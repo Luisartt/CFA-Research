@@ -79,7 +79,7 @@ Replace every token:
 | `{{TEAM_YAML}}` | One `  - name: "..."` / `    role: "..."` pair per member, or `  []` |
 | `{{REPORT_DEADLINE}}` `{{PRESENTATION_DATE}}` | Q6 |
 | `{{MILESTONES}}` | See below |
-| `{{MNPI_CONFIRMED}}` | `true` only on an explicit yes in Q7 |
+| `{{MNPI_CONFIRMED}}` | `true` only on an explicit yes in Q7, else `false` |
 | `{{TODAY}}` | Today, YYYY-MM-DD |
 
 `{{MILESTONES}}`: count back from the report deadline D, one todo line each:
