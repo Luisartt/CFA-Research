@@ -76,7 +76,10 @@ def read_text(path: Path) -> str:
 
 
 def read_frontmatter(path: Path) -> dict[str, str]:
-    match = re.match(r"^---\n(.*?)\n---\n", read_text(path), re.DOTALL)
+    text = read_text(path)
+    if text.startswith("﻿"):
+        raise AssertionError(f"{path} starts with a UTF-8 BOM; save it as UTF-8 without BOM")
+    match = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
     if match is None:
         raise AssertionError(f"{path} has no frontmatter block")
     fields: dict[str, str] = {}
@@ -115,7 +118,10 @@ def test_description_is_yaml_safe_and_rich(name: str) -> None:
 @pytest.mark.parametrize("name", PHASE1_SKILLS)
 def test_required_sections_in_order(name: str) -> None:
     text = read_text(skill_md(name))
-    positions = [text.find(section) for section in REQUIRED_SECTIONS]
+    positions: list[int] = []
+    for section in REQUIRED_SECTIONS:
+        match = re.search(rf"^{re.escape(section)}[ \t]*$", text, re.MULTILINE)
+        positions.append(match.start() if match else -1)
     assert all(p >= 0 for p in positions), dict(zip(REQUIRED_SECTIONS, positions))
     assert positions == sorted(positions), "sections out of order"
 
