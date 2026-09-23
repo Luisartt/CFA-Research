@@ -120,3 +120,25 @@ def test_summary_has_drivers_and_ratios(project: Path) -> None:
     assert gross_margin["values"]["2025"] == pytest.approx(5500 / 13400)
     assert "r_roic" in summary["ratios"]
     assert "r_ebitda_margin" in summary["ratios"]
+
+
+def test_summary_has_football_and_sensitivity(project: Path) -> None:
+    assert main(["--project", str(project)]) == 0
+    summary = json.loads((project / "model" / "model-summary.json").read_text(encoding="utf-8"))
+    methods = [row["method"] for row in summary["football"]]
+    assert methods[0].startswith("DCF - Gordon")
+    assert "Current share price" in methods
+    for row in summary["football"]:
+        assert row["low"] <= row["high"]
+    grid = summary["sensitivity"]
+    assert len(grid["wacc"]) == 5 and len(grid["growth"]) == 5
+    assert len(grid["values"]) == 5 and all(len(r) == 5 for r in grid["values"])
+    assert grid["values"][2][2] == pytest.approx(summary["valuation"]["price_gordon"], rel=1e-6)
+
+
+def test_summary_without_valuation_has_empty_football(tmp_path: Path) -> None:
+    write_project(tmp_path, valuation=None)
+    assert main(["--project", str(tmp_path)]) == 0
+    summary = json.loads((tmp_path / "model" / "model-summary.json").read_text(encoding="utf-8"))
+    assert summary["football"] == []
+    assert summary["sensitivity"] is None
