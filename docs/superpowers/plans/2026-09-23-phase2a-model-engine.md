@@ -15,6 +15,7 @@
 - No `Historical` tab: reported history sits directly in IS/BS/CF as blue cells with a source comment (document, page, tag).
 - Valuation is as of the last fiscal year-end (no stub period). Sensitivity uses formula grids, not Excel data tables.
 - D&A reduces PP&E only; intangibles, other non-current items, short-term debt and leases are held flat.
+- Superseded during implementation: see spec §7 (stub roll-forward, intangible amortization, IFRS 16 lease renewals were added after reviews).
 
 **Branch:** work on `feat/phase2a-engine`; merge after phase 2b adds the `model` skill that uses this engine.
 

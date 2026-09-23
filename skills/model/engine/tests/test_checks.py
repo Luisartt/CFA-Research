@@ -114,3 +114,44 @@ def test_wacc_g_spread_warns(tmp_path: Path) -> None:
     assert _status(results, "wacc_gt_g", None) == "OK"
     assert _status(results, "wacc_g_spread", None) == "WARN"
     assert overall_status(results) == "OK WITH WARNINGS"
+
+
+def test_sanity_checks_are_warnings_and_pass_on_the_fixture(project: Path) -> None:
+    sanity = {"revolver_unused", "price_gordon_positive", "price_exit_positive",
+              "tv_methods_agree_low", "tv_methods_agree_high"}
+    checks = {c.key: c for c in build_checks(load_inputs(project))}
+    assert sanity <= checks.keys()
+    assert all(checks[k].severity is Severity.WARN for k in sanity)
+    assert checks["revolver_unused"].periods == (5, 6, 7, 8, 9)
+    results = _results(project)
+    assert {r.status for r in results if r.key in sanity} == {"OK"}
+
+
+def test_revolver_draw_warns(tmp_path: Path) -> None:
+    drivers = copy.deepcopy(DRIVERS)
+    drivers["drivers"]["min_cash"] = _driver([5000] * 5)
+    results = _results(write_project(tmp_path, drivers=drivers))
+    assert _status(results, "revolver_unused", 5) == "WARN"
+    assert _status(results, "revolver_positive", 5) == "OK"
+
+
+def test_negative_values_per_share_warn(tmp_path: Path) -> None:
+    valuation = copy.deepcopy(VALUATION)
+    valuation["debt_like_items"] = 100000
+    results = _results(write_project(tmp_path, valuation=valuation))
+    assert _status(results, "price_gordon_positive", None) == "WARN"
+    assert _status(results, "price_exit_positive", None) == "WARN"
+
+
+def test_terminal_value_methods_disagree_warns(tmp_path: Path) -> None:
+    # The fixture's Gordon value implies about 5.5x EBITDA.
+    high_exit = copy.deepcopy(VALUATION)
+    high_exit["terminal"]["exit_ev_ebitda"] = 12.0
+    results = _results(write_project(tmp_path / "high", valuation=high_exit))
+    assert _status(results, "tv_methods_agree_low", None) == "WARN"
+    assert _status(results, "tv_methods_agree_high", None) == "OK"
+    low_exit = copy.deepcopy(VALUATION)
+    low_exit["terminal"]["exit_ev_ebitda"] = 2.5
+    results = _results(write_project(tmp_path / "low", valuation=low_exit))
+    assert _status(results, "tv_methods_agree_low", None) == "OK"
+    assert _status(results, "tv_methods_agree_high", None) == "WARN"

@@ -214,20 +214,30 @@ Decisions made while building (after reviews by a finance/valuation reviewer):
   formulas, green links).
 - Inputs: `data/financials.csv`, `model/drivers.yaml`, `valuation/valuation.yaml`
   (optional — without it, valuation tabs are omitted).
-- Periodicity: annual, 5 historical + 5 forecast years.
+- Periodicity: annual, 3-5 historical years (last 5 used) + 1-10 forecast years
+  (default 5).
 - Tabs: Cover, Drivers, IS, BS, CF, Schedules (revenue build,
   capex/D&A, working-capital days, debt/interest), Ratios, WACC, DCF, Comps,
-  Sensitivity, Football field, Checks.
+  Sensitivity, Football, Checks.
 - **Checks tab** (Excel formulas; evaluates in any Excel on Windows or macOS):
-  BS balances every year; CF ending cash = BS cash; retained earnings roll;
-  historical ties to reported (`financials.csv`); WACC > g; g <= long-term nominal
-  GDP; terminal value share of EV < 75% (warning, not failure); **Python/Excel
-  parity** (Excel result vs Python-computed value written alongside).
+  - ERROR: BS balances; CF closing cash = BS cash; equity roll-forward;
+    revolver >= 0; cash >= minimum; PP&E >= 0; long-term debt >= 0; reported
+    totals tie (total assets, net income from `financials.csv`); revenue
+    segments tie to revenue; WACC > g; g <= long-term nominal GDP.
+  - WARN (flagged, not a failure): terminal value share of EV < 75%; WACC - g
+    spread >= 2 points; revolver unused; Gordon and exit-multiple values per
+    share positive; TV methods agree (exit multiple implied by Gordon within
+    0.5x-2x of the exit multiple input); **Excel-vs-Python parity** (Excel result
+    vs Python-computed value written alongside).
 - `model-summary.json` exposes computed figures to `valuation`, `report` and
   `pitch` without requiring Excel recalculation.
-- Excel COM recalculation from the original builder is **removed** (Windows-only).
+- No Excel recalculation at build time (the engine writes formulas; Excel
+  recalculates on open), so the build runs the same on Windows and macOS.
 - If checks fail, the file is still written, and the Cover shows
   **CHECKS FAILING** in red.
+- CLI exit codes: 0 built (even if checks fail; read `status` in
+  `model-summary.json`); 2 input error; 3 model definition error; 4 file could
+  not be written.
 - Console output ASCII-only (`[ok]`, `[x]`, `->`).
 
 **Main build risk:** keeping Python calculation and Excel formulas in parity.
@@ -300,7 +310,7 @@ hands off to `model` to rebuild the workbook.
 
 | From | What | How |
 |---|---|---|
-| `cfamexico/research_analyst` | xlsx builder | Adapt: strip COM recalculation, add Python parity, student tabs |
+| `cfamexico/research_analyst` | xlsx builder style palette only | Adapted (engine is new code) |
 | | `framework-mapper` IFRS/US GAAP/NIF reference | Reference file for `financials` |
 | | `issuer-profile.yaml` fields | Slimmed into `company-profile.yaml` |
 | | Data tags, MNPI guard, 7-section industry report | Adopt |

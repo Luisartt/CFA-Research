@@ -8,6 +8,9 @@ import pytest
 from conftest import DRIVERS, HISTORY, PROFILE, SEGMENTS, VALUATION, YEARS, write_project
 from rcmodel.inputs import InputError, load_inputs
 
+LEASE_WARNING = ("lease_liabilities are reported but lease_principal_paid is missing: free cash flow would ignore "
+                 "lease payments; add it from the financing section of the cash-flow statement")
+
 
 def _messages(project: Path) -> list[str]:
     with pytest.raises(InputError) as caught:
@@ -24,7 +27,19 @@ def test_loads_the_fixture(project: Path) -> None:
     assert inputs.drivers["gross_margin"].values == (0.41,) * 5
     assert inputs.valuation is not None
     assert len(inputs.valuation.peers) == 3
-    assert inputs.warnings == ()
+    assert inputs.warnings == (LEASE_WARNING,)  # the fixture reports leases without lease_principal_paid
+
+
+def test_lease_principal_paid_present_silences_the_lease_warning(tmp_path: Path) -> None:
+    history = {**HISTORY, "lease_principal_paid": (100, 110, 120, 125, 134)}
+    assert load_inputs(write_project(tmp_path, history=history)).warnings == ()
+
+
+def test_no_lease_warning_without_lease_liabilities(tmp_path: Path) -> None:
+    history = dict(HISTORY)
+    history["lease_liabilities"] = (600, 600, 600, 600, 0)
+    history["other_noncurrent_liabilities"] = (300, 300, 300, 300, 900)
+    assert load_inputs(write_project(tmp_path, history=history)).warnings == ()
 
 
 def test_missing_required_line_is_reported(tmp_path: Path) -> None:
@@ -44,8 +59,12 @@ def test_unknown_line_item_and_bad_tag(tmp_path: Path) -> None:
 
 
 def test_unverified_tag_warns(tmp_path: Path) -> None:
-    inputs = load_inputs(write_project(tmp_path, unverified=("capex",)))
-    assert any("capex 2025" in w and "unverified" in w for w in inputs.warnings)
+    inputs = load_inputs(write_project(tmp_path, unverified=("capex", "opex")))
+    tagged = [w for w in inputs.warnings if "unverified" in w]
+    assert tagged == [
+        "opex 2021, 2022, 2023, 2024, 2025 tagged [unverified]; resolve before the report",
+        "capex 2021, 2022, 2023, 2024, 2025 tagged [unverified]; resolve before the report",
+    ]
 
 
 def test_too_few_years(tmp_path: Path) -> None:
@@ -80,8 +99,15 @@ def test_missing_driver_warns_with_its_default(tmp_path: Path) -> None:
     del drivers["drivers"]["gross_margin"]
     del drivers["drivers"]["net_new_debt"]
     inputs = load_inputs(write_project(tmp_path, drivers=drivers))
-    assert any("'gross_margin'" in w and "last actual" in w for w in inputs.warnings)
-    assert any("'net_new_debt'" in w and "zero" in w for w in inputs.warnings)
+    assert "driver 'gross_margin' not set: held at its last actual value (see the Drivers sheet)" in inputs.warnings
+    assert "driver 'net_new_debt' not set: zero (engine default)" in inputs.warnings
+
+
+def test_missing_min_cash_keeps_its_wording(tmp_path: Path) -> None:
+    drivers = copy.deepcopy(DRIVERS)
+    del drivers["drivers"]["min_cash"]
+    inputs = load_inputs(write_project(tmp_path, drivers=drivers))
+    assert "driver 'min_cash' not set: last actual cash (engine default)" in inputs.warnings
 
 
 def test_profile_with_placeholders_rejected(tmp_path: Path) -> None:
@@ -92,7 +118,9 @@ def test_profile_with_placeholders_rejected(tmp_path: Path) -> None:
 
 
 def test_valuation_is_optional(tmp_path: Path) -> None:
-    assert load_inputs(write_project(tmp_path, valuation=None)).valuation is None
+    inputs = load_inputs(write_project(tmp_path, valuation=None))
+    assert inputs.valuation is None
+    assert "valuation/valuation.yaml not found: valuation sheets omitted (run the valuation skill)" in inputs.warnings
 
 
 def test_valuation_bad_number(tmp_path: Path) -> None:

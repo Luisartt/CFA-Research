@@ -136,7 +136,8 @@ def load_inputs(project: Path) -> ModelInputs:
     errors: list[str] = []
     profile = _collect(errors, lambda: load_profile(project / "company-profile.yaml"))
     financials = _collect(errors, lambda: load_financials(project / "data" / "financials.csv"))
-    valuation = _collect(errors, lambda: load_valuation(project / "valuation" / "valuation.yaml"))
+    valuation_path = project / "valuation" / "valuation.yaml"
+    valuation = _collect(errors, lambda: load_valuation(valuation_path))
     if errors or profile is None or financials is None:
         raise InputError(errors)
     history, hist_years, warnings = financials
@@ -144,6 +145,8 @@ def load_inputs(project: Path) -> ModelInputs:
     if errors or drivers_result is None:
         raise InputError(errors)
     drivers, segments, n_fcst, driver_warnings = drivers_result
+    if not valuation_path.is_file():
+        driver_warnings.append("valuation/valuation.yaml not found: valuation sheets omitted (run the valuation skill)")
     last = hist_years[-1]
     return ModelInputs(
         profile=profile,
@@ -194,7 +197,6 @@ def load_financials(path: Path) -> tuple[dict[str, dict[int, Observation]], tupl
     if not path.is_file():
         raise InputError([f"data/{path.name} not found: run the financials skill first"])
     errors: list[str] = []
-    warnings: list[str] = []
     raw: dict[str, dict[int, Observation]] = {}
     try:
         with path.open(newline="", encoding="utf-8-sig") as handle:
@@ -203,7 +205,7 @@ def load_financials(path: Path) -> tuple[dict[str, dict[int, Observation]], tupl
             if missing:
                 raise InputError([f"financials.csv is missing columns: {', '.join(missing)}"])
             for number, row in enumerate(reader, start=2):
-                _read_row(number, row, raw, errors, warnings)
+                _read_row(number, row, raw, errors)
     except UnicodeDecodeError:
         raise InputError([
             f"{path.name} is not saved as UTF-8. In Excel use File > Save As > "
@@ -226,11 +228,24 @@ def load_financials(path: Path) -> tuple[dict[str, dict[int, Observation]], tupl
             "map the costs directly tied to sales into cogs; see the financials skill)"
         ])
     history = {key: {y: o for y, o in series.items() if y in hist_years} for key, series in raw.items()}
-    return history, hist_years, warnings
+    return history, hist_years, _financials_warnings(history, hist_years)
+
+
+def _financials_warnings(history: Mapping[str, Mapping[int, Observation]], hist_years: tuple[int, ...]) -> list[str]:
+    warnings: list[str] = []
+    for key, series in history.items():  # file order
+        unverified = [str(y) for y in sorted(series) if series[y].tag == "unverified"]
+        if unverified:
+            warnings.append(f"{key} {', '.join(unverified)} tagged [unverified]; resolve before the report")
+    leases = history.get("lease_liabilities", {}).get(hist_years[-1])
+    if leases is not None and leases.value > 0 and not history.get("lease_principal_paid"):
+        warnings.append("lease_liabilities are reported but lease_principal_paid is missing: free cash flow would "
+                        "ignore lease payments; add it from the financing section of the cash-flow statement")
+    return warnings
 
 
 def _read_row(number: int, row: Mapping[str, str | None], raw: dict[str, dict[int, Observation]],
-              errors: list[str], warnings: list[str]) -> None:
+              errors: list[str]) -> None:
     key = (row.get("line_item") or "").strip()
     if key not in BY_KEY and not key.startswith(SEGMENT_PREFIX):
         errors.append(f"financials.csv row {number}: unknown line_item '{key}'")
@@ -252,8 +267,6 @@ def _read_row(number: int, row: Mapping[str, str | None], raw: dict[str, dict[in
     if year in series:
         errors.append(f"financials.csv row {number}: duplicate {key} for {year}")
         return
-    if tag == "unverified":
-        warnings.append(f"{key} {year} is tagged [unverified]; resolve it before the report")
     series[year] = Observation(value, tag, (row.get("source_doc") or "").strip(), (row.get("page") or "").strip())
 
 
@@ -285,12 +298,12 @@ def load_drivers(path: Path, history: Mapping[str, Mapping[int, Observation]], h
         if key == "revenue_growth" and segments:
             continue
         if key in ZERO_DEFAULT_DRIVERS:
-            default = "zero"
+            default = "zero (engine default)"
         elif key in DEFAULT_FROM_LAST_ACTUAL:
-            default = f"last actual {DEFAULT_FROM_LAST_ACTUAL[key]}"
+            default = f"last actual {DEFAULT_FROM_LAST_ACTUAL[key]} (engine default)"
         else:
-            default = "held at last actual value"
-        warnings.append(f"driver '{key}' not set: {default} (engine default)")
+            default = "held at its last actual value (see the Drivers sheet)"
+        warnings.append(f"driver '{key}' not set: {default}")
     if segments and "revenue_growth" in drivers:
         warnings.append("revenue_growth is ignored because revenue_segments are set")
     return drivers, segments, n_fcst, warnings

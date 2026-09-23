@@ -21,6 +21,8 @@ R = Ref
 TOLERANCE = 0.5  # half a unit of the model currency (e.g. MXN 0.5 million)
 TV_SHARE_LIMIT = 0.75
 WACC_G_SPREAD_LIMIT = 0.02
+TV_AGREE_LOW = 0.5  # Gordon's implied exit multiple should sit within 0.5x-2x of the exit multiple input
+TV_AGREE_HIGH = 2.0
 REFERENCE_KEY = "__reference_value__"  # the address a Context resolves for a check's own reference cell
 
 
@@ -83,6 +85,8 @@ def build_checks(inputs: ModelInputs) -> list[Check]:
               cmp(R("ppe_net"), ">=", -0.001), all_years),
         Check("debt_non_negative", "Long-term debt stays at or above zero", Severity.ERROR,
               cmp(R("debt_long"), ">=", -0.001), all_years),
+        Check("revolver_unused", "Revolver not drawn (cash flow funds the plan without new borrowing)", Severity.WARN,
+              cmp(R("revolver"), "<=", TOLERANCE), forecast),
     ]
     for key, computed, label in (
         ("total_assets_reported", "total_assets", "Total assets tie to the reported figure"),
@@ -106,6 +110,16 @@ def build_checks(inputs: ModelInputs) -> list[Check]:
                   cmp(R("tv_share_gordon"), "<=", TV_SHARE_LIMIT), None),
             Check("wacc_g_spread", "WACC exceeds terminal growth by at least 2 points", Severity.WARN,
                   cmp(R("wacc") - R("terminal_growth"), ">=", WACC_G_SPREAD_LIMIT), None),
+            Check("price_gordon_positive", "Gordon value per share is positive", Severity.WARN,
+                  cmp(R("price_gordon"), ">", 0), None),
+            Check("price_exit_positive", "Exit-multiple value per share is positive", Severity.WARN,
+                  cmp(R("price_exit"), ">", 0), None),
+            Check("tv_methods_agree_low", "Exit multiple implied by Gordon is at least half the exit multiple input",
+                  Severity.WARN,
+                  cmp(R("implied_exit_multiple"), ">=", TV_AGREE_LOW * R("exit_multiple")), None),
+            Check("tv_methods_agree_high", "Exit multiple implied by Gordon is at most twice the exit multiple input",
+                  Severity.WARN,
+                  cmp(R("implied_exit_multiple"), "<=", TV_AGREE_HIGH * R("exit_multiple")), None),
         ]
     return checks
 
