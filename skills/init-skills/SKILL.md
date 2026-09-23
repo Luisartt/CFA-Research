@@ -105,7 +105,8 @@ sections from the template, keep every existing line. Never overwrite silently.
 Re-run the Step 1 audit. Print `file | created / kept / merged`. Then give one
 next step: "Next: say \"let's work on our thesis\" (or run
 `/research-challenge:thesis`), or \"analyze the industry\"
-(`/research-challenge:industry`)."
+(`/research-challenge:industry`). Drop the latest annual and quarterly reports
+into `filings/`."
 
 ## Coach moments
 

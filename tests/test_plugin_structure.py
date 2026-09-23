@@ -77,7 +77,7 @@ def read_text(path: Path) -> str:
 
 def read_frontmatter(path: Path) -> dict[str, str]:
     text = read_text(path)
-    if text.startswith("﻿"):
+    if text.startswith("\ufeff"):
         raise AssertionError(f"{path} starts with a UTF-8 BOM; save it as UTF-8 without BOM")
     match = re.match(r"^---\n(.*?)\n---\n", text, re.DOTALL)
     if match is None:
