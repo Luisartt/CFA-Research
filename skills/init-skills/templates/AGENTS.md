@@ -63,9 +63,13 @@ Plugin `research-challenge`. Each skill works on its own; missing inputs become
 | `/research-challenge:init-skills` | Set up or repair this project | this file, profile, context files |
 | `thesis` | Shape and stress-test the investment story | `research/thesis.md` |
 | `industry` | Industry structure, competition, peers | `research/industry.md` |
+| `financials` | Extract and map the statements from filings | `data/financials.csv`, `data/adjustments.md` |
+| `forecast` | Set the drivers; the team picks the 3-5 that carry the story | `model/drivers.yaml` |
+| `model` | Build, check and explain the Excel model | `model/<TICKER>_model_v<N>.xlsx`, `model/review.md` |
+| `valuation` | WACC, DCF, comps, target price and recommendation | `valuation/valuation.yaml`, `valuation/valuation.md` |
 | `/research-challenge:wrap-up` | Close a work session | `docs/context/*` |
 
-Skills also trigger from plain requests ("roast our thesis", "analyze the industry").
+Skills also trigger from plain requests ("roast our thesis", "build the model", "what's our WACC").
 
 ## Context files
 

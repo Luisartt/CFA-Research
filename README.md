@@ -29,21 +29,27 @@ language, roles, deadlines) and writes `AGENTS.md`, `CLAUDE.md`,
 **Requirements:** Claude Code. The model skills need Python 3 with `openpyxl`
 and `pyyaml`; `init-skills` checks and tells you the exact install command.
 
-## Skills (v0.1)
+## Skills (v0.2)
 
 | Skill | What it does | You decide |
 |---|---|---|
 | `/research-challenge:init-skills` | Sets up the project and the specialist persona | Interview answers |
 | `thesis` | Stress-tests your investment story, then co-writes it | The pillars, your edge vs consensus, what would change your mind |
 | `industry` | Market, five forces, competitors, moat, SWOT, peers | Where the company really competes, what protects it, the peer set |
+| `financials` | Extracts the last 3-5 years from your filings, maps them and explains every adjustment | Nothing — but read `data/adjustments.md` before Q&A |
+| `forecast` | Sets every driver from history; proposes the story drivers | The 3-5 assumptions that carry your thesis |
+| `model` | Builds the Excel model (3 statements, schedules, ratios, checks, valuation) and explains it | Whether the model looks like the business |
+| `valuation` | WACC, DCF, comps, sensitivity, football field | WACC calls, terminal value, target price, recommendation |
 | `/research-challenge:wrap-up` | Updates the memory files at the end of a session | — |
 
 Just ask in plain words ("roast our thesis", "analyze the industry") — the
 right skill triggers (except `init-skills`, which you run by name). Every
 skill works on its own, so team members can split roles.
 
-Coming next: `financials`, `forecast`, `model`, `valuation` (institutional-grade
-Excel model), then `risks-esg`, `report`, `pitch`.
+Coming next: `risks-esg`, `report`, `pitch`.
+
+Typical order: `init-skills` -> `thesis` + `industry` -> `financials` -> `forecast`
+-> `model` -> `valuation`. Each skill also works on its own.
 
 ## Working as a team
 

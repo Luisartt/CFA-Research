@@ -1,7 +1,7 @@
 # research-challenge plugin — design spec
 
 - **Date:** 2026-09-22
-- **Status:** approved; phase 1 implemented
+- **Status:** approved; phases 1, 2a and 2b implemented
 - **Repo:** `Luisartt/CFA-Research` (this repo = the plugin = its own marketplace)
 
 ## 1. Goal
@@ -331,6 +331,7 @@ hands off to `model` to rebuild the workbook.
 1. `init-skills`, `thesis`, `industry`, `/wrap-up` + templates + plugin manifests
    (done: plan `docs/superpowers/plans/2026-09-22-phase1-foundation-coaching-skills.md`)
 2. `financials`, `forecast`, `model`, `valuation` + engine
+   (done: plans 2026-09-23-phase2a-model-engine.md, 2026-09-24-phase2b-model-skills.md)
 3. `risks-esg`, `report`, `pitch`
 
 ## 15. Open items to verify during implementation
