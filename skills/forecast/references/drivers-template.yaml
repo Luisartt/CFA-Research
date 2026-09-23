@@ -1,0 +1,29 @@
+# model/drivers.yaml - written by the forecast skill, read by the model engine.
+# One value per forecast year. tag: guidance | assumption | sourced.
+# pillar: the thesis pillar the driver supports ("1", "2", "3") or "".
+forecast_years: 5
+drivers:
+  revenue_growth:              {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  gross_margin:                {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  opex_pct_revenue:            {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  da_pct_revenue:              {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  amort_pct_revenue:           {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  capex_pct_revenue:           {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  lease_principal_pct_revenue: {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  dso:                         {values: [0, 0, 0, 0, 0], tag: assumption, rationale: "", pillar: ""}
+  dio:                         {values: [0, 0, 0, 0, 0], tag: assumption, rationale: "", pillar: ""}
+  dpo:                         {values: [0, 0, 0, 0, 0], tag: assumption, rationale: "", pillar: ""}
+  other_ca_pct_revenue:        {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  other_cl_pct_revenue:        {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  tax_rate:                    {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  interest_rate_debt:          {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  interest_rate_cash:          {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  payout_ratio:                {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  nci_share:                   {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  net_new_debt:                {values: [0, 0, 0, 0, 0], tag: assumption, rationale: "", pillar: ""}
+  shares_growth:               {values: [0.0, 0.0, 0.0, 0.0, 0.0], tag: assumption, rationale: "", pillar: ""}
+  min_cash:                    {values: [0, 0, 0, 0, 0], tag: assumption, rationale: "", pillar: ""}
+# Optional, only when financials.csv has seg_<key> rows:
+# revenue_segments:
+#   - {key: mexico, label: Mexico}
+# and add per segment:  seg_mexico_growth: {values: [...], tag: ..., rationale: ..., pillar: ...}
