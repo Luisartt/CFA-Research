@@ -165,9 +165,10 @@ def dcf_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
         _calc("tv_ronic", "Return on new capital implied by the terminal value", DCF_S,
               R("terminal_growth") / (1 - last_fcff / At("dcf_nopat", last)), Fmt.PCT),
         Header(DCF_S, "Reverse DCF - what the market price implies"),
-        _calc("market_ev", "Market EV = price x shares + net debt + NCI + debt-like items - non-operating assets",
-              DCF_S, R("share_price") * R("shares_val") + R("net_debt_val") + R("nci_val") + R("debt_like")
-              - R("non_op")),
+        _calc("market_ev", "Market EV at fiscal year-end = price / roll-forward x shares + net debt + NCI "
+              "+ debt-like items - non-operating assets", DCF_S,
+              R("share_price") / R("roll_factor") * R("shares_val") + R("net_debt_val") + R("nci_val")
+              + R("debt_like") - R("non_op")),
         _calc("implied_tv", "Terminal value implied by the market", DCF_S,
               (R("market_ev") - R("sum_pv")) * (1 + R("wacc")) ** tv_years),
         _calc("implied_g", "Terminal growth implied by the market price", DCF_S,
@@ -255,8 +256,9 @@ def _exit_price(multiple: Expr, last: int, years: int) -> Expr:
 
 def football_layout(inputs: ModelInputs, v: Valuation) -> tuple[list[LayoutItem], FootballSpec]:
     last, years = inputs.n - 1, inputs.n - inputs.h
-    # n.m. grid cells (0) fall back to the base Gordon value so they never drag the range to zero.
-    grid = [iff(cmp(R(f"sens_{i}_{j}"), ">", 0), R(f"sens_{i}_{j}"), R("price_gordon"))
+    # n.m. grid cells (same WACC - g test as the grid) fall back to the base Gordon value so they never
+    # drag the range to zero; valid values, negative ones included, are kept.
+    grid = [iff(cmp(R(f"sens_w_{i}") - R(f"sens_g_{j}"), ">=", MIN_SPREAD), R(f"sens_{i}_{j}"), R("price_gordon"))
             for i in range(len(WACC_STEPS)) for j in range(len(G_STEPS))]
     rows: list[tuple[str, str, Expr | float, Expr | float]] = [
         ("dcf", "DCF - Gordon (sensitivity range)", fn("MIN", *grid), fn("MAX", *grid)),

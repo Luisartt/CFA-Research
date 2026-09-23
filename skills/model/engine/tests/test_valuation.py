@@ -187,6 +187,22 @@ def test_reverse_dcf_recovers_growth_with_bridge_items(tmp_path: Path) -> None:
     assert m.value("implied_g", None) == pytest.approx(0.04, abs=1e-9)
 
 
+def test_reverse_dcf_recovers_growth_with_stub(tmp_path: Path) -> None:
+    base = _with_valuation(tmp_path, "base", years_since_fiscal_year_end=0.75)
+    m = _with_valuation(tmp_path, "priced", years_since_fiscal_year_end=0.75,
+                        share_price=base.value("price_gordon", None))
+    assert m.value("implied_g", None) == pytest.approx(m.value("terminal_growth", None), abs=1e-9)
+
+
+def test_football_keeps_valid_negative_grid_values(tmp_path: Path) -> None:
+    """A heavily indebted company can have genuinely negative values; only n.m. cells fall back."""
+    m = _with_valuation(tmp_path, "indebted", debt_like_items=15000.0)
+    grid = [m.value(f"sens_{i}_{j}", None) for i in range(len(WACC_STEPS)) for j in range(len(G_STEPS))]
+    assert min(grid) < m.value("price_gordon", None) < 0 < max(grid)
+    assert m.value("ff_dcf_low", None) == pytest.approx(min(grid))
+    assert m.value("ff_dcf_high", None) == pytest.approx(max(grid))
+
+
 def test_value_today_rolls_forward_from_fiscal_year_end(tmp_path: Path) -> None:
     base = _with_valuation(tmp_path, "base")
     m = _with_valuation(tmp_path, "stub", years_since_fiscal_year_end=0.75)
