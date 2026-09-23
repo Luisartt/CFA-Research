@@ -1,0 +1,24 @@
+# Written by /research-challenge:init-skills. Every skill reads this file.
+# Edit by hand if something changes; keep the keys.
+company:
+  name: "{{COMPANY_NAME}}"
+  ticker: "{{TICKER}}"
+  exchange: "{{EXCHANGE}}"          # BMV | BIVA | B3 | BCS | BVC | BVL | BYMA | NYSE | NASDAQ
+  country: "{{COUNTRY}}"
+  sector: "{{SECTOR}}"
+  issuer_type: "{{ISSUER_TYPE}}"    # non_financial | bank | insurer | reit
+accounting:
+  framework: "{{FRAMEWORK}}"        # ifrs | us_gaap | nif
+  framework_confirmed_by_team: {{FRAMEWORK_CONFIRMED}}
+  reporting_currency: "{{CURRENCY}}"
+  fiscal_year_end: "{{FISCAL_YEAR_END}}"   # MM-DD
+  units: "{{UNITS}}"                # millions | thousands
+report:
+  language: "{{REPORT_LANGUAGE}}"   # en | es | pt
+  report_deadline: "{{REPORT_DEADLINE}}"      # YYYY-MM-DD
+  presentation_date: "{{PRESENTATION_DATE}}"  # YYYY-MM-DD
+team:
+{{TEAM_YAML}}
+compliance:
+  public_information_only_confirmed: {{MNPI_CONFIRMED}}
+created: "{{TODAY}}"
