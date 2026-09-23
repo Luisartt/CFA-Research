@@ -27,7 +27,7 @@ Colors: blue = input or reported figure, black = formula, green = link to anothe
 |---|---|---|---|
 | Balance sheet balances (history) | A reported line was missed or double counted | Re-map the year; tie to reported totals | financials |
 | Total assets / net income tie | Mapping differs from the reported total | Find the missing line | financials |
-| Segments add up | Segments miss eliminations | Add `seg_eliminations` | financials |
+| Segments add up | Not a check: a segment mismatch is rejected as an input error (exit 2) before the build | Add an eliminations segment (`seg_eliminations`) | financials |
 | Balance sheet balances (forecast only) | Inherited from a history gap | Fix history first | financials |
 | Cash at or above minimum / revolver not drawn | The plan burns cash: high payout, capex or working capital | Revisit story drivers or accept the borrowing and say so | forecast |
 | PP&E stays at or above zero | D&A too high vs capex, or intangible amortization not split out | Set `amort_pct_revenue`, revisit capex/D&A | forecast |

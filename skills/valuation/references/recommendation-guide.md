@@ -23,7 +23,9 @@ gives the evidence; the team chooses and defends.
 ## Recommendation convention (state yours in the report)
 
 The Challenge does not prescribe one. A common convention, measured as expected
-12-month total return (price change + dividend yield):
+12-month total return (price change + dividend yield), computed with the keys in
+the `valuation` section of `model/model-summary.json`:
+expected return = team target / `share_price` - 1 + `dps_next` / `share_price`.
 
 | Expected return | Recommendation |
 |---|---|

@@ -14,8 +14,9 @@ in `data/adjustments.md` so any team member can defend the numbers in Q&A.
 ## Reads
 
 - `company-profile.yaml` — framework, currency, units, fiscal year end. Missing:
-  ask for company, framework and units in one line, suggest
-  `/research-challenge:init-skills`, continue.
+  ask for company, framework and units in one line and continue the extraction,
+  but run `/research-challenge:init-skills` before step 6 (the engine needs name,
+  ticker, currency, units and framework).
 - `filings/` — annual reports / audited statements. Empty or fewer than 3 years:
   stop and list exactly which documents to download and where (see
   `references/extraction-guide.md`); add a `todo.md` item.
@@ -35,18 +36,30 @@ in `data/adjustments.md` so any team member can defend the numbers in Q&A.
    following `references/extraction-guide.md` (opex netting, D&A from the cash
    flow, costs by nature, PTU, associates, leases under IFRS 16 or US GAAP).
    Add `total_assets_reported` and `net_income_reported` rows.
-4. **Tie out** every year: assets = liabilities + equity, EBIT = reported
-   operating income, net income = reported. A gap means a missed line — find it.
+4. **Tie out** every year: assets = liabilities + equity, net income = reported,
+   and EBIT = reported operating income after the reclassifications recorded in
+   `adjustments.md` (PTU, associates, discontinued operations). A gap beyond
+   those means a missed line — find it.
 5. **Write `data/financials.csv`**: columns
    `line_item,year,value,tag,source_doc,page,note`; UTF-8; plain numbers in the
    profile's units; costs positive. Tag `sourced`, or `unverified` when a figure
    could not be tied to a page (add a `todo.md` item for each).
-6. **Validate with the engine.** Find Python as in init-skills (`python3`,
-   `python`, then `py` on Windows) and run from the project folder:
+6. **Validate with the engine.** Find Python 3.10 or newer as in init-skills
+   (`python3`, `python`, then `py` on Windows; confirm with
+   `<python> -c "import sys; assert sys.version_info >= (3, 10)"` — macOS's
+   built-in python3 may be 3.9, install from python.org); if Python, openpyxl or
+   pyyaml is missing, give the install command from init-skills and stop. From
+   the project folder run:
    `<python> "${CLAUDE_PLUGIN_ROOT}/skills/model/engine/build_model.py" --project . --check`
-   Fix every `[x]` input error and rerun until it prints
-   `[ok] inputs are valid`. Warnings about drivers are expected at this stage.
-   A lease warning is not: add `lease_principal_paid`.
+   (if `${CLAUDE_PLUGIN_ROOT}` does not resolve in the shell, locate
+   `skills/model/engine/build_model.py` in the installed plugin folder and use its
+   absolute path, in quotes; exit 3 = model definition error: report it as a
+   plugin bug; never edit the engine). `--check` exits 0 even when checks fail:
+   fix every `[x]` input error and every `[x] Not met` line for a historical year
+   (balance sheet balances, total assets / net income tie), and rerun until it
+   prints `[ok] inputs are valid` AND no such line remains. Warnings about
+   drivers are expected at this stage. A lease warning is not: add
+   `lease_principal_paid`.
 7. **Write `data/adjustments.md`** from `references/adjustments-template.md`:
    sources, mapping table, each adjustment in plain words, one-off items (kept in
    the numbers, flagged for the forecast), open items, and three questions a

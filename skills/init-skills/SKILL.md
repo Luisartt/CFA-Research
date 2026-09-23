@@ -37,12 +37,13 @@ All conform -> say "Project already set up. Nothing changed." and stop.
 ### Step 2 — Environment check (warn, never block)
 
 Try `python3 --version`, then `python --version`, then (Windows) `py --version`;
-use the first that works to run `<cmd> -c "import openpyxl, yaml"`. Phase-1 skills do
-not need Python; the model skills will. If missing, print the exact command and
-offer to run it:
+use the first that is 3.10 or newer (`<cmd> -c "import sys; assert sys.version_info >= (3, 10)"`)
+to run `<cmd> -c "import openpyxl, yaml"`. Phase-1 skills do not need Python;
+the model skills will. If missing, print the exact command and offer to run it:
 
-- Python missing -> Windows: `winget install Python.Python.3.12`; macOS: install
-  from python.org (or `brew install python` if Homebrew is installed)
+- Python missing or older than 3.10 -> Windows: `winget install Python.Python.3.12`;
+  macOS: install from python.org (the built-in python3 may be 3.9; or
+  `brew install python` if Homebrew is installed)
 - openpyxl or PyYAML missing -> Windows: `py -m pip install openpyxl pyyaml python-docx`; macOS: `python3 -m pip install openpyxl pyyaml python-docx`
 
 ### Step 3 — Interview (only for what the audit found missing)

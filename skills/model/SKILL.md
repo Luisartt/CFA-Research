@@ -22,17 +22,27 @@ and explains the rest so any member can walk a judge through the model.
 
 ## Steps
 
-1. **Build.** Find Python as in init-skills (`python3`, `python`, then `py` on
-   Windows); if Python, openpyxl or pyyaml is missing, give the install command
-   from init-skills and stop. From the project folder run:
+1. **Build.** Find Python 3.10 or newer as in init-skills (`python3`, `python`,
+   then `py` on Windows; confirm with
+   `<python> -c "import sys; assert sys.version_info >= (3, 10)"` — macOS's
+   built-in python3 may be 3.9, install from python.org); if Python, openpyxl or
+   pyyaml is missing, give the install command from init-skills and stop. From
+   the project folder run:
    `<python> "${CLAUDE_PLUGIN_ROOT}/skills/model/engine/build_model.py" --project .`
-   Exit code 2: fix the listed inputs (mapping problems yourself; story drivers
-   go to the team) and rerun. Exit 4: ask the team to close the file, rerun.
+   (if `${CLAUDE_PLUGIN_ROOT}` does not resolve in the shell, locate
+   `skills/model/engine/build_model.py` in the installed plugin folder and use its
+   absolute path, in quotes; exit 3 = model definition error: report it as a
+   plugin bug; never edit the engine). Exit code 2: fix the listed inputs —
+   mapping problems by applying the financials skill's steps 3-7 (update
+   `data/financials.csv` AND `data/adjustments.md`); story drivers go to the
+   team — and rerun. Exit 4: ask the team to close the file, rerun.
 2. **Read** `model/model-summary.json`: `status`, every check that is not OK,
    `warnings`, and the `ratios` and `lines` sections.
 3. **Resolve failed checks** with `references/reading-the-model.md`: fix
-   mechanical causes directly (a mapping gap, a missing lease line), rebuild, and
-   list story causes for the team with the driver involved.
+   mechanical causes (a mapping gap, a missing lease line) by applying the
+   financials skill's steps 3-7 (update `data/financials.csv` AND
+   `data/adjustments.md`), rebuild, and list story causes for the team with the
+   driver involved.
 4. **Review the forecast against history** (from `ratios`): revenue growth,
    EBITDA margin, ROIC, net debt / EBITDA, FCF margin. Flag any forecast year that
    breaks the historical range and name the driver responsible.

@@ -14,8 +14,9 @@ the target price and the recommendation — belong to the team.
 ## Reads
 
 - `model/model-summary.json` with forecast lines — missing or built without
-  `drivers.yaml`: run the model skill's build first and say the valuation rests on
-  engine defaults until the forecast skill has run.
+  `drivers.yaml` (its `warnings` contain "model/drivers.yaml not found"): run the
+  model skill's build first and say the valuation rests on engine defaults until
+  the forecast skill has run.
 - `research/industry.md` — the peer set. Missing: propose 4-8 peers and add a
   `todo.md` item to confirm them with the industry skill.
 - `research/thesis.md` — direction, catalysts, kill criteria (for the recommendation).
@@ -32,7 +33,7 @@ the target price and the recommendation — belong to the team.
    available, else ask the team); `years_since_fiscal_year_end` from today and
    the fiscal year end. Cite source and date.
 2. **WACC inputs** per `references/wacc-latam.md`: choose the currency route,
-   risk-free, ERP, CRP (0 on the local route), bottom-up unlevered beta from
+   risk-free, ERP, CRP (0 unless the reporting currency is USD), bottom-up unlevered beta from
    peers, target D/E with leases, pre-tax cost of debt, marginal tax. Propose
    values with sources; the team confirms (Coach moments).
 3. **Peers** from the industry peer set: price, shares, net debt incl. leases +
@@ -40,10 +41,18 @@ the target price and the recommendation — belong to the team.
    Drop peers with non-positive EBITDA or EPS and say so.
 4. **Bridge items**: `non_operating_assets`, `debt_like_items` from the notes.
 5. **Terminal**: propose `growth`, `exit_ev_ebitda`, `lt_nominal_gdp_growth`.
-6. **Write `valuation/valuation.yaml`** from the template with `target_price: null`
-   and run from the project folder (Python found as in init-skills):
+6. **Write `valuation/valuation.yaml`** from the template with `target_price: null`.
+   Find Python 3.10 or newer as in init-skills (`python3`, `python`, then `py` on
+   Windows; confirm with
+   `<python> -c "import sys; assert sys.version_info >= (3, 10)"` — macOS's
+   built-in python3 may be 3.9, install from python.org); if Python, openpyxl or
+   pyyaml is missing, give the install command from init-skills and stop. From
+   the project folder run:
    `<python> "${CLAUDE_PLUGIN_ROOT}/skills/model/engine/build_model.py" --project .`
-   Read `valuation` and `checks` in `model/model-summary.json`; explain every
+   (if `${CLAUDE_PLUGIN_ROOT}` does not resolve in the shell, locate
+   `skills/model/engine/build_model.py` in the installed plugin folder and use its
+   absolute path, in quotes; exit 3 = model definition error: report it as a
+   plugin bug; never edit the engine). Read `valuation` and `checks` in `model/model-summary.json`; explain every
    valuation WARN or ERROR in one plain sentence and fix input mistakes.
 7. **Coach the target price and recommendation** with
    `references/recommendation-guide.md`. Write the team's `target_price` into

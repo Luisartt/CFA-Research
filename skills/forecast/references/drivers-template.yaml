@@ -26,4 +26,5 @@ drivers:
 # Optional, only when financials.csv has seg_<key> rows:
 # revenue_segments:
 #   - {key: mexico, label: Mexico}
-# and add per segment:  seg_mexico_growth: {values: [...], tag: ..., rationale: ..., pillar: ...}
+# and add under drivers:
+#   seg_mexico_growth: {values: [...], tag: ..., rationale: ..., pillar: ...}

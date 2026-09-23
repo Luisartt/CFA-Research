@@ -24,10 +24,17 @@ must be defensible against history, guidance and the industry.
 
 ## Steps
 
-1. **Baseline.** Run the engine once from the project folder (Python found as in
-   init-skills) to get historical driver values:
+1. **Baseline.** Find Python 3.10 or newer as in init-skills (`python3`,
+   `python`, then `py` on Windows; confirm with
+   `<python> -c "import sys; assert sys.version_info >= (3, 10)"` — macOS's
+   built-in python3 may be 3.9, install from python.org); if Python, openpyxl or
+   pyyaml is missing, give the install command from init-skills and stop. Run the
+   engine once from the project folder to get historical driver values:
    `<python> "${CLAUDE_PLUGIN_ROOT}/skills/model/engine/build_model.py" --project .`
-   Read the `drivers` section of `model/model-summary.json`. If there is no
+   (if `${CLAUDE_PLUGIN_ROOT}` does not resolve in the shell, locate
+   `skills/model/engine/build_model.py` in the installed plugin folder and use its
+   absolute path, in quotes; exit 3 = model definition error: report it as a
+   plugin bug; never edit the engine). Read the `drivers` section of `model/model-summary.json`. If there is no
    `drivers.yaml` yet, this first workbook is the "engine-default baseline"; say so.
 2. **Clean baselines.** For each driver compute the 3-5 year average and trend,
    excluding the one-off years listed in `adjustments.md`.

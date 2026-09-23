@@ -9,12 +9,17 @@ The model is in the reporting currency (e.g. MXN nominal). The discount rate
 must be in the same currency and in nominal terms.
 
 - **Local route (preferred):** local 10-year government bond yield as risk-free
-  (it already contains country risk and local inflation) + beta x mature-market
+  (it already contains sovereign risk and local inflation) + beta x mature-market
   ERP. No separate country risk premium (set it to 0).
-- **USD route:** US 10-year Treasury + beta x ERP + country risk premium, then
-  convert to local currency: `(1 + k_local) = (1 + k_usd) x (1 + inflation_local) / (1 + inflation_us)`.
-  Enter the converted local rates in `valuation.yaml` and set the CRP line to 0,
-  or keep the USD components and explain why the cash flows are in USD.
+  The local yield embeds the sovereign default spread, not an equity country risk
+  premium — be ready to defend that in Q&A.
+- **USD route:** compute `k_e(USD) = rf_US + beta_L x ERP + CRP` (beta_L = the
+  beta relevered at the target D/E), then convert it with
+  `(1 + k_local) = (1 + k_usd) x (1 + inflation_local) / (1 + inflation_us)` to
+  get `k_e(local)`. In `valuation.yaml` enter `risk_free` = k_e(local) - beta_L x ERP
+  and `country_risk_premium` = 0, so the WACC tab reproduces k_e(local). Convert
+  `pre_tax_cost_of_debt` from USD to local the same way. Keep the USD inputs
+  (US Treasury, CRP) only if the reporting currency is USD.
 
 | Country | Local 10-year risk-free | Central-bank inflation target |
 |---|---|---|
@@ -27,7 +32,8 @@ must be in the same currency and in nominal terms.
 ## 2. Equity risk premium and country risk
 
 - ERP: a mature-market ERP (e.g. Damodaran's implied US ERP, updated monthly).
-- Country risk premium: only on the USD route (e.g. Damodaran's country table).
+- Country risk premium: only on the USD route (e.g. Damodaran's country table),
+  inside k_e(USD); `valuation.yaml` gets 0 unless the reporting currency is USD.
 
 ## 3. Beta
 
@@ -40,6 +46,10 @@ median, and enter it as `beta_unlevered`; the model relevers it at the target D/
 - `target_debt_to_equity`: market values, **debt including leases** (the model
   subtracts lease liabilities in net debt). Peer median or the company's own
   long-run target. The WACC tab shows the current market D/E next to it.
+- Include only the leases the model counts as debt (`lease_liabilities`). For a
+  US GAAP company with operating leases in other liabilities, exclude them from
+  D/E, from beta unlevering and from peers' net debt, and use EBITDA after rent
+  for peers.
 - `pre_tax_cost_of_debt`: yield on the company's bonds, or risk-free + a spread
   for its rating.
 - `tax_rate`: statutory marginal rate (Mexico 30%, Brazil 34%, Chile 27%,

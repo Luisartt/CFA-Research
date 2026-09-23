@@ -26,7 +26,8 @@ that is not in a document there.
 
 - **Operating expenses (`opex`)**: everything between gross profit and operating
   income, netted (other operating income reduces it). Then EBIT = revenue - cogs -
-  opex must equal reported operating income; if not, find the missing line.
+  opex must equal reported operating income after the reclassifications below
+  (PTU, associates, discontinued operations); if not, find the missing line.
 - **Costs presented by nature** (common for telecoms, airlines, miners): there is
   no "cost of sales" line. Put costs directly tied to delivering the product or
   service in `cogs` (e.g. cost of equipment and services, fuel, raw materials) and
@@ -52,10 +53,14 @@ that is not in a document there.
   `other_noncurrent_liabilities` (so they are not counted as debt, consistent with
   their cost sitting in operating expenses). Say this in `adjustments.md` —
   it matters when comparing EBITDA with IFRS peers.
+- Under ASC 842, exclude operating-lease right-of-use amortization from `da`
+  (it is part of the lease cost in `opex`); only finance leases go in
+  `lease_liabilities` / `lease_principal_paid`.
 
 ## Tie-outs before writing
 
 For every year: assets = liabilities + equity (after mapping), `total_assets_reported`
 and `net_income_reported` equal the reported figures, and EBIT matches reported
-operating income. A difference means a line was missed — find it; never force it
-into a random line.
+operating income after the reclassifications recorded in `adjustments.md` (PTU,
+associates, discontinued operations). A difference beyond those means a line was
+missed — find it; never force it into a random line.

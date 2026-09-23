@@ -29,7 +29,7 @@ set is held at its last actual value (a few default to zero) and the engine warn
 | `dpo` | Payable days | Recent average | Rising payables flatter cash flow — don't assume it without evidence |
 | `other_ca_pct_revenue` | Other current assets / revenue | Recent average | |
 | `other_cl_pct_revenue` | Other current liabilities / revenue | Recent average | |
-| `tax_rate` | Effective tax rate | Statutory rate (Mexico 30%, Brazil 34%, Chile 27%, Colombia 35%, Peru 29.5%) adjusted by recent history | Loss years distort the history |
+| `tax_rate` | Effective tax rate | Statutory rate (Mexico 30%, Brazil 34%, Chile 27%, Colombia 35%, Peru 29.5%) adjusted by recent history | Loss years distort the history; verify current statutory rates; Colombia has sector surcharges (e.g. financial institutions, extractives) |
 | `interest_rate_debt` | Interest / opening total debt (incl. leases) | Recent history; debt costs note | |
 | `interest_rate_cash` | Interest income / opening cash | Local short rates | |
 | `payout_ratio` | Dividends / net income to shareholders | Dividend policy; recent history | |
