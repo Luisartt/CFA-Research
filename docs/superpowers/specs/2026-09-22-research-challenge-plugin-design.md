@@ -256,13 +256,18 @@ skills/
   init-skills/  financials/  industry/  thesis/  forecast/
   model/  valuation/  risks-esg/  report/  pitch/
     SKILL.md (+ references/)
-engine/                 model builder (adapted) + tests/
+skills/init-skills/templates/   AGENTS.md, CLAUDE.md, docs/context/*, company-profile.yaml
+skills/model/engine/            model builder (adapted) + tests/ (phase 2)
 commands/wrap-up.md
-templates/              AGENTS.md, CLAUDE.md, docs/context/*, company-profile.yaml
+tests/                  structural tests (pytest)
+evals/                  manual eval prompts per phase
 README.md  LICENSE (MIT)  NOTICE (research_analyst attribution)
 ```
 
-Skills locate `engine/` and `templates/` relative to their own base directory.
+Skills reference only files inside their own directory (the plugin cache path
+differs per machine). Shared code lives inside the skill that owns it: the
+engine belongs to `model`; `valuation` writes `valuation/valuation.yaml` and
+hands off to `model` to rebuild the workbook.
 
 ## 12. Reused material
 
@@ -286,14 +291,15 @@ Skills locate `engine/` and `templates/` relative to their own base directory.
 
 ## 14. Build order
 
-1. `init-skills`, `thesis`, `industry` + templates + plugin manifests
+1. `init-skills`, `thesis`, `industry`, `/wrap-up` + templates + plugin manifests
+   (done: plan `docs/superpowers/plans/2026-09-22-phase1-foundation-coaching-skills.md`)
 2. `financials`, `forecast`, `model`, `valuation` + engine
-3. `risks-esg`, `report`, `pitch` + `/wrap-up`
+3. `risks-esg`, `report`, `pitch`
 
 ## 15. Open items to verify during implementation
 
 - Current CFA Research Challenge rules: report page limits, section requirements,
   AI-use disclosure wording.
-- Exact marketplace name for the install command (set in `marketplace.json`).
-- Whether plugin skills can reference sibling directories (`engine/`,
-  `templates/`) via relative path from the skill base directory on both OSes.
+- Resolved: marketplace name is `cfa-research`
+  (`/plugin install research-challenge@cfa-research`).
+- Resolved: skills reference only their own directory (see §11).
