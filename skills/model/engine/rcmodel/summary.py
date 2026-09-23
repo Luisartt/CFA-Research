@@ -1,0 +1,59 @@
+"""model/model-summary.json: the numbers the valuation, report and pitch skills read."""
+
+from __future__ import annotations
+
+import math
+from collections.abc import Sequence
+from typing import Any
+
+from .checks import CheckResult, overall_status
+from .engine import BlankCell, Model
+from .writer import BuildInfo
+
+SUMMARY_LINES: tuple[str, ...] = (
+    "revenue", "gross_profit", "ebitda", "ebit", "net_income_parent", "eps",
+    "fcf", "cash", "revolver", "net_debt", "fcff",
+)
+SUMMARY_VALUES: tuple[str, ...] = (
+    "wacc", "terminal_growth", "exit_multiple", "ev_gordon", "ev_exit", "price_gordon", "price_exit",
+    "share_price", "upside_gordon", "upside_exit", "target_12m_gordon", "dps_next", "tv_ronic", "de_market",
+    "tv_share_gordon", "implied_exit_multiple",
+    "implied_g_exit", "implied_g", "price_comps_ev_ebitda", "price_comps_pe",
+)
+
+
+def _clean(value: float) -> float | None:
+    return round(value, 6) if math.isfinite(value) else None
+
+
+def build_summary(model: Model, results: Sequence[CheckResult], info: BuildInfo) -> dict[str, Any]:
+    inputs = model.inputs
+    lines: dict[str, dict[str, float | None]] = {}
+    for key in SUMMARY_LINES:
+        if not model.has(key):
+            continue
+        lines[key] = {
+            str(year): None if isinstance(model.cell(key, t), BlankCell) else _clean(model.value(key, t))
+            for t, year in enumerate(inputs.years)
+        }
+    valuation = {key: _clean(model.value(key, None)) for key in SUMMARY_VALUES if model.has(key)}
+    return {
+        "company": inputs.profile.name,
+        "ticker": inputs.profile.ticker,
+        "framework": inputs.profile.framework,
+        "currency": inputs.profile.currency,
+        "units": inputs.profile.units,
+        "model_file": info.filename,
+        "version": info.version,
+        "built_on": info.built_on.isoformat(),
+        "historical_years": list(inputs.hist_years),
+        "forecast_years": list(inputs.fcst_years),
+        "status": overall_status(results),
+        "lines": lines,
+        "valuation": valuation,
+        "checks": [
+            {"check": r.label, "year": None if r.period is None else inputs.years[r.period], "status": r.status}
+            for r in results
+        ],
+        "warnings": list(inputs.warnings),
+    }
