@@ -27,7 +27,7 @@ report and pitch, producing an institutional-grade financial model on the way.
 | # | Decision | Choice |
 |---|---|---|
 | 1 | Writing boundary | Co-writer with coaching; AI use disclosed |
-| 2 | Language | Skills in English; report language chosen at init (EN/ES/PT); coaching follows the student's language |
+| 2 | Language | Skills in English; report always in English (Official Rules 2.6c); presentation language chosen at init (local rounds may allow ES/PT); coaching follows the student's language |
 | 3 | Distribution | Claude Code plugin with own marketplace |
 | 4 | Persistent context | No hooks; instruction-driven updates + `/wrap-up` command; soft size caps |
 | 5 | Model support | Institutional-grade xlsx built by the plugin |
@@ -123,7 +123,7 @@ A fully conforming project is a no-op.
    US domestic filer -> US GAAP; foreign private issuer ADR -> IFRS. Banks and
    insurers -> warning that valuation changes (DDM / residual income) and the
    v1 model does not cover them fully.
-4. Report language (EN/ES/PT).
+4. Presentation language for the local round (EN/ES/PT); the report is always English.
 5. Team members and roles (optional) -> ownership in `todo.md`.
 6. Report deadline and presentation date -> milestones in `todo.md`.
 7. Confirmation that all material is public (CFA Standard II(A)).
@@ -244,24 +244,49 @@ Decisions made while building (after reviews by a finance/valuation reviewer):
 The parity check is the guard; the fallback (LibreOffice headless recalculation)
 was rejected because it adds an install for every student.
 
-## 8. `report` and `pitch`
+## 8. Phase 3: `risks-esg`, `report`, `pitch`, `deck`
 
-**report**
-- Structure and page limits live in `skills/report/references/challenge-structure.md`,
-  editable. Default (assumed, to verify against current Challenge rules):
-  cover (recommendation, target price, key data), investment summary, business
-  description, industry overview and competitive positioning, valuation,
-  financial analysis, investment risks, ESG, appendices; ~10 pages + appendices.
-- One file per section so members write in parallel.
-- Co-writes from upstream files and cites them; flags any claim without a tag;
-  tracks the page budget; assembles `.docx` if `python-docx` is installed.
-- Drafts the **AI-use disclosure appendix** from `ai-use-log.md`.
+Rules source: CFA Institute Research Challenge **2026-2027 Official Rules**
+(PDF created 2026-07-16). Key facts: report in **English** at every round (2.6c);
+max 10 A4 pages + appendix max 10 (2.6b); official CFA cover template, unaltered,
+carrying the mandatory disclosures (App. A, C); first-page header: company,
+exchange, ticker, sector/industry, rating, price + date, target + % up/down;
+sections: Business description, Industry overview & competitive positioning,
+Investment summary, Valuation, Financial analysis, Investment risks, ESG.
+Report grading /100: Business 5, Industry 10, Investment summary 15, Valuation 20,
+Financial analysis 20, Risks 15, ESG 15. AI use allowed; material reliance must be
+disclosed (2.4d, App. B; no mandated wording); judges likely to ask about it.
+Presentation: 10 min + 10 min Q&A at the local final (15 at regional/global
+finals; recorded, no Q&A at sub-regional); English from sub-regional up; every
+slide shows sources; scoring /100: Financial analysis 20, Valuation 20, ESG 10,
+Presentation 20, Q&A 20, Team 5, Materials 5. Local final = 50% report / 50%
+presentation. Mexico 2026-27: Grupo Bimbo, reports due 2026-11-05.
 
-**pitch**
-- 10-12 slide outline + speaker notes (students build the deck themselves).
-- **Judge Q&A drill**: ~30 likely questions generated from the team's own files
-  (adjustments, weakest assumption, terminal value share, bear case), run as a
-  mock Q&A with a scorecard.
+| Skill | Assistant does | Team decides | Writes |
+|---|---|---|---|
+| `risks-esg` | Risks per thesis pillar with probability x impact and a risk-matrix chart; ESG materiality by industry plus a LatAm governance checklist (controlling shareholder, related parties, board independence, disclosure quality) | Which risks matter and how they are mitigated or priced; which ESG factors are material and whether they change the valuation | `research/risks.md`, `research/esg.md` |
+| `report` | Co-writes the 7 sections from upstream files with page budgets by rubric weight; first-page header block; charts; A4 `.docx` body; flags untagged claims; drafts the AI-use disclosure from `ai-use-log.md` | Final say on every claim; the investment-summary story; rating and target wording | `report/sections/NN-*.md`, `report/charts/*.png`, `report/<TICKER>_report_v<N>.docx` |
+| `pitch` | 10-minute slide-by-slide outline, speaker notes, timing plan; Q&A drill scored on the rubric (incl. AI-use questions) | Lead message, who presents what, answers in their own words | `pitch/outline.md`, `pitch/qa-drill.md` |
+| `deck` | Build: outline + the team's own `.pptx` template -> deck with charts, sources footer on every slide, speaker notes. Audit: slide count vs 10 minutes, sources, notes, fonts and sizes, overflow estimates, numbers stale vs `model-summary.json`; fixes mechanical issues, flags judgment ones | The design (their template) and final visual polish | `pitch/<TICKER>_deck_v<N>.pptx`, `pitch/deck-audit.md` |
+
+- **Page budget** (10 pages): Investment summary 1.5, Valuation 2, Financial
+  analysis 2, Risks 1.5, ESG 1.5, Industry 1, Business 0.5 (~500 words/page minus
+  chart space). Appendix: statements, DCF, comps, sensitivity, AI-use and sources.
+- **Cover:** teams download the official CFA cover (.docx) and attach the body
+  behind it; the plugin never redistributes it.
+- **Code:** `skills/report/tools/charts.py` (matplotlib; from `model-summary.json`
+  and `risks.md`), `skills/report/tools/build_docx.py` (python-docx; A4 body),
+  `skills/deck/tools/build_pptx.py` and `audit_pptx.py` (python-pptx). All pure
+  Python, pytest-tested with the Acme fixture. Deck QA is structural by default;
+  visual rendering only if LibreOffice is present.
+- **Deck design:** workflow ideas inspired by Anthropic's official pptx skill
+  (inspect the template's layouts first, structural edits before text, run-level
+  text replacement, notes in the notes field, placeholder-leftover check); no
+  text or code copied (that skill is proprietary).
+- **init-skills changes:** report language is always English; the interview asks
+  the presentation language instead; install line adds `matplotlib python-pptx`.
+- **Build order:** plan 3a = language fix + `risks-esg` + chart/docx tools +
+  `report` (target: usable by 2026-10-15); plan 3b = `pitch` + `deck` (before 2026-11-19).
 
 ## 9. Error handling
 
@@ -323,7 +348,6 @@ hands off to `model` to rebuild the workbook.
 - Quarterly model updates and ongoing coverage maintenance
 - Automatic filing download (BMV has no public API; students drop PDFs in `filings/`)
 - Full bank / insurer models
-- Generating the slide deck file
 - Hooks of any kind
 
 ## 14. Build order
@@ -332,12 +356,12 @@ hands off to `model` to rebuild the workbook.
    (done: plan `docs/superpowers/plans/2026-09-22-phase1-foundation-coaching-skills.md`)
 2. `financials`, `forecast`, `model`, `valuation` + engine
    (done: plans 2026-09-23-phase2a-model-engine.md, 2026-09-24-phase2b-model-skills.md)
-3. `risks-esg`, `report`, `pitch`
+3. 3a: report-language fix, `risks-esg`, chart/docx tools, `report`;
+   3b: `pitch`, `deck` (see §8)
 
 ## 15. Open items to verify during implementation
 
-- Current CFA Research Challenge rules: report page limits, section requirements,
-  AI-use disclosure wording.
+- Resolved: Challenge rules checked against the 2026-2027 Official Rules (see §8).
 - Resolved: marketplace name is `cfa-research`
   (`/plugin install research-challenge@cfa-research`).
 - Resolved: skills reference only their own directory (see §11).
