@@ -187,3 +187,45 @@ def test_profile_and_valuation_errors_reported_together(tmp_path: Path) -> None:
     messages = _messages(write_project(tmp_path, profile=profile, valuation=valuation))
     assert any("init-skills" in m for m in messages)
     assert any("wacc.risk_free must be a number" in m for m in messages)
+
+
+def test_valuation_optional_bridge_and_stub_default_to_zero(project: Path) -> None:
+    valuation = load_inputs(project).valuation
+    assert valuation is not None
+    assert valuation.non_operating_assets == 0.0
+    assert valuation.debt_like_items == 0.0
+    assert valuation.years_since_fiscal_year_end == 0.0
+
+
+def test_valuation_reads_bridge_and_stub(tmp_path: Path) -> None:
+    valuation = copy.deepcopy(VALUATION)
+    valuation.update(non_operating_assets=500, debt_like_items=200.5, years_since_fiscal_year_end=0.25)
+    loaded = load_inputs(write_project(tmp_path, valuation=valuation)).valuation
+    assert loaded is not None
+    assert (loaded.non_operating_assets, loaded.debt_like_items, loaded.years_since_fiscal_year_end) == (
+        500.0, 200.5, 0.25)
+
+
+@pytest.mark.parametrize("stub", [-0.1, 1.0, 1.5, "soon"])
+def test_valuation_rejects_bad_stub(tmp_path: Path, stub: object) -> None:
+    valuation = copy.deepcopy(VALUATION)
+    valuation["years_since_fiscal_year_end"] = stub
+    messages = _messages(write_project(tmp_path, valuation=valuation))
+    assert any("years_since_fiscal_year_end must be a number >= 0 and < 1" in m for m in messages)
+
+
+def test_valuation_rejects_non_numeric_bridge_items(tmp_path: Path) -> None:
+    valuation = copy.deepcopy(VALUATION)
+    valuation.update(non_operating_assets="lots", debt_like_items=None)
+    messages = _messages(write_project(tmp_path, valuation=valuation))
+    assert any("non_operating_assets must be a number" in m for m in messages)
+    assert not any("debt_like_items" in m for m in messages)
+
+
+@pytest.mark.parametrize("field", ["ebitda_fwd", "eps_fwd"])
+def test_valuation_rejects_peer_with_non_positive_earnings(tmp_path: Path, field: str) -> None:
+    valuation = copy.deepcopy(VALUATION)
+    valuation["peers"][1][field] = 0 if field == "ebitda_fwd" else -1.5
+    messages = _messages(write_project(tmp_path, valuation=valuation))
+    assert ("valuation.yaml: peers[2] (Peer B) has non-positive EBITDA or EPS; "
+            "drop it from the peer set or use a different multiple") in messages

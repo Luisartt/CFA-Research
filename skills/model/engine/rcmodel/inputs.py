@@ -102,6 +102,9 @@ class Valuation:
     mid_year: bool
     peers: tuple[Peer, ...]
     target_price: float | None
+    non_operating_assets: float = 0.0
+    debt_like_items: float = 0.0
+    years_since_fiscal_year_end: float = 0.0
 
 
 @dataclass(frozen=True)
@@ -360,11 +363,21 @@ def load_valuation(path: Path) -> Valuation | None:
             return math.nan
         return float(raw)
 
+    def optional(name: str) -> float:
+        return 0.0 if doc.get(name) is None else number(doc, name, "")
+
     w = {f: number(wacc, f, "wacc.") for f in WACC_FIELDS}
     t = {f: number(terminal, f, "terminal.") for f in TERMINAL_FIELDS}
     price = number(doc, "share_price", "")
     low = number(doc, "price_52w_low", "")
     high = number(doc, "price_52w_high", "")
+    non_operating = optional("non_operating_assets")
+    debt_like = optional("debt_like_items")
+    stub_raw = doc.get("years_since_fiscal_year_end")
+    stub = 0.0 if stub_raw is None else float(stub_raw) if _is_number(stub_raw) else math.nan
+    if not 0.0 <= stub < 1.0:  # False for NaN too
+        errors.append("valuation.yaml: years_since_fiscal_year_end must be a number >= 0 and < 1 "
+                      "(e.g. 0.25 three months after the fiscal year-end)")
     peers: list[Peer] = []
     raw_peers = doc.get("peers") or []
     if not isinstance(raw_peers, list):
@@ -375,7 +388,7 @@ def load_valuation(path: Path) -> Valuation | None:
             errors.append(f"valuation.yaml: peer {i} must be a mapping")
             continue
         where = f"peers[{i}]."
-        peers.append(Peer(
+        peer = Peer(
             name=str(entry.get("name", f"Peer {i}")),
             ticker=str(entry.get("ticker", "")),
             price=number(entry, "price", where),
@@ -383,7 +396,11 @@ def load_valuation(path: Path) -> Valuation | None:
             net_debt=number(entry, "net_debt", where),
             ebitda_fwd=number(entry, "ebitda_fwd", where),
             eps_fwd=number(entry, "eps_fwd", where),
-        ))
+        )
+        if peer.ebitda_fwd <= 0 or peer.eps_fwd <= 0:  # NaN (already reported) compares False
+            errors.append(f"valuation.yaml: peers[{i}] ({peer.name}) has non-positive EBITDA or EPS; "
+                          "drop it from the peer set or use a different multiple")
+        peers.append(peer)
     target = doc.get("target_price")
     if target is not None and not _is_number(target):
         errors.append("valuation.yaml: target_price must be a number or null")
@@ -400,6 +417,7 @@ def load_valuation(path: Path) -> Valuation | None:
         tax_rate=w["tax_rate"], terminal_growth=t["growth"], exit_ev_ebitda=t["exit_ev_ebitda"],
         lt_nominal_gdp_growth=t["lt_nominal_gdp_growth"], mid_year=bool(mid_year), peers=tuple(peers),
         target_price=float(target) if _is_number(target) else None,
+        non_operating_assets=non_operating, debt_like_items=debt_like, years_since_fiscal_year_end=stub,
     )
 
 

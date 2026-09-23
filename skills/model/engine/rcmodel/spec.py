@@ -17,6 +17,7 @@ class Fmt(Enum):
     MULT = '0.0"x"'
     DAYS = "0"
     PRICE = "#,##0.00"
+    PRICE_NM = '#,##0.00;-#,##0.00;"n.m."'  # zero reads "not meaningful" (sensitivity cells guarded to 0)
     SHARES = "#,##0.0"
     NUMBER = "0.00"
 
