@@ -166,6 +166,14 @@ def test_every_template_token_is_documented_in_init_skill() -> None:
     assert used <= documented, f"undocumented tokens: {sorted(used - documented)}"
 
 
+def test_gitattributes_template_uses_union_merge() -> None:
+    path = TEMPLATES_DIR / "gitattributes"
+    assert path.is_file(), path
+    text = read_text(path)
+    for filename in ("ai-use-log.md", "thesis-journal.md", "session-log.md"):
+        assert f"docs/context/{filename} merge=union" in text, filename
+
+
 def test_wrap_up_command_has_description() -> None:
     fields = read_frontmatter(ROOT / "commands" / "wrap-up.md")
     assert fields.get("description"), "wrap-up needs a description"

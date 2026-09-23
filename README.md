@@ -33,22 +33,24 @@ model skills in the next release; `init-skills` checks and tells you how to inst
 
 | Skill | What it does | You decide |
 |---|---|---|
-| `init-skills` | Sets up the project and the specialist persona | Interview answers |
+| `/research-challenge:init-skills` | Sets up the project and the specialist persona | Interview answers |
 | `thesis` | Stress-tests your investment story, then co-writes it | The pillars, your edge vs consensus, what would change your mind |
 | `industry` | Market, five forces, competitors, moat, SWOT, peers | Where the company really competes, what protects it, the peer set |
 | `/research-challenge:wrap-up` | Updates the memory files at the end of a session | — |
 
 Just ask in plain words ("roast our thesis", "analyze the industry") — the
-right skill triggers. Every skill works on its own, so team members can split
-roles.
+right skill triggers (except `init-skills`, which you run by name). Every
+skill works on its own, so team members can split roles.
 
 Coming next: `financials`, `forecast`, `model`, `valuation` (institutional-grade
 Excel model), then `risks-esg`, `report`, `pitch`.
 
 ## Working as a team
 
-- Share the project folder through git. Shared memory files are append-only,
-  so parallel work merges cleanly.
+- Share the project folder through git. The append-only logs (`ai-use-log`,
+  `thesis-journal`, `session-log`) merge automatically thanks to the
+  `.gitattributes` that `init-skills` installs; `todo.md` and `memory.md` may
+  need a quick manual merge.
 - Run `/research-challenge:wrap-up` before you stop working.
 - Drop filings (annual and quarterly reports) into `filings/`.
 

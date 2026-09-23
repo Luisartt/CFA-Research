@@ -13,10 +13,13 @@ belong to the team: where the company really competes, and what protects it.
 
 ## Reads
 
-- `company-profile.yaml` — missing: ask company, country and sector in one line
-  and continue.
-- `filings/` — annual report business and MD&A sections, risk factors.
-- `research/sources/` — any reports or links the team saved.
+- `company-profile.yaml` — missing: ask company, country and sector in one
+  line, suggest `/research-challenge:init-skills`, and continue anyway.
+- `filings/` — annual report business and MD&A sections, risk factors —
+  empty: say so, use web search, tag every figure, add a todo to drop the
+  annual report in `filings/`.
+- `research/sources/` — any reports or links the team saved — optional; if
+  absent, suggest the team save reports and links there.
 - `research/thesis.md` — optional; used for section 7.
 - `research/industry.md` — if present, update it instead of starting over.
 - `references/industry-report-template.md`.

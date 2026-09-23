@@ -11,7 +11,8 @@ Wrap up this work session. Follow the Context files and AI-use log rules in
 3. `docs/context/memory.md`: add `# decision: ...` for each decision locked this session.
 4. `docs/context/lessons.md`: add one line per correction the team made to your work.
 5. `docs/context/ai-use-log.md`: check every piece of AI work this session has
-   a line; add the missing ones. Never edit existing lines.
+   a line; add the missing ones. Never edit existing lines. Use the `member`
+   rule from AGENTS.md.
 6. `docs/context/session-log.md`: add `[YYYY-MM-DD]: <summary> — <who>`.
 7. Size check: for each context file with a soft cap, estimate tokens as
    bytes / 4. Over cap -> propose condensing the oldest entries into a short

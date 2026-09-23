@@ -9,7 +9,9 @@ project. `CLAUDE.md` imports it. Edit here, not there.
 
 You are coaching a university team competing in the CFA Institute Research
 Challenge. Team: {{TEAM}}. The report is written in {{REPORT_LANGUAGE}}; coach
-in whatever language the student writes to you in.
+in whatever language the student writes to you in. Write files under
+`research/` and `report/` in {{REPORT_LANGUAGE}}, translating template
+headings.
 
 ## Who decides what
 
@@ -89,6 +91,10 @@ ends up in the report, model or pitch, append one line to
 `docs/context/ai-use-log.md`:
 
 `YYYY-MM-DD | member | skill | section or file | what the AI did`
+
+`member` = the student working this session (names in `company-profile.yaml` >
+`team`). If you don't know, ask once at the start of the session; if there is
+no answer, write `team`.
 
 Never skip this. The team's AI-use disclosure is built from it.
 

@@ -30,16 +30,19 @@ Check each item and print a table `item | present | missing | non-conforming`:
 3. `company-profile.yaml` exists and contains no `{{`.
 4. The six files in `docs/context/` exist.
 5. Folders exist: `filings/ data/ research/ model/ valuation/ report/ pitch/`.
+6. `.gitattributes` contains the three `merge=union` lines from `templates/gitattributes`.
 
 All conform -> say "Project already set up. Nothing changed." and stop.
 
 ### Step 2 — Environment check (warn, never block)
 
-Run `python --version` (on Windows fall back to `py --version`) and
-`python -c "import openpyxl"`. Phase-1 skills do not need Python; the model
-skills will. If missing, print the exact command and offer to run it:
+Try `python3 --version`, then `python --version`, then (Windows) `py --version`;
+use the first that works to run `<cmd> -c "import openpyxl"`. Phase-1 skills do
+not need Python; the model skills will. If missing, print the exact command and
+offer to run it:
 
-- Python missing -> Windows: `winget install Python.Python.3.12`; macOS: `brew install python`
+- Python missing -> Windows: `winget install Python.Python.3.12`; macOS: install
+  from python.org (or `brew install python` if Homebrew is installed)
 - openpyxl missing -> Windows: `py -m pip install openpyxl python-docx`; macOS: `python3 -m pip install openpyxl python-docx`
 
 ### Step 3 — Interview (only for what the audit found missing)
@@ -89,6 +92,10 @@ date). Format: `- [pending] <milestone> — owner: <role or all> — due: <date>
 
 Create the seven folders with an empty `.gitkeep` in each.
 
+Copy `templates/gitattributes` to `.gitattributes` in the project root; if a
+`.gitattributes` already exists, append only the missing lines (no k/o/m
+prompt needed).
+
 A file that exists but does not conform: show the difference and ask
 `[k] keep / [o] overwrite / [m] merge` (default keep). Merge = add the missing
 sections from the template, keep every existing line. Never overwrite silently.
@@ -96,8 +103,9 @@ sections from the template, keep every existing line. Never overwrite silently.
 ### Step 5 — Verify and report
 
 Re-run the Step 1 audit. Print `file | created / kept / merged`. Then give one
-next step: "Next: `thesis` to shape your story, or `industry` to map the market.
-Drop the latest annual report and quarterly reports into `filings/`."
+next step: "Next: say \"let's work on our thesis\" (or run
+`/research-challenge:thesis`), or \"analyze the industry\"
+(`/research-challenge:industry`)."
 
 ## Coach moments
 
@@ -109,7 +117,7 @@ Drop the latest annual report and quarterly reports into `filings/`."
 ## Writes
 
 `AGENTS.md`, `CLAUDE.md`, `company-profile.yaml`, `docs/context/*.md` (6),
-`filings/ data/ research/ model/ valuation/ report/ pitch/`.
+`.gitattributes`, `filings/ data/ research/ model/ valuation/ report/ pitch/`.
 
 ## Log
 

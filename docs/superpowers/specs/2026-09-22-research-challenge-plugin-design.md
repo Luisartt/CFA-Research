@@ -1,7 +1,7 @@
 # research-challenge plugin — design spec
 
 - **Date:** 2026-09-22
-- **Status:** approved in brainstorming, pending written-spec review
+- **Status:** approved; phase 1 implemented
 - **Repo:** `Luisartt/CFA-Research` (this repo = the plugin = its own marketplace)
 
 ## 1. Goal
@@ -40,7 +40,7 @@ report and pitch, producing an institutional-grade financial model on the way.
 
 ```
 /plugin marketplace add Luisartt/CFA-Research
-/plugin install research-challenge@<marketplace-name>
+/plugin install research-challenge@cfa-research
 ```
 
 Then, once per team project folder: `/research-challenge:init-skills`.
@@ -175,8 +175,9 @@ pitch      -> pitch/outline.md, pitch/qa-drill.md
 Independence rule: a skill whose input is missing states what is missing, then
 either asks for the minimum it needs or proceeds with a placeholder tagged
 `[assumption]` and adds a `todo.md` item. No skill blocks another. Each skill
-writes only its own outputs; shared files are append-only, so parallel team
-members merge cleanly in git. Versioned outputs (`_v<N>`) are never overwritten.
+writes only its own outputs; append-only shared logs use git `merge=union`
+(installed by `init-skills` via `.gitattributes`), so parallel team members
+merge cleanly. Versioned outputs (`_v<N>`) are never overwritten.
 
 ## 7. Model engine
 

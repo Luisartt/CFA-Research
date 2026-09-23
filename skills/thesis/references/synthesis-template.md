@@ -19,6 +19,10 @@ We rate <Company> a <BUY/HOLD/SELL — provisional until valuation> because
 
 (Repeat for pillars 2-3.)
 
+## What works
+
+-
+
 ## Catalysts (next 12 months)
 
 | Catalyst | Expected timing | Pillar | How we will know |

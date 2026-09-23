@@ -12,7 +12,7 @@ policies note (usually Note 2 or 3) of the latest annual report.
 | BVL | Peru | Lima | PEN (some USD) | IFRS | Miners often report in USD. |
 | BYMA | Argentina | Buenos Aires | ARS | IFRS | IAS 29 hyperinflation restatement applies — flag it early. |
 | NYSE / NASDAQ, 10-K filer | USA | New York | USD | US GAAP | Domestic filer: 10-K / 10-Q. |
-| NYSE / NASDAQ, 20-F filer (ADR) | home country | home city | home currency | IFRS as issued by IASB | Foreign private issuer. |
+| NYSE / NASDAQ, 20-F filer (ADR) | home country | home city | home currency | Usually IFRS as issued by IASB (some 20-F filers use US GAAP — check the auditor's opinion) | Foreign private issuer. |
 
 ## Issuer types that change the work
 
@@ -30,7 +30,9 @@ policies note (usually Note 2 or 3) of the latest annual report.
 - **Hyperinflation:** IAS 29 restates Argentine figures to current purchasing power.
 - **Inventory:** LIFO is not allowed under IFRS.
 - **Cash-flow classification:** IFRS lets interest paid sit in operating or
-  financing; check before comparing free cash flow.
+  financing; check before comparing free cash flow. IFRS 18 (effective for
+  periods from 1 January 2027) makes interest paid a financing cash flow for
+  most non-financial companies.
 - **PP&E revaluation:** allowed under IFRS, not under US GAAP.
 - **Mexico PTU (employee profit sharing):** an operating cost; check where it is
   presented before computing margins.
