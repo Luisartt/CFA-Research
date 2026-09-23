@@ -26,8 +26,9 @@ language, roles, deadlines) and writes `AGENTS.md`, `CLAUDE.md`,
 `company-profile.yaml`, the memory files in `docs/context/`, and the folders
 `filings/ data/ research/ model/ valuation/ report/ pitch/`.
 
-**Requirements:** Claude Code. The model skills need Python 3 with `openpyxl`
-and `pyyaml`; `init-skills` checks and tells you the exact install command.
+**Requirements:** Claude Code. The model skills need Python 3.10 or newer with
+`openpyxl` and `pyyaml` (the python3 built into macOS may be older — install
+from python.org); `init-skills` checks and tells you the exact install command.
 
 ## Skills (v0.2)
 
@@ -42,7 +43,7 @@ and `pyyaml`; `init-skills` checks and tells you the exact install command.
 | `valuation` | WACC, DCF, comps, sensitivity, football field | WACC calls, terminal value, target price, recommendation |
 | `/research-challenge:wrap-up` | Updates the memory files at the end of a session | — |
 
-Just ask in plain words ("roast our thesis", "analyze the industry") — the
+Just ask in plain words ("roast our thesis", "build the model", "what's our WACC") — the
 right skill triggers (except `init-skills`, which you run by name). Every
 skill works on its own, so team members can split roles.
 
