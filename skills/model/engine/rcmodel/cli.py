@@ -63,15 +63,30 @@ def build(project: Path, today: date) -> BuildResult:
     return BuildResult(path, summary_path, tuple(results), inputs.warnings, overall_status(results), inputs.years)
 
 
+def check(project: Path) -> tuple[tuple[CheckResult, ...], tuple[str, ...], str, tuple[int, ...]]:
+    """Load, evaluate and run every check without writing any file."""
+    inputs = load_inputs(project)
+    model, _ = assemble(inputs)
+    results = evaluate_checks(model, [*build_checks(inputs), *parity_checks(model)])
+    return tuple(results), inputs.warnings, overall_status(results), inputs.years
+
+
 def main(argv: Sequence[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         description="Build the research-challenge financial model (xlsx + model-summary.json).",
         epilog=EXIT_CODES_HELP,
     )
     parser.add_argument("--project", default=".", help="Team project folder (the one with company-profile.yaml)")
+    parser.add_argument("--check", action="store_true",
+                        help="Validate inputs and run every check without writing the workbook or summary")
     args = parser.parse_args(argv)
+    project = Path(args.project).resolve()
     try:
-        result = build(Path(args.project).resolve(), date.today())
+        if args.check:
+            results, warnings, status, years = check(project)
+        else:
+            result = build(project, date.today())
+            results, warnings, status, years = result.results, result.warnings, result.status, result.years
     except InputError as exc:
         print("[x] Cannot build the model. Fix these inputs first:")
         for message in exc.messages:
@@ -85,16 +100,19 @@ def main(argv: Sequence[str] | None = None) -> int:
         print(f"[x] Could not write {ascii_safe(target)}: {ascii_safe(exc.strerror or str(exc))}.")
         print("    Close it if it is open in Excel or another program (or pause OneDrive sync), then run again.")
         return EXIT_IO_ERROR
-    counts = {status: sum(1 for r in result.results if r.status == status) for status in ("OK", "ERROR", "WARN")}
-    print(f"[ok] workbook -> model/{ascii_safe(result.workbook.name)}")
-    print("[ok] summary  -> model/model-summary.json")
+    if args.check:
+        print("[ok] inputs are valid (check only, no files written)")
+    else:
+        print(f"[ok] workbook -> model/{ascii_safe(result.workbook.name)}")
+        print("[ok] summary  -> model/model-summary.json")
+    counts = {s: sum(1 for r in results if r.status == s) for s in ("OK", "ERROR", "WARN")}
     print(f"checks: {counts['OK']} OK, {counts['ERROR']} ERROR, {counts['WARN']} WARN")
-    for r in result.results:
+    for r in results:
         if r.status != "OK":
-            year = "" if r.period is None else f" ({result.years[r.period]})"
+            year = "" if r.period is None else f" ({years[r.period]})"
             marker = "[x]" if r.status == "ERROR" else "[warn]"
             print(f"{marker} Not met: {ascii_safe(r.label)}{year}")
-    for warning in result.warnings:
+    for warning in warnings:
         print("[warn] " + ascii_safe(warning))
-    print(f"status: {result.status}")
+    print(f"status: {status}")
     return EXIT_OK

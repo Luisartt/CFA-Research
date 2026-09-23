@@ -92,3 +92,31 @@ def test_launcher_runs(project: Path) -> None:
     )
     assert completed.returncode == 0, completed.stdout + completed.stderr
     assert (project / "model" / "ACME_model_v1.xlsx").is_file()
+
+
+def test_check_mode_writes_nothing(project: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    assert main(["--project", str(project), "--check"]) == 0
+    assert not list((project / "model").glob("*.xlsx"))
+    assert not (project / "model" / "model-summary.json").exists()
+    out = capsys.readouterr().out
+    assert out.isascii()
+    assert "[ok] inputs are valid (check only, no files written)" in out
+    assert "status:" in out
+
+
+def test_check_mode_reports_input_errors(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    history = {k: v for k, v in HISTORY.items() if k != "cash"}
+    write_project(tmp_path, history=history)
+    assert main(["--project", str(tmp_path), "--check"]) == 2
+    assert "cash" in capsys.readouterr().out
+
+
+def test_summary_has_drivers_and_ratios(project: Path) -> None:
+    assert main(["--project", str(project)]) == 0
+    summary = json.loads((project / "model" / "model-summary.json").read_text(encoding="utf-8"))
+    gross_margin = summary["drivers"]["gross_margin"]
+    assert gross_margin["source"] == "team"
+    assert gross_margin["values"]["2026"] == pytest.approx(0.41)
+    assert gross_margin["values"]["2025"] == pytest.approx(5500 / 13400)
+    assert "r_roic" in summary["ratios"]
+    assert "r_ebitda_margin" in summary["ratios"]

@@ -20,22 +20,36 @@ SUMMARY_VALUES: tuple[str, ...] = (
     "tv_share_gordon", "implied_exit_multiple",
     "implied_g_exit", "implied_g", "price_comps_ev_ebitda", "price_comps_pe",
 )
+SUMMARY_RATIOS: tuple[str, ...] = (
+    "r_revenue_growth", "r_gross_margin", "r_ebitda_margin", "r_ebit_margin", "r_net_margin",
+    "r_fcf_margin", "r_roe", "r_roic", "r_net_debt_ebitda", "r_interest_cover", "r_ccc",
+)
 
 
 def _clean(value: float) -> float | None:
     return round(value, 6) if math.isfinite(value) else None
 
 
+def _series(model: Model, key: str) -> dict[str, float | None]:
+    return {
+        str(year): None if isinstance(model.cell(key, t), BlankCell) else _clean(model.value(key, t))
+        for t, year in enumerate(model.inputs.years)
+    }
+
+
 def build_summary(model: Model, results: Sequence[CheckResult], info: BuildInfo) -> dict[str, Any]:
     inputs = model.inputs
-    lines: dict[str, dict[str, float | None]] = {}
-    for key in SUMMARY_LINES:
-        if not model.has(key):
-            continue
-        lines[key] = {
-            str(year): None if isinstance(model.cell(key, t), BlankCell) else _clean(model.value(key, t))
-            for t, year in enumerate(inputs.years)
+    lines = {key: _series(model, key) for key in SUMMARY_LINES if model.has(key)}
+    ratios = {key: _series(model, key) for key in SUMMARY_RATIOS if model.has(key)}
+    drivers = {
+        line.key: {
+            "label": line.label,
+            "source": "team" if line.key in inputs.drivers else "engine default",
+            "values": _series(model, line.key),
         }
+        for line, _ in model.placed.lines
+        if line.sheet == "Drivers"
+    }
     valuation = {key: _clean(model.value(key, None)) for key in SUMMARY_VALUES if model.has(key)}
     return {
         "company": inputs.profile.name,
@@ -50,6 +64,8 @@ def build_summary(model: Model, results: Sequence[CheckResult], info: BuildInfo)
         "forecast_years": list(inputs.fcst_years),
         "status": overall_status(results),
         "lines": lines,
+        "ratios": ratios,
+        "drivers": drivers,
         "valuation": valuation,
         "checks": [
             {"check": r.label, "year": None if r.period is None else inputs.years[r.period], "status": r.status}
