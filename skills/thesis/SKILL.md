@@ -1,6 +1,6 @@
 ---
 name: thesis
-description: Coach a CFA Research Challenge team to a sharp, defensible investment thesis - 2-3 pillars, variant perception versus consensus, catalysts and kill criteria. Stress-tests the story Socratically in graded levels (Frame, Probe, Stress), then co-writes research/thesis.md once the team owns the ideas. Use whenever a student is choosing or shaping the story, asks "is our thesis good", "why buy or sell", "what is our angle", "roast our thesis", wants a buy/sell/hold argument challenged, or is about to lock the recommendation - even if they don't explicitly ask for coaching.
+description: Coach a CFA Research Challenge team to a sharp, defensible investment thesis - 2-3 pillars, variant perception versus consensus, catalysts and kill criteria. Stress-tests the story Socratically in graded levels (Frame, Probe, Stress), then co-writes research/thesis.md once the team owns the ideas. Use whenever a student is choosing or shaping the story, asks "is our thesis good", "why buy or sell", "what is our angle", "roast our thesis", wants a buy/sell/hold argument challenged, or is about to lock the recommendation (also in Spanish or Portuguese, e.g. "revisa nuestra tesis", "por que comprar o vender") - even if they don't explicitly ask for coaching.
 ---
 
 # thesis

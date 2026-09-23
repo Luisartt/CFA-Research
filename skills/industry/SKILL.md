@@ -1,6 +1,6 @@
 ---
 name: industry
-description: Industry and competitive analysis for a CFA Research Challenge company - market definition and size, five forces, competitive landscape and market share, positioning and moat, SWOT, peer universe for comps, and what it all implies for the forecast and thesis, with a LatAm lens (regulation, FX, informal markets, family groups). Does the research and structure; coaches the team on where the company really competes and what protects it. Use whenever a student asks to analyze the industry or sector, map competitors, pick comparables, build a SWOT or five forces, assess a moat or market share - even if they don't explicitly ask for an industry report.
+description: Industry and competitive analysis for a CFA Research Challenge company - market definition and size, five forces, competitive landscape and market share, positioning and moat, SWOT, peer universe for comps, and what it all implies for the forecast and thesis, with a LatAm lens (regulation, FX, informal markets, family groups). Does the research and structure; coaches the team on where the company really competes and what protects it. Use whenever a student asks to analyze the industry or sector, map competitors, pick comparables, build a SWOT or five forces, assess a moat or market share (also in Spanish or Portuguese, e.g. "analiza la industria", "quienes son los comparables") - even if they don't explicitly ask for an industry report.
 ---
 
 # industry
@@ -52,7 +52,8 @@ question the student must answer. Append the answer to `thesis-journal.md`.
 ## Writes
 
 - `research/industry.md`
-- Appends coach-moment answers to `docs/context/thesis-journal.md`.
+- Appends to `docs/context/thesis-journal.md`:
+  `## YYYY-MM-DD — industry — <decision point>` + question, answer, what changed.
 
 ## Log
 
