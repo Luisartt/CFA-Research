@@ -14,7 +14,8 @@ accounting:
   fiscal_year_end: "{{FISCAL_YEAR_END}}"   # MM-DD
   units: "{{UNITS}}"                # millions | thousands
 report:
-  language: "{{REPORT_LANGUAGE}}"   # en | es | pt
+  language: "en"                    # always English (CFA Institute Official Rules 2.6c)
+  presentation_language: "{{PRESENTATION_LANGUAGE}}"   # en | es | pt, local round only; English from sub-regional up
   report_deadline: "{{REPORT_DEADLINE}}"      # YYYY-MM-DD
   presentation_date: "{{PRESENTATION_DATE}}"  # YYYY-MM-DD
 team:

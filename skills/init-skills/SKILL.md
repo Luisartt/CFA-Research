@@ -44,7 +44,7 @@ the model skills will. If missing, print the exact command and offer to run it:
 - Python missing or older than 3.10 -> Windows: `winget install Python.Python.3.12`;
   macOS: install from python.org (the built-in python3 may be 3.9; or
   `brew install python` if Homebrew is installed)
-- openpyxl or PyYAML missing -> Windows: `py -m pip install openpyxl pyyaml python-docx`; macOS: `python3 -m pip install openpyxl pyyaml python-docx`
+- openpyxl or PyYAML missing -> Windows: `py -m pip install openpyxl pyyaml python-docx matplotlib python-pptx`; macOS: `python3 -m pip install openpyxl pyyaml python-docx matplotlib python-pptx`
 
 ### Step 3 — Interview (only for what the audit found missing)
 
@@ -60,7 +60,7 @@ One question at a time. Always offer a default the student can accept with
 3. Accounting framework, reporting currency, fiscal year end, units — propose
    from `references/framework-inference.md`, ask to confirm. Bank, insurer or
    REIT -> read the issuer-type table there and warn what changes.
-4. Report language: en / es / pt.
+4. Presentation language for the local round: en / es / pt. (The report is always in English; from the sub-regional round up the presentation is too.)
 5. Team members and roles (optional): model, industry, valuation, writer, all.
 6. Report deadline and presentation date (YYYY-MM-DD).
 7. "Is all the material you will use public information?" (CFA Standard II(A)).
@@ -78,7 +78,7 @@ Replace every token:
 | `{{SYSTEM_PERSONA}}` | Persona text accepted in Q2 |
 | `{{FRAMEWORK}}` `{{CURRENCY}}` `{{FISCAL_YEAR_END}}` `{{UNITS}}` | Q3 |
 | `{{FRAMEWORK_CONFIRMED}}` | `true` if the team confirmed, else `false` |
-| `{{REPORT_LANGUAGE}}` | Q4 |
+| `{{PRESENTATION_LANGUAGE}}` | Q4 |
 | `{{TEAM}}` | One line, e.g. `Ana (model), Luis (industry)` or `not assigned yet` |
 | `{{TEAM_YAML}}` | One `  - name: "..."` / `    role: "..."` pair per member, or `  []` |
 | `{{REPORT_DEADLINE}}` `{{PRESENTATION_DATE}}` | Q6 |
@@ -124,5 +124,5 @@ into `filings/`."
 ## Log
 
 - `docs/context/ai-use-log.md`: `YYYY-MM-DD | <member> | init-skills | project setup | created project files and persona`
-- `docs/context/memory.md`: `# decision: framework = <framework> (confirmed by team: yes/no)` and `# decision: report language = <lang>`
+- `docs/context/memory.md`: `# decision: framework = <framework> (confirmed by team: yes/no)` and `# decision: presentation language = <lang> (report always English)`
 - `docs/context/session-log.md`: `[YYYY-MM-DD]: project set up with init-skills — <member>`
