@@ -25,6 +25,7 @@ MIN_HIST_YEARS = 3
 MAX_HIST_YEARS = 5
 DEFAULT_FCST_YEARS = 5
 MAX_FCST_YEARS = 10
+SEGMENT_TOLERANCE = 0.5  # segments must add up to revenue within rounding
 FIN_COLUMNS = ("line_item", "year", "value", "tag", "source_doc", "page")
 WACC_FIELDS = ("risk_free", "equity_risk_premium", "country_risk_premium", "beta_unlevered",
                "target_debt_to_equity", "pre_tax_cost_of_debt", "tax_rate")
@@ -215,6 +216,11 @@ def load_financials(path: Path) -> tuple[dict[str, dict[int, Observation]], tupl
             errors.append(f"financials.csv: required line '{key}' is missing for {', '.join(absent)}")
     if errors:
         raise InputError(errors)
+    if any(raw["cogs"][y].value <= 0 for y in hist_years):
+        raise InputError([
+            "financials.csv: cogs must be positive in every year (if the company presents costs by nature, "
+            "map the costs directly tied to sales into cogs; see the financials skill)"
+        ])
     history = {key: {y: o for y, o in series.items() if y in hist_years} for key, series in raw.items()}
     return history, hist_years, warnings
 
@@ -318,7 +324,25 @@ def _read_segments(raw: object, history: Mapping[str, Mapping[int, Observation]]
             errors.append(f"financials.csv: segment line '{line}' is missing for {', '.join(absent)}")
             continue
         segments.append(Segment(key, str(item.get("label", key))))
+    if segments and not errors:
+        _check_segments_add_up(segments, history, hist_years, errors)
     return tuple(segments)
+
+
+def _check_segments_add_up(segments: list[Segment], history: Mapping[str, Mapping[int, Observation]],
+                           hist_years: tuple[int, ...], errors: list[str]) -> None:
+    revenue = history.get("revenue", {})
+    for year in hist_years:
+        if year not in revenue:
+            continue
+        total = math.fsum(history[f"{SEGMENT_PREFIX}{s.key}"][year].value for s in segments)
+        if abs(total - revenue[year].value) > SEGMENT_TOLERANCE:
+            errors.append(
+                f"financials.csv: revenue segments add up to {total:,.1f} in {year} but revenue is "
+                f"{revenue[year].value:,.1f}; if the company reports inter-segment eliminations or "
+                "unallocated revenue, add them as another segment (e.g. seg_eliminations with negative values) "
+                "and list it under revenue_segments in drivers.yaml"
+            )
 
 
 def load_valuation(path: Path) -> Valuation | None:

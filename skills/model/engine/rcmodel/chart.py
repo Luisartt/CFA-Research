@@ -55,6 +55,8 @@ CHART: tuple[ChartItem, ...] = (
     ChartItem("cfo", "Cash flow from operations", Statement.CF, True, "As reported"),
     ChartItem("capex", "Capital expenditures", Statement.CF, True, "Positive; PP&E plus intangible purchases"),
     ChartItem("dividends_paid", "Dividends paid", Statement.CF, False, "Positive; to parent shareholders"),
+    ChartItem("lease_principal_paid", "Lease principal paid", Statement.CF, False,
+              "Principal of lease liabilities paid (IFRS 16); positive"),
     ChartItem("total_assets_reported", "Total assets as reported", Statement.CHECK, False, "Used only to check the mapping"),
     ChartItem("net_income_reported", "Net income as reported", Statement.CHECK, False, "Used only to check the mapping"),
 )
@@ -69,7 +71,9 @@ DRIVER_KEYS: tuple[str, ...] = (
     "gross_margin",
     "opex_pct_revenue",
     "da_pct_revenue",
+    "amort_pct_revenue",
     "capex_pct_revenue",
+    "lease_principal_pct_revenue",
     "dso",
     "dio",
     "dpo",
@@ -84,4 +88,6 @@ DRIVER_KEYS: tuple[str, ...] = (
     "shares_growth",
     "min_cash",
 )
-ZERO_DEFAULT_DRIVERS: frozenset[str] = frozenset({"net_new_debt", "shares_growth"})
+ZERO_DEFAULT_DRIVERS: frozenset[str] = frozenset(
+    {"net_new_debt", "shares_growth", "amort_pct_revenue", "lease_principal_pct_revenue"}
+)

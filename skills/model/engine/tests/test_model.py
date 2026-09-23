@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import copy
+import math
 from pathlib import Path
+from typing import Any
 
 import pytest
 
@@ -108,3 +110,154 @@ def test_ratios_are_computed(project: Path) -> None:
     m = _model(project)
     assert m.value("r_gross_margin", m.h - 1) == pytest.approx(5500 / 13400)
     assert m.value("r_ccc", m.h) == pytest.approx(43 + 50 - 55)
+
+
+OVERRIDE_TAG = "assumption"
+
+
+def _drivers_with(**overrides: list[float]) -> dict[str, Any]:
+    drivers = copy.deepcopy(DRIVERS)
+    for key, values in overrides.items():
+        drivers["drivers"][key] = {"values": values, "tag": OVERRIDE_TAG}
+    return drivers
+
+
+def _assert_balances(m: Model) -> None:
+    for t in range(m.n):
+        assert m.value("total_assets", t) == pytest.approx(m.value("total_liabilities_equity", t), abs=1e-6)
+
+
+def test_lease_principal_is_financing_and_renews_right_of_use_assets(tmp_path: Path) -> None:
+    base = _model(write_project(tmp_path / "base"))
+    m = _model(write_project(tmp_path / "lease", drivers=_drivers_with(lease_principal_pct_revenue=[0.02] * 5)))
+    _assert_balances(m)
+    cumulative = 0.0
+    for t in range(m.h, m.n):
+        principal = m.value("lease_principal_paid", t)
+        assert principal == pytest.approx(0.02 * m.value("revenue", t))
+        cumulative += principal
+        assert m.value("sch_new_leases", t) == pytest.approx(principal)
+        assert m.value("lease_liabilities", t) == pytest.approx(600)
+        assert m.value("revolver", t) == pytest.approx(0.0, abs=1e-9)
+        assert m.value("ppe_net", t) - base.value("ppe_net", t) == pytest.approx(cumulative)
+        shortfall = base.value("cash", t) - m.value("cash", t)
+        assert shortfall == pytest.approx(cumulative, rel=0.05)
+        assert shortfall >= cumulative  # lost interest income only widens the gap
+        assert m.value("fcf", t) == pytest.approx(m.value("cfo", t) - m.value("capex", t) - principal)
+
+
+def test_lease_principal_history_is_observed(tmp_path: Path) -> None:
+    history = {**HISTORY, "lease_principal_paid": (100, 110, 120, 125, 134)}
+    m = _model(write_project(tmp_path, history=history))
+    last = m.h - 1
+    assert m.value("lease_principal_pct_revenue", last) == pytest.approx(134 / 13400)
+    assert m.value("fcf", last) == pytest.approx(1700 - 900 - 134)
+
+
+def _asset_light_history() -> dict[str, tuple[float, ...]]:
+    history = dict(HISTORY)
+    history["intangibles_goodwill"] = tuple(
+        i + p - 500 for i, p in zip(HISTORY["intangibles_goodwill"], HISTORY["ppe_net"])
+    )
+    history["ppe_net"] = (500.0,) * len(HISTORY["ppe_net"])
+    return history
+
+
+def test_amortization_runs_off_intangibles_not_ppe(tmp_path: Path) -> None:
+    history = _asset_light_history()
+    before = _model(write_project(tmp_path / "before", history=history,
+                                  drivers=_drivers_with(capex_pct_revenue=[0.02] * 5)))
+    assert min(before.value("ppe_net", t) for t in range(before.h, before.n)) < 0
+    m = _model(write_project(tmp_path / "after", history=history,
+                             drivers=_drivers_with(capex_pct_revenue=[0.02] * 5, amort_pct_revenue=[0.035] * 5)))
+    _assert_balances(m)
+    for t in range(m.h, m.n):
+        amortization = 0.035 * m.value("revenue", t)
+        assert m.value("sch_amort", t) == pytest.approx(amortization)
+        assert m.value("sch_da_ppe", t) == pytest.approx(m.value("da", t) - amortization)
+        assert m.value("da", t) == pytest.approx(before.value("da", t))
+        assert m.value("intangibles_goodwill", t) == pytest.approx(m.value("intangibles_goodwill", t - 1) - amortization)
+        assert m.value("ppe_net", t) >= 0
+
+
+def test_amortization_is_capped_at_opening_intangibles(tmp_path: Path) -> None:
+    history = {**HISTORY, "intangibles_goodwill": (0.0,) * 5,
+               "equity_parent": tuple(e - 1500 for e in HISTORY["equity_parent"])}
+    m = _model(write_project(tmp_path, history=history, drivers=_drivers_with(amort_pct_revenue=[0.01] * 5)))
+    _assert_balances(m)
+    for t in range(m.h, m.n):
+        assert m.value("sch_amort", t) == pytest.approx(0.0)
+        assert m.value("intangibles_goodwill", t) == pytest.approx(0.0)
+
+
+def test_loss_years_pay_no_dividends(tmp_path: Path) -> None:
+    m = _with_driver(tmp_path, "gross_margin", [0.25] * 5)
+    _assert_balances(m)
+    for t in range(m.h, m.n):
+        assert m.value("net_income_parent", t) < 0
+        assert m.value("dividends_paid", t) == 0.0
+        assert m.value("nci_dividends", t) == 0.0
+
+
+def test_nci_dividends_reduce_nci_equity_and_cash(project: Path) -> None:
+    m = _model(project)
+    t = m.h
+    nci_dividends = m.value("nci_income", t) * 0.40
+    assert m.value("nci_dividends", t) == pytest.approx(nci_dividends)
+    assert m.value("nci_equity", t) == pytest.approx(420 + m.value("nci_income", t) - nci_dividends)
+    assert m.value("cff_before_revolver", t) == pytest.approx(
+        m.value("cf_net_new_debt", t) - m.value("dividends_paid", t) - m.value("lease_principal_paid", t) - nci_dividends
+    )
+
+
+def test_debt_repayment_stops_at_zero(tmp_path: Path) -> None:
+    m = _with_driver(tmp_path, "net_new_debt", [-1000.0] * 5)
+    _assert_balances(m)
+    for t, expected in zip(range(m.h, m.n), (2100, 1100, 100, 0, 0)):
+        assert m.value("debt_long", t) == pytest.approx(expected)
+        assert m.value("cf_net_new_debt", t) == pytest.approx(m.value("sch_net_new_debt", t))
+
+
+def test_debt_free_company_builds_without_nan(tmp_path: Path) -> None:
+    zeros = (0.0,) * 5
+    history = {k: v for k, v in HISTORY.items() if k != "net_income_reported"}
+    history.update(debt_short=zeros, debt_long=zeros, lease_liabilities=zeros, interest_expense=zeros)
+    history["equity_parent"] = tuple(
+        e + s + d + le for e, s, d, le in zip(HISTORY["equity_parent"], HISTORY["debt_short"],
+                                             HISTORY["debt_long"], HISTORY["lease_liabilities"])
+    )
+    drivers = copy.deepcopy(DRIVERS)
+    del drivers["drivers"]["interest_rate_debt"]
+    m = _model(write_project(tmp_path, history=history, drivers=drivers))
+    assert m.value("interest_rate_debt", m.h - 1) == 0.0
+    _assert_balances(m)
+    for key, line in m.lines.items():
+        if line.is_scalar or m.sheet_of(key) == "Ratios":
+            continue
+        for t in range(m.n):
+            assert not math.isnan(m.value(key, t)), f"{key}[{t}] is NaN"
+
+
+def test_loss_year_history_gives_zero_tax_rate_and_payout(tmp_path: Path) -> None:
+    history = {k: v for k, v in HISTORY.items() if k != "net_income_reported"}
+    history["opex"] = (*HISTORY["opex"][:-1], 6000)
+    drivers = copy.deepcopy(DRIVERS)
+    del drivers["drivers"]["tax_rate"]
+    del drivers["drivers"]["payout_ratio"]
+    m = _model(write_project(tmp_path, history=history, drivers=drivers))
+    last = m.h - 1
+    assert m.value("ebt", last) < 0
+    assert m.value("tax_rate", last) == 0.0
+    assert m.value("payout_ratio", last) == 0.0
+    assert m.value("tax_rate", m.h) == 0.0
+    assert m.value("payout_ratio", m.h) == 0.0
+
+
+def test_roic_uses_opening_capital(project: Path) -> None:
+    m = _model(project)
+    t = m.h
+    opening_capital = m.value("total_equity", t - 1) + m.value("net_debt", t - 1)
+    assert m.value("r_roic", t) == pytest.approx(m.value("ebit", t) * (1 - 0.30) / opening_capital)
+    assert isinstance(m.cell("r_roic", 0), BlankCell)
+    assert m.line("r_roic").label == "ROIC = EBIT x (1 - tax rate) / opening (equity + net debt)"
+    assert m.line("ebitda").label == "EBITDA (post-IFRS 16)"

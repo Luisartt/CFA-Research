@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from conftest import DRIVERS, HISTORY, PROFILE, VALUATION, YEARS, write_project
+from conftest import DRIVERS, HISTORY, PROFILE, SEGMENTS, VALUATION, YEARS, write_project
 from rcmodel.inputs import InputError, load_inputs
 
 
@@ -114,6 +114,28 @@ def test_segments_need_history(tmp_path: Path) -> None:
     drivers["revenue_segments"] = [{"key": "mx", "label": "Mexico"}]
     messages = _messages(write_project(tmp_path, drivers=drivers))
     assert any("seg_mx" in m for m in messages)
+
+
+def test_segments_must_add_up_to_revenue(tmp_path: Path) -> None:
+    drivers = copy.deepcopy(DRIVERS)
+    drivers["revenue_segments"] = [{"key": "mx", "label": "Mexico"}, {"key": "us", "label": "United States"}]
+    segments = {**SEGMENTS, "seg_us": (4000, 4300, 4600, 5000, 5400)}
+    messages = _messages(write_project(tmp_path, history={**HISTORY, **segments}, drivers=drivers))
+    assert any("2023" in m and "seg_eliminations" in m for m in messages)
+
+
+def test_segments_within_rounding_are_accepted(tmp_path: Path) -> None:
+    drivers = copy.deepcopy(DRIVERS)
+    drivers["revenue_segments"] = [{"key": "mx", "label": "Mexico"}, {"key": "us", "label": "United States"}]
+    segments = {**SEGMENTS, "seg_us": (4000, 4300, 4700.4, 5000, 5400)}
+    inputs = load_inputs(write_project(tmp_path, history={**HISTORY, **segments}, drivers=drivers))
+    assert len(inputs.segments) == 2
+
+
+def test_cogs_must_be_positive(tmp_path: Path) -> None:
+    history = {**HISTORY, "cogs": (6000, 6450, 0, 7400, 7900)}
+    messages = _messages(write_project(tmp_path, history=history))
+    assert any("cogs must be positive in every year" in m and "financials skill" in m for m in messages)
 
 
 def test_missing_financials_file(tmp_path: Path) -> None:
