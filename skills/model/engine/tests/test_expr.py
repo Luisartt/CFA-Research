@@ -16,6 +16,9 @@ class FakeCtx:
     def value(self, key: str, period: int | None) -> float:
         return self.values[(key, period)]
 
+    def is_blank(self, key: str, period: int | None) -> bool:
+        return False
+
     def address(self, key: str, period: int | None, from_sheet: str) -> str:
         return f"{key.upper()}{'' if period is None else period}"
 

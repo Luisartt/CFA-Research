@@ -20,12 +20,16 @@ COMPARISON = 0
 BINARY_PRECEDENCE: dict[str, int] = {"+": 1, "-": 1, "*": 2, "/": 2, "^": 3}
 COMPARE_OPS = frozenset({"<", "<=", ">", ">=", "=", "<>"})
 FUNCTIONS = frozenset({"SUM", "MIN", "MAX", "MEDIAN", "ABS", "IF", "NPV"})
+# Excel skips blank cells in these functions, while Python would read them as 0.0.
+BLANK_SKIPPING = frozenset({"MIN", "MAX", "MEDIAN", "NPV"})
 
 
 class Context(Protocol):
     """What an expression needs from the model to evaluate or render itself."""
 
     def value(self, key: str, period: int | None) -> float: ...
+
+    def is_blank(self, key: str, period: int | None) -> bool: ...
 
     def address(self, key: str, period: int | None, from_sheet: str) -> str: ...
 
@@ -299,11 +303,15 @@ class Func(Expr):
             return yes.evaluate(ctx, t) if cond.evaluate(ctx, t) != 0.0 else no.evaluate(ctx, t)
         if self.name == "NPV":
             rate = _as_expr(self.args[0]).evaluate(ctx, t)
+            flows = _collect(self.args[1:], ctx, t)
+            self._refuse_blanks(ctx, t)
             total = 0.0
-            for i, flow in enumerate(_collect(self.args[1:], ctx, t), start=1):
+            for i, flow in enumerate(flows, start=1):
                 total += _arith("/", flow, _arith("^", 1.0 + rate, float(i)))
             return total
         values = _collect(self.args, ctx, t)
+        if self.name in BLANK_SKIPPING:
+            self._refuse_blanks(ctx, t)
         if any(math.isnan(v) for v in values):
             return math.nan
         if self.name == "SUM":
@@ -315,6 +323,25 @@ class Func(Expr):
         if self.name == "MEDIAN":
             return float(statistics.median(values))
         return abs(values[0])
+
+    def _refuse_blanks(self, ctx: Context, t: int | None) -> None:
+        """Excel skips blank cells here but Python reads them as 0.0, so refuse rather than disagree."""
+        for arg in self.args:
+            cells: list[tuple[str, int | None]]
+            if isinstance(arg, Rng):
+                cells = [(arg.key, p) for p in range(arg.first, arg.last + 1)]
+            elif isinstance(arg, Ref):
+                cells = [(arg.key, arg._period(t))]
+            elif isinstance(arg, At):
+                cells = [(arg.key, arg.period)]
+            else:
+                continue
+            for key, period in cells:
+                if ctx.is_blank(key, period):
+                    raise ValueError(
+                        f"{self.name} would read a blank cell of '{key}'; "
+                        "Excel ignores blanks there, so Python and Excel would disagree"
+                    )
 
     def render(self, ctx: Context, t: int | None, sheet: str) -> str:
         parts = [a.render(ctx, sheet) if isinstance(a, Rng) else a.render(ctx, t, sheet) for a in self.args]

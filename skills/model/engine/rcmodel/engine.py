@@ -48,10 +48,17 @@ class Model:
 
     def __init__(self, layout: Sequence[LayoutItem], inputs: ModelInputs) -> None:
         self.inputs = inputs
-        self.placed = place(layout)
+        self.placed = place(layout, inputs.n)
         self.lines: dict[str, Line] = {line.key: line for line, _ in self.placed.lines}
+        n_fcst = inputs.n - inputs.h
+        for line in self.lines.values():
+            if isinstance(line.fcst, Inputs) and len(line.fcst.values) != n_fcst:
+                raise ModelError(
+                    f"line '{line.key}' has {len(line.fcst.values)} forecast inputs; "
+                    f"the model has {n_fcst} forecast years"
+                )
         self._cache: dict[tuple[str, int | None], float] = {}
-        self._visiting: set[tuple[str, int | None]] = set()
+        self._visiting: dict[tuple[str, int | None], None] = {}  # insertion-ordered, for cycle messages
 
     @property
     def h(self) -> int:
@@ -107,14 +114,19 @@ class Model:
         if cache_key in self._cache:
             return self._cache[cache_key]
         if cache_key in self._visiting:
-            raise ModelError(f"circular reference through '{key}'")
-        self._visiting.add(cache_key)
+            visiting = list(self._visiting)
+            cycle = [*visiting[visiting.index(cache_key):], cache_key]
+            raise ModelError(f"circular reference through '{key}': {' -> '.join(_cell_name(c) for c in cycle)}")
+        self._visiting[cache_key] = None
         try:
             result = self._compute(key, slot)
         finally:
-            self._visiting.discard(cache_key)
+            self._visiting.pop(cache_key, None)
         self._cache[cache_key] = result
         return result
+
+    def is_blank(self, key: str, period: int | None) -> bool:
+        return isinstance(self.cell(key, period), BlankCell)
 
     def address(self, key: str, period: int | None, from_sheet: str) -> str:
         placement = self._placement(key)
@@ -137,11 +149,25 @@ class Model:
         return span if placement.sheet == from_sheet else f"{placement.sheet}!{span}"
 
     def evaluate_all(self) -> None:
-        """Evaluate every cell once, so broken references and cycles fail before writing."""
-        for key, line in self.lines.items():
-            periods: Sequence[int | None] = [None] if line.is_scalar else range(self.n)
-            for period in periods:
-                self.value(key, period)
+        """Evaluate every cell once, so broken references and cycles fail before writing.
+
+        Year by year: by the time year t is evaluated every earlier year is cached, so the
+        recursion never has to walk a lag chain back through the whole history.
+        """
+        per_year = [key for key, line in self.lines.items() if not line.is_scalar]
+        scalars = [key for key, line in self.lines.items() if line.is_scalar]
+        for period in range(self.n):
+            for key in per_year:
+                self._evaluate_reporting(key, period)
+        for key in scalars:
+            self._evaluate_reporting(key, None)
+
+    def _evaluate_reporting(self, key: str, period: int | None) -> None:
+        try:
+            self.value(key, period)
+        except (ModelError, ValueError, RecursionError) as exc:
+            where = "" if period is None else f" in {self.inputs.years[period]} (period {period})"
+            raise ModelError(f"while evaluating '{key}'{where}: {exc}") from exc
 
     def _placement(self, key: str) -> Placement:
         try:
@@ -163,4 +189,11 @@ class Model:
             return cell.value
         if isinstance(cell, FormulaCell):
             return cell.expr.evaluate(self, slot)
-        return 0.0  # blank cells read as zero, exactly as in Excel
+        # Blank cells read as zero, exactly as in Excel, in arithmetic and SUM;
+        # MIN/MAX/MEDIAN/NPV refuse blanks (see expr.Func).
+        return 0.0
+
+
+def _cell_name(cell: tuple[str, int | None]) -> str:
+    key, period = cell
+    return key if period is None else f"{key}[{period}]"

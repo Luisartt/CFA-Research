@@ -21,6 +21,9 @@ class LiteralCtx:
     def value(self, key: str, period: int | None) -> float:
         return LEAVES[key]
 
+    def is_blank(self, key: str, period: int | None) -> bool:
+        return False
+
     def address(self, key: str, period: int | None, from_sheet: str) -> str:
         return f"({LEAVES[key]!r})"
 
