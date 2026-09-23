@@ -6,8 +6,8 @@ from pathlib import Path
 import matplotlib.image as mpimg
 import pytest
 
+from report_fixtures import RISKS, report_project, write_report_project  # noqa: F401
 from charts import CHARTS, ChartError, load_risks, main
-from conftest import RISKS, write_report_project
 
 EXPECTED = {"revenue-margin", "free-cash-flow", "football-field", "sensitivity", "risk-matrix"}
 

@@ -216,7 +216,7 @@ shutil.copy(project / "model" / "model-summary.json", target)
 
 Run it. Then edit the copied JSON by hand in one place only: set `"built_on"` to `"2026-09-24"` so the fixture is stable. Confirm it has non-empty `football`, a `sensitivity` grid, and `valuation.price_gordon`.
 
-- [ ] **Step 4: Create `skills/report/tools/tests/conftest.py`**
+- [ ] **Step 4: Create `skills/report/tools/tests/conftest.py`** (Implemented as `report_fixtures.py`, not `conftest.py`: two conftest modules in one pytest session collide.)
 
 ```python
 """Shared fixtures for the report tools: a project folder with a model summary, risks and sections."""
@@ -706,9 +706,9 @@ import pytest
 from docx import Document
 from docx.shared import Mm
 
+from report_fixtures import HEADER, SECTIONS, report_project, write_report_project  # noqa: F401
 from build_docx import BUDGET_PAGES, main, parse_markdown
 from charts import main as draw_charts
-from conftest import HEADER, SECTIONS, write_report_project
 
 
 def _build(project: Path) -> Path:
