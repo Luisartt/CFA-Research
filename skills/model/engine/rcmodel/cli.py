@@ -93,7 +93,7 @@ def main(argv: Sequence[str] | None = None) -> int:
         if r.status != "OK":
             year = "" if r.period is None else f" ({result.years[r.period]})"
             marker = "[x]" if r.status == "ERROR" else "[warn]"
-            print(f"{marker} {ascii_safe(r.label)}{year}")
+            print(f"{marker} Not met: {ascii_safe(r.label)}{year}")
     for warning in result.warnings:
         print("[warn] " + ascii_safe(warning))
     print(f"status: {result.status}")

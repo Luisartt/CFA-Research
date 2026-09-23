@@ -23,6 +23,19 @@ def test_file_write_errors_exit_4_with_ascii_output(
     assert out.isascii() and "close it" in out.lower() and "model-summary.json" in out
 
 
+def test_failed_checks_print_as_not_met(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    import copy
+
+    from conftest import DRIVERS
+
+    drivers = copy.deepcopy(DRIVERS)
+    drivers["drivers"]["payout_ratio"]["values"] = [3.0] * 5  # forces the revolver to be drawn
+    write_project(tmp_path, drivers=drivers)
+    assert main(["--project", str(tmp_path)]) == 0
+    out = capsys.readouterr().out
+    assert "[warn] Not met: Revolver not drawn" in out
+
+
 def test_help_documents_exit_codes(capsys: pytest.CaptureFixture[str]) -> None:
     with pytest.raises(SystemExit):
         main(["--help"])
