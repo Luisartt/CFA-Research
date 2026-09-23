@@ -1,0 +1,16 @@
+{
+  "name": "cfa-research",
+  "description": "Skills for university teams competing in the CFA Institute Research Challenge (LatAm).",
+  "owner": {
+    "name": "CFA-Research contributors"
+  },
+  "plugins": [
+    {
+      "name": "research-challenge",
+      "displayName": "Research Challenge",
+      "source": "./",
+      "description": "From filings to report and pitch: setup, thesis coaching, industry analysis (phase 1). The assistant does the technical work; the team owns the story.",
+      "keywords": ["cfa", "research-challenge", "equity-research", "latam"]
+    }
+  ]
+}
