@@ -131,11 +131,11 @@ def load_inputs(project: Path) -> ModelInputs:
     errors: list[str] = []
     profile = _collect(errors, lambda: load_profile(project / "company-profile.yaml"))
     financials = _collect(errors, lambda: load_financials(project / "data" / "financials.csv"))
+    valuation = _collect(errors, lambda: load_valuation(project / "valuation" / "valuation.yaml"))
     if errors or profile is None or financials is None:
         raise InputError(errors)
     history, hist_years, warnings = financials
     drivers_result = _collect(errors, lambda: load_drivers(project / "model" / "drivers.yaml", history, hist_years))
-    valuation = _collect(errors, lambda: load_valuation(project / "valuation" / "valuation.yaml"))
     if errors or drivers_result is None:
         raise InputError(errors)
     drivers, segments, n_fcst, driver_warnings = drivers_result
@@ -191,13 +191,19 @@ def load_financials(path: Path) -> tuple[dict[str, dict[int, Observation]], tupl
     errors: list[str] = []
     warnings: list[str] = []
     raw: dict[str, dict[int, Observation]] = {}
-    with path.open(newline="", encoding="utf-8-sig") as handle:
-        reader = csv.DictReader(handle)
-        missing = [c for c in FIN_COLUMNS if c not in (reader.fieldnames or [])]
-        if missing:
-            raise InputError([f"financials.csv is missing columns: {', '.join(missing)}"])
-        for number, row in enumerate(reader, start=2):
-            _read_row(number, row, raw, errors, warnings)
+    try:
+        with path.open(newline="", encoding="utf-8-sig") as handle:
+            reader = csv.DictReader(handle)
+            missing = [c for c in FIN_COLUMNS if c not in (reader.fieldnames or [])]
+            if missing:
+                raise InputError([f"financials.csv is missing columns: {', '.join(missing)}"])
+            for number, row in enumerate(reader, start=2):
+                _read_row(number, row, raw, errors, warnings)
+    except UnicodeDecodeError:
+        raise InputError([
+            f"{path.name} is not saved as UTF-8. In Excel use File > Save As > "
+            "'CSV UTF-8 (Comma delimited)'; in a text editor choose encoding UTF-8. Then run again."
+        ]) from None
     years = sorted({year for series in raw.values() for year in series})
     if len(years) < MIN_HIST_YEARS:
         errors.append(f"financials.csv needs at least {MIN_HIST_YEARS} years of history; found {len(years)}")
@@ -206,7 +212,7 @@ def load_financials(path: Path) -> tuple[dict[str, dict[int, Observation]], tupl
     for key in sorted(REQUIRED_KEYS):
         absent = [str(y) for y in hist_years if y not in raw.get(key, {})]
         if absent:
-            errors.append(f"required line '{key}' is missing for {', '.join(absent)}")
+            errors.append(f"financials.csv: required line '{key}' is missing for {', '.join(absent)}")
     if errors:
         raise InputError(errors)
     history = {key: {y: o for y, o in series.items() if y in hist_years} for key, series in raw.items()}
@@ -217,24 +223,24 @@ def _read_row(number: int, row: Mapping[str, str | None], raw: dict[str, dict[in
               errors: list[str], warnings: list[str]) -> None:
     key = (row.get("line_item") or "").strip()
     if key not in BY_KEY and not key.startswith(SEGMENT_PREFIX):
-        errors.append(f"row {number}: unknown line_item '{key}'")
+        errors.append(f"financials.csv row {number}: unknown line_item '{key}'")
         return
     try:
         year = int((row.get("year") or "").strip())
         value = float((row.get("value") or "").strip())
     except ValueError:
-        errors.append(f"row {number}: year and value must be plain numbers (no thousands separators)")
+        errors.append(f"financials.csv row {number}: year and value must be plain numbers (no thousands separators)")
         return
     if not math.isfinite(value):
-        errors.append(f"row {number}: value must be a finite number")
+        errors.append(f"financials.csv row {number}: value must be a finite number")
         return
     tag = (row.get("tag") or "").strip()
     if tag not in TAGS:
-        errors.append(f"row {number}: tag '{tag}' must be one of {', '.join(sorted(TAGS))}")
+        errors.append(f"financials.csv row {number}: tag '{tag}' must be one of {', '.join(sorted(TAGS))}")
         return
     series = raw.setdefault(key, {})
     if year in series:
-        errors.append(f"row {number}: duplicate {key} for {year}")
+        errors.append(f"financials.csv row {number}: duplicate {key} for {year}")
         return
     if tag == "unverified":
         warnings.append(f"{key} {year} is tagged [unverified]; resolve it before the report")
@@ -383,7 +389,11 @@ def _collect(errors: list[str], load: Callable[[], T]) -> T | None:
 
 def _read_yaml(path: Path) -> Any:
     try:
-        return yaml.safe_load(path.read_text(encoding="utf-8-sig"))
+        text = path.read_text(encoding="utf-8-sig")
+    except UnicodeDecodeError:
+        raise InputError([f"{path.name} is not saved as UTF-8; re-save it with UTF-8 encoding and run again."]) from None
+    try:
+        return yaml.safe_load(text)
     except yaml.YAMLError as exc:
         raise InputError([f"{path.name} is not valid YAML: {exc}"]) from None
 

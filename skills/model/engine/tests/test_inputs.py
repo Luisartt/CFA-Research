@@ -121,3 +121,47 @@ def test_missing_financials_file(tmp_path: Path) -> None:
     (tmp_path / "data" / "financials.csv").unlink()
     messages = _messages(tmp_path)
     assert any("financials skill" in m for m in messages)
+
+
+def test_non_utf8_financials_csv_reports_input_error(tmp_path: Path) -> None:
+    project = write_project(tmp_path)
+    path = project / "data" / "financials.csv"
+    data = path.read_bytes()
+    data = data.replace(b"Annual report 2025", b"Annual report \x93", 1)
+    path.write_bytes(data)
+    messages = _messages(project)
+    assert any("UTF-8" in m for m in messages)
+
+
+def test_non_utf8_yaml_file_reports_input_error(tmp_path: Path) -> None:
+    project = write_project(tmp_path)
+    path = project / "company-profile.yaml"
+    data = path.read_bytes()
+    data = data.replace(b"Acme Alimentos", b"Acme \x93Alimentos", 1)
+    path.write_bytes(data)
+    messages = _messages(project)
+    assert any("UTF-8" in m for m in messages)
+
+
+def test_financials_row_errors_name_the_file(tmp_path: Path) -> None:
+    write_project(tmp_path)
+    with (tmp_path / "data" / "financials.csv").open("a", encoding="utf-8") as handle:
+        handle.write("ebitdaa,2025,1,sourced,AR,1,\n")
+    messages = _messages(tmp_path)
+    assert any("financials.csv row " in m and "unknown line_item 'ebitdaa'" in m for m in messages)
+
+
+def test_required_line_error_names_the_file(tmp_path: Path) -> None:
+    history = {k: v for k, v in HISTORY.items() if k != "cash"}
+    messages = _messages(write_project(tmp_path, history=history))
+    assert any(m.startswith("financials.csv: required line 'cash'") for m in messages)
+
+
+def test_profile_and_valuation_errors_reported_together(tmp_path: Path) -> None:
+    profile = copy.deepcopy(PROFILE)
+    profile["company"]["ticker"] = "{{TICKER}}"
+    valuation = copy.deepcopy(VALUATION)
+    valuation["wacc"]["risk_free"] = "high"
+    messages = _messages(write_project(tmp_path, profile=profile, valuation=valuation))
+    assert any("init-skills" in m for m in messages)
+    assert any("wacc.risk_free must be a number" in m for m in messages)
