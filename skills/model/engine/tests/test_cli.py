@@ -11,6 +11,25 @@ from conftest import ENGINE_DIR, HISTORY, write_project
 from rcmodel.cli import main, next_version_path
 
 
+def test_file_write_errors_exit_4_with_ascii_output(
+    project: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def locked(*_: object) -> None:
+        raise PermissionError(13, "Permission denied", str(project / "model" / "model-summary.json"))
+
+    monkeypatch.setattr("rcmodel.cli.build", locked)
+    assert main(["--project", str(project)]) == 4
+    out = capsys.readouterr().out
+    assert out.isascii() and "close it" in out.lower() and "model-summary.json" in out
+
+
+def test_help_documents_exit_codes(capsys: pytest.CaptureFixture[str]) -> None:
+    with pytest.raises(SystemExit):
+        main(["--help"])
+    out = capsys.readouterr().out
+    assert out.isascii() and "exit codes" in out and "4" in out
+
+
 def test_build_writes_workbook_and_summary(project: Path, capsys: pytest.CaptureFixture[str]) -> None:
     assert main(["--project", str(project)]) == 0
     assert (project / "model" / "ACME_model_v1.xlsx").is_file()

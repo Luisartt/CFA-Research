@@ -20,6 +20,8 @@ from .writer import BuildInfo, write_workbook
 EXIT_OK = 0
 EXIT_INPUT_ERROR = 2
 EXIT_MODEL_ERROR = 3
+EXIT_IO_ERROR = 4
+EXIT_CODES_HELP = "exit codes: 0 built, 2 input error, 3 model definition error, 4 file could not be written"
 
 
 @dataclass(frozen=True)
@@ -62,7 +64,10 @@ def build(project: Path, today: date) -> BuildResult:
 
 
 def main(argv: Sequence[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description="Build the research-challenge financial model (xlsx + model-summary.json).")
+    parser = argparse.ArgumentParser(
+        description="Build the research-challenge financial model (xlsx + model-summary.json).",
+        epilog=EXIT_CODES_HELP,
+    )
     parser.add_argument("--project", default=".", help="Team project folder (the one with company-profile.yaml)")
     args = parser.parse_args(argv)
     try:
@@ -75,6 +80,11 @@ def main(argv: Sequence[str] | None = None) -> int:
     except ModelError as exc:
         print("[x] Model definition error: " + ascii_safe(str(exc)))
         return EXIT_MODEL_ERROR
+    except OSError as exc:
+        target = Path(exc.filename).name if exc.filename else "a file in model/"
+        print(f"[x] Could not write {ascii_safe(target)}: {ascii_safe(exc.strerror or str(exc))}.")
+        print("    Close it if it is open in Excel or another program (or pause OneDrive sync), then run again.")
+        return EXIT_IO_ERROR
     counts = {status: sum(1 for r in result.results if r.status == status) for status in ("OK", "ERROR", "WARN")}
     print(f"[ok] workbook -> model/{ascii_safe(result.workbook.name)}")
     print("[ok] summary  -> model/model-summary.json")
