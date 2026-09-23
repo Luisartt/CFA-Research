@@ -20,6 +20,7 @@ class Fmt(Enum):
     PRICE_NM = '#,##0.00;-#,##0.00;"n.m."'  # zero reads "not meaningful" (sensitivity cells guarded to 0)
     SHARES = "#,##0.0"
     NUMBER = "0.00"
+    FACTOR = "0.000"
 
 
 class Style(Enum):

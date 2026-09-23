@@ -19,7 +19,8 @@ from typing import Any, TypeGuard, TypeVar
 
 import yaml
 
-from .chart import BY_KEY, DRIVER_KEYS, REQUIRED_KEYS, SEGMENT_PREFIX, TAGS, ZERO_DEFAULT_DRIVERS
+from .chart import (BY_KEY, DEFAULT_FROM_LAST_ACTUAL, DRIVER_KEYS, REQUIRED_KEYS, SEGMENT_PREFIX, TAGS,
+                    ZERO_DEFAULT_DRIVERS)
 
 MIN_HIST_YEARS = 3
 MAX_HIST_YEARS = 5
@@ -283,7 +284,12 @@ def load_drivers(path: Path, history: Mapping[str, Mapping[int, Observation]], h
     for key in sorted(allowed - drivers.keys()):
         if key == "revenue_growth" and segments:
             continue
-        default = "zero" if key in ZERO_DEFAULT_DRIVERS else "held at last actual value"
+        if key in ZERO_DEFAULT_DRIVERS:
+            default = "zero"
+        elif key in DEFAULT_FROM_LAST_ACTUAL:
+            default = f"last actual {DEFAULT_FROM_LAST_ACTUAL[key]}"
+        else:
+            default = "held at last actual value"
         warnings.append(f"driver '{key}' not set: {default} (engine default)")
     if segments and "revenue_growth" in drivers:
         warnings.append("revenue_growth is ignored because revenue_segments are set")

@@ -1,7 +1,8 @@
 """Integrity checks, written to the Checks sheet as Excel formulas and evaluated in Python.
 
 Parity checks compare an Excel formula with the value Python computed at build
-time; they can only fail inside Excel, which is exactly what they are for.
+time, which the writer puts next to the result. They only warn: once a student
+edits an input in Excel the build-time value is stale, and that is not an error.
 """
 
 from __future__ import annotations
@@ -12,13 +13,15 @@ from dataclasses import dataclass
 from enum import Enum
 
 from .engine import Model
-from .expr import At, Expr, Ref, cmp, fn, wrap
+from .expr import At, Context, Expr, Ref, cmp, fn
 from .inputs import ModelInputs
+from .spec import Fmt
 
 R = Ref
 TOLERANCE = 0.5  # half a unit of the model currency (e.g. MXN 0.5 million)
 TV_SHARE_LIMIT = 0.75
 WACC_G_SPREAD_LIMIT = 0.02
+REFERENCE_KEY = "__reference_value__"  # the address a Context resolves for a check's own reference cell
 
 
 class Severity(Enum):
@@ -33,6 +36,21 @@ class Check:
     severity: Severity
     cond: Expr
     periods: tuple[int, ...] | None  # None = single-value check
+    reference_value: float | None = None  # the Python value at build, shown next to a single-value result
+    reference_fmt: Fmt = Fmt.NUMBER
+
+
+@dataclass(frozen=True)
+class ReferenceValue(Expr):
+    """A check's build-time Python value: evaluates to the number, renders as the cell the writer puts it in."""
+
+    v: float
+
+    def evaluate(self, ctx: Context, t: int | None) -> float:
+        return self.v
+
+    def render(self, ctx: Context, t: int | None, sheet: str) -> str:
+        return ctx.address(REFERENCE_KEY, None, sheet)
 
 
 @dataclass(frozen=True)
@@ -105,8 +123,11 @@ def parity_checks(model: Model) -> list[Check]:
             continue
         ref: Expr = At(key, period) if period is not None else R(key)
         tolerance = 1e-6 * max(1.0, abs(value))
-        checks.append(Check(f"parity_{key}", f"Excel matches the Python value: {model.line(key).label}",
-                            Severity.ERROR, _close(ref, wrap(value), tolerance), None))
+        line = model.line(key)
+        label = (f"Excel matches the Python value at build: {line.label} "
+                 "(stale if inputs are edited in Excel - rebuild)")
+        checks.append(Check(f"parity_{key}", label, Severity.WARN, _close(ref, ReferenceValue(value), tolerance),
+                            None, reference_value=value, reference_fmt=line.fmt))
     return checks
 
 

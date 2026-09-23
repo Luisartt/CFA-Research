@@ -5,7 +5,7 @@ from pathlib import Path
 
 from conftest import DRIVERS, HISTORY, VALUATION, write_project
 from rcmodel.assemble import assemble
-from rcmodel.checks import CheckResult, build_checks, evaluate_checks, overall_status, parity_checks
+from rcmodel.checks import CheckResult, Severity, build_checks, evaluate_checks, overall_status, parity_checks
 from rcmodel.inputs import load_inputs
 
 DRIVER_ENTRY_DEFAULTS = {"tag": "assumption", "rationale": "test", "pillar": "1"}
@@ -28,6 +28,22 @@ def test_fixture_has_no_errors(project: Path) -> None:
     results = _results(project)
     assert [r for r in results if r.status == "ERROR"] == []
     assert any(r.key == "parity_price_gordon" for r in results)
+
+
+def test_parity_checks_warn_and_carry_the_python_value(project: Path) -> None:
+    model, _ = assemble(load_inputs(project))
+    checks = parity_checks(model)
+    assert {c.key for c in checks} == {"parity_total_assets", "parity_net_income_parent", "parity_cash_end",
+                                       "parity_wacc", "parity_price_gordon"}
+    for check in checks:
+        assert check.severity is Severity.WARN
+        assert check.label.startswith("Excel matches the Python value at build: ")
+        assert check.label.endswith("(stale if inputs are edited in Excel - rebuild)")
+    price = next(c for c in checks if c.key == "parity_price_gordon")
+    assert price.reference_value == model.value("price_gordon", None)
+    assert "Value per share today - Gordon" in price.label
+    assert all(c.reference_value is None for c in build_checks(model.inputs))
+    assert overall_status(evaluate_checks(model, checks)) == "ALL CHECKS OK"
 
 
 def test_reported_total_assets_mismatch_is_flagged(tmp_path: Path) -> None:

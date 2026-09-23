@@ -15,7 +15,7 @@ from openpyxl.formatting.rule import CellIsRule, FormulaRule
 from openpyxl.utils import get_column_letter
 
 from . import styles
-from .checks import Check, CheckResult, Severity, overall_status
+from .checks import REFERENCE_KEY, Check, CheckResult, Severity, overall_status
 from .engine import BlankCell, Cell, InputCell, Model, ObservedCell
 from .expr import At, Expr, Ref
 from .placement import FIRST_ROW, HEADER_ROW, PERIOD_COL0
@@ -45,7 +45,15 @@ COVER_NOTES = (
     "green = link to another sheet.",
     "Interest is charged on opening balances, so the model has no circular references.",
     "A revolving credit line keeps cash at or above the minimum cash balance.",
-    "Valuation is as of the last fiscal year-end (no stub-period adjustment).",
+    "Value per share is at the last fiscal year-end rolled forward to today at the cost of equity; "
+    "the 12-month target rolls it one more year and subtracts next year's dividend.",
+)
+FRAMEWORK_NAMES: dict[str, str] = {"ifrs": "IFRS", "us_gaap": "US GAAP", "nif": "NIF"}
+REFERENCE_COL = PERIOD_COL0 + 1  # a single-value check's build-time Python value sits right of its result
+STATUS_FILLS = (
+    ("CHECKS FAILING", styles.ERROR_FILL, styles.WHITE_BOLD),
+    ("OK WITH WARNINGS", styles.WARN_FILL, None),
+    ("ALL CHECKS OK", styles.OK_FILL, None),
 )
 
 
@@ -75,6 +83,8 @@ def write_workbook(path: Path, model: Model, checks: Sequence[Check], results: S
     if football is not None:
         _football_chart(sheets["Football"], model, football)
     _cover(cover, model, info, results, last_check_row)
+    for ws in workbook.worksheets:
+        _print_setup(ws)
     workbook.calculation.fullCalcOnLoad = True
     path.parent.mkdir(parents=True, exist_ok=True)
     workbook.save(path)
@@ -82,6 +92,14 @@ def write_workbook(path: Path, model: Model, checks: Sequence[Check], results: S
 
 def _last_col(model: Model) -> int:
     return PERIOD_COL0 + model.n + 2
+
+
+def _print_setup(ws: Any) -> None:
+    """Landscape, one page wide, as many pages tall as needed."""
+    ws.page_setup.orientation = "landscape"
+    ws.page_setup.fitToWidth = 1
+    ws.page_setup.fitToHeight = 0
+    ws.sheet_properties.pageSetUpPr.fitToPage = True
 
 
 def _frame(ws: Any, model: Model, name: str) -> None:
@@ -115,12 +133,18 @@ def _header(ws: Any, row: int, header: Header, model: Model) -> None:
     for col, text in header.columns:
         cell = ws.cell(row, col, text)
         cell.font = styles.SECTION_FONT
-        cell.alignment = styles.RIGHT
+        cell.alignment = styles.COLUMN_TITLE
+
+
+def _label(ws: Any, row: int, text: str, bold: bool = False) -> None:
+    cell = ws.cell(row, 2, text)
+    cell.font = styles.font(styles.BLACK, bold=bold)
+    cell.alignment = styles.LABEL
 
 
 def _write_line(ws: Any, line: Line, row: int, model: Model) -> None:
     if line.new_row and line.label:
-        ws.cell(row, 2, line.label).font = styles.font(styles.BLACK, bold=line.style is not Style.NORMAL)
+        _label(ws, row, line.label, bold=line.style is not Style.NORMAL)
     periods: Sequence[int | None] = [None] if line.is_scalar else range(model.n)
     for period in periods:
         col = line.col if period is None else PERIOD_COL0 + period
@@ -159,28 +183,70 @@ def _is_link(expr: Expr, sheet: str, model: Model) -> bool:
     return isinstance(expr, (Ref, At)) and model.sheet_of(expr.key) != sheet
 
 
-def _write_checks(ws: Any, model: Model, checks: Sequence[Check]) -> int:
-    row = FIRST_ROW
+def check_layout(checks: Sequence[Check]) -> tuple[list[tuple[int, Header]], list[tuple[int, Check]]]:
+    """Rows of the Checks sheet: section headers, then one row per check (by-year checks first)."""
     groups = (
-        ("Checks by year", [c for c in checks if c.periods is not None]),
-        ("Single-value checks (result in column C)", [c for c in checks if c.periods is None]),
+        (Header("Checks", "Checks by year"), [c for c in checks if c.periods is not None]),
+        (Header("Checks", "Single-value checks",
+                columns=((PERIOD_COL0, "Result"), (REFERENCE_COL, "Python value at build"))),
+         [c for c in checks if c.periods is None]),
     )
-    for title, group in groups:
+    headers: list[tuple[int, Header]] = []
+    rows: list[tuple[int, Check]] = []
+    row = FIRST_ROW
+    for header, group in groups:
         if not group:
             continue
         if row > FIRST_ROW:
             row += 1
-        _header(ws, row, Header("Checks", title), model)
+        headers.append((row, header))
         row += 1
         for check in group:
-            suffix = " (warning only)" if check.severity is Severity.WARN else ""
-            ws.cell(row, 2, check.label + suffix)
-            for period in check.periods if check.periods is not None else (None,):
-                col = PERIOD_COL0 if period is None else PERIOD_COL0 + period
-                condition = check.cond.render(model, period, ws.title)
-                ws.cell(row, col, f'=IF({condition},"OK","{check.severity.value}")').alignment = styles.RIGHT
+            rows.append((row, check))
             row += 1
-    last = max(row - 1, FIRST_ROW)
+    return headers, rows
+
+
+class _CheckRowContext:
+    """The model as an expression context, plus the check row's own reference-value cell."""
+
+    def __init__(self, model: Model, row: int) -> None:
+        self._model = model
+        self._row = row
+
+    def value(self, key: str, period: int | None) -> float:
+        return self._model.value(key, period)
+
+    def is_blank(self, key: str, period: int | None) -> bool:
+        return self._model.is_blank(key, period)
+
+    def address(self, key: str, period: int | None, from_sheet: str) -> str:
+        if key == REFERENCE_KEY:
+            return f"{get_column_letter(REFERENCE_COL)}{self._row}"
+        return self._model.address(key, period, from_sheet)
+
+    def range_address(self, key: str, first: int, last: int, from_sheet: str) -> str:
+        return self._model.range_address(key, first, last, from_sheet)
+
+
+def _write_checks(ws: Any, model: Model, checks: Sequence[Check]) -> int:
+    headers, rows = check_layout(checks)
+    for row, header in headers:
+        _header(ws, row, header, model)
+    for row, check in rows:
+        explained = check.reference_value is not None  # its label already says why it is only a warning
+        suffix = " (warning only)" if check.severity is Severity.WARN and not explained else ""
+        _label(ws, row, check.label + suffix)
+        context = _CheckRowContext(model, row)
+        for period in check.periods if check.periods is not None else (None,):
+            col = PERIOD_COL0 if period is None else PERIOD_COL0 + period
+            condition = check.cond.render(context, period, ws.title)
+            ws.cell(row, col, f'=IF({condition},"OK","{check.severity.value}")').alignment = styles.RIGHT
+        if check.reference_value is not None:
+            reference = ws.cell(row, REFERENCE_COL, check.reference_value)
+            reference.number_format = check.reference_fmt.value
+            reference.font = styles.font(styles.BLACK)
+    last = max((row for row, _ in rows), default=FIRST_ROW)
     span = f"C{FIRST_ROW}:{get_column_letter(PERIOD_COL0 + model.n - 1)}{last}"
     ws.conditional_formatting.add(span, CellIsRule(operator="equal", formula=['"ERROR"'],
                                                    fill=styles.ERROR_FILL, font=styles.WHITE_BOLD))
@@ -201,6 +267,9 @@ def _football_chart(ws: Any, model: Model, spec: FootballSpec) -> None:
     chart.series[0].graphicalProperties.noFill = True
     chart.series[0].graphicalProperties.line.noFill = True
     chart.legend = None
+    chart.x_axis.delete = False  # openpyxl hides both axes unless told otherwise
+    chart.y_axis.delete = False
+    chart.x_axis.scaling.orientation = "maxMin"  # methods top to bottom, in table order
     chart.height = 9
     chart.width = 18
     ws.add_chart(chart, f"G{FIRST_ROW}")
@@ -213,13 +282,13 @@ def _cover(ws: Any, model: Model, info: BuildInfo, results: Sequence[CheckResult
     ws.column_dimensions["B"].width = 36
     ws.column_dimensions["C"].width = 90
     ws.cell(2, 2, f"{profile.name} ({profile.ticker})").font = styles.TITLE_FONT
-    facts = (
-        ("Accounting framework", profile.framework),
+    facts: tuple[tuple[str, str | int], ...] = (
+        ("Accounting framework", FRAMEWORK_NAMES.get(profile.framework.lower(), profile.framework)),
         ("Currency and units", f"{profile.currency} {profile.units}"),
         ("Historical years", f"{years[0]}-{years[model.h - 1]}"),
         ("Forecast years", f"{years[model.h]}-{years[-1]}"),
         ("Model file", info.filename),
-        ("Version", str(info.version)),
+        ("Version", info.version),
         ("Built on", info.built_on.isoformat()),
     )
     row = 4
@@ -233,8 +302,8 @@ def _cover(ws: Any, model: Model, info: BuildInfo, results: Sequence[CheckResult
     status = ws.cell(row, 3, f'=IF(COUNTIF({span},"ERROR")>0,"CHECKS FAILING",'
                              f'IF(COUNTIF({span},"WARN")>0,"OK WITH WARNINGS","ALL CHECKS OK"))')
     status.font = styles.TITLE_FONT
-    ws.conditional_formatting.add(f"C{row}", FormulaRule(formula=[f'$C${row}="CHECKS FAILING"'],
-                                                         fill=styles.ERROR_FILL, font=styles.WHITE_BOLD))
+    for text, fill, font in STATUS_FILLS:
+        ws.conditional_formatting.add(f"C{row}", FormulaRule(formula=[f'$C${row}="{text}"'], fill=fill, font=font))
     row += 1
     ws.cell(row, 2, "Status computed by Python at build").font = styles.BOLD_FONT
     ws.cell(row, 3, overall_status(results))

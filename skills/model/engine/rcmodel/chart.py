@@ -91,3 +91,5 @@ DRIVER_KEYS: tuple[str, ...] = (
 ZERO_DEFAULT_DRIVERS: frozenset[str] = frozenset(
     {"net_new_debt", "shares_growth", "amort_pct_revenue"}
 )
+# Drivers with no history of their own: when not set, the forecast holds the last actual of another line.
+DEFAULT_FROM_LAST_ACTUAL: dict[str, str] = {"min_cash": "cash"}

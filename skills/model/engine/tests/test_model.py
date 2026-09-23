@@ -91,6 +91,27 @@ def test_missing_driver_is_held_at_last_actual(tmp_path: Path) -> None:
     assert m.value("gross_margin", m.h) == pytest.approx(5500 / 13400)
 
 
+def test_min_cash_has_no_history_and_defaults_to_last_actual_cash(tmp_path: Path) -> None:
+    drivers = copy.deepcopy(DRIVERS)
+    del drivers["drivers"]["min_cash"]
+    m = _model(write_project(tmp_path, drivers=drivers))
+    assert all(isinstance(m.cell("min_cash", t), BlankCell) for t in range(m.h))
+    assert isinstance(m.cell("min_cash", m.h), FormulaCell)
+    for t in range(m.h, m.n):
+        assert m.value("min_cash", t) == pytest.approx(HISTORY["cash"][-1])
+    assert m.line("min_cash").notes[1] == "engine default: last actual cash"
+
+
+def test_pillar_note_reads_as_text(tmp_path: Path) -> None:
+    drivers = copy.deepcopy(DRIVERS)
+    drivers["drivers"]["dso"]["pillar"] = "Pillar 2 - pricing"
+    drivers["drivers"]["dio"]["pillar"] = ""
+    m = _model(write_project(tmp_path, drivers=drivers))
+    assert m.line("gross_margin").notes[2] == "Pillar 1"
+    assert m.line("dso").notes[2] == "Pillar 2 - pricing"
+    assert m.line("dio").notes[2] == ""
+
+
 def test_segments_drive_revenue(tmp_path: Path) -> None:
     drivers = copy.deepcopy(DRIVERS)
     drivers["revenue_segments"] = [{"key": "mx", "label": "Mexico"}, {"key": "us", "label": "United States"}]

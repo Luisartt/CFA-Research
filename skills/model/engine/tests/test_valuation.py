@@ -8,7 +8,7 @@ import pytest
 
 from conftest import DRIVERS, VALUATION, write_project
 from rcmodel.assemble import assemble
-from rcmodel.engine import Model
+from rcmodel.engine import FormulaCell, Model
 from rcmodel.inputs import load_inputs
 from rcmodel.spec import Fmt, Header
 from rcmodel.valuation import COMPS_S, G_STEPS, WACC_STEPS, FootballSpec, comps_layout
@@ -153,6 +153,36 @@ def test_mid_year_discounts_gordon_terminal_value_half_a_year_less(tmp_path: Pat
         assert m.value("pv_tv_gordon", None) == pytest.approx(m.value("tv_gordon", None) / (1 + w) ** exponent)
         assert m.value("pv_tv_exit", None) == pytest.approx(m.value("tv_exit", None) / (1 + w) ** years)
         assert m.value("sens_2_2", None) == pytest.approx(m.value("price_gordon", None), rel=1e-9)
+
+
+def test_discount_convention_is_an_editable_input(tmp_path: Path) -> None:
+    mid = _with_valuation(tmp_path, "mid", mid_year=True)
+    end = _with_valuation(tmp_path, "end", mid_year=False)
+    for m, offset in ((mid, 0.5), (end, 0.0)):
+        assert m.value("mid_year_offset", None) == offset
+        for t in range(m.h, m.n):
+            year = t - m.h + 1
+            assert m.value("dcf_year", t) == year
+            assert m.value("dcf_period", t) == pytest.approx(year - offset)
+        assert m.value("sens_2_2", None) == pytest.approx(m.value("price_gordon", None), rel=1e-9)
+    assert end.line("dcf_df").fmt == Fmt.FACTOR
+    # Every discount exponent reads the offset and year-number cells, so editing them in Excel re-discounts.
+    offset_cell = end.address("mid_year_offset", None, "DCF")
+    last_year_cell = end.address("dcf_year", end.n - 1, "DCF")
+    assert offset_cell in _formula(end, "dcf_period", end.n - 1)
+    for key in ("pv_tv_gordon", "implied_tv", "implied_exit_multiple", "implied_g_exit"):
+        assert offset_cell in _formula(end, key), key
+    for key in ("pv_tv_gordon", "pv_tv_exit", "implied_tv"):
+        assert last_year_cell in _formula(end, key), key
+    sensitivity = _formula(end, "sens_0_0")
+    assert f"DCF!{offset_cell}" in sensitivity and f"DCF!{last_year_cell}" in sensitivity
+    assert f"DCF!{last_year_cell}" in _formula(end, "ff_exit_low")
+
+
+def _formula(m: Model, key: str, period: int | None = None) -> str:
+    cell = m.cell(key, period)
+    assert isinstance(cell, FormulaCell), key
+    return cell.expr.render(m, period, m.sheet_of(key))
 
 
 def test_exit_at_implied_multiple_equals_gordon_without_mid_year(tmp_path: Path) -> None:

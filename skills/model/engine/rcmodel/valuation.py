@@ -1,11 +1,13 @@
 """Valuation sheets: WACC, DCF (Gordon and exit multiple), reverse DCF, comps,
 sensitivity and football field.
 
-Cash flows are discounted to the last fiscal year-end (mid-year convention
-optional). With the mid-year convention the Gordon terminal value is worth
-its perpetuity as of half a year before the final year-end, so it is
-discounted `years - 0.5`; the exit-multiple terminal value is a year-end value
-and is discounted `years`. Equity = EV + non-operating assets - net debt - NCI
+Cash flows are discounted to the last fiscal year-end. The discount convention
+is two editable inputs on the DCF sheet: the forecast year numbers (1..N) and
+the mid-year offset (0.5 = mid-year, 0 = end of year); every discount exponent
+reads them. Cash flow t is discounted `year - offset`; the Gordon terminal value
+is worth its perpetuity as of the last cash flow's discount date, so it is
+discounted `N - offset`; the exit-multiple terminal value is a year-end value
+and is discounted `N`. Equity = EV + non-operating assets - net debt - NCI
 - debt-like items; the per-share value is then rolled forward to today at the
 cost of equity, and the 12-month target adds one more year of cost of equity
 less the next dividend.
@@ -58,6 +60,16 @@ def _offset(v: Valuation) -> float:
     return 0.5 if v.mid_year else 0.0
 
 
+def _year_end_discount(last: int) -> Expr:
+    """Discount exponent of a year-end value at the end of the forecast (the exit terminal value)."""
+    return At("dcf_year", last)
+
+
+def _gordon_discount(last: int) -> Expr:
+    """Discount exponent of the Gordon terminal value: the final cash flow's own discount period."""
+    return At("dcf_year", last) - R("mid_year_offset")
+
+
 def _equity(enterprise_value: Expr) -> Expr:
     """Equity bridge: EV + non-operating assets - net debt - NCI - debt-like items."""
     return enterprise_value + R("non_op") - R("net_debt_val") - R("nci_val") - R("debt_like")
@@ -96,15 +108,15 @@ def wacc_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
 def dcf_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
     h, last = inputs.h, inputs.n - 1
     years = inputs.n - inputs.h
-    offset = _offset(v)
-    tv_years = years - offset  # the Gordon terminal value is worth its perpetuity half a year early (mid-year)
-    periods = Inputs(tuple(float(i) - offset for i in range(1, years + 1)))
-    period_label = "Discount period (years, mid-year)" if v.mid_year else "Discount period (years)"
+    value = ((3, "Value"),)
     last_fcff, last_ebitda = At("fcff", last), At("ebitda", last)
     # Year-end equivalents: Gordon TV carried to the final year-end, and exit TV brought back to the Gordon date.
-    tv_gordon_year_end: Expr = R("tv_gordon") * (1 + R("wacc")) ** offset if offset else R("tv_gordon")
-    tv_exit_adj: Expr = R("tv_exit") / (1 + R("wacc")) ** offset if offset else R("tv_exit")
+    tv_gordon_year_end = R("tv_gordon") * (1 + R("wacc")) ** R("mid_year_offset")
+    tv_exit_adj = R("tv_exit") / (1 + R("wacc")) ** R("mid_year_offset")
     return [
+        Header(DCF_S, "Discounting convention", columns=value),
+        _input("mid_year_offset", "Mid-year convention offset (0.5 = mid-year, 0 = end of year)", DCF_S,
+               _offset(v), Fmt.NUMBER, note="input from valuation/valuation.yaml (mid_year)"),
         Header(DCF_S, "Free cash flow to the firm"),
         Line("dcf_ebit", "EBIT", DCF_S, fcst=R("ebit")),
         Line("dcf_tax", "Less: taxes on EBIT", DCF_S, fcst=R("dcf_ebit") * R("tax_rate")),
@@ -116,11 +128,13 @@ def dcf_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
         Line("dcf_nwc", "Plus: change in working capital", DCF_S, fcst=R("change_nwc")),
         Line("fcff", "Free cash flow to the firm", DCF_S, style=Style.TOTAL,
              fcst=R("dcf_nopat") + R("dcf_da") - R("dcf_capex") - R("dcf_new_leases") + R("dcf_nwc")),
-        Line("dcf_period", period_label, DCF_S, Fmt.NUMBER, fcst=periods,
-             notes=("mechanical: year number, minus 0.5 with the mid-year convention",)),
-        Line("dcf_df", "Discount factor", DCF_S, Fmt.NUMBER, fcst=1 / (1 + R("wacc")) ** R("dcf_period")),
+        Line("dcf_year", "Forecast year number", DCF_S, Fmt.NUMBER,
+             fcst=Inputs(tuple(float(i) for i in range(1, years + 1))), notes=("mechanical",)),
+        Line("dcf_period", "Discount period (years) = year number - mid-year offset", DCF_S, Fmt.NUMBER,
+             fcst=R("dcf_year") - R("mid_year_offset")),
+        Line("dcf_df", "Discount factor", DCF_S, Fmt.FACTOR, fcst=1 / (1 + R("wacc")) ** R("dcf_period")),
         Line("dcf_pv", "Present value of FCFF", DCF_S, fcst=R("fcff") * R("dcf_df")),
-        Header(DCF_S, "Terminal value and enterprise value (single values in column C)"),
+        Header(DCF_S, "Terminal value and enterprise value", columns=value),
         _input("terminal_growth", "Terminal growth (g)", DCF_S, v.terminal_growth, Fmt.PCT),
         _input("exit_multiple", "Exit EV / EBITDA multiple (applied to final-year EBITDA)", DCF_S,
                v.exit_ev_ebitda, Fmt.MULT),
@@ -128,12 +142,12 @@ def dcf_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
         _calc("sum_pv", "Sum of PV of FCFF", DCF_S, fn("SUM", Rng("dcf_pv", h, last))),
         _calc("tv_gordon", "Terminal value - Gordon growth", DCF_S,
               last_fcff * (1 + R("terminal_growth")) / (R("wacc") - R("terminal_growth"))),
-        _calc("pv_tv_gordon", "PV of terminal value - Gordon", DCF_S, R("tv_gordon") / (1 + R("wacc")) ** tv_years),
+        _calc("pv_tv_gordon", "PV of terminal value - Gordon", DCF_S, R("tv_gordon") / (1 + R("wacc")) ** _gordon_discount(last)),
         _calc("ev_gordon", "Enterprise value - Gordon", DCF_S, R("sum_pv") + R("pv_tv_gordon"), style=Style.SUBTOTAL),
         _calc("tv_exit", "Terminal value - exit multiple", DCF_S, last_ebitda * R("exit_multiple")),
-        _calc("pv_tv_exit", "PV of terminal value - exit multiple", DCF_S, R("tv_exit") / (1 + R("wacc")) ** years),
+        _calc("pv_tv_exit", "PV of terminal value - exit multiple", DCF_S, R("tv_exit") / (1 + R("wacc")) ** _year_end_discount(last)),
         _calc("ev_exit", "Enterprise value - exit multiple", DCF_S, R("sum_pv") + R("pv_tv_exit"), style=Style.SUBTOTAL),
-        Header(DCF_S, "Equity value per share"),
+        Header(DCF_S, "Equity value per share", columns=value),
         _calc("net_debt_val", "Net debt incl. leases (last actual)", DCF_S, At("net_debt", h - 1)),
         _calc("nci_val", "Non-controlling interests (last actual)", DCF_S, At("nci_equity", h - 1)),
         _input("non_op", "Plus: non-operating assets (associates, investments, excess land)", DCF_S,
@@ -156,7 +170,7 @@ def dcf_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
         _calc("upside_gordon", "Upside to 12-month target - Gordon", DCF_S,
               R("target_12m_gordon") / R("share_price") - 1, Fmt.PCT),
         _calc("upside_exit", "Upside / (downside) - exit multiple", DCF_S, R("price_exit") / R("share_price") - 1, Fmt.PCT),
-        Header(DCF_S, "Cross-checks"),
+        Header(DCF_S, "Cross-checks", columns=value),
         _calc("tv_share_gordon", "Terminal value share of EV - Gordon", DCF_S, R("pv_tv_gordon") / R("ev_gordon"), Fmt.PCT),
         _calc("implied_exit_multiple", "Exit multiple implied by Gordon", DCF_S, tv_gordon_year_end / last_ebitda,
               Fmt.MULT),
@@ -164,13 +178,13 @@ def dcf_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
               (tv_exit_adj * R("wacc") - last_fcff) / (tv_exit_adj + last_fcff), Fmt.PCT),
         _calc("tv_ronic", "Return on new capital implied by the terminal value", DCF_S,
               R("terminal_growth") / (1 - last_fcff / At("dcf_nopat", last)), Fmt.PCT),
-        Header(DCF_S, "Reverse DCF - what the market price implies"),
+        Header(DCF_S, "Reverse DCF - what the market price implies", columns=value),
         _calc("market_ev", "Market EV at fiscal year-end = price / roll-forward x shares + net debt + NCI "
               "+ debt-like items - non-operating assets", DCF_S,
               R("share_price") / R("roll_factor") * R("shares_val") + R("net_debt_val") + R("nci_val")
               + R("debt_like") - R("non_op")),
         _calc("implied_tv", "Terminal value implied by the market", DCF_S,
-              (R("market_ev") - R("sum_pv")) * (1 + R("wacc")) ** tv_years),
+              (R("market_ev") - R("sum_pv")) * (1 + R("wacc")) ** _gordon_discount(last)),
         _calc("implied_g", "Terminal growth implied by the market price", DCF_S,
               (R("implied_tv") * R("wacc") - last_fcff) / (R("implied_tv") + last_fcff), Fmt.PCT),
     ]
@@ -220,20 +234,19 @@ def comps_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
     return items
 
 
-def _price_at(w: Expr, g: Expr, first: int, last: int, years: int, offset: float) -> Expr:
+def _price_at(w: Expr, g: Expr, first: int, last: int) -> Expr:
     """Gordon value per share today at WACC w and growth g, written as one self-contained formula.
 
+    NPV discounts whole years; (1 + w) ^ offset moves it to the model's convention (factor 1 at year-end).
     Reads 0 (formatted "n.m.") when w - g < MIN_SPREAD; IF is lazy, so the division never runs there.
     """
-    present_value: Expr = fn("NPV", w, Rng("fcff", first, last))
-    if offset:
-        present_value = present_value * (1 + w) ** offset
-    terminal = At("fcff", last) * (1 + g) / (w - g) / (1 + w) ** (years - offset)
+    present_value = fn("NPV", w, Rng("fcff", first, last)) * (1 + w) ** R("mid_year_offset")
+    terminal = At("fcff", last) * (1 + g) / (w - g) / (1 + w) ** _gordon_discount(last)
     return iff(cmp(w - g, ">=", MIN_SPREAD), _value_today(present_value + terminal), 0)
 
 
 def sensitivity_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
-    first, last, years = inputs.h, inputs.n - 1, inputs.n - inputs.h
+    first, last = inputs.h, inputs.n - 1
     items: list[LayoutItem] = [
         Header(SENS_S, "Value per share today (Gordon): WACC down the side, terminal growth across; "
                        "n.m. where WACC - g < 1%")
@@ -245,17 +258,17 @@ def sensitivity_layout(inputs: ModelInputs, v: Valuation) -> list[LayoutItem]:
         items.append(Line(f"sens_w_{i}", "WACC" if i == 0 else "", SENS_S, Fmt.PCT, scalar=R("wacc") + step, col=3))
         for j in range(len(G_STEPS)):
             items.append(Line(f"sens_{i}_{j}", "", SENS_S, Fmt.PRICE_NM, col=4 + j, new_row=False,
-                              scalar=_price_at(R(f"sens_w_{i}"), R(f"sens_g_{j}"), first, last, years, _offset(v))))
+                              scalar=_price_at(R(f"sens_w_{i}"), R(f"sens_g_{j}"), first, last)))
     return items
 
 
-def _exit_price(multiple: Expr, last: int, years: int) -> Expr:
-    terminal = At("ebitda", last) * multiple / (1 + R("wacc")) ** years
+def _exit_price(multiple: Expr, last: int) -> Expr:
+    terminal = At("ebitda", last) * multiple / (1 + R("wacc")) ** _year_end_discount(last)
     return _value_today(R("sum_pv") + terminal)
 
 
 def football_layout(inputs: ModelInputs, v: Valuation) -> tuple[list[LayoutItem], FootballSpec]:
-    last, years = inputs.n - 1, inputs.n - inputs.h
+    last = inputs.n - 1
     # n.m. grid cells (same WACC - g test as the grid) fall back to the base Gordon value so they never
     # drag the range to zero; valid values, negative ones included, are kept.
     grid = [iff(cmp(R(f"sens_w_{i}") - R(f"sens_g_{j}"), ">=", MIN_SPREAD), R(f"sens_{i}_{j}"), R("price_gordon"))
@@ -263,7 +276,7 @@ def football_layout(inputs: ModelInputs, v: Valuation) -> tuple[list[LayoutItem]
     rows: list[tuple[str, str, Expr | float, Expr | float]] = [
         ("dcf", "DCF - Gordon (sensitivity range)", fn("MIN", *grid), fn("MAX", *grid)),
         ("exit", "DCF - exit multiple +/- 1.0x",
-         _exit_price(R("exit_multiple") - EXIT_STEP, last, years), _exit_price(R("exit_multiple") + EXIT_STEP, last, years)),
+         _exit_price(R("exit_multiple") - EXIT_STEP, last), _exit_price(R("exit_multiple") + EXIT_STEP, last)),
     ]
     if v.peers:
         rows += [

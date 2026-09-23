@@ -20,7 +20,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 
-from .chart import SEGMENT_PREFIX, ZERO_DEFAULT_DRIVERS
+from .chart import DEFAULT_FROM_LAST_ACTUAL, SEGMENT_PREFIX, ZERO_DEFAULT_DRIVERS
 from .expr import At, Expr, Num, Ref, cmp, fn, iff
 from .inputs import ModelInputs
 from .spec import OBSERVED, CellSpec, Fmt, Header, Inputs, LayoutItem, Line, Style
@@ -71,7 +71,7 @@ DRIVER_DEFS: tuple[DriverDef, ...] = (
     DriverDef("nci_share", "Non-controlling share of net income", Fmt.PCT, _safe_ratio(R("nci_income"), R("net_income"))),
     DriverDef("net_new_debt", "Net new long-term debt", Fmt.MONEY, R("debt_long") - R("debt_long", 1)),
     DriverDef("shares_growth", "Diluted share count growth", Fmt.PCT, _growth("shares_diluted")),
-    DriverDef("min_cash", "Minimum cash balance", Fmt.MONEY, R("cash")),
+    DriverDef("min_cash", "Minimum cash balance", Fmt.MONEY, None),
 )
 
 
@@ -91,14 +91,26 @@ def _driver_line(key: str, label: str, fmt: Fmt, hist: Expr | None, inputs: Mode
     fcst: CellSpec
     if given is not None:
         fcst = Inputs(given.values)
-        notes = (given.tag, given.rationale, given.pillar)
+        notes = (given.tag, given.rationale, _pillar(given.pillar))
     elif key in ZERO_DEFAULT_DRIVERS:
         fcst = Inputs(tuple(0.0 for _ in inputs.fcst_years))
         notes = ("assumption", "engine default: zero", "")
+    elif key in DEFAULT_FROM_LAST_ACTUAL:
+        source = DEFAULT_FROM_LAST_ACTUAL[key]
+        fcst = At(source, inputs.h - 1)
+        notes = ("assumption", f"engine default: last actual {source}", "")
     else:
         fcst = At(key, inputs.h - 1)
         notes = ("assumption", "engine default: held at last actual", "")
     return Line(key, label, DRV, fmt, hist=hist, fcst=fcst, notes=notes)
+
+
+def _pillar(text: str) -> str:
+    """'1' -> 'Pillar 1', so Excel shows a label rather than a number stored as text."""
+    stripped = text.strip()
+    if not stripped or stripped.lower().startswith("pillar"):
+        return stripped
+    return f"Pillar {stripped}"
 
 
 def driver_layout(inputs: ModelInputs) -> list[LayoutItem]:
