@@ -181,7 +181,33 @@ merge cleanly. Versioned outputs (`_v<N>`) are never overwritten.
 
 ## 7. Model engine
 
-Adapted from research_analyst `tools/xlsx_builder.py` (MIT, attributed in NOTICE).
+New code in `skills/model/engine/` (research_analyst has no calculation engine;
+only its style palette is adapted, attributed in NOTICE). Every cell is defined
+once as an expression tree that is both evaluated in Python and rendered as an
+Excel formula, so the two cannot drift; tests recalculate the whole workbook
+with the `formulas` library as an Excel oracle and compare every formula cell.
+Plan: `docs/superpowers/plans/2026-09-23-phase2a-model-engine.md`.
+
+Decisions made while building (after reviews by a finance/valuation reviewer):
+- Reported history sits in IS/BS/CF as blue cells with a comment (document,
+  page, tag); there is no separate Historical tab.
+- IFRS 16: lease liability stays in net debt; new leases (= lease principal
+  repaid) are treated like capex in FCFF and added to PP&E.
+- Intangible amortization is a separate driver; D&A net of it reduces PP&E.
+- Dividends (parent and NCI) are never negative; long-term debt cannot go below
+  zero; historical driver ratios with a zero denominator read 0.
+- Valuation: mid-year convention with the Gordon terminal value discounted at
+  N - 0.5 (exit multiple at N); discount conventions are editable cells; equity
+  bridge includes non-operating assets and debt-like items; value per share is
+  rolled forward to today at the cost of equity, and a 12-month target
+  (value x (1 + ke) - next dividend) is shown. Sensitivity uses formula grids
+  (n.m. where WACC - g < 1%), not Excel data tables.
+- Excel-vs-Python parity checks show the Python value next to the check and are
+  warnings (they go stale if inputs are edited in Excel; rebuild to refresh).
+- Engine defaults: a missing driver is held at its last actual value and flagged
+  (net new debt, share growth and amortization default to zero; minimum cash to
+  last actual cash).
+- Runtime dependencies: `openpyxl`, `pyyaml`.
 
 - **Python computes the full model** (source of truth), then writes the xlsx
   with **live formulas**, formatted per excel-standards (blue inputs, black
@@ -189,7 +215,7 @@ Adapted from research_analyst `tools/xlsx_builder.py` (MIT, attributed in NOTICE
 - Inputs: `data/financials.csv`, `model/drivers.yaml`, `valuation/valuation.yaml`
   (optional — without it, valuation tabs are omitted).
 - Periodicity: annual, 5 historical + 5 forecast years.
-- Tabs: Cover, Historical, Drivers, IS, BS, CF, Schedules (revenue build,
+- Tabs: Cover, Drivers, IS, BS, CF, Schedules (revenue build,
   capex/D&A, working-capital days, debt/interest), Ratios, WACC, DCF, Comps,
   Sensitivity, Football field, Checks.
 - **Checks tab** (Excel formulas; evaluates in any Excel on Windows or macOS):
@@ -258,7 +284,7 @@ skills/
   model/  valuation/  risks-esg/  report/  pitch/
     SKILL.md (+ references/)
 skills/init-skills/templates/   AGENTS.md, CLAUDE.md, docs/context/*, company-profile.yaml
-skills/model/engine/            model builder (adapted) + tests/ (phase 2)
+skills/model/engine/            model engine (rcmodel package, build_model.py) + tests/
 commands/wrap-up.md
 tests/                  structural tests (pytest)
 evals/                  manual eval prompts per phase

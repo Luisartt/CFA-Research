@@ -26,8 +26,8 @@ language, roles, deadlines) and writes `AGENTS.md`, `CLAUDE.md`,
 `company-profile.yaml`, the memory files in `docs/context/`, and the folders
 `filings/ data/ research/ model/ valuation/ report/ pitch/`.
 
-**Requirements:** Claude Code. Python 3 with `openpyxl` will be needed by the
-model skills in the next release; `init-skills` checks and tells you how to install it.
+**Requirements:** Claude Code. The model skills need Python 3 with `openpyxl`
+and `pyyaml`; `init-skills` checks and tells you the exact install command.
 
 ## Skills (v0.1)
 
@@ -63,9 +63,9 @@ your disclosure appendix. Check your competition's current rules on AI use.
 ## Development
 
 ```
-python -m pip install -e ".[dev]"
+python -m pip install "openpyxl>=3.1" "pyyaml>=6" "pytest>=8" "mypy>=1.10" "hypothesis>=6" "formulas>=1.2"
 python -m pytest -q
-python -m mypy tests
+python -m mypy tests skills/model/engine
 ```
 
 Test locally without publishing: `/plugin marketplace add <path-to-this-repo>`.

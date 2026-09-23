@@ -9,6 +9,13 @@ Adapted so far: data tags ([sourced]/[guidance]/[assumption]/[calc]), the
 public-information (MNPI) confirmation, the industry report structure, the
 issuer profile fields, and the IFRS / US GAAP / NIF framework notes.
 
+The model engine (skills/model/engine) is original code. Its cell palette and
+number formats (blue inputs, black formulas, green links) are adapted from
+research_analyst tools/xlsx_builder.py, and its valuation conventions (dual
+terminal value with implied cross-checks, closed-form reverse DCF, Hamada
+beta relevering, working capital in days, interest on opening balances)
+follow research_analyst's model-standards references.
+
 It also adapts coaching and setup patterns (roast-me, scaffold) from
 battle_tested_skills
   https://github.com/alanvaa06/battle_tested_skills
