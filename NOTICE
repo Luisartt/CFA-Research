@@ -1,0 +1,14 @@
+research-challenge plugin
+Copyright (c) 2026 CFA-Research contributors
+
+This project adapts material from research_analyst
+  https://github.com/cfamexico/research_analyst
+  Copyright (c) 2026 CFA Society Mexico - AI for Finance
+  Licensed under the MIT License.
+Adapted so far: data tags ([sourced]/[guidance]/[assumption]/[calc]), the
+public-information (MNPI) confirmation, the industry report structure, the
+issuer profile fields, and the IFRS / US GAAP / NIF framework notes.
+
+It also adapts coaching and setup patterns (roast-me, scaffold) from
+battle_tested_skills
+  https://github.com/alanvaa06/battle_tested_skills
