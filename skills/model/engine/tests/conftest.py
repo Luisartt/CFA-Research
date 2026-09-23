@@ -1,4 +1,8 @@
-"""Shared fixture: Acme Alimentos, a small balanced fictional company (MXN millions)."""
+"""Shared fixture: Acme Alimentos, a small fictional company (MXN millions).
+
+The balance-sheet identity and the net-income tie hold every year; historical
+cash, equity and PP&E roll-forwards are NOT consistent (not needed by any check).
+"""
 
 from __future__ import annotations
 

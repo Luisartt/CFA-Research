@@ -5,10 +5,10 @@ from __future__ import annotations
 import math
 
 import pytest
-from hypothesis import given, settings
+from hypothesis import assume, given, settings
 from hypothesis import strategies as st
 
-from rcmodel.expr import Bin, Expr, Neg, Num, Ref
+from rcmodel.expr import Bin, Cmp, Expr, Neg, Num, Ref, fn, iff
 
 formulas = pytest.importorskip("formulas")
 
@@ -28,6 +28,23 @@ class LiteralCtx:
         raise AssertionError("ranges are not generated here")
 
 
+@st.composite
+def _if_cmp(draw: st.DrawFn, children: st.SearchStrategy[Expr]) -> Expr:
+    """IF(cond, yes, x) where cond compares two children with <, >, <=, >=.
+
+    Excel and Python can legitimately pick different branches when the two
+    compared values are equal within floating noise, so such draws are
+    rejected (not a semantics bug -- just an unstable oracle input).
+    """
+    left = draw(children)
+    op = draw(st.sampled_from(["<", ">", "<=", ">="]))
+    right = draw(children)
+    yes = draw(children)
+    ctx = LiteralCtx()
+    assume(abs(left.evaluate(ctx, 0) - right.evaluate(ctx, 0)) >= 1e-9)
+    return iff(Cmp(op, left, right), yes, left)
+
+
 def _trees() -> st.SearchStrategy[Expr]:
     leaves: st.SearchStrategy[Expr] = st.one_of(
         st.sampled_from([Ref("a"), Ref("b")]),
@@ -39,6 +56,14 @@ def _trees() -> st.SearchStrategy[Expr]:
             st.tuples(st.sampled_from(["+", "-", "*", "/"]), children, children).map(lambda t: Bin(t[0], t[1], t[2])),
             children.map(Neg),
             st.tuples(children, st.sampled_from([2.0, 3.0])).map(lambda t: Bin("^", t[0], Num(t[1]))),
+            _if_cmp(children),
+            st.tuples(st.sampled_from(["MIN", "MAX", "MEDIAN", "SUM"]), children, children, children).map(
+                lambda t: fn(t[0], t[1], t[2], t[3])
+            ),
+            children.map(lambda c: fn("ABS", c)),
+            st.tuples(st.floats(min_value=0.01, max_value=0.5), children, children).map(
+                lambda t: fn("NPV", t[0], t[1], t[2])
+            ),
         )
 
     return st.recursive(leaves, extend, max_leaves=8)

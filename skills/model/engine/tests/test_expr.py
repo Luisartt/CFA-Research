@@ -4,7 +4,7 @@ import math
 
 import pytest
 
-from rcmodel.expr import At, Neg, Ref, Rng, cmp, fn, iff
+from rcmodel.expr import At, Cmp, Neg, Num, Ref, Rng, cmp, fn, iff
 
 
 class FakeCtx:
@@ -97,3 +97,31 @@ def test_unknown_function_rejected() -> None:
 
 def test_comparison_with_nan_is_false() -> None:
     assert cmp(Ref("a") / (Ref("b") - 3), "<=", 1).evaluate(CTX, 2) == 0.0
+
+
+def test_num_coerces_to_float_and_renders() -> None:
+    assert Num(3).render(CTX, 2, "S") == "3"
+
+
+def test_num_rejects_non_finite_values() -> None:
+    with pytest.raises(ValueError):
+        Num(float("inf"))
+
+
+def test_rng_rejects_invalid_bounds() -> None:
+    with pytest.raises(ValueError):
+        Rng("f", 3, 1)
+    with pytest.raises(ValueError):
+        Rng("f", -1, 2)
+
+
+def test_cmp_rejects_nested_comparison() -> None:
+    with pytest.raises(ValueError):
+        Cmp("<", Cmp("<", Ref("a"), Ref("b")), Ref("c"))
+    with pytest.raises(ValueError):
+        Cmp("<", Ref("a"), Cmp("<", Ref("b"), Ref("c")))
+
+
+def test_ref_lag_without_period_context_rejected() -> None:
+    with pytest.raises(ValueError):
+        Ref("s", 1).evaluate(CTX, None)

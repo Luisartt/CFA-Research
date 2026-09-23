@@ -109,6 +109,11 @@ def _arith(op: str, x: float, y: float) -> float:
 class Num(Expr):
     v: float
 
+    def __post_init__(self) -> None:
+        object.__setattr__(self, "v", float(self.v))
+        if not math.isfinite(self.v):
+            raise ValueError(f"Num must be finite, got {self.v!r}")
+
     def evaluate(self, ctx: Context, t: int | None) -> float:
         return self.v
 
@@ -125,7 +130,11 @@ class Ref(Expr):
     lag: int = 0
 
     def _period(self, t: int | None) -> int | None:
-        return None if t is None else t - self.lag
+        if t is None:
+            if self.lag:
+                raise ValueError(f"lag on '{self.key}' needs a per-year context")
+            return None
+        return t - self.lag
 
     def evaluate(self, ctx: Context, t: int | None) -> float:
         return ctx.value(self.key, self._period(t))
@@ -158,6 +167,10 @@ class Rng:
     key: str
     first: int
     last: int
+
+    def __post_init__(self) -> None:
+        if not 0 <= self.first <= self.last:
+            raise ValueError(f"invalid range bounds [{self.first}, {self.last}]")
 
     def values(self, ctx: Context) -> list[float]:
         return [ctx.value(self.key, p) for p in range(self.first, self.last + 1)]
@@ -220,7 +233,13 @@ class Neg(Expr):
 
 @dataclass(frozen=True)
 class Cmp(Expr):
-    """Comparison; evaluates to 1.0 (true) or 0.0 (false). Any NaN operand is false."""
+    """Comparison; evaluates to 1.0 (true) or 0.0 (false).
+
+    Any NaN operand makes the comparison false on purpose: a broken upstream
+    value must fail integrity checks closed rather than silently pass one side
+    of a check. Excel would instead surface a #VALUE!/#DIV/0! error for the
+    same input; either way the model is telling you "not OK".
+    """
 
     op: str
     a: Expr
@@ -229,6 +248,8 @@ class Cmp(Expr):
     def __post_init__(self) -> None:
         if self.op not in COMPARE_OPS:
             raise ValueError(f"unsupported comparison {self.op!r}")
+        if isinstance(self.a, Cmp) or isinstance(self.b, Cmp):
+            raise ValueError("nested comparison")
 
     @property
     def precedence(self) -> int:
@@ -273,6 +294,8 @@ class Func(Expr):
     def evaluate(self, ctx: Context, t: int | None) -> float:
         if self.name == "IF":
             cond, yes, no = (_as_expr(a) for a in self.args)
+            # A NaN-tainted cond evaluates its Cmp to 0.0 (false) on purpose, so IF takes
+            # the "no" branch closed rather than propagating NaN into an ambiguous branch.
             return yes.evaluate(ctx, t) if cond.evaluate(ctx, t) != 0.0 else no.evaluate(ctx, t)
         if self.name == "NPV":
             rate = _as_expr(self.args[0]).evaluate(ctx, t)
