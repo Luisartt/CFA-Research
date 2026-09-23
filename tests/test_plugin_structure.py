@@ -36,7 +36,7 @@ def test_marketplace_lists_plugin_at_repo_root() -> None:
 
 
 SKILLS_DIR = ROOT / "skills"
-PHASE1_SKILLS: tuple[str, ...] = ("init-skills", "thesis", "industry")
+SKILLS: tuple[str, ...] = ("init-skills", "thesis", "industry", "financials", "forecast", "model", "valuation")
 USER_INVOKED_ONLY: frozenset[str] = frozenset({"init-skills"})
 REQUIRED_SECTIONS: tuple[str, ...] = (
     "## Purpose",
@@ -94,17 +94,17 @@ def skill_md(name: str) -> Path:
     return SKILLS_DIR / name / "SKILL.md"
 
 
-@pytest.mark.parametrize("name", PHASE1_SKILLS)
+@pytest.mark.parametrize("name", SKILLS)
 def test_skill_file_exists(name: str) -> None:
     assert skill_md(name).is_file(), f"missing {skill_md(name)}"
 
 
-@pytest.mark.parametrize("name", PHASE1_SKILLS)
+@pytest.mark.parametrize("name", SKILLS)
 def test_frontmatter_name_matches_directory(name: str) -> None:
     assert read_frontmatter(skill_md(name))["name"] == name
 
 
-@pytest.mark.parametrize("name", PHASE1_SKILLS)
+@pytest.mark.parametrize("name", SKILLS)
 def test_description_is_yaml_safe_and_rich(name: str) -> None:
     description = read_frontmatter(skill_md(name))["description"]
     assert ": " not in description, "unquoted ': ' breaks YAML frontmatter"
@@ -115,7 +115,7 @@ def test_description_is_yaml_safe_and_rich(name: str) -> None:
         assert "Use whenever" in description
 
 
-@pytest.mark.parametrize("name", PHASE1_SKILLS)
+@pytest.mark.parametrize("name", SKILLS)
 def test_required_sections_in_order(name: str) -> None:
     text = read_text(skill_md(name))
     positions: list[int] = []
@@ -126,13 +126,13 @@ def test_required_sections_in_order(name: str) -> None:
     assert positions == sorted(positions), "sections out of order"
 
 
-@pytest.mark.parametrize("name", PHASE1_SKILLS)
+@pytest.mark.parametrize("name", SKILLS)
 def test_skill_is_short(name: str) -> None:
     line_count = len(read_text(skill_md(name)).splitlines())
     assert line_count <= MAX_SKILL_LINES, f"{name}: {line_count} lines"
 
 
-@pytest.mark.parametrize("name", PHASE1_SKILLS)
+@pytest.mark.parametrize("name", SKILLS)
 def test_referenced_local_files_exist(name: str) -> None:
     skill_dir = SKILLS_DIR / name
     for ref in LOCAL_REF_RE.findall(read_text(skill_md(name))):
@@ -178,3 +178,49 @@ def test_wrap_up_command_has_description() -> None:
     fields = read_frontmatter(ROOT / "commands" / "wrap-up.md")
     assert fields.get("description"), "wrap-up needs a description"
     assert ": " not in fields["description"]
+
+
+ENGINE_SKILLS: tuple[str, ...] = ("financials", "forecast", "model", "valuation")
+ENGINE_CALL = "${CLAUDE_PLUGIN_ROOT}/skills/model/engine/build_model.py"
+ENGINE_DIR = SKILLS_DIR / "model" / "engine"
+
+
+@pytest.mark.parametrize("name", ENGINE_SKILLS)
+def test_engine_skills_call_the_engine_by_plugin_root(name: str) -> None:
+    assert ENGINE_CALL in read_text(skill_md(name))
+    assert (ENGINE_DIR / "build_model.py").is_file()
+
+
+def _engine_chart() -> tuple[tuple[str, ...], tuple[str, ...]]:
+    import sys
+
+    if str(ENGINE_DIR) not in sys.path:
+        sys.path.insert(0, str(ENGINE_DIR))
+    from rcmodel.chart import CHART, DRIVER_KEYS
+
+    return tuple(item.key for item in CHART), DRIVER_KEYS
+
+
+def test_chart_reference_lists_every_engine_line_item() -> None:
+    chart_keys, _ = _engine_chart()
+    text = read_text(SKILLS_DIR / "financials" / "references" / "chart-of-accounts.md")
+    missing = [key for key in chart_keys if f"`{key}`" not in text]
+    assert not missing, missing
+
+
+def test_drivers_guide_lists_every_engine_driver() -> None:
+    _, driver_keys = _engine_chart()
+    for path in (SKILLS_DIR / "forecast" / "references" / "drivers-guide.md",
+                 SKILLS_DIR / "forecast" / "references" / "drivers-template.yaml"):
+        text = read_text(path)
+        missing = [key for key in driver_keys if key not in text]
+        assert not missing, (path.name, missing)
+
+
+def test_valuation_template_matches_the_loader() -> None:
+    text = read_text(SKILLS_DIR / "valuation" / "references" / "valuation-template.yaml")
+    for field in ("share_price", "price_52w_low", "price_52w_high", "years_since_fiscal_year_end",
+                  "non_operating_assets", "debt_like_items", "risk_free", "equity_risk_premium",
+                  "country_risk_premium", "beta_unlevered", "target_debt_to_equity", "pre_tax_cost_of_debt",
+                  "tax_rate", "growth", "exit_ev_ebitda", "lt_nominal_gdp_growth", "peers", "target_price"):
+        assert f"{field}:" in text, field
