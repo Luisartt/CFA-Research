@@ -89,5 +89,5 @@ DRIVER_KEYS: tuple[str, ...] = (
     "min_cash",
 )
 ZERO_DEFAULT_DRIVERS: frozenset[str] = frozenset(
-    {"net_new_debt", "shares_growth", "amort_pct_revenue", "lease_principal_pct_revenue"}
+    {"net_new_debt", "shares_growth", "amort_pct_revenue"}
 )
