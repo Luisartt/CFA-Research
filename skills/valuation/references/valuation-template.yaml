@@ -1,0 +1,30 @@
+# valuation/valuation.yaml - written by the valuation skill, read by the model engine.
+# Rates as decimals (0.095 = 9.5%). Money in the model's units (e.g. MXN millions).
+share_price: 0.0                  # current price, source and date in valuation.md
+price_52w_low: 0.0
+price_52w_high: 0.0
+mid_year: true                    # mid-year discounting convention
+years_since_fiscal_year_end: 0.0  # e.g. 0.75 in late September for a December year-end
+non_operating_assets: 0.0         # associates, investments, excess land (added to EV)
+debt_like_items: 0.0              # pensions, provisions treated as debt (subtracted)
+wacc:
+  risk_free: 0.0                  # local 10y government bond (or US 10y on the USD route)
+  equity_risk_premium: 0.0
+  country_risk_premium: 0.0       # 0 on the local route
+  beta_unlevered: 0.0             # median of peers' unlevered betas
+  target_debt_to_equity: 0.0      # market values, debt incl. leases
+  pre_tax_cost_of_debt: 0.0
+  tax_rate: 0.0                   # statutory marginal rate
+terminal:
+  growth: 0.0                     # <= long-term nominal GDP growth
+  exit_ev_ebitda: 0.0             # applied to final-year EBITDA
+  lt_nominal_gdp_growth: 0.0
+peers:                            # 4-8 peers from research/industry.md
+  - name: ""
+    ticker: ""
+    price: 0.0
+    shares: 0.0
+    net_debt: 0.0                 # incl. leases + non-controlling interests
+    ebitda_fwd: 0.0               # next-year EBITDA (must be > 0)
+    eps_fwd: 0.0                  # next-year EPS (must be > 0)
+target_price: null                # the TEAM's 12-month target; null until decided
