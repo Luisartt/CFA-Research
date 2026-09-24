@@ -1,11 +1,14 @@
 """Audit a pitch deck against the Challenge rules and basic presentation hygiene.
 
 Structural checks only (no rendering): slide count for a 10-minute talk, a source on
-every slide but the title, speaker notes, leftover placeholder text, shapes off the
-slide, small fonts, too many font families, likely text overflow, dense slides, and
-numbers that disagree with model/model-summary.json and report/header.yaml.
---fix saves a NEW version with mechanical fixes only (empty placeholders removed,
-off-palette fonts set to the deck's main font); everything else is reported.
+every slide but the title ("Source:", "Fuente:" or "Fonte:" anywhere, groups and tables
+included), speaker notes, leftover placeholder text, shapes off the slide, small fonts,
+too many font families, likely text overflow (at the size the text really inherits),
+pictures over titles or a sources line over other shapes, dense slides, and numbers that
+disagree with model/model-summary.json and report/header.yaml.
+--fix saves a NEW version with mechanical fixes only (empty placeholders removed, rare
+pasted fonts in body text reset to the theme font; theme and title fonts are never
+touched); nothing is saved when there is nothing to fix. Everything else is reported.
 Writes pitch/deck-audit.md. Console output is ASCII only.
 
 Usage: python audit_pptx.py --project <team folder> [--deck <file>] [--fix]
@@ -24,7 +27,14 @@ from typing import Any
 
 import yaml
 from pptx import Presentation
+from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 from pptx.exc import PackageNotFoundError
+from pptx.opc.constants import RELATIONSHIP_TYPE as RT
+from pptx.oxml import parse_xml
+from pptx.oxml.ns import qn
+from pptx.util import Inches
+
+from build_pptx import Box, decor_boxes, shape_box
 
 EXIT_OK = 0
 EXIT_NO_DECK = 2
@@ -35,9 +45,19 @@ MAX_WORDS = 60
 MAX_FONT_FAMILIES = 2
 DEFAULT_FONT_PT = 18
 EMU_PER_PT = 12700
-LEFTOVERS = ("click to add", "lorem ipsum", "todo", "[insert", "xx.x", "tbd")
-TARGET_RE = re.compile(r"target(?:\s+price)?\D{0,15}?(\d[\d,]*\.?\d*)", re.IGNORECASE)
-WACC_RE = re.compile(r"WACC\D{0,15}?(\d+(?:\.\d+)?)\s*%", re.IGNORECASE)
+OVERLAP_TOLERANCE = Inches(0.05)
+SOURCE_RE = re.compile(r"^\s*(sources?|fuentes?|fontes?)\s*:", re.IGNORECASE)
+LEFTOVERS = (re.compile(r"\bTODO\b"), re.compile(r"\bTBD\b"), re.compile(r"click to add", re.IGNORECASE),
+             re.compile(r"haga clic para agregar", re.IGNORECASE), re.compile(r"clique para adicionar", re.IGNORECASE),
+             re.compile(r"lorem ipsum", re.IGNORECASE), re.compile(r"\[insert", re.IGNORECASE),
+             re.compile(r"\bxx\.x\b", re.IGNORECASE))
+NOTES_HEADER_RE = re.compile(r"^\s*\[[^\]]*\bmin\]")
+TARGET_RE = re.compile(r"target price|price target|\bTP\b|precio objetivo|pre[cç]o-alvo", re.IGNORECASE)
+TARGET_WINDOW = 20  # characters between the words and the number
+NUMBER_RE = re.compile(r"\d+(?:[.,]\d+)*")
+YEAR_RE = re.compile(r"(?:19|20)\d{2}")
+WACC_RE = re.compile(r"WACC\D{0,15}?(\d+(?:[.,]\d+)?)\s*%", re.IGNORECASE)
+TITLE_TYPES = {PP_PLACEHOLDER.TITLE, PP_PLACEHOLDER.CENTER_TITLE}
 
 
 @dataclass(frozen=True)
@@ -58,26 +78,101 @@ def _texts(slide: Any) -> Iterator[tuple[Any, str]]:
             yield shape, shape.text_frame.text
 
 
-def _load_reference(project: Path) -> dict[str, float]:
+def _frames(shapes: Any) -> Iterator[Any]:
+    """Every text frame on a slide: shapes, shapes inside groups, and table cells."""
+    for shape in shapes:
+        if shape.shape_type == MSO_SHAPE_TYPE.GROUP:
+            yield from _frames(shape.shapes)
+        elif getattr(shape, "has_table", False):
+            for row in shape.table.rows:
+                for cell in row.cells:
+                    yield cell.text_frame
+        elif shape.has_text_frame:
+            yield shape.text_frame
+
+
+def _load_reference(project: Path) -> tuple[dict[str, float], list[Finding]]:
     ref: dict[str, float] = {}
+    problems: list[Finding] = []
     header = project / "report" / "header.yaml"
     if header.is_file():
-        doc = yaml.safe_load(header.read_text(encoding="utf-8-sig"))
+        try:
+            doc = yaml.safe_load(header.read_text(encoding="utf-8-sig"))
+        except (yaml.YAMLError, UnicodeDecodeError):
+            doc = None
+            problems.append(Finding(0, "WARN", "reference", "report/header.yaml is unreadable: target check skipped"))
         if isinstance(doc, dict) and isinstance(doc.get("target_price"), (int, float)):
             ref["target"] = float(doc["target_price"])
     summary = project / "model" / "model-summary.json"
     if summary.is_file():
-        data = json.loads(summary.read_text(encoding="utf-8"))
-        wacc = data.get("valuation", {}).get("wacc")
-        if isinstance(wacc, (int, float)):
+        try:
+            data = json.loads(summary.read_text(encoding="utf-8-sig"))
+        except (json.JSONDecodeError, UnicodeDecodeError):
+            data = None
+            problems.append(Finding(0, "WARN", "reference",
+                                    "model/model-summary.json is unreadable: WACC check skipped"))
+        valuation = data.get("valuation") if isinstance(data, dict) else None
+        wacc = valuation.get("wacc") if isinstance(valuation, dict) else None
+        if isinstance(wacc, (int, float)) and not isinstance(wacc, bool):
             ref["wacc_pct"] = float(wacc) * 100
-    return ref
+    return ref, problems
+
+
+# --- effective font size ---------------------------------------------------------------------
+
+def _lvl_size(container: Any, level: int) -> float | None:
+    """sz of a:lvlNpPr/a:defRPr in a list style (a:lstStyle, p:titleStyle, p:bodyStyle...)."""
+    if container is None:
+        return None
+    props = container.find(qn(f"a:lvl{level}pPr"))
+    run = props.find(qn("a:defRPr")) if props is not None else None
+    size = run.get("sz") if run is not None else None
+    return int(size) / 100 if size else None
+
+
+def _inherited_size(shape: Any, level: int) -> float:
+    """The size text inherits: the shape's list style, then its layout and master placeholders, then the
+    master text styles; 18 pt when nothing says (plain text boxes)."""
+    chain: list[Any] = [shape]
+    if shape.is_placeholder:
+        base = getattr(shape, "_base_placeholder", None)
+        while base is not None and len(chain) < 4:
+            chain.append(base)
+            base = getattr(base, "_base_placeholder", None)
+    for item in chain:
+        size = _lvl_size(item._element.find(f"{qn('p:txBody')}/{qn('a:lstStyle')}"), level)
+        if size:
+            return size
+    if shape.is_placeholder:
+        styles = shape.part.slide_layout.slide_master._element.find(qn("p:txStyles"))
+        kind = shape.placeholder_format.type
+        name = "p:titleStyle" if kind in TITLE_TYPES else \
+            "p:otherStyle" if kind in (PP_PLACEHOLDER.DATE, PP_PLACEHOLDER.FOOTER, PP_PLACEHOLDER.SLIDE_NUMBER) \
+            else "p:bodyStyle"
+        size = _lvl_size(styles.find(qn(name)) if styles is not None else None, level)
+        if size:
+            return size
+    return DEFAULT_FONT_PT
+
+
+def _font_scale(shape: Any) -> float:
+    autofit = shape._element.find(f"{qn('p:txBody')}/{qn('a:bodyPr')}/{qn('a:normAutofit')}")
+    scale = autofit.get("fontScale") if autofit is not None else None
+    return int(scale) / 100000 if scale else 1.0
+
+
+def _size(shape: Any, paragraph: Any, run: Any | None) -> float:
+    if run is not None and run.font.size is not None:
+        return float(run.font.size.pt)
+    if paragraph.font.size is not None:
+        return float(paragraph.font.size.pt)
+    return _inherited_size(shape, min(paragraph.level, 8) + 1) * _font_scale(shape)
 
 
 def _overflow(shape: Any, text: str) -> bool:
     if shape.width is None or shape.height is None or not text.strip():
         return False
-    sizes = [r.font.size.pt for p in shape.text_frame.paragraphs for r in p.runs if r.font.size is not None]
+    sizes = [_size(shape, p, r) for p in shape.text_frame.paragraphs for r in (p.runs or [None])]
     size = min(sizes) if sizes else DEFAULT_FONT_PT
     chars_per_line = max(1.0, (shape.width / EMU_PER_PT) / (size * 0.5))
     lines = sum(max(1, -(-len(p.text) // int(chars_per_line))) for p in shape.text_frame.paragraphs)
@@ -85,27 +180,84 @@ def _overflow(shape: Any, text: str) -> bool:
     return bool(lines > capacity + 0.5)
 
 
+# --- numbers -----------------------------------------------------------------------------------
+
+def _number(raw: str) -> float | None:
+    """'31.0', '31,0', '1,234.5', '1.234,5', '3,100' -> float."""
+    if "," in raw and "." in raw:
+        decimal = "," if raw.rfind(",") > raw.rfind(".") else "."
+        raw = raw.replace("." if decimal == "," else ",", "").replace(decimal, ".")
+    elif "," in raw or "." in raw:
+        sep = "," if "," in raw else "."
+        parts = raw.split(sep)
+        thousands = len(parts) > 2 or len(parts[-1]) == 3
+        raw = raw.replace(sep, "") if thousands else raw.replace(sep, ".")
+    try:
+        return float(raw)
+    except ValueError:
+        return None
+
+
+def _targets(text: str) -> Iterator[float]:
+    """Numbers right after 'target price' words: not percentages, years or numbers glued to units (12m, 5bn)."""
+    for key in TARGET_RE.finditer(text):
+        for match in NUMBER_RE.finditer(text, key.end()):
+            if match.start() - key.end() > TARGET_WINDOW:
+                break
+            after = text[match.end():]
+            if after.lstrip().startswith("%") or YEAR_RE.fullmatch(match.group()) or after[:1].isalpha():
+                continue
+            if (value := _number(match.group())) is not None:
+                yield value
+            break
+
+
+# --- overlap -----------------------------------------------------------------------------------
+
+def _overlaps(a: Box, b: Box) -> bool:
+    width, height = a.overlap(b)
+    return width > OVERLAP_TOLERANCE and height > OVERLAP_TOLERANCE
+
+
+def _overlap_findings(n: int, slide: Any, width: int, height: int) -> list[Finding]:
+    findings: list[Finding] = []
+    title = slide.shapes.title
+    title_box = shape_box(title) if title is not None else None
+    boxes = [(shape, box) for shape in slide.shapes if (box := shape_box(shape)) is not None]
+    for shape, box in boxes:
+        if shape.shape_type == MSO_SHAPE_TYPE.PICTURE and title_box is not None and _overlaps(box, title_box):
+            findings.append(Finding(n, "WARN", "overlap", f"picture '{shape.name}' overlaps the title"))
+    for footer, footer_box in boxes:
+        if not (footer.has_text_frame and SOURCE_RE.match(footer.text_frame.text)):
+            continue
+        others = [(s.name, b) for s, b in boxes if s is not footer]
+        others += [("the template's logo/decoration", b) for b in decor_boxes(slide.slide_layout, width, height)]
+        for name, box in others:
+            if _overlaps(footer_box, box):
+                findings.append(Finding(n, "WARN", "overlap", f"the sources line overlaps '{name}'"))
+                break
+    return findings
+
+
 def audit(path: Path, project: Path) -> list[Finding]:
     prs = Presentation(str(path))
-    reference = _load_reference(project)
-    findings: list[Finding] = []
+    reference, findings = _load_reference(project)
     count = len(prs.slides)
     if not MIN_SLIDES <= count <= MAX_SLIDES:
         findings.append(Finding(0, "WARN", "slide-count",
                                 f"{count} slides; a 10-minute talk usually needs {MIN_SLIDES}-{MAX_SLIDES}"))
     families: Counter[str] = Counter()
     for n, slide in enumerate(prs.slides, start=1):
-        texts = list(_texts(slide))
-        all_text = " ".join(t for _, t in texts)
-        if n > 1 and not any(t.strip().lower().startswith("source") for _, t in texts):
+        frames = list(_frames(slide.shapes))
+        all_text = " ".join(frame.text for frame in frames)
+        if n > 1 and not any(SOURCE_RE.match(p.text) for frame in frames for p in frame.paragraphs):
             findings.append(Finding(n, "ERROR", "no-sources", "no 'Source:' line (Challenge rule: slides show sources)"))
         notes = slide.notes_slide.notes_text_frame.text if slide.has_notes_slide else ""
-        if not notes.strip():
+        if not NOTES_HEADER_RE.sub("", notes, count=1).strip():
             findings.append(Finding(n, "WARN", "no-notes", "no speaker notes"))
-        lowered = all_text.lower()
         for marker in LEFTOVERS:
-            if marker in lowered:
-                findings.append(Finding(n, "ERROR", "leftover", f"placeholder text left: '{marker}'"))
+            if found := marker.search(all_text):
+                findings.append(Finding(n, "ERROR", "leftover", f"placeholder text left: '{found.group()}'"))
         if len(all_text.split()) > MAX_WORDS:
             findings.append(Finding(n, "WARN", "dense", f"{len(all_text.split())} words; aim for under {MAX_WORDS}"))
         for shape in slide.shapes:
@@ -113,8 +265,8 @@ def audit(path: Path, project: Path) -> list[Finding]:
                     shape.left < 0 or shape.top < 0 or shape.left + shape.width > prs.slide_width
                     or shape.top + shape.height > prs.slide_height):
                 findings.append(Finding(n, "ERROR", "off-slide", f"'{shape.name}' extends beyond the slide"))
-        for shape, text in texts:
-            is_footer = text.strip().lower().startswith("source")
+        for shape, text in _texts(slide):
+            is_footer = bool(SOURCE_RE.match(text))
             for paragraph in shape.text_frame.paragraphs:
                 for run in paragraph.runs:
                     if run.font.name:
@@ -124,15 +276,16 @@ def audit(path: Path, project: Path) -> list[Finding]:
                         findings.append(Finding(n, "WARN", "small-font", f"{size.pt:g} pt text in '{shape.name}'"))
             if _overflow(shape, text):
                 findings.append(Finding(n, "WARN", "overflow", f"text may not fit in '{shape.name}'"))
+        findings += _overlap_findings(n, slide, int(prs.slide_width or 0), int(prs.slide_height or 0))
         if "target" in reference:
-            for match in TARGET_RE.finditer(all_text):
-                value = float(match.group(1).replace(",", ""))
+            for value in _targets(all_text):
                 if abs(value - reference["target"]) > 0.01 * reference["target"]:
                     findings.append(Finding(n, "WARN", "stale-target",
                                             f"target {value:g} differs from report/header.yaml ({reference['target']:g})"))
         if "wacc_pct" in reference:
             for match in WACC_RE.finditer(all_text):
-                if abs(float(match.group(1)) - reference["wacc_pct"]) > 0.1:
+                wacc = float(match.group(1).replace(",", "."))
+                if abs(wacc - reference["wacc_pct"]) > 0.1:
                     findings.append(Finding(n, "WARN", "stale-wacc",
                                             f"WACC {match.group(1)}% differs from the model ({reference['wacc_pct']:.1f}%)"))
     if len(families) > MAX_FONT_FAMILIES:
@@ -143,16 +296,32 @@ def audit(path: Path, project: Path) -> list[Finding]:
 RARE_FONT_SHARE = 0.2
 
 
+def _theme_fonts(prs: Any) -> set[str]:
+    fonts: set[str] = set()
+    for master in prs.slide_masters:
+        theme = parse_xml(master.part.part_related_by(RT.THEME).blob)
+        for tag in ("a:majorFont", "a:minorFont"):
+            latin = theme.find(f".//{qn(tag)}/{qn('a:latin')}")
+            if latin is not None and latin.get("typeface"):
+                fonts.add(latin.get("typeface"))
+    return fonts
+
+
+def _is_title(shape: Any) -> bool:
+    return bool(shape.is_placeholder and shape.placeholder_format.type in TITLE_TYPES)
+
+
 def fix(path: Path, target: Path) -> int:
-    """Mechanical fixes only; returns the number of changes. Saves to `target`.
+    """Mechanical fixes only; returns the number of changes. Saves to `target` only when there are changes.
 
     - removes empty placeholders;
-    - a font used for less than 20% of the deck's text is reset to the template's
-      theme font (explicit font removed), so stray pasted fonts disappear while
-      the team's main font is never touched.
+    - a font used for less than 20% of the deck's text in body text is reset to the template's
+      theme font (explicit font removed), so stray pasted fonts disappear. Theme fonts and any
+      font used on titles (a brand font) are never touched.
     """
     prs = Presentation(str(path))
     families: Counter[str] = Counter()
+    protected = _theme_fonts(prs)
     total = 0
     for slide in prs.slides:
         for shape, _ in _texts(slide):
@@ -161,7 +330,10 @@ def fix(path: Path, target: Path) -> int:
                     total += len(run.text)
                     if run.font.name:
                         families[run.font.name] += len(run.text)
-    rare = {name for name, chars in families.items() if chars < RARE_FONT_SHARE * total}
+                        if _is_title(shape):
+                            protected.add(run.font.name)
+    rare = {name for name, chars in families.items()
+            if chars < RARE_FONT_SHARE * total and name not in protected and not name.startswith("+")}
     changes = 0
     for slide in prs.slides:
         for ph in list(slide.placeholders):
@@ -169,12 +341,15 @@ def fix(path: Path, target: Path) -> int:
                 ph._element.getparent().remove(ph._element)
                 changes += 1
         for shape, _ in _texts(slide):
+            if _is_title(shape):
+                continue
             for paragraph in shape.text_frame.paragraphs:
                 for run in paragraph.runs:
                     if run.font.name in rare:
                         run.font.name = None
                         changes += 1
-    prs.save(str(target))
+    if changes:
+        prs.save(str(target))
     return changes
 
 
@@ -220,11 +395,14 @@ def main(argv: Sequence[str] | None = None) -> int:
         if args.fix:
             fixed = _next_version(deck)
             changes = fix(deck, fixed)
-            print(f"[ok] {changes} mechanical fixes -> pitch/{ascii_safe(fixed.name)}")
-            deck = fixed
+            if changes:
+                print(f"[ok] {changes} mechanical fixes -> pitch/{ascii_safe(fixed.name)}")
+                deck = fixed
+            else:
+                print("[ok] no mechanical fixes needed; no new version saved")
         findings = audit(deck, project)
         report = write_report(project, deck, findings)
-    except PackageNotFoundError:
+    except (PackageNotFoundError, ValueError, KeyError):
         print(f"[x] {ascii_safe(deck.name)} is not a valid .pptx file")
         return EXIT_NO_DECK
     except OSError as exc:
