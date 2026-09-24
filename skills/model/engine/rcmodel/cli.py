@@ -5,6 +5,7 @@ from __future__ import annotations
 import argparse
 import json
 import re
+import unicodedata
 from collections.abc import Sequence
 from dataclasses import dataclass
 from datetime import date
@@ -35,7 +36,9 @@ class BuildResult:
 
 
 def ascii_safe(text: str) -> str:
-    return text.encode("ascii", "replace").decode("ascii")
+    """Console-safe text: accents dropped ("Diseño" -> "Diseno"), anything else non-ASCII -> "?"."""
+    plain = "".join(c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c))
+    return plain.encode("ascii", "replace").decode("ascii")
 
 
 def next_version_path(model_dir: Path, ticker: str) -> tuple[Path, int]:

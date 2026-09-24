@@ -193,6 +193,44 @@ def test_overflow_uses_the_inherited_placeholder_size(deck_project: Path) -> Non
     assert _slides_with(findings, "overflow") == {1}
 
 
+def test_overflow_of_vertical_text_swaps_width_and_height(deck_project: Path) -> None:
+    """Vertical text (inherited from the layout) runs down the box: paragraphs are columns across its width."""
+    def fill(prs: Any) -> None:
+        vertical = next(item for item in prs.slide_layouts if item.name == "Vertical Title and Text")
+        for count in (5, 3):  # a 2-inch-wide vertical body at 32 pt holds about 4 columns
+            slide = prs.slides.add_slide(vertical)
+            slide.shapes.title.text = "Thesis"
+            body = slide.placeholders[1]
+            body.left, body.top, body.width, body.height = Inches(0.5), Inches(0.3), Inches(2), Inches(6.4)
+            body.text_frame.text = "Volume up"
+            for _ in range(count - 1):
+                body.text_frame.add_paragraph().text = "Volume up"
+            slide.notes_slide.notes_text_frame.text = "Real notes."
+    findings = audit(_deck(deck_project, fill), deck_project)
+    assert _slides_with(findings, "overflow") == {1}
+
+
+def test_fix_on_a_hand_made_deck_saves_numbered_copies(deck_project: Path, tmp_path_factory: pytest.TempPathFactory,
+                                                      capsys: pytest.CaptureFixture[str]) -> None:
+    def fill(prs: Any) -> None:
+        slide = prs.slides.add_slide(prs.slide_layouts[1])  # title + empty body placeholder
+        slide.shapes.title.text = "Hand made"
+    inside = _deck(deck_project, fill).rename(deck_project / "pitch" / "Our deck.pptx")
+    outside_dir = tmp_path_factory.mktemp("elsewhere")  # outside the project folder
+    outside = outside_dir / "Our deck.pptx"
+    outside.write_bytes(inside.read_bytes())
+
+    assert main(["--project", str(deck_project), "--deck", str(inside), "--fix"]) == 0
+    assert "-> pitch/Our deck_fixed1.pptx" in capsys.readouterr().out
+    assert main(["--project", str(deck_project), "--deck", str(inside), "--fix"]) == 0
+    assert "-> pitch/Our deck_fixed2.pptx" in capsys.readouterr().out
+    assert inside.is_file() and (deck_project / "pitch" / "Our deck_fixed2.pptx").is_file()
+
+    assert main(["--project", str(deck_project), "--deck", str(outside), "--fix"]) == 0
+    out = capsys.readouterr().out
+    assert out.isascii() and f"-> {outside_dir.resolve() / 'Our deck_fixed1.pptx'}" in out
+
+
 def test_overlap_of_pictures_on_titles_and_of_the_sources_line(deck_project: Path) -> None:
     chart = deck_project / "report" / "charts" / "football-field.png"
 

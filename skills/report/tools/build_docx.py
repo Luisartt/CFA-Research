@@ -17,6 +17,7 @@ from __future__ import annotations
 
 import argparse
 import re
+import unicodedata
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 from pathlib import Path
@@ -113,7 +114,9 @@ class Block:
 
 
 def ascii_safe(text: str) -> str:
-    return text.encode("ascii", "replace").decode("ascii")
+    """Console-safe text: accents dropped ("Diseño" -> "Diseno"), anything else non-ASCII -> "?"."""
+    plain = "".join(c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c))
+    return plain.encode("ascii", "replace").decode("ascii")
 
 
 # --- Markdown ------------------------------------------------------------------------------------------

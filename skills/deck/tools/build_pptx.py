@@ -18,6 +18,7 @@ from __future__ import annotations
 import argparse
 import io
 import re
+import unicodedata
 import zipfile
 from collections.abc import Iterator, Sequence
 from dataclasses import dataclass, replace
@@ -40,6 +41,7 @@ KINDS = ("title", "section", "content", "chart")
 DEFAULT_MINUTES = 10.0
 MAX_BULLETS = 6
 MAX_BULLET_WORDS = 20
+MAX_TITLE_CHARS = 60  # a title is the message in about 10 words
 MARGIN = Inches(0.5)
 FOOTER_HEIGHT = Inches(0.4)
 MIN_FOOTER_HEIGHT = Inches(0.3)
@@ -118,7 +120,9 @@ class Box:
 
 
 def ascii_safe(text: str) -> str:
-    return text.encode("ascii", "replace").decode("ascii")
+    """Console-safe text: accents dropped ("Título" -> "Titulo"), anything else non-ASCII -> "?"."""
+    plain = "".join(c for c in unicodedata.normalize("NFKD", text) if not unicodedata.combining(c))
+    return plain.encode("ascii", "replace").decode("ascii")
 
 
 # --- outline --------------------------------------------------------------------------------
@@ -164,6 +168,9 @@ def load_outline(path: Path, charts_dir: Path) -> tuple[dict[str, Any], list[Sli
             problems.append(f"{where}: kind must be one of {', '.join(KINDS)}")
         if not title:
             problems.append(f"slide {n}: title is missing")
+        elif len(title) > MAX_TITLE_CHARS:
+            warnings.append(f"{where}: title has {len(title)} characters; say the message in about 10 words "
+                            f"(at most {MAX_TITLE_CHARS} characters)")
         bullets = raw.get("bullets") or []
         if not isinstance(bullets, list) or not all(isinstance(b, str) for b in bullets):
             problems.append(f"{where}: bullets must be a list of text lines")
@@ -210,7 +217,8 @@ def shape_box(shape: Any) -> Box | None:
     return Box(left, top, width, height)
 
 
-def _vertical_text(placeholder: Any) -> bool:
+def vertical_text(placeholder: Any) -> bool:
+    """True when the shape's text runs vertically (bodyPr/@vert on the shape or inherited from its layout/master)."""
     element: Any = placeholder._element
     while element is not None:
         body_pr = element.find(f"{qn('p:txBody')}/{qn('a:bodyPr')}")
@@ -309,10 +317,10 @@ def _analyse(layout: Any, order: int, frame: Frame) -> LayoutInfo:
             continue
         if ph_type in TITLE_TYPES and title_idx is None and box is not None:
             title_idx, title = idx, box
-            vertical = box.height > box.width or _vertical_text(ph)
+            vertical = box.height > box.width or vertical_text(ph)
         elif ph_type == PP_PLACEHOLDER.SUBTITLE and subtitle_idx is None:
             subtitle_idx = idx
-        elif ph_type in BODY_TYPES and box is not None and not _vertical_text(ph):
+        elif ph_type in BODY_TYPES and box is not None and not vertical_text(ph):
             bodies.append((idx, box))
         else:
             others += 1

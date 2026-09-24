@@ -23,7 +23,7 @@ from pptx import Presentation
 from pptx.enum.shapes import MSO_SHAPE_TYPE, PP_PLACEHOLDER
 from pptx.util import Emu
 
-from build_pptx import SOURCES_NAME, main, pick_layout
+from build_pptx import SOURCES_NAME, ascii_safe, main, pick_layout
 
 
 def _build(project: Path) -> Any:
@@ -119,6 +119,28 @@ def test_list_layouts(deck_project: Path, capsys: pytest.CaptureFixture[str]) ->
     assert main(["--project", str(deck_project), "--list-layouts"]) == 0
     out = capsys.readouterr().out
     assert out.isascii() and "Title Slide" in out and "Two Content" in out
+
+
+def test_list_layouts_prints_accented_names_without_accents(tmp_path: Path,
+                                                            capsys: pytest.CaptureFixture[str]) -> None:
+    project = write_deck_project(tmp_path)
+    spanish_template(project / "pitch" / "template.pptx")
+    assert main(["--project", str(project), "--list-layouts"]) == 0
+    out = capsys.readouterr().out
+    assert out.isascii() and "Titulo y objetos" in out and "Encabezado de seccion" in out
+
+
+@pytest.mark.parametrize(("text", "shown"), [("Título", "Titulo"), ("Diseño", "Diseno"), ("Preço — alvo", "Preco ? alvo")])
+def test_ascii_safe_drops_accents(text: str, shown: str) -> None:
+    assert ascii_safe(text) == shown  # audit_pptx imports this same function
+
+
+def test_long_slide_title_warns(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    outline = copy.deepcopy(OUTLINE)
+    outline["slides"][1]["title"] = "Volume recovery, margin expansion and deleveraging drive a rerating"  # 67 chars
+    assert main(["--project", str(write_deck_project(tmp_path, outline=outline))]) == 0
+    title_warnings = [line for line in capsys.readouterr().out.splitlines() if "60 characters" in line]
+    assert len(title_warnings) == 1 and title_warnings[0].startswith("[warn] slide 2")  # short titles do not warn
 
 
 def test_layout_choice_on_the_default_template() -> None:

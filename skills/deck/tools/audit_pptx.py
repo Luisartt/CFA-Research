@@ -34,7 +34,7 @@ from pptx.oxml import parse_xml
 from pptx.oxml.ns import qn
 from pptx.util import Inches
 
-from build_pptx import Box, decor_boxes, shape_box
+from build_pptx import Box, ascii_safe, decor_boxes, shape_box, vertical_text
 
 EXIT_OK = 0
 EXIT_NO_DECK = 2
@@ -66,10 +66,6 @@ class Finding:
     severity: str  # ERROR or WARN
     code: str
     message: str
-
-
-def ascii_safe(text: str) -> str:
-    return text.encode("ascii", "replace").decode("ascii")
 
 
 def _texts(slide: Any) -> Iterator[tuple[Any, str]]:
@@ -174,9 +170,12 @@ def _overflow(shape: Any, text: str) -> bool:
         return False
     sizes = [_size(shape, p, r) for p in shape.text_frame.paragraphs for r in (p.runs or [None])]
     size = min(sizes) if sizes else DEFAULT_FONT_PT
-    chars_per_line = max(1.0, (shape.width / EMU_PER_PT) / (size * 0.5))
+    along, across = int(shape.width), int(shape.height)
+    if vertical_text(shape):  # lines run down the box and stack across its width
+        along, across = across, along
+    chars_per_line = max(1.0, (along / EMU_PER_PT) / (size * 0.5))
     lines = sum(max(1, -(-len(p.text) // int(chars_per_line))) for p in shape.text_frame.paragraphs)
-    capacity = (shape.height / EMU_PER_PT) / (size * 1.2)
+    capacity = (across / EMU_PER_PT) / (size * 1.2)
     return bool(lines > capacity + 0.5)
 
 
@@ -360,13 +359,25 @@ def _latest_deck(pitch: Path) -> Path | None:
 
 
 def _next_version(path: Path) -> Path:
+    """<name>_deck_v<N+1>.pptx for built decks; otherwise the next free <stem>_fixed<N>.pptx (never overwrites)."""
     match = re.match(r"^(.*_deck_v)(\d+)\.pptx$", path.name)
     if not match:
-        return path.with_name(path.stem + "_fixed.pptx")
+        base = re.sub(r"_fixed\d+$", "", path.stem)
+        pattern = re.compile(rf"^{re.escape(base)}_fixed(\d+)\.pptx$", re.IGNORECASE)
+        used = [int(m.group(1)) for p in path.parent.glob("*.pptx") if (m := pattern.match(p.name))]
+        return path.with_name(f"{base}_fixed{max(used, default=0) + 1}.pptx")
     stem = match.group(1)
     versions = [int(m.group(1)) for p in path.parent.glob(f"{stem}*.pptx")
                 if (m := re.search(r"_v(\d+)\.pptx$", p.name))]
     return path.with_name(f"{stem}{max(versions) + 1}.pptx")
+
+
+def _shown(path: Path, project: Path) -> str:
+    """The path relative to the project when it is inside it, else absolute (ASCII-safe)."""
+    try:
+        return ascii_safe(path.relative_to(project).as_posix())
+    except ValueError:
+        return ascii_safe(str(path))
 
 
 def write_report(project: Path, deck: Path, findings: Sequence[Finding]) -> Path:
@@ -396,7 +407,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             fixed = _next_version(deck)
             changes = fix(deck, fixed)
             if changes:
-                print(f"[ok] {changes} mechanical fixes -> pitch/{ascii_safe(fixed.name)}")
+                print(f"[ok] {changes} mechanical fixes -> {_shown(fixed, project)}")
                 deck = fixed
             else:
                 print("[ok] no mechanical fixes needed; no new version saved")
