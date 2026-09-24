@@ -32,14 +32,15 @@ the lead message, the speakers and the answers belong to the team.
    `presentation_language`).
 2. **Lead message** (Coach moments) before any slide.
 3. **Draft `pitch/outline.yaml`** from the template and the suggested flow: each
-   slide's title is its message; at most 6 bullets of at most 20 words; a chart
-   from `report/charts/` where one exists; `sources` on every slide but the title
-   (Challenge rule); notes written as spoken sentences in the presentation
+   slide's title = the message in at most about 10 words / 60 characters; at
+   most 6 bullets of at most 20 words; a chart from `report/charts/` where one
+   exists; `sources` on every slide but the title (Challenge rule); notes written as spoken sentences in the presentation
    language; speaker and minutes per slide, total about 9.5.
 4. **Speakers and cuts** (Coach moments), then update the outline.
 5. **Q&A drill**: write `pitch/qa-drill.md` with about 30 questions from
    `references/qa-bank.md`, each with a pointer to the file and number that
-   answers it (not a scripted answer).
+   answers it (not a scripted answer). For the recorded sub-regional round there
+   is no Q&A; keep the drill for the regional semifinal.
 6. **Mock rounds** when asked: one question at a time, the student answers,
    score with the bank's five criteria, give one improvement, re-ask weak ones
    later. Include AI-use questions every round.

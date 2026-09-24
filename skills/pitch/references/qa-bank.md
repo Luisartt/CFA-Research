@@ -1,8 +1,9 @@
 # Judge Q&A bank
 
 Generate questions from the team's own files — the judges read the report.
-Pick 30: at least 4 from each category, weighted to the team's weakest spots
-(largest assumption vs history, terminal value share, biggest risk, governance).
+Pick 30: at least 3 from each category (24), and 6 more on the team's weakest
+spots (largest assumption vs history, terminal value share, biggest risk,
+governance).
 
 ## Categories and seed questions
 

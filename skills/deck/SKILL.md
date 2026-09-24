@@ -39,11 +39,11 @@ path, in quotes).
    `<python> "${CLAUDE_PLUGIN_ROOT}/skills/deck/tools/audit_pptx.py" --project .`
    Add `--fix` for mechanical fixes (new version). Fix content findings (dense
    slides, stale numbers, missing sources) in `pitch/outline.yaml` and rebuild —
-   never edit numbers inside the deck.
+   never change a number only in the deck.
 4. **Existing deck**: to check a deck the team made by hand, run the audit with
    `--deck "<file>"` (and `--fix` if they agree).
-5. **Visual check** per `references/deck-design.md` (LibreOffice render if
-   available; otherwise list the slides for the team to check in PowerPoint).
+5. **Visual check** per `references/deck-design.md` (PowerPoint export or
+   LibreOffice render; otherwise list the slides for the team to check in PowerPoint).
 6. **Close**: file name, slide count, errors and warnings left, and the checkpoint.
 
 ## Coach moments
@@ -51,6 +51,12 @@ path, in quotes).
 No story decisions. One review checkpoint: the team opens the deck in
 PowerPoint and confirms the layout and design are theirs to present; their
 changes to wording go back into `pitch/outline.yaml` so the next build keeps them.
+
+Polish last. Every build starts again from the template, so finish the content
+in `pitch/outline.yaml` first. After the team polishes the deck by hand, check
+it with `audit_pptx.py --deck "<file>"` instead of rebuilding. If a number
+changes late, change it in the model, the outline and the polished deck, then
+rerun the audit.
 
 ## Writes
 
