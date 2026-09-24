@@ -3,19 +3,19 @@ name = "research-challenge-plugin"
 version = "0.2.0"
 description = "Structural tests and model engine for the research-challenge Claude Code plugin"
 requires-python = ">=3.10"
-dependencies = ["openpyxl>=3.1", "pyyaml>=6", "matplotlib>=3.8", "python-docx>=1.1"]
+dependencies = ["openpyxl>=3.1", "pyyaml>=6", "matplotlib>=3.8", "python-docx>=1.1", "python-pptx>=1.0"]
 
 [project.optional-dependencies]
 dev = ["pytest>=8", "mypy>=1.10", "hypothesis>=6", "formulas>=1.2"]
 
 [tool.pytest.ini_options]
-testpaths = ["tests", "skills/model/engine/tests", "skills/report/tools/tests"]
+testpaths = ["tests", "skills/model/engine/tests", "skills/report/tools/tests", "skills/deck/tools/tests"]
 
 [tool.mypy]
 strict = true
 python_version = "3.10"
-mypy_path = "skills/model/engine,skills/report/tools"
+mypy_path = "skills/model/engine,skills/report/tools,skills/deck/tools"
 
 [[tool.mypy.overrides]]
-module = ["openpyxl.*", "yaml", "formulas", "numpy", "docx", "docx.*"]
+module = ["openpyxl.*", "yaml", "formulas", "numpy", "docx", "docx.*", "pptx", "pptx.*"]
 ignore_missing_imports = true
