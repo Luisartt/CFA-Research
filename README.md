@@ -30,7 +30,7 @@ language, roles, deadlines) and writes `AGENTS.md`, `CLAUDE.md`,
 `openpyxl` and `pyyaml` (the python3 built into macOS may be older — install
 from python.org); `init-skills` checks and tells you the exact install command.
 
-## Skills (v0.2)
+## Skills (v0.3)
 
 | Skill | What it does | You decide |
 |---|---|---|
@@ -41,16 +41,25 @@ from python.org); `init-skills` checks and tells you the exact install command.
 | `forecast` | Sets every driver from history; proposes the story drivers | The 3-5 assumptions that carry your thesis |
 | `model` | Builds the Excel model (3 statements, schedules, ratios, checks, valuation) and explains it | Whether the model looks like the business |
 | `valuation` | WACC, DCF, comps, sensitivity, football field | WACC calls, terminal value, target price, recommendation |
+| `risks-esg` | Specific risks with a risk matrix; ESG materiality and governance | Which risks and ESG issues matter, and how they affect value |
+| `report` | Co-writes the 7 graded sections within 10 pages, charts, appendix, AI-use disclosure; builds the Word body | Every claim, the rating and the target |
 | `/research-challenge:wrap-up` | Updates the memory files at the end of a session | — |
 
 Just ask in plain words ("roast our thesis", "build the model", "what's our WACC") — the
 right skill triggers (except `init-skills`, which you run by name). Every
 skill works on its own, so team members can split roles.
 
-Coming next: `risks-esg`, `report`, `pitch`.
+Coming next: `pitch` and `deck` (presentation).
 
 Typical order: `init-skills` -> `thesis` + `industry` -> `financials` -> `forecast`
--> `model` -> `valuation`. Each skill also works on its own.
+-> `model` -> `valuation` -> `risks-esg` -> `report`. Each skill also works on its own.
+
+## The written report
+
+The report is always in English (CFA Institute rules). `report` builds the body
+as a Word file; download the official CFA Institute cover page from the Research
+Challenge student-preparation page, put it in front, check the layout and the
+10-page limit in Word, and export to PDF.
 
 ## Working as a team
 
@@ -70,9 +79,10 @@ your disclosure appendix. Check your competition's current rules on AI use.
 ## Development
 
 ```
-python -m pip install "openpyxl>=3.1" "pyyaml>=6" "pytest>=8" "mypy>=1.10" "hypothesis>=6" "formulas>=1.2"
+python -m pip install "openpyxl>=3.1" "pyyaml>=6" "pytest>=8" "mypy>=1.10" "hypothesis>=6" "formulas>=1.2" "matplotlib>=3.8" "python-docx>=1.1"
 python -m pytest -q
 python -m mypy tests skills/model/engine
+python -m mypy skills/report/tools
 ```
 
 Test locally without publishing: `/plugin marketplace add <path-to-this-repo>`.

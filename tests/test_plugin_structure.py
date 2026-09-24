@@ -36,7 +36,10 @@ def test_marketplace_lists_plugin_at_repo_root() -> None:
 
 
 SKILLS_DIR = ROOT / "skills"
-SKILLS: tuple[str, ...] = ("init-skills", "thesis", "industry", "financials", "forecast", "model", "valuation")
+SKILLS: tuple[str, ...] = (
+    "init-skills", "thesis", "industry", "financials", "forecast", "model", "valuation",
+    "risks-esg", "report",
+)
 USER_INVOKED_ONLY: frozenset[str] = frozenset({"init-skills"})
 REQUIRED_SECTIONS: tuple[str, ...] = (
     "## Purpose",
@@ -224,3 +227,43 @@ def test_valuation_template_matches_the_loader() -> None:
                   "country_risk_premium", "beta_unlevered", "target_debt_to_equity", "pre_tax_cost_of_debt",
                   "tax_rate", "growth", "exit_ev_ebitda", "lt_nominal_gdp_growth", "peers", "target_price"):
         assert f"{field}:" in text, field
+
+
+REPORT_TOOLS = SKILLS_DIR / "report" / "tools"
+TOOL_CALLS: dict[str, tuple[str, ...]] = {
+    "risks-esg": ("${CLAUDE_PLUGIN_ROOT}/skills/report/tools/charts.py",),
+    "report": ("${CLAUDE_PLUGIN_ROOT}/skills/report/tools/charts.py",
+               "${CLAUDE_PLUGIN_ROOT}/skills/report/tools/build_docx.py"),
+}
+
+
+@pytest.mark.parametrize("name", sorted(TOOL_CALLS))
+def test_report_skills_call_the_tools_by_plugin_root(name: str) -> None:
+    text = read_text(skill_md(name))
+    for call in TOOL_CALLS[name]:
+        assert call in text, call
+        assert (ROOT / call.replace("${CLAUDE_PLUGIN_ROOT}/", "")).is_file(), call
+
+
+def test_challenge_structure_matches_the_page_budget() -> None:
+    import sys
+
+    if str(REPORT_TOOLS) not in sys.path:
+        sys.path.insert(0, str(REPORT_TOOLS))
+    from build_docx import BUDGET_PAGES
+
+    text = read_text(SKILLS_DIR / "report" / "references" / "challenge-structure.md")
+    for slug, pages in BUDGET_PAGES.items():
+        assert f"-{slug}.md`" in text, slug
+        assert f"| {pages:.1f} |" in text, (slug, pages)
+
+
+def test_risks_template_loads_in_the_chart_tool() -> None:
+    import sys
+
+    if str(REPORT_TOOLS) not in sys.path:
+        sys.path.insert(0, str(REPORT_TOOLS))
+    from charts import load_risks
+
+    risks = load_risks(SKILLS_DIR / "risks-esg" / "references" / "risks-template.yaml")
+    assert risks and risks[0]["id"] == "R1"

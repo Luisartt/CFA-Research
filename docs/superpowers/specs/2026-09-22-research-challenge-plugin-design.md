@@ -1,7 +1,7 @@
 # research-challenge plugin — design spec
 
 - **Date:** 2026-09-22
-- **Status:** approved; phases 1, 2a and 2b implemented
+- **Status:** approved; phases 1, 2a, 2b and 3a implemented
 - **Repo:** `Luisartt/CFA-Research` (this repo = the plugin = its own marketplace)
 
 ## 1. Goal

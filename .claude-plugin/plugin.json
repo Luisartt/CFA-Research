@@ -1,7 +1,7 @@
 {
   "name": "research-challenge",
-  "version": "0.2.0",
-  "description": "Coaching skills for CFA Research Challenge teams: project setup with a LatAm specialist analyst persona, thesis coaching, industry analysis, statement extraction, forecasting, an institutional-grade Excel model and valuation. The assistant does the technical work; the team owns the story.",
+  "version": "0.3.0",
+  "description": "Coaching skills for CFA Research Challenge teams: project setup with a LatAm specialist analyst persona, thesis coaching, industry analysis, statement extraction, forecasting, an institutional-grade Excel model and valuation, risks and ESG, and the written report. The assistant does the technical work; the team owns the story.",
   "author": {
     "name": "CFA-Research contributors"
   },
