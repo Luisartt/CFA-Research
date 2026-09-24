@@ -71,7 +71,7 @@ Plugin `research-challenge`. Each skill works on its own; missing inputs become
 | `risks-esg` | Key risks (probability x impact) and material ESG issues | `research/risks.md`, `research/esg.md` |
 | `report` | Co-write the seven sections and build the Word body | `report/sections/`, `report/<TICKER>_report_v<N>.docx` |
 | `pitch` | 10-minute outline, speaker notes, timing, judge Q&A drill | `pitch/outline.yaml`, `pitch/qa-drill.md` |
-| `deck` | Build the PowerPoint on your template; audit any deck | `pitch/<TICKER>_deck_v<N>.pptx`, `pitch/deck-audit.md` |
+| `deck` | Build the deck (PowerPoint template or Claude Design); audit any deck | `pitch/<TICKER>_deck_v<N>.pptx`, `pitch/deck-audit.md` |
 | `/research-challenge:wrap-up` | Close a work session | `docs/context/*` |
 
 Skills also trigger from plain requests ("roast our thesis", "build the model", "what's our WACC").

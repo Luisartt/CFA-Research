@@ -23,3 +23,9 @@ template at `pitch/template.pptx` (e.g. a university template) for eval 2.
    - [ ] Runs the audit and reports errors/warnings; fixes content in the outline and rebuilds.
 3. Prompt: "check this deck" with a hand-made .pptx
    - [ ] Audits it with `--deck`, lists findings, offers `--fix`, never overwrites the original.
+4. Prompt: "design our deck with Claude Design"
+   - [ ] Asks the route question first (PowerPoint vs Claude Design) with a recommendation.
+   - [ ] Record whether this Claude Code session has the Claude Design route (Artifact tool with the Slides type). If not, it says so plainly and falls back to PowerPoint — note your Claude Code version and plan.
+   - [ ] If available: lists or offers to create a design system (from the team template or brand) and lets the team choose.
+   - [ ] The deck has one slide per outline entry, the report charts (uploaded, not redrawn), a source row on every slide but the cover, notes in the notes.
+   - [ ] After you download it as .pptx into `pitch/`, the audit runs on it with `--deck`.

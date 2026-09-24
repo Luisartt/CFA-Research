@@ -1,5 +1,10 @@
 # Deck design and checks
 
+Two routes build the same outline: **PowerPoint** (below: the team's .pptx
+template) and **Claude Design** (`claude-design-route.md`: a Slides deck styled
+by the team's design system, downloaded as .pptx). The slide rules and the audit
+apply to both.
+
 ## The team's template is the design
 
 Put the team's template at `pitch/template.pptx`. The builder keeps its theme,

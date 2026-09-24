@@ -45,7 +45,7 @@ python.org); `init-skills` checks and tells you the exact install command.
 | `risks-esg` | Specific risks with a risk matrix; ESG materiality and governance | Which risks and ESG issues matter, and how they affect value |
 | `report` | Co-writes the 7 graded sections within 10 pages, charts, appendix, AI-use disclosure; builds the Word body | Every claim, the rating and the target |
 | `pitch` | 10-minute outline with speaker notes and timing; scored mock Q&A (incl. AI-use questions) | The lead message, who presents what, your answers |
-| `deck` | Builds the PowerPoint on your team template (sources on every slide, notes, charts) and audits any deck | The design and the final polish |
+| `deck` | Builds the deck on your PowerPoint template, or as a Claude Design deck with your design system (downloadable as .pptx); sources on every slide, notes, charts; audits any deck | The route, the design and the final polish |
 | `/research-challenge:wrap-up` | Updates the memory files at the end of a session | — |
 
 Just ask in plain words ("roast our thesis", "build the model", "what's our WACC") — the
