@@ -2,7 +2,8 @@
 
 Inputs (team project folder):
   report/header.yaml            first-page header fields
-  report/sections/NN-slug.md    one file per section, sorted by NN; 99-appendix* starts the appendix
+  report/sections/NN-slug.md    one file per section, sorted by NN; 98-appendix.md and then
+                                99-appendix-ai-use.md each start on a new page
   report/charts/*.png           images referenced from the sections with ![caption](../charts/x.png)
 
 The official CFA Institute cover page is NOT generated; the team puts it in front.
@@ -35,7 +36,9 @@ EXIT_INPUT_ERROR = 2
 EXIT_IO_ERROR = 4
 PAGE_LIMIT = 10
 WORDS_PER_PAGE = 500
-PAGES_PER_FIGURE = 0.3
+PAGES_PER_FIGURE = 0.3  # a narrow figure on its own line, or any figure whose file is not on disk yet
+PAGES_PER_PAIR = 0.3  # two narrow figures side by side (0.15 each)
+PAGES_PER_FULL_FIGURE = 0.45  # a figure wider than PAIR_MAX_SHARE of the text width
 HEADER_PAGES = 0.25  # the first-page header block
 BUDGET_PAGES: dict[str, float] = {
     "investment-summary": 1.5,
@@ -51,17 +54,23 @@ HEADER_FIELDS = ("company", "exchange", "ticker", "sector", "industry", "recomme
                  "price_date", "currency", "target_price", "report_date")
 FONT = "Arial"
 NAVY = RGBColor(0x1F, 0x4E, 0x79)
+GREY = RGBColor(0x59, 0x59, 0x59)
 RULE_COLOR = "1F4E79"
 HEADER_FILL = "DDEBF7"
+PAGE_WIDTH, PAGE_HEIGHT = Mm(210), Mm(297)  # A4
 MARGIN = Mm(20)
+USABLE_WIDTH = Length(int(PAGE_WIDTH) - 2 * int(MARGIN))
 LABEL_WIDTH, VALUE_WIDTH = Mm(45), Mm(125)
 CELL_PADDING = Mm(4)  # left + right cell margins Word adds around a picture in a table cell
 PAIR_MAX_SHARE = 0.55  # images at most this share of the text width may sit side by side
 HEADING_SIZES = {1: 11.0, 2: 10.5, 3: 10.0}
 
-# Author-date "(Acme, 2025a, p. 4)", "(INEGI, n.d.)", "(team estimate)" / "(team model)".
+# Author-date "(Acme, 2025a, p. 4)", "(Acme, 2025, pp. 4-6)", "(Acme, 3Q25 earnings call)", "(INEGI, n.d.)",
+# "(team estimate)" / "(team model)", and mixed ones such as "(team model; Acme, 2025)".
+_OTHER_SOURCES = r"(?:[^()]*;\s*)?"  # earlier sources in a mixed citation, separated by ";"
 CITATION = re.compile(
-    r"\([A-Z][^()]*?,?\s(19|20)\d{2}[a-z]?(,\s*pp?\.\s*[\d-]+)?\)"
+    rf"\({_OTHER_SOURCES}[A-Z][^()]*?,?\s(19|20)\d{{2}}[a-z]?([,;][^()]*)?\)"
+    rf"|\({_OTHER_SOURCES}[A-Z][^()]*,\s*\d[QH]\d{{2}}[^()]*\)"
     r"|\([^()]*n\.d\.\)"
     r"|\(team (estimate|model)\)"
 )
@@ -286,6 +295,40 @@ def _words(blocks: Sequence[Block]) -> int:
     return count
 
 
+def _narrow(section: Path, block: Block, usable: Length) -> bool | None:
+    """Like _fits_half, but None instead of an error when the image is not on disk or unreadable."""
+    image = (section.parent / block.path).resolve()
+    if not image.is_file():
+        return None
+    try:
+        width = int(DocxImage.from_file(str(image)).width)
+    except Exception:  # python-docx raises several types for files it cannot read as an image
+        return None
+    return width <= int(usable) * PAIR_MAX_SHARE
+
+
+def _figure_pages(section: Path, blocks: Sequence[Block]) -> float:
+    """Pages the figures take, pairing consecutive narrow images the way build() does."""
+    pages = 0.0
+    k = 0
+    while k < len(blocks):
+        block = blocks[k]
+        k += 1
+        if block.kind != "image":
+            continue
+        narrow = _narrow(section, block, USABLE_WIDTH)
+        following = blocks[k] if k < len(blocks) else None
+        if narrow and following is not None and following.kind == "image" \
+                and _narrow(section, following, USABLE_WIDTH):
+            pages += PAGES_PER_PAIR
+            k += 1
+        elif narrow is False:
+            pages += PAGES_PER_FULL_FIGURE
+        else:
+            pages += PAGES_PER_FIGURE
+    return pages
+
+
 def budget_rows(sections: Sequence[tuple[Path, list[Block]]]) -> list[tuple[str, int, int, float, float | None]]:
     rows: list[tuple[str, int, int, float, float | None]] = []
     for path, blocks in sections:
@@ -293,7 +336,7 @@ def budget_rows(sections: Sequence[tuple[Path, list[Block]]]) -> list[tuple[str,
         if slug.startswith("appendix"):
             continue
         figures = sum(1 for b in blocks if b.kind == "image")
-        pages = _words(blocks) / WORDS_PER_PAGE + figures * PAGES_PER_FIGURE
+        pages = _words(blocks) / WORDS_PER_PAGE + _figure_pages(path, blocks)
         rows.append((slug, _words(blocks), figures, round(pages, 2), BUDGET_PAGES.get(slug)))
     return rows
 
@@ -307,11 +350,17 @@ def _is_source(block: Block | None) -> bool:
 
 
 def uncited(sections: Sequence[tuple[Path, list[Block]]]) -> list[tuple[str, str]]:
-    """Paragraphs and list items with data but no citation; tables with data and no 'Source:' line under them."""
+    """Paragraphs and list items with data but no citation; tables with data and no 'Source:' line under them.
+
+    Paragraphs and list items in the appendix are skipped: the reference list lives there.
+    """
     found: list[tuple[str, str]] = []
     for path, blocks in sections:
+        appendix = _slug(path).startswith("appendix")
         for k, block in enumerate(blocks):
             if block.kind in ("paragraph", "bullet", "number"):
+                if appendix:
+                    continue
                 if _has_data(block.text) and not CITATION.search(block.text) and not _is_source(block):
                     found.append((_slug(path), block.text[:70]))
             elif block.kind == "table":
@@ -417,7 +466,8 @@ def _header_block(doc: Any, header: dict[str, Any]) -> None:
     doc.add_paragraph()
 
 
-def _table(doc: Any, rows: list[list[str]]) -> None:
+def _table(doc: Any, rows: list[list[str]], spacer: bool = True) -> None:
+    """A data table; spacer=False when a 'Source:' line follows, so it sits right under the table."""
     width = max(len(r) for r in rows)
     grid = [[cells[j] if j < len(cells) else "" for j in range(width)] for cells in rows]
     body = grid[1:]
@@ -438,7 +488,17 @@ def _table(doc: Any, rows: list[list[str]]) -> None:
                 _rule(cell, "top", "bottom")
             elif i == last:
                 _rule(cell, "bottom")
-    doc.add_paragraph()
+    if spacer:
+        doc.add_paragraph()
+
+
+def _source_line(doc: Any, text: str) -> None:
+    """The 'Source:' line under a table: 8 pt grey, with the gap the table spacer would have left after it."""
+    paragraph = doc.add_paragraph()
+    paragraph.paragraph_format.space_after = Pt(12)
+    _add_runs(paragraph, text, 8)
+    for run in paragraph.runs:
+        run.font.color.rgb = GREY
 
 
 def _image_path(section: Path, block: Block) -> Path:
@@ -455,12 +515,11 @@ def _not_an_image(section: Path, block: Block) -> ReportInputError:
 
 def _fits_half(section: Path, block: Block, usable: Length) -> bool:
     """True if the image at its own size is narrow enough to share the line with another one."""
-    image = _image_path(section, block)
-    try:
-        width = int(DocxImage.from_file(str(image)).width)
-    except Exception:  # python-docx raises several types for files it cannot read as an image
-        raise _not_an_image(section, block) from None
-    return width <= int(usable) * PAIR_MAX_SHARE
+    _image_path(section, block)  # raises when the file is missing
+    narrow = _narrow(section, block, usable)
+    if narrow is None:
+        raise _not_an_image(section, block)
+    return narrow
 
 
 def _picture(paragraph: Any, section: Path, block: Block, max_width: Length) -> None:
@@ -526,10 +585,10 @@ def _break_before(doc: Any, element: Any) -> None:
 def build(project: Path, header: dict[str, Any], sections: Sequence[tuple[Path, list[Block]]]) -> Path:
     doc = Document()
     section = doc.sections[0]
-    section.page_width, section.page_height = Mm(210), Mm(297)
+    section.page_width, section.page_height = PAGE_WIDTH, PAGE_HEIGHT
     for side in ("left_margin", "right_margin", "top_margin", "bottom_margin"):
         setattr(section, side, MARGIN)
-    usable = Length(section.page_width - section.left_margin - section.right_margin)  # type: ignore[operator]
+    usable = USABLE_WIDTH
     doc.styles["Normal"].font.name = FONT
     doc.styles["Normal"].font.size = Pt(10)
     _header_block(doc, header)
@@ -552,7 +611,10 @@ def build(project: Path, header: dict[str, Any], sections: Sequence[tuple[Path, 
                 for run in heading.runs:
                     run.font.color.rgb = NAVY
             elif block.kind == "paragraph":
-                _add_runs(doc.add_paragraph(), block.text)
+                if k >= 2 and blocks[k - 2].kind == "table" and _is_source(block):
+                    _source_line(doc, block.text)
+                else:
+                    _add_runs(doc.add_paragraph(), block.text)
             elif block.kind == "bullet":
                 _add_runs(doc.add_paragraph(style="List Bullet"), block.text)
             elif block.kind == "number":
@@ -562,10 +624,11 @@ def build(project: Path, header: dict[str, Any], sections: Sequence[tuple[Path, 
                 _set_numbering(item, num_id)
                 _add_runs(item, block.text)
             elif block.kind == "table":
-                _table(doc, block.rows)
+                _table(doc, block.rows, spacer=not _is_source(blocks[k] if k < len(blocks) else None))
             elif block.kind == "image":
                 following = blocks[k] if k < len(blocks) else None
-                if following is not None and following.kind == "image"                         and _fits_half(path, block, usable) and _fits_half(path, following, usable):
+                if following is not None and following.kind == "image" \
+                        and _fits_half(path, block, usable) and _fits_half(path, following, usable):
                     _image_pair(doc, path, (block, following), figure + 1, usable)
                     figure += 2
                     k += 1
@@ -596,7 +659,8 @@ def _print_check(sections: Sequence[tuple[Path, list[Block]]]) -> None:
         print(f"{flag} {ascii_safe(slug):<{width}}  {words:>5}  {figures:>7}  {pages:>5.2f}  {budget_text:>6}")
     total = sum(r[3] for r in rows) + HEADER_PAGES
     print(f"total estimated pages: {total:.1f} of {PAGE_LIMIT} (conservative estimate: {WORDS_PER_PAGE} words per page, "
-          f"{PAGES_PER_FIGURE} page per figure; appendix not counted)")
+          f"{PAGES_PER_FULL_FIGURE} page per full-width figure, {PAGES_PER_PAIR} per side-by-side pair, "
+          f"{PAGES_PER_FIGURE} per other figure or chart not drawn yet; appendix not counted)")
     if total > PAGE_LIMIT:
         print("[x] over the 10-page limit: cut before building")
     missing = [s for s in BUDGET_PAGES if s not in {r[0] for r in rows}]

@@ -55,7 +55,7 @@ SECTIONS: dict[str, str] = {
         "| Method | Value |\n|---|---|\n| DCF | 31.0 |\n| Comps | 29.5 |\n\n"
         "Our DCF gives 31 per share with a WACC of 12.5%.\n"
     ),
-    "99-appendix.md": "# Appendix\n\nAI-use disclosure: we used an AI assistant to extract statements.\n",
+    "98-appendix.md":"# Appendix\n\nAI-use disclosure: we used an AI assistant to extract statements.\n",
 }
 
 

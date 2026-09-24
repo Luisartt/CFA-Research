@@ -15,8 +15,9 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.oxml.ns import qn
 from docx.shared import Pt
 
-from build_docx import (HEADER_PAGES, BUDGET_PAGES, ReportInputError, budget_rows, load_sections, looks_numeric,
-                        main, parse_markdown, uncited)
+from build_docx import (HEADER_PAGES, BUDGET_PAGES, GREY, PAGES_PER_FIGURE, PAGES_PER_FULL_FIGURE, PAGES_PER_PAIR,
+                        WORDS_PER_PAGE, ReportInputError, budget_rows, load_sections, looks_numeric, main,
+                        parse_markdown, uncited)
 from charts import main as draw_charts
 
 
@@ -76,7 +77,7 @@ def test_appendix_starts_on_a_new_page(report_project: Path) -> None:
 
 
 def test_appendix_starting_with_a_table_still_breaks_the_page(tmp_path: Path) -> None:
-    project = _project_with(tmp_path, **{"99-appendix.md": "| A | B |\n|---|---|\n| x | y |\n"})
+    project = _project_with(tmp_path, **{"98-appendix.md": "| A | B |\n|---|---|\n| x | y |\n"})
     doc = Document(str(_build(project)))
     previous = doc.tables[-1]._tbl.getprevious()
     assert previous.tag == qn("w:p")
@@ -371,9 +372,24 @@ def _uncited(text: str) -> list[tuple[str, str]]:
     "Margins reach 21% (team estimate).",
     "WACC is 12.5% (team model).",
     "Source: INEGI household survey 2024.",
+    "Revenue was MXN 400bn (Grupo Bimbo, 2025, p. 45).",
+    "Volumes fell 2% (Grupo Bimbo, 3Q25 earnings call).",
+    "Capex was MXN 25bn (Grupo Bimbo, 2025, pp. 45–47).",
+    "Capex was MXN 25bn (Grupo Bimbo, 2025, pp. 45-47).",
+    "Net debt was 2.1x (Grupo Bimbo, 2025, Table 3).",
+    "Margins reach 21% (team model; Grupo Bimbo, 2025).",
+    "Margins reach 21% (Grupo Bimbo, 2025; team model).",
 ])
 def test_uncited_ignores_cited_or_label_numbers(text: str) -> None:
     assert _uncited(text) == []
+
+
+def test_uncited_skips_the_reference_list_in_the_appendix() -> None:
+    references = ("# References\n\n- Grupo Bimbo (2025) Annual Report 2024. Available at: bimbo.com, accessed 3 "
+                  "October 2026.\n\nINEGI (2024) Household survey 2024, p. 12.\n")
+    for name in ("98-appendix.md", "99-appendix-ai-use.md"):
+        assert uncited([(Path(name), parse_markdown(references))]) == []
+    assert len(uncited([(Path("03-industry.md"), parse_markdown(references))])) == 2
 
 
 @pytest.mark.parametrize("text", [
@@ -391,6 +407,23 @@ def test_uncited_flags_a_table_without_a_source_line() -> None:
     assert len(flagged) == 1 and "table" in flagged[0][1].lower() and "Method" in flagged[0][1]
     assert _uncited(table + "\nSource: team model.\n") == []
     assert len(_uncited(table)) == 1  # table at the end of the section
+
+
+def test_source_line_sits_right_under_its_table_in_small_grey_type(tmp_path: Path) -> None:
+    project = _project_with(tmp_path, **{"05-valuation.md": (
+        "# Valuation\n\n| Method | Value |\n|---|---|\n| DCF | 31.0 |\n\nSource: team model.\n\n"
+        "| Peer | P/E |\n|---|---|\n| Gruma | 12.0x |\n\nPeers trade at 12x (team model).\n")})
+    doc = Document(str(_build(project)))
+    sourced, unsourced = doc.tables[1], doc.tables[2]
+    source = sourced._tbl.getnext()
+    assert source.tag == qn("w:p")
+    paragraph = next(p for p in doc.paragraphs if p._p is source)
+    assert paragraph.text == "Source: team model."
+    assert all(run.font.size == Pt(8) and run.font.color.rgb == GREY for run in paragraph.runs)
+    spacer = unsourced._tbl.getnext()
+    assert spacer.tag == qn("w:p") and not "".join(spacer.itertext()).strip()  # other tables keep their spacer
+    body = next(p for p in doc.paragraphs if p.text.startswith("Peers trade"))
+    assert all(run.font.size == Pt(10) for run in body.runs)
 
 
 # --- figures -----------------------------------------------------------------------------------------
@@ -429,6 +462,32 @@ def test_single_image_is_centered_and_kept_with_its_caption(report_project: Path
     picture = next(p for p in doc.paragraphs if p._p.xpath(".//pic:pic"))
     assert picture.alignment == WD_ALIGN_PARAGRAPH.CENTER
     assert picture.paragraph_format.keep_with_next is True
+
+
+# --- page estimate -----------------------------------------------------------------------------------
+
+def _figure_pages(project: Path, section: str) -> float:
+    rows = budget_rows(load_sections(project / "report" / "sections"))
+    slug, words, _, pages, _ = next(r for r in rows if r[0] == section)
+    return round(pages - words / WORDS_PER_PAGE, 2)
+
+
+def test_page_estimate_uses_the_layout_of_each_figure(tmp_path: Path) -> None:
+    project = _project_with(tmp_path, **{"03-industry.md": (
+        "# Industry\n\n![Free cash flow](../charts/free-cash-flow.png)\n![Risk matrix](../charts/risk-matrix.png)\n\n"
+        "Text.\n\n![Football field](../charts/football-field.png)\n\nMore.\n\n"
+        "![Sensitivity](../charts/sensitivity.png)\n")})
+    draw_charts(["--project", str(project)])
+    assert (PAGES_PER_PAIR, PAGES_PER_FULL_FIGURE, PAGES_PER_FIGURE) == (0.3, 0.45, 0.3)
+    # a side-by-side pair (0.15 each) + a full-width figure + a narrow figure on its own line
+    assert _figure_pages(project, "industry") == pytest.approx(0.3 + 0.45 + 0.3)
+
+
+def test_page_estimate_falls_back_to_the_average_without_charts_on_disk(tmp_path: Path) -> None:
+    project = _project_with(tmp_path, **{"03-industry.md": (
+        "# Industry\n\n![Free cash flow](../charts/free-cash-flow.png)\n![Risk matrix](../charts/risk-matrix.png)\n\n"
+        "![Football field](../charts/football-field.png)\n")})
+    assert _figure_pages(project, "industry") == pytest.approx(3 * PAGES_PER_FIGURE)
 
 
 # --- --check output ----------------------------------------------------------------------------------
