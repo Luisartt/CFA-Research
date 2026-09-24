@@ -26,13 +26,12 @@ language, roles, deadlines) and writes `AGENTS.md`, `CLAUDE.md`,
 `company-profile.yaml`, the memory files in `docs/context/`, and the folders
 `filings/ data/ research/ model/ valuation/ report/ pitch/`.
 
-**Requirements:** Claude Code. The model and report skills need Python 3.10 or
-newer with `openpyxl`, `pyyaml`, `matplotlib` and `python-docx` (`python-pptx`
-comes with the presentation skills; the python3 built into macOS may be older —
-install from python.org); `init-skills` checks and tells you the exact install
-command.
+**Requirements:** Claude Code. The model, report and presentation skills need
+Python 3.10 or newer with `openpyxl`, `pyyaml`, `matplotlib`, `python-docx` and
+`python-pptx` (the python3 built into macOS may be older — install from
+python.org); `init-skills` checks and tells you the exact install command.
 
-## Skills (v0.3)
+## Skills (v0.4)
 
 | Skill | What it does | You decide |
 |---|---|---|
@@ -45,16 +44,17 @@ command.
 | `valuation` | WACC, DCF, comps, sensitivity, football field | WACC calls, terminal value, target price, recommendation |
 | `risks-esg` | Specific risks with a risk matrix; ESG materiality and governance | Which risks and ESG issues matter, and how they affect value |
 | `report` | Co-writes the 7 graded sections within 10 pages, charts, appendix, AI-use disclosure; builds the Word body | Every claim, the rating and the target |
+| `pitch` | 10-minute outline with speaker notes and timing; scored mock Q&A (incl. AI-use questions) | The lead message, who presents what, your answers |
+| `deck` | Builds the PowerPoint on your team template (sources on every slide, notes, charts) and audits any deck | The design and the final polish |
 | `/research-challenge:wrap-up` | Updates the memory files at the end of a session | — |
 
 Just ask in plain words ("roast our thesis", "build the model", "what's our WACC") — the
 right skill triggers (except `init-skills`, which you run by name). Every
 skill works on its own, so team members can split roles.
 
-Coming next: `pitch` and `deck` (presentation).
-
 Typical order: `init-skills` -> `thesis` + `industry` -> `financials` -> `forecast`
--> `model` -> `valuation` -> `risks-esg` -> `report`. Each skill also works on its own.
+-> `model` -> `valuation` -> `risks-esg` -> `report` -> `pitch` -> `deck`. Each
+skill also works on its own.
 
 ## The written report
 
@@ -81,10 +81,11 @@ your disclosure appendix. Check your competition's current rules on AI use.
 ## Development
 
 ```
-python -m pip install "openpyxl>=3.1" "pyyaml>=6" "pytest>=8" "mypy>=1.10" "hypothesis>=6" "formulas>=1.2" "matplotlib>=3.8" "python-docx>=1.1"
+python -m pip install "openpyxl>=3.1" "pyyaml>=6" "pytest>=8" "mypy>=1.10" "hypothesis>=6" "formulas>=1.2" "matplotlib>=3.8" "python-docx>=1.1" "python-pptx>=1.0"
 python -m pytest -q
 python -m mypy tests skills/model/engine
 python -m mypy skills/report/tools
+python -m mypy skills/deck/tools
 ```
 
 Test locally without publishing: `/plugin marketplace add <path-to-this-repo>`.

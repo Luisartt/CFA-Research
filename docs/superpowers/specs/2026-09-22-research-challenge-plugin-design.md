@@ -1,7 +1,7 @@
 # research-challenge plugin — design spec
 
 - **Date:** 2026-09-22
-- **Status:** approved; phases 1, 2a, 2b and 3a implemented
+- **Status:** approved; phases 1, 2a, 2b, 3a and 3b implemented
 - **Repo:** `Luisartt/CFA-Research` (this repo = the plugin = its own marketplace)
 
 ## 1. Goal
@@ -170,7 +170,7 @@ model      -> model/<TICKER>_model_v<N>.xlsx   built from the three files above
               model/model-summary.json         computed numbers for downstream skills
 risks-esg  -> research/risks-esg.md
 report     -> report/sections/NN-<name>.md -> report/<TICKER>_report_v<N>.docx (optional)
-pitch      -> pitch/outline.md, pitch/qa-drill.md
+pitch      -> pitch/outline.yaml, pitch/qa-drill.md
 ```
 
 Independence rule: a skill whose input is missing states what is missing, then
@@ -267,7 +267,7 @@ presentation. Mexico 2026-27: Grupo Bimbo, reports due 2026-11-05.
 |---|---|---|---|
 | `risks-esg` | Risks per thesis pillar with probability x impact and a risk-matrix chart; ESG materiality by industry plus a LatAm governance checklist (controlling shareholder, related parties, board independence, disclosure quality) | Which risks matter and how they are mitigated or priced; which ESG factors are material and whether they change the valuation | `research/risks.yaml`, `research/risks.md`, `research/esg.md` |
 | `report` | Co-writes the 7 sections from upstream files with page budgets by rubric weight; first-page header block; charts; A4 `.docx` body; flags untagged claims; drafts the AI-use disclosure from `ai-use-log.md` | Final say on every claim; the investment-summary story; rating and target wording | `report/sections/NN-*.md`, `report/charts/*.png`, `report/<TICKER>_report_v<N>.docx` |
-| `pitch` | 10-minute slide-by-slide outline, speaker notes, timing plan; Q&A drill scored on the rubric (incl. AI-use questions) | Lead message, who presents what, answers in their own words | `pitch/outline.md`, `pitch/qa-drill.md` |
+| `pitch` | 10-minute slide-by-slide outline, speaker notes, timing plan; Q&A drill scored on the rubric (incl. AI-use questions) | Lead message, who presents what, answers in their own words | `pitch/outline.yaml`, `pitch/qa-drill.md` |
 | `deck` | Build: outline + the team's own `.pptx` template -> deck with charts, sources footer on every slide, speaker notes. Audit: slide count vs 10 minutes, sources, notes, fonts and sizes, overflow estimates, numbers stale vs `model-summary.json`; fixes mechanical issues, flags judgment ones | The design (their template) and final visual polish | `pitch/<TICKER>_deck_v<N>.pptx`, `pitch/deck-audit.md` |
 
 - **Page budget** (10 pages): Investment summary 1.5, Valuation 2, Financial

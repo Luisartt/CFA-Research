@@ -38,7 +38,7 @@ def test_marketplace_lists_plugin_at_repo_root() -> None:
 SKILLS_DIR = ROOT / "skills"
 SKILLS: tuple[str, ...] = (
     "init-skills", "thesis", "industry", "financials", "forecast", "model", "valuation",
-    "risks-esg", "report",
+    "risks-esg", "report", "pitch", "deck",
 )
 USER_INVOKED_ONLY: frozenset[str] = frozenset({"init-skills"})
 REQUIRED_SECTIONS: tuple[str, ...] = (
@@ -234,6 +234,8 @@ TOOL_CALLS: dict[str, tuple[str, ...]] = {
     "risks-esg": ("${CLAUDE_PLUGIN_ROOT}/skills/report/tools/charts.py",),
     "report": ("${CLAUDE_PLUGIN_ROOT}/skills/report/tools/charts.py",
                "${CLAUDE_PLUGIN_ROOT}/skills/report/tools/build_docx.py"),
+    "deck": ("${CLAUDE_PLUGIN_ROOT}/skills/deck/tools/build_pptx.py",
+             "${CLAUDE_PLUGIN_ROOT}/skills/deck/tools/audit_pptx.py"),
 }
 
 
@@ -267,3 +269,17 @@ def test_risks_template_loads_in_the_chart_tool() -> None:
 
     risks = load_risks(SKILLS_DIR / "risks-esg" / "references" / "risks-template.yaml")
     assert risks and risks[0]["id"] == "R1"
+
+
+def test_outline_template_names_real_charts_and_fields() -> None:
+    import sys
+
+    if str(REPORT_TOOLS) not in sys.path:
+        sys.path.insert(0, str(REPORT_TOOLS))
+    from charts import CHARTS
+
+    text = read_text(SKILLS_DIR / "pitch" / "references" / "outline-template.yaml")
+    for chart in CHARTS:
+        assert chart.name in text, chart.name
+    for field in ("kind:", "title:", "subtitle:", "bullets:", "chart:", "sources:", "notes:", "speaker:", "minutes:"):
+        assert field in text, field
