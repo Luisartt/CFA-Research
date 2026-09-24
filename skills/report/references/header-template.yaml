@@ -1,0 +1,12 @@
+# report/header.yaml - written by the report skill, read by report/tools/build_docx.py.
+company: ""
+exchange: ""            # e.g. BMV
+ticker: ""
+sector: ""
+industry: ""
+recommendation: ""      # BUY | HOLD | SELL - the team's decision
+price: 0.0              # current price
+price_date: ""          # YYYY-MM-DD
+currency: ""            # e.g. MXN
+target_price: 0.0       # the team's 12-month target
+report_date: ""         # YYYY-MM-DD
