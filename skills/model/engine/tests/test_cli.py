@@ -136,6 +136,24 @@ def test_summary_has_football_and_sensitivity(project: Path) -> None:
     assert grid["values"][2][2] == pytest.approx(summary["valuation"]["price_gordon"], rel=1e-6)
 
 
+def test_summary_sensitivity_follows_valuation_grid_constants(
+    project: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from rcmodel.valuation import G_STEPS, WACC_STEPS
+
+    monkeypatch.setattr("rcmodel.summary.MIN_SPREAD", 0.08)
+    assert main(["--project", str(project)]) == 0
+    grid = json.loads((project / "model" / "model-summary.json").read_text(encoding="utf-8"))["sensitivity"]
+    assert len(grid["wacc"]) == len(WACC_STEPS) and len(grid["growth"]) == len(G_STEPS)
+    blanks = 0
+    for i, w in enumerate(grid["wacc"]):
+        for j, g in enumerate(grid["growth"]):
+            is_blank = grid["values"][i][j] is None
+            assert is_blank == (w - g < 0.08 - 1e-9), (i, j)
+            blanks += is_blank
+    assert blanks > 0
+
+
 def test_summary_without_valuation_has_empty_football(tmp_path: Path) -> None:
     write_project(tmp_path, valuation=None)
     assert main(["--project", str(tmp_path)]) == 0

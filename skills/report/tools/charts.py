@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import json
 import math
+from collections import defaultdict
 from collections.abc import Callable, Sequence
 from dataclasses import dataclass
 from pathlib import Path
@@ -22,9 +23,16 @@ import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 import yaml  # noqa: E402
+from matplotlib import font_manager  # noqa: E402
 from matplotlib.axes import Axes  # noqa: E402
 from matplotlib.figure import Figure  # noqa: E402
 from matplotlib.patches import Rectangle  # noqa: E402
+from matplotlib.ticker import PercentFormatter, StrMethodFormatter  # noqa: E402
+
+PREFERRED_FONTS: tuple[str, ...] = ("Arial", "Liberation Sans", "DejaVu Sans")
+# Only installed families: matplotlib logs a "findfont" warning per text for every missing one.
+_INSTALLED = {entry.name for entry in font_manager.fontManager.ttflist}
+matplotlib.rcParams["font.family"] = [f for f in PREFERRED_FONTS if f in _INSTALLED] or ["DejaVu Sans"]
 
 NAVY = "#1F4E79"
 LIGHT = "#9DC3E6"
@@ -34,6 +42,9 @@ FULL_WIDTH_IN = 6.3
 HALF_WIDTH_IN = 3.2
 DPI = 200
 SOURCE_NOTE = "A = actual, E = estimate. Source: team model."
+THOUSANDS = "{x:,.0f}"
+MARGIN_HEADROOM = 1.3
+DARK_CELL = 0.5  # cells darker than this (0 black, 1 white) get white text
 EXIT_OK = 0
 EXIT_NOTHING = 2
 
@@ -94,6 +105,11 @@ def revenue_margin(summary: Summary, _: list[dict[str, Any]], path: Path) -> Non
     twin.plot(labels, margin, color=ACCENT, marker="o", linewidth=1.2, markersize=3)
     twin.set_ylabel("EBITDA margin (%)", fontsize=7)
     twin.tick_params(labelsize=7)
+    finite = [m for m in margin if math.isfinite(m)]
+    if finite and max(finite) > 0:
+        twin.set_ylim(min(0.0, min(finite) * MARGIN_HEADROOM), max(finite) * MARGIN_HEADROOM)
+    twin.yaxis.set_major_formatter(PercentFormatter(xmax=100, decimals=0))
+    ax.yaxis.set_major_formatter(StrMethodFormatter(THOUSANDS))
     ax.set_title("Revenue and EBITDA margin", fontsize=8)
     _style(ax)
     ax.tick_params(axis="x", rotation=45)
@@ -107,6 +123,7 @@ def free_cash_flow(summary: Summary, _: list[dict[str, Any]], path: Path) -> Non
     ax.bar(labels, fcf, color=[ACCENT if (not math.isnan(v) and v < 0) else NAVY for v in fcf])
     ax.axhline(0, color=GREY, linewidth=0.6)
     ax.set_ylabel(f"{summary['currency']} {summary['units']}", fontsize=7)
+    ax.yaxis.set_major_formatter(StrMethodFormatter(THOUSANDS))
     ax.set_title("Free cash flow (CFO - capex - lease principal)", fontsize=8)
     _style(ax)
     ax.tick_params(axis="x", rotation=45)
@@ -117,18 +134,28 @@ def football_field(summary: Summary, _: list[dict[str, Any]], path: Path) -> Non
     rows = [r for r in summary["football"] if r["low"] is not None and r["high"] is not None]
     fig, ax = plt.subplots(figsize=(FULL_WIDTH_IN, 0.45 * len(rows) + 1.0))
     labels = [r["method"] for r in rows]
+    target: float | None = None
     for i, row in enumerate(rows):
-        width = row["high"] - row["low"]
-        if width > 0:
-            ax.barh(i, width, left=row["low"], color=LIGHT, edgecolor=NAVY, height=0.5)
+        lo, hi = sorted((float(row["low"]), float(row["high"])))
+        if hi > lo:
+            ax.barh(i, hi - lo, left=lo, color=LIGHT, edgecolor=NAVY, height=0.5)
         else:
-            ax.plot([row["low"]], [i], marker="D", color=NAVY)
+            ax.plot([lo], [i], marker="D", color=NAVY)
+        if target is None and "target" in str(row["method"]).lower():
+            target = (lo + hi) / 2
     price = summary.get("valuation", {}).get("share_price")
+    # Labels sit in the headroom above the first bar; with both lines they lean away from each other.
+    price_ha, target_ha = "center", "center"
+    if price is not None and target is not None:
+        price_ha, target_ha = ("right", "left") if target >= price else ("left", "right")
     if price is not None:
         ax.axvline(price, color=ACCENT, linestyle="--", linewidth=1)
-        ax.text(price, len(rows) - 0.4, f" price {price:,.2f}", color=ACCENT, fontsize=7)
+        ax.text(price, -0.6, f"Price {price:,.2f}", ha=price_ha, va="bottom", color=ACCENT, fontsize=7)
+    if target is not None:
+        ax.axvline(target, color=NAVY, linestyle="--", linewidth=1)
+        ax.text(target, -0.6, f"Target {target:,.2f}", ha=target_ha, va="bottom", color=NAVY, fontsize=7)
     ax.set_yticks(range(len(rows)), labels=labels, fontsize=7)
-    ax.invert_yaxis()
+    ax.set_ylim(len(rows) - 0.5, -0.9)  # inverted: first method on top, room for the line labels
     ax.set_xlabel(f"Value per share ({summary['currency']})", fontsize=7)
     ax.set_title("Valuation summary (football field)", fontsize=8)
     _style(ax)
@@ -136,15 +163,23 @@ def football_field(summary: Summary, _: list[dict[str, Any]], path: Path) -> Non
     _save(fig, path, "Source: team model (DCF, comps, market data).")
 
 
+def _luminance(rgba: tuple[float, float, float, float]) -> float:
+    red, green, blue, _ = rgba
+    return 0.299 * red + 0.587 * green + 0.114 * blue
+
+
 def sensitivity(summary: Summary, _: list[dict[str, Any]], path: Path) -> None:
     grid = summary["sensitivity"]
     values = [[math.nan if v is None else float(v) for v in row] for row in grid["values"]]
     fig, ax = plt.subplots(figsize=(HALF_WIDTH_IN, 2.6))
-    ax.imshow(values, cmap="Blues", aspect="auto")
+    image = ax.imshow(values, cmap="Blues", aspect="auto")
     for i, row in enumerate(values):
         for j, v in enumerate(row):
+            dark = math.isfinite(v) and _luminance(image.cmap(image.norm(v))) < DARK_CELL
             ax.text(j, i, "n.m." if math.isnan(v) else f"{v:,.1f}", ha="center", va="center", fontsize=6,
-                    color="black")
+                    color="white" if dark else "black")
+    base_row, base_col = len(values) // 2, len(grid["growth"]) // 2
+    ax.add_patch(Rectangle((base_col - 0.5, base_row - 0.5), 1, 1, fill=False, edgecolor=ACCENT, linewidth=1.5))
     ax.set_xticks(range(len(grid["growth"])), labels=[f"{g * 100:.1f}%" for g in grid["growth"]], fontsize=7)
     ax.set_yticks(range(len(grid["wacc"])), labels=[f"{w * 100:.1f}%" for w in grid["wacc"]], fontsize=7)
     ax.set_xlabel("Terminal growth", fontsize=7)
@@ -160,10 +195,12 @@ def risk_matrix(_: Summary, risks: list[dict[str, Any]], path: Path) -> None:
             score = x * y
             color = "#E2F0D9" if score <= 6 else ("#FFF2CC" if score <= 12 else "#F8CBAD")
             ax.add_patch(Rectangle((x - 0.5, y - 0.5), 1, 1, color=color, zorder=0))
+    cells: dict[tuple[int, int], list[str]] = defaultdict(list)
     for risk in risks:
-        ax.scatter(risk["probability"], risk["impact"], color=NAVY, s=30, zorder=2)
-        ax.annotate(risk["id"], (risk["probability"], risk["impact"]), textcoords="offset points",
-                    xytext=(4, 4), fontsize=7)
+        cells[(risk["probability"], risk["impact"])].append(str(risk["id"]))
+    for (x, y), ids in sorted(cells.items()):
+        ax.scatter(x, y, color=NAVY, s=30, zorder=2)
+        ax.annotate(", ".join(ids), (x, y), textcoords="offset points", xytext=(4, 4), fontsize=7)
     ax.set_xlim(0.5, 5.5)
     ax.set_ylim(0.5, 5.5)
     ax.set_xticks(range(1, 6))
@@ -205,11 +242,19 @@ def load_risks(path: Path) -> list[dict[str, Any]]:
     if not isinstance(risks, list):
         raise ChartError(f"{path.name} needs a 'risks:' list")
     problems: list[str] = []
+    seen: set[str] = set()
     for n, risk in enumerate(risks, start=1):
-        rid = risk.get("id", f"#{n}") if isinstance(risk, dict) else f"#{n}"
+        raw_id = risk.get("id") if isinstance(risk, dict) else None
+        valid_id = isinstance(raw_id, str) and raw_id.strip() != ""
+        rid = str(raw_id).strip() if valid_id else f"#{n}"
         if not isinstance(risk, dict):
             problems.append(f"risk {rid} must be a mapping")
             continue
+        if not valid_id:
+            problems.append(f"risk {rid}: id must be non-empty text such as R{n} (put numbers in quotes)")
+        elif rid in seen:
+            problems.append(f"risk id {rid} is used twice: give each risk its own id")
+        seen.add(rid)
         for field in ("probability", "impact"):
             value = risk.get(field)
             if isinstance(value, bool) or not isinstance(value, int) or not 1 <= value <= 5:

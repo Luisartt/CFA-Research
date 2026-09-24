@@ -8,6 +8,7 @@ from typing import Any
 
 from .checks import CheckResult, overall_status
 from .engine import BlankCell, Model
+from .valuation import G_STEPS, MIN_SPREAD, WACC_STEPS
 from .writer import BuildInfo
 
 SUMMARY_LINES: tuple[str, ...] = (
@@ -53,15 +54,15 @@ def _football(model: Model) -> list[dict[str, Any]]:
 def _sensitivity(model: Model) -> dict[str, Any] | None:
     if not model.has("sens_0_0"):
         return None
-    size = 5
-    wacc = [_clean(model.value(f"sens_w_{i}", None)) for i in range(size)]
-    growth = [_clean(model.value(f"sens_g_{j}", None)) for j in range(size)]
+    rows, cols = len(WACC_STEPS), len(G_STEPS)
+    wacc = [_clean(model.value(f"sens_w_{i}", None)) for i in range(rows)]
+    growth = [_clean(model.value(f"sens_g_{j}", None)) for j in range(cols)]
     values: list[list[float | None]] = []
-    for i in range(size):
+    for i in range(rows):
         row: list[float | None] = []
-        for j in range(size):
+        for j in range(cols):
             w, g = model.value(f"sens_w_{i}", None), model.value(f"sens_g_{j}", None)
-            row.append(_clean(model.value(f"sens_{i}_{j}", None)) if w - g >= 0.01 else None)
+            row.append(_clean(model.value(f"sens_{i}_{j}", None)) if w - g >= MIN_SPREAD else None)
         values.append(row)
     return {"wacc": wacc, "growth": growth, "values": values}
 
