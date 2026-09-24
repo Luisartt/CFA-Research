@@ -1,6 +1,6 @@
 ---
 name: init-skills
-description: One-time setup for a CFA Research Challenge team project. Interviews the team (company, exchange, sector, accounting framework, report language, roles, deadlines), builds a LatAm sector-specialist analyst persona, and writes AGENTS.md, CLAUDE.md, company-profile.yaml, the docs/context memory files and the project folders. Idempotent - audits first, fills only gaps, never overwrites silently. Run it once per team folder before the other research-challenge skills, or again to repair a broken setup.
+description: One-time setup for a CFA Research Challenge team project. Interviews the team (company, exchange, sector, accounting framework, presentation language, roles, deadlines), builds a LatAm sector-specialist analyst persona, and writes AGENTS.md, CLAUDE.md, company-profile.yaml, the docs/context memory files and the project folders. Idempotent - audits first, fills only gaps, never overwrites silently. Run it once per team folder before the other research-challenge skills, or again to repair a broken setup.
 disable-model-invocation: true
 ---
 
@@ -38,13 +38,13 @@ All conform -> say "Project already set up. Nothing changed." and stop.
 
 Try `python3 --version`, then `python --version`, then (Windows) `py --version`;
 use the first that is 3.10 or newer (`<cmd> -c "import sys; assert sys.version_info >= (3, 10)"`)
-to run `<cmd> -c "import openpyxl, yaml"`. Phase-1 skills do not need Python;
-the model skills will. If missing, print the exact command and offer to run it:
+to run `<cmd> -c "import openpyxl, yaml, matplotlib, docx"`. Phase-1 skills do not need Python;
+the model and report skills will. If missing, print the exact command and offer to run it:
 
 - Python missing or older than 3.10 -> Windows: `winget install Python.Python.3.12`;
   macOS: install from python.org (the built-in python3 may be 3.9; or
   `brew install python` if Homebrew is installed)
-- openpyxl or PyYAML missing -> Windows: `py -m pip install openpyxl pyyaml python-docx matplotlib python-pptx`; macOS: `python3 -m pip install openpyxl pyyaml python-docx matplotlib python-pptx`
+- any of these missing -> Windows: `py -m pip install openpyxl pyyaml python-docx matplotlib python-pptx`; macOS: `python3 -m pip install openpyxl pyyaml python-docx matplotlib python-pptx`
 
 ### Step 3 — Interview (only for what the audit found missing)
 

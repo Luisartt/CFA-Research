@@ -21,14 +21,16 @@ Then open your team's project folder and run once:
 /research-challenge:init-skills
 ```
 
-It interviews you (company, exchange, sector, accounting framework, report
+It interviews you (company, exchange, sector, accounting framework, presentation
 language, roles, deadlines) and writes `AGENTS.md`, `CLAUDE.md`,
 `company-profile.yaml`, the memory files in `docs/context/`, and the folders
 `filings/ data/ research/ model/ valuation/ report/ pitch/`.
 
-**Requirements:** Claude Code. The model skills need Python 3.10 or newer with
-`openpyxl` and `pyyaml` (the python3 built into macOS may be older — install
-from python.org); `init-skills` checks and tells you the exact install command.
+**Requirements:** Claude Code. The model and report skills need Python 3.10 or
+newer with `openpyxl`, `pyyaml`, `matplotlib` and `python-docx` (`python-pptx`
+comes with the presentation skills; the python3 built into macOS may be older —
+install from python.org); `init-skills` checks and tells you the exact install
+command.
 
 ## Skills (v0.3)
 

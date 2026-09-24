@@ -27,8 +27,10 @@ or risk.
 ## 2. Governance checklist (often the most material ESG issue in LatAm)
 
 - Controlling shareholder or family: stake, voting control, share classes.
-- Board: size, share of independent directors (Mexican securities law requires
-  at least 25%), independent audit committee, chair and CEO roles.
+- Board: size, share of independent directors, independent audit committee,
+  chair and CEO roles (Mexico: at least 25% independent directors, and fully
+  independent audit and corporate-practices committees; Brazil's Novo Mercado,
+  Chile and Colombia have their own rules — check them).
 - Related-party transactions: size, disclosure quality (related-parties note).
 - Minority protections: dividend policy, tag-along rights, free float and liquidity.
 - Succession and key-person risk.

@@ -35,6 +35,17 @@ labeling, concessions, antitrust), ESG (environmental, social), governance
 - For each: mitigation (what the company does) and whether it is priced in
   (already in the market price, in our forecast, or neither).
 - One downside scenario: the risks that matter most, hitting together, with
-  the value per share it implies (the valuation skill can run it).
+  the value per share it implies. Run it on a copy, never on the team's base
+  model:
+  1. Copy the whole project folder to a sibling folder (for example
+     `<team folder>-downside`).
+  2. In the copy's `model/drivers.yaml`, change only the drivers the scenario
+     moves (for example a lower `gross_margin` or `revenue_growth`).
+  3. Rebuild the copy with the same engine call as the model skill:
+     `<python> "${CLAUDE_PLUGIN_ROOT}/skills/model/engine/build_model.py" --project "<copy>"`.
+  4. Record the value per share from the copy's `model/model-summary.json`
+     (`valuation.price_gordon` and `valuation.price_exit`) in `research/risks.md`,
+     next to the base case and the drivers you changed.
+  Never edit the team's base `model/drivers.yaml` for a scenario.
 - Every risk that could break a thesis pillar should match a kill criterion in
   `research/thesis.md`.

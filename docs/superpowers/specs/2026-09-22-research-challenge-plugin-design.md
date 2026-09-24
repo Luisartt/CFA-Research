@@ -45,9 +45,10 @@ report and pitch, producing an institutional-grade financial model on the way.
 
 Then, once per team project folder: `/research-challenge:init-skills`.
 
-Requirements on student machines: Claude Code, Python 3, `openpyxl`
-(`python-docx` optional for .docx assembly). `init-skills` checks and prints the
-exact install command per OS when something is missing. Works on Windows and macOS.
+Requirements on student machines: Claude Code, Python 3.10+, `openpyxl`,
+`pyyaml`, `matplotlib` and `python-docx` (`python-pptx` for the deck).
+`init-skills` checks and prints the exact install command per OS when something
+is missing. Works on Windows and macOS.
 
 ## 4. Skills
 
@@ -135,7 +136,7 @@ AGENTS.md              canonical: persona, coaching rules, who-decides table,
                        data tags, skill map, context-file rules
 CLAUDE.md              "@AGENTS.md" import + Claude-only notes
 company-profile.yaml   ticker, exchange, country, sector, framework, currency,
-                       fiscal year end, report language, team, deadlines
+                       fiscal year end, presentation language, team, deadlines
 docs/context/
   memory.md            decisions ("# decision: ...")
   thesis-journal.md    append-only: thesis evolution, coaching answers
@@ -264,7 +265,7 @@ presentation. Mexico 2026-27: Grupo Bimbo, reports due 2026-11-05.
 
 | Skill | Assistant does | Team decides | Writes |
 |---|---|---|---|
-| `risks-esg` | Risks per thesis pillar with probability x impact and a risk-matrix chart; ESG materiality by industry plus a LatAm governance checklist (controlling shareholder, related parties, board independence, disclosure quality) | Which risks matter and how they are mitigated or priced; which ESG factors are material and whether they change the valuation | `research/risks.md`, `research/esg.md` |
+| `risks-esg` | Risks per thesis pillar with probability x impact and a risk-matrix chart; ESG materiality by industry plus a LatAm governance checklist (controlling shareholder, related parties, board independence, disclosure quality) | Which risks matter and how they are mitigated or priced; which ESG factors are material and whether they change the valuation | `research/risks.yaml`, `research/risks.md`, `research/esg.md` |
 | `report` | Co-writes the 7 sections from upstream files with page budgets by rubric weight; first-page header block; charts; A4 `.docx` body; flags untagged claims; drafts the AI-use disclosure from `ai-use-log.md` | Final say on every claim; the investment-summary story; rating and target wording | `report/sections/NN-*.md`, `report/charts/*.png`, `report/<TICKER>_report_v<N>.docx` |
 | `pitch` | 10-minute slide-by-slide outline, speaker notes, timing plan; Q&A drill scored on the rubric (incl. AI-use questions) | Lead message, who presents what, answers in their own words | `pitch/outline.md`, `pitch/qa-drill.md` |
 | `deck` | Build: outline + the team's own `.pptx` template -> deck with charts, sources footer on every slide, speaker notes. Audit: slide count vs 10 minutes, sources, notes, fonts and sizes, overflow estimates, numbers stale vs `model-summary.json`; fixes mechanical issues, flags judgment ones | The design (their template) and final visual polish | `pitch/<TICKER>_deck_v<N>.pptx`, `pitch/deck-audit.md` |
@@ -275,7 +276,7 @@ presentation. Mexico 2026-27: Grupo Bimbo, reports due 2026-11-05.
 - **Cover:** teams download the official CFA cover (.docx) and attach the body
   behind it; the plugin never redistributes it.
 - **Code:** `skills/report/tools/charts.py` (matplotlib; from `model-summary.json`
-  and `risks.md`), `skills/report/tools/build_docx.py` (python-docx; A4 body),
+  and `research/risks.yaml`), `skills/report/tools/build_docx.py` (python-docx; A4 body),
   `skills/deck/tools/build_pptx.py` and `audit_pptx.py` (python-pptx). All pure
   Python, pytest-tested with the Acme fixture. Deck QA is structural by default;
   visual rendering only if LibreOffice is present.

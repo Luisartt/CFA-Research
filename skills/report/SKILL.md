@@ -34,7 +34,9 @@ target and every claim belong to the team.
    `<python> "${CLAUDE_PLUGIN_ROOT}/skills/report/tools/charts.py" --project .`
    (if `${CLAUDE_PLUGIN_ROOT}` does not resolve, use the absolute path of the
    installed plugin's `skills/report/tools/`, in quotes; missing packages: give the
-   init-skills install command).
+   init-skills install command). The football field shows a target line only
+   after the team's `target_price` is in `valuation/valuation.yaml` and the model
+   is rebuilt.
 4. **Draft sections** in `report/sections/` with the file names in
    `references/challenge-structure.md`, in this order: financial analysis,
    valuation, risks, ESG, industry, business description, then the investment
@@ -42,7 +44,7 @@ target and every claim belong to the team.
    team's ideas only (never a claim they did not make), every number cited.
 5. **Check**: `<python> "${CLAUDE_PLUGIN_ROOT}/skills/report/tools/build_docx.py" --project . --check`.
    Fix uncited numbers; bring over-budget sections to the team (Coach moments).
-6. **Appendix**: `99-appendix.md` (statements, DCF and WACC, comps, sensitivity
+6. **Appendix**: `98-appendix.md` (statements, DCF and WACC, comps, sensitivity
    figure, full risk table, ESG data, Harvard reference list) and
    `99-appendix-ai-use.md` from `references/ai-disclosure-template.md`, filled from
    `ai-use-log.md`; the team reviews and edits the reflection.

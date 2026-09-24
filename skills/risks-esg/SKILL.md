@@ -44,8 +44,13 @@ priced, which ESG issues are material and how they affect value.
    `<python> "${CLAUDE_PLUGIN_ROOT}/skills/report/tools/charts.py" --project .`
    (if `${CLAUDE_PLUGIN_ROOT}` does not resolve in the shell, use the absolute
    path of `skills/report/tools/charts.py` in the installed plugin, in quotes).
-7. **Close** with the key risks, the material ESG issues, and one next step
-   (usually: ask the valuation skill to run the downside scenario).
+7. **Downside scenario** (`references/risk-framework.md`): copy the project
+   folder, change the scenario's drivers in the copy's `model/drivers.yaml`, run
+   `build_model.py --project "<copy>"` (same engine call as the model skill) and
+   record the value per share from the copy's `model/model-summary.json` in
+   `research/risks.md`. Never edit the team's base `drivers.yaml` for a scenario.
+   **Close** with the key risks, the material ESG issues, the downside value and
+   one next step.
 
 ## Coach moments
 

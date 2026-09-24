@@ -31,14 +31,16 @@ SELL), current price with date, target price with % upside or downside.
 | `05-valuation.md` | Valuation | 20 | 2.0 |
 | `06-risks.md` | Investment risks | 15 | 1.5 |
 | `07-esg.md` | ESG | 15 | 1.5 |
-| `99-appendix*.md` | Appendix (not graded separately; max 10 pages) | - | - |
+| `98-appendix.md` | Appendix (not graded separately; max 10 pages) | - | - |
+| `99-appendix-ai-use.md` | AI-use disclosure (part of the appendix) | - | - |
 
 The rules list the sections without mandating an order; putting the
 investment summary first, under the header, is the common practice. File
 numbers set the order — rename files to change it.
 
-Budget rule of thumb: about 500 words per page; a half-width chart takes about
-0.3 of a page. `build_docx.py --check` does this arithmetic.
+Budget rule of thumb: about 500 words per page; a full-width chart takes about
+0.45 of a page, two half-width charts side by side about 0.3 together.
+`build_docx.py --check` does this arithmetic.
 
 ## Appendix (suggested)
 
