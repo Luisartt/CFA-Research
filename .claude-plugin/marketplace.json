@@ -10,7 +10,24 @@
       "displayName": "Research Challenge",
       "source": "./",
       "description": "From filings to a valued model: setup, thesis and industry coaching, financials, forecast, Excel model and valuation, risks and ESG, the written report, the pitch and the PowerPoint deck. The assistant does the technical work; the team owns the story.",
-      "keywords": ["cfa", "research-challenge", "equity-research", "latam"]
+      "keywords": [
+        "cfa",
+        "research-challenge",
+        "equity-research",
+        "latam"
+      ]
+    },
+    {
+      "name": "research-analyst",
+      "displayName": "Research Analyst",
+      "source": "./vendor/research-analyst",
+      "description": "Equity research coverage toolkit from CFA Society Mexico - AI for Finance (MIT): coverage folders, accounting profile, industry analysis, driver inventory, 3-statement model standards, deterministic valuation, materiality triage.",
+      "keywords": [
+        "equity-research",
+        "cfa",
+        "financial-modeling",
+        "ifrs"
+      ]
     }
   ]
 }

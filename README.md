@@ -97,3 +97,7 @@ See `NOTICE`. MIT licensed.
 ## Wiki
 
 [`wiki/`](wiki/README.md) holds the compiled Grupo Bimbo (BIMBOA) knowledge base: company, industry, financials, valuation inputs, macro, risks and ESG, thesis evidence and process notes, built from public filings and S&P Capital IQ exports, with the processed CSVs in [`data/`](data/capitaliq) and the sources in [`filings/`](filings).
+
+## Quick start for teammates
+
+Copy the prompt in [PROMPT.md](PROMPT.md). It downloads all the information into a local folder and installs the skills (`research-challenge`, `research-analyst` from [`vendor/`](vendor/research-analyst), and the standalone `research` skill from [`extras/`](extras/research)).
