@@ -93,3 +93,7 @@ Test locally without publishing: `/plugin marketplace add <path-to-this-repo>`.
 ## Credits
 
 See `NOTICE`. MIT licensed.
+
+## Wiki
+
+[`wiki/`](wiki/README.md) holds the compiled Grupo Bimbo (BIMBOA) knowledge base: company, industry, financials, valuation inputs, macro, risks and ESG, thesis evidence and process notes, built from public filings.
