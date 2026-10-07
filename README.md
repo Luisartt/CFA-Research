@@ -96,4 +96,4 @@ See `NOTICE`. MIT licensed.
 
 ## Wiki
 
-[`wiki/`](wiki/README.md) holds the compiled Grupo Bimbo (BIMBOA) knowledge base: company, industry, financials, valuation inputs, macro, risks and ESG, thesis evidence and process notes, built from public filings.
+[`wiki/`](wiki/README.md) holds the compiled Grupo Bimbo (BIMBOA) knowledge base: company, industry, financials, valuation inputs, macro, risks and ESG, thesis evidence and process notes, built from public filings and S&P Capital IQ exports, with the processed CSVs in [`data/`](data/capitaliq) and the sources in [`filings/`](filings).
