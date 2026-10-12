@@ -1,0 +1,10 @@
+- [ ] [unverified] Share de EE.UU. en puntos (Circana) y split volumen/precio de Bimbo (industry 2026-10-12)
+- [ ] [unverified] Share por país en Brasil, Colombia, Argentina, España, Reino Unido
+- [ ] [unverified] Repasar EV/EBITDA y márgenes de pares (heredados del 08-oct)
+- [ ] [unverified] Texto final de la Ley de Ingresos 2027 sobre IEPS (votación fines de oct)
+- [ ] [unverified] Accionistas de control de Gruma, Arca, Nutresa, Lala
+- [ ] [unverified] Conciliar botanas: RA25 US$106.9bn (top-10) vs Celebramos p.16 US$183bn (top-5, 1.4%) (industry 2026-10-12)
+- [ ] [unverified] Pedir a IR de Bimbo: share EE.UU. por categoría (Circana) y ranking de Barcel USA (#5 RA23 vs #6 RA24-25)
+- [ ] [unverified] Alcance del vínculo Flowers-Bimbo «licensee» (CIQ customers.csv, fuente 10-K de Flowers)
+- [ ] [unverified] Nutrella (Bimbo Brasil): confirmar venta a la que obliga Cade y su peso en ventas de Brasil (industry 2026-10-12)
+- [ ] [unverified] Precio de la compra del 40% de Bimbo Colombia (Nutresa, may-2025)
