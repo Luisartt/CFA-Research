@@ -1,0 +1,12 @@
+# research/risks.yaml - written by the risks-esg skill, read by report/tools/charts.py.
+# probability and impact: whole numbers 1-5 (see risk-framework.md).
+risks:
+  - id: R1
+    risk: ""                 # one line: cause -> effect
+    category: market         # market | operational | financial | regulatory | ESG | governance
+    pillar: "1"              # thesis pillar it threatens
+    driver: gross_margin     # model driver that moves
+    probability: 3
+    impact: 3
+    mitigation: ""           # what the company does about it
+    priced_in: "no"          # yes | partly | no, with one line of why

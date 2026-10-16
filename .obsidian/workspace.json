@@ -1,0 +1,233 @@
+{
+  "main": {
+    "id": "ffbbbf57a7a17913",
+    "type": "split",
+    "children": [
+      {
+        "id": "db7be87a5e0e6c38",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "c6141e4b152999cc",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "wiki/Industry/bakery-market-structure.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "bakery-market-structure"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "aefe490cc15a058d",
+    "type": "split",
+    "children": [
+      {
+        "id": "bb9748ac9da38c21",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "7ab313d2f3ce8cbd",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Files"
+            }
+          },
+          {
+            "id": "c738663c82803439",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f4fc52bb82d3de28",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "425d1f5a9463c881",
+    "type": "split",
+    "children": [
+      {
+        "id": "c101599aaebbc8a9",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "dcfa240fbda0d633",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "reports/Bimbo macro outlook 2026.md",
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "1cbb59827c066145",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "reports/Bimbo macro outlook 2026.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "ac6a11a2161de547",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "f432104e71222f5d",
+            "type": "leaf",
+            "state": {
+              "type": "all-properties",
+              "state": {
+                "sortOrder": "frequency",
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-archive",
+              "title": "All properties"
+            }
+          },
+          {
+            "id": "7157111f8b785211",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "reports/Bimbo macro outlook 2026.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "bases:Create new base": false,
+      "obsidian-excalidraw-plugin:New drawing": false,
+      "obsidian-git:Open Git source control": false
+    }
+  },
+  "active": "c6141e4b152999cc",
+  "lastOpenFiles": [
+    "wiki/CFA-Process/bimbo-ciq-recent-documents-inventory.md",
+    "PROMPT.md",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "README.md",
+    "wiki/Financials/bimbo-balance-sheet-and-debt-fy14-fy20.md",
+    "raw/Análisis FORMATO.pdf",
+    "Análisis FORMATO.pdf",
+    "BIMBOA/report/charts/risk-matrix.png",
+    "BIMBOA/report/charts",
+    "BIMBOA/report",
+    "BIMBOA/research/esg.md",
+    "BIMBOA/research/esg.md.tmp.126060.9cd9fd7ca05f",
+    "BIMBOA/research/risks.md.tmp.126060.00d219dbfa15",
+    "BIMBOA/research/risks.md",
+    "BIMBOA/research/risks.md.tmp.126060.1487eba64748",
+    "BIMBOA/research/risks.yaml",
+    "BIMBOA/research/risks.yaml.tmp.126060.1b308b8886da",
+    "pitch",
+    "docs/context/session-log.md",
+    "docs/context/lessons.md",
+    "docs/context/memory.md",
+    "wiki/Financials/bimbo-balance-sheet-and-debt-fy08-fy13.md",
+    "wiki/Company/ciq-public-holdings-and-investments.md",
+    "wiki/Company/ciq-plant-network-and-capacity.md",
+    "wiki/Company/bimbo-acquisitions.md",
+    "wiki/CFA-Process/ciq-delta-vs-previous-export.md",
+    "wiki/CFA-Process/cfa-research-standards-checklist.md",
+    "wiki/Financials/bimbo-volume-disclosure-audit.md",
+    "wiki/Company/bimbo-governance-and-ownership.md",
+    "Excalidraw/Drawing 2026-10-14 13.48.35.excalidraw.md",
+    "wiki/Company/bimbo-business-model.md",
+    "wiki/Company/bimbo-brands-and-portfolio.md",
+    "wiki/CFA-Process/cfa-challenge-timeline.md",
+    "wiki/CFA-Process/bimbo-filings-source-map.md",
+    "WIKI.md",
+    "Finanzas/rawc/2026-10-12 How to Build an AI Second Brain With Claude and Obsidian That Gets Smarter Every Day (Full Guide).md"
+  ]
+}

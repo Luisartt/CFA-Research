@@ -1,0 +1,162 @@
+from __future__ import annotations
+
+import json
+import subprocess
+import sys
+from pathlib import Path
+
+import pytest
+
+from conftest import ENGINE_DIR, HISTORY, write_project
+from rcmodel.cli import main, next_version_path
+
+
+def test_file_write_errors_exit_4_with_ascii_output(
+    project: Path, capsys: pytest.CaptureFixture[str], monkeypatch: pytest.MonkeyPatch
+) -> None:
+    def locked(*_: object) -> None:
+        raise PermissionError(13, "Permission denied", str(project / "model" / "model-summary.json"))
+
+    monkeypatch.setattr("rcmodel.cli.build", locked)
+    assert main(["--project", str(project)]) == 4
+    out = capsys.readouterr().out
+    assert out.isascii() and "close it" in out.lower() and "model-summary.json" in out
+
+
+def test_failed_checks_print_as_not_met(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    import copy
+
+    from conftest import DRIVERS
+
+    drivers = copy.deepcopy(DRIVERS)
+    drivers["drivers"]["payout_ratio"]["values"] = [3.0] * 5  # forces the revolver to be drawn
+    write_project(tmp_path, drivers=drivers)
+    assert main(["--project", str(tmp_path)]) == 0
+    out = capsys.readouterr().out
+    assert "[warn] Not met: Revolver not drawn" in out
+
+
+def test_help_documents_exit_codes(capsys: pytest.CaptureFixture[str]) -> None:
+    with pytest.raises(SystemExit):
+        main(["--help"])
+    out = capsys.readouterr().out
+    assert out.isascii() and "exit codes" in out and "4" in out
+
+
+def test_build_writes_workbook_and_summary(project: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    assert main(["--project", str(project)]) == 0
+    assert (project / "model" / "ACME_model_v1.xlsx").is_file()
+    summary = json.loads((project / "model" / "model-summary.json").read_text(encoding="utf-8"))
+    assert summary["status"] in {"ALL CHECKS OK", "OK WITH WARNINGS"}
+    assert summary["lines"]["revenue"]["2026"] == pytest.approx(13400 * 1.07)
+    assert summary["lines"]["fcff"]["2021"] is None
+    assert "price_gordon" in summary["valuation"]
+    assert "target_12m_gordon" in summary["valuation"]
+    assert summary["model_file"] == "ACME_model_v1.xlsx"
+    out = capsys.readouterr().out
+    assert out.isascii()
+    assert "[ok] workbook -> model/ACME_model_v1.xlsx" in out
+
+
+def test_second_build_bumps_the_version(project: Path) -> None:
+    assert main(["--project", str(project)]) == 0
+    assert main(["--project", str(project)]) == 0
+    assert (project / "model" / "ACME_model_v1.xlsx").is_file()
+    assert (project / "model" / "ACME_model_v2.xlsx").is_file()
+
+
+def test_input_errors_exit_2_with_ascii_output(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    history = {k: v for k, v in HISTORY.items() if k != "cash"}
+    write_project(tmp_path, history=history)
+    assert main(["--project", str(tmp_path)]) == 2
+    out = capsys.readouterr().out
+    assert out.isascii() and "cash" in out
+
+
+def test_next_version_ignores_other_files(tmp_path: Path) -> None:
+    (tmp_path / "ACME_model_v3.xlsx").write_bytes(b"")
+    (tmp_path / "notes.xlsx").write_bytes(b"")
+    path, version = next_version_path(tmp_path, "ACME")
+    assert (path.name, version) == ("ACME_model_v4.xlsx", 4)
+
+
+def test_ticker_is_made_filename_safe(tmp_path: Path) -> None:
+    path, _ = next_version_path(tmp_path, "GFNORTE O")
+    assert path.name == "GFNORTE-O_model_v1.xlsx"
+
+
+def test_launcher_runs(project: Path) -> None:
+    completed = subprocess.run(
+        [sys.executable, str(ENGINE_DIR / "build_model.py"), "--project", str(project)],
+        capture_output=True, text=True, check=False,
+    )
+    assert completed.returncode == 0, completed.stdout + completed.stderr
+    assert (project / "model" / "ACME_model_v1.xlsx").is_file()
+
+
+def test_check_mode_writes_nothing(project: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    assert main(["--project", str(project), "--check"]) == 0
+    assert not list((project / "model").glob("*.xlsx"))
+    assert not (project / "model" / "model-summary.json").exists()
+    out = capsys.readouterr().out
+    assert out.isascii()
+    assert "[ok] inputs are valid (check only, no files written)" in out
+    assert "status:" in out
+
+
+def test_check_mode_reports_input_errors(tmp_path: Path, capsys: pytest.CaptureFixture[str]) -> None:
+    history = {k: v for k, v in HISTORY.items() if k != "cash"}
+    write_project(tmp_path, history=history)
+    assert main(["--project", str(tmp_path), "--check"]) == 2
+    assert "cash" in capsys.readouterr().out
+
+
+def test_summary_has_drivers_and_ratios(project: Path) -> None:
+    assert main(["--project", str(project)]) == 0
+    summary = json.loads((project / "model" / "model-summary.json").read_text(encoding="utf-8"))
+    gross_margin = summary["drivers"]["gross_margin"]
+    assert gross_margin["source"] == "team"
+    assert gross_margin["values"]["2026"] == pytest.approx(0.41)
+    assert gross_margin["values"]["2025"] == pytest.approx(5500 / 13400)
+    assert "r_roic" in summary["ratios"]
+    assert "r_ebitda_margin" in summary["ratios"]
+
+
+def test_summary_has_football_and_sensitivity(project: Path) -> None:
+    assert main(["--project", str(project)]) == 0
+    summary = json.loads((project / "model" / "model-summary.json").read_text(encoding="utf-8"))
+    methods = [row["method"] for row in summary["football"]]
+    assert methods[0].startswith("DCF - Gordon")
+    assert "Current share price" in methods
+    for row in summary["football"]:
+        assert row["low"] <= row["high"]
+    grid = summary["sensitivity"]
+    assert len(grid["wacc"]) == 5 and len(grid["growth"]) == 5
+    assert len(grid["values"]) == 5 and all(len(r) == 5 for r in grid["values"])
+    assert grid["values"][2][2] == pytest.approx(summary["valuation"]["price_gordon"], rel=1e-6)
+
+
+def test_summary_sensitivity_follows_valuation_grid_constants(
+    project: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    from rcmodel.valuation import G_STEPS, WACC_STEPS
+
+    monkeypatch.setattr("rcmodel.summary.MIN_SPREAD", 0.08)
+    assert main(["--project", str(project)]) == 0
+    grid = json.loads((project / "model" / "model-summary.json").read_text(encoding="utf-8"))["sensitivity"]
+    assert len(grid["wacc"]) == len(WACC_STEPS) and len(grid["growth"]) == len(G_STEPS)
+    blanks = 0
+    for i, w in enumerate(grid["wacc"]):
+        for j, g in enumerate(grid["growth"]):
+            is_blank = grid["values"][i][j] is None
+            assert is_blank == (w - g < 0.08 - 1e-9), (i, j)
+            blanks += is_blank
+    assert blanks > 0
+
+
+def test_summary_without_valuation_has_empty_football(tmp_path: Path) -> None:
+    write_project(tmp_path, valuation=None)
+    assert main(["--project", str(tmp_path)]) == 0
+    summary = json.loads((tmp_path / "model" / "model-summary.json").read_text(encoding="utf-8"))
+    assert summary["football"] == []
+    assert summary["sensitivity"] is None

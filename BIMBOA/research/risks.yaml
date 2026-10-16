@@ -1,0 +1,121 @@
+# BIMBOA/research/risks.yaml - propuesta de la IA (2026-10-14); el equipo decide puntajes y riesgos clave.
+# probability / impact: enteros 1-5 (ver risk-framework.md). Impacto medido contra el valor base MXN 75.2 (puente CIQ, 7.68x).
+# "driver": no existe model/drivers.yaml en este proyecto; el nombre es el concepto, no una clave del motor.
+risks:
+  - id: R1
+    risk: "Trigo, azúcar y aceites suben en 2027 (trigo CBOT dic-27 US$7.235/bu, +34.9% a/a) -> margen bruto cae ~150-240 pb antes de cobertura y precio -> EBITDA y múltiplo"
+    category: market
+    pillar: "1"
+    driver: gross_margin
+    probability: 4
+    impact: 3
+    mitigation: "Coberturas de trigo y gas, ajustes de precio, programa de productividad; el CFO dijo que 2027 se está cubriendo a costos más altos [unverified]"
+    priced_in: "no - el consenso FY27 pide +4.5% de EBITDA y no desglosa insumos"
+  - id: R2
+    risk: "El volumen de pan en EE.UU. sigue cayendo y la marca propia gana (35% de unidades en pan fresco) -> el margen de NA vuelve a 8.4% (FY24) o menos -> EBITDA y pilar 1"
+    category: market
+    pillar: "1"
+    driver: na_ebitda_margin
+    probability: 3
+    impact: 3
+    mitigation: "Productividad récord 3T25-2T26, cierre de plantas, precio/mezcla; margen NA 10.0% en 2T26"
+    priced_in: "partly - el múltiplo de 6.3x ya descuenta poca recuperación; el techo de ~10-12% es nuestro supuesto"
+  - id: R3
+    risk: "Política mexicana: IEPS a botanas/pan dulce de 8% a 20%, semana de 40 h desde 2027, NOM-051 fase 3 en 2028, multas de aduanas -> margen de México (20.4%, ~55% del EBITDA) -150 pb -> EBITDA"
+    category: regulatory
+    pillar: "3"
+    driver: mexico_ebitda_margin
+    probability: 3
+    impact: 3
+    mitigation: "Reformulación (98% del portafolio diario con perfil nutricional positivo), traslado a precio, escala de rutas; paquete 2027 sin tasa nueva (Morena frenó el alza por ahora, sep-2026)"
+    priced_in: "partly - 8% vigente; la propuesta de 20% no está en el paquete; la ley final no está aprobada al 14-oct-2026"
+  - id: R4
+    risk: "El capex se reacelera (programa >US$2 mil millones en México) o una adquisición grande -> FCF y desapalancamiento se detienen; deuda neta/EBITDA > 2.7x y S&P BBB+ con perspectiva negativa -> más costo de deuda y múltiplo menor"
+    category: financial
+    pillar: "2"
+    driver: capex_to_sales
+    probability: 3
+    impact: 2
+    mitigation: "Guía de capex 2026 bajó a US$1.0-1.2 mil millones; deuda neta 137,097 (jun-26) contra 145,128 (dic-25); costo promedio 6.5%"
+    priced_in: "partly - el consenso FY26 de capex (21,979) exige ~15,086 en 2S26, 2.2x el 1S26"
+  - id: R5
+    risk: "El múltiplo no se revalora: EV/EBITDA ya está en línea con panificadores (6.3x contra mediana 6.45x) y el control familiar (72%) con defensas anti-toma (1/10) justifica un descuento persistente -> sin revaloración cada 1.0x menos son MXN 15.1 por acción"
+    category: governance
+    pillar: "3"
+    driver: exit_multiple
+    probability: 4
+    impact: 4
+    mitigation: "Comité de auditoría 100% independiente, dividendo estable, desapalancamiento; no hay mitigación estructural de la concentración"
+    priced_in: "yes - el precio MXN 55.41 equivale a ~6.3x: ya supone cero revaloración"
+  - id: R6
+    risk: "El peso se aprecia (USD/MXN < 18) -> la conversión resta ventas y EBITDA de NA y EAA (~39% del EBITDA por segmentos) -> EBITDA reportado en MXN; la deuda en USD (42-44%) amortigua parte"
+    category: financial
+    pillar: "3"
+    driver: fx_translation
+    probability: 3
+    impact: 2
+    mitigation: "Cobertura natural: 42-44% de la deuda en USD; ingresos en USD de NA"
+    priced_in: "partly - el escenario de Macro ya supone +1 a +3 pp de FX en 2027"
+  - id: R7
+    risk: "EE.UU. no renovó el T-MEC el 1-jul-2026 (revisiones anuales hasta 2036) y sube aranceles a insumos -> costo de harina/azúcar importados y volatilidad del peso"
+    category: regulatory
+    pillar: "2"
+    driver: gross_margin
+    probability: 3
+    impact: 2
+    mitigation: "Producción local en cada país; la empresa dice que los aranceles mexicanos no afectan directamente sus importaciones"
+    priced_in: "partly"
+  - id: R8
+    risk: "GLP-1 y cambio de hábitos reducen gasto en botanas (-10%) y pan -> volumen de Barcel y pastelitos -> EBITDA"
+    category: market
+    pillar: "1"
+    driver: revenue_growth
+    probability: 3
+    impact: 2
+    mitigation: "Reformulación, porciones, portafolio saludable (48% de ventas con 3.5+ estrellas)"
+    priced_in: "no"
+  - id: R9
+    risk: "Demandas colectivas de Canada Bread sin provisión y disputa con Maple Leaf (>CAD 2 mil millones a favor de Bimbo) -> pago puntual o reputación"
+    category: governance
+    pillar: ""
+    driver: other_provisions
+    probability: 2
+    impact: 1
+    mitigation: "Multa de US$38 millones ya pagada (2023); provisiones totales 10,684, 80% posiciones fiscales inciertas"
+    priced_in: "yes"
+  - id: R10
+    risk: "Planes multipatronales de EE.UU. (aportaciones 2,700 en 2025) suben por retiro de otros empleadores -> flujo de operación"
+    category: financial
+    pillar: "2"
+    driver: pension_contributions
+    probability: 2
+    impact: 1
+    mitigation: "Pasivos de retiro bajaron de 2,033 a 985 (2023-2025); aportación esperada 2026: 2,406"
+    priced_in: "yes"
+  - id: R11
+    risk: "Agua (reforma de la Ley de Aguas, 11-dic-2025), economía circular (EPR, 19-ene-2026), metas de Alcance 3 incumplidas y SBTi en pausa -> capex ambiental y costo de deuda ligada a sostenibilidad"
+    category: ESG
+    pillar: ""
+    driver: capex_to_sales
+    probability: 4
+    impact: 1
+    mitigation: "100% de reúso de agua tratada vs. base 2020, 99% de empaques reciclables, >520,000 ha de agricultura regenerativa"
+    priced_in: "yes - penalización del bono 23-2L = MXN 6 millones"
+  - id: R12
+    risk: "Ciberataque o falla de TI en producción y distribución (ya tuvo exposición a ransomware) -> interrupción y multas"
+    category: operational
+    pillar: ""
+    driver: ebitda_margin
+    probability: 2
+    impact: 2
+    mitigation: "Programa de ciberseguridad; seguros con exclusiones"
+    priced_in: "no"
+  - id: R13
+    risk: "Hiperinflación en Argentina (IAS 29), expropiación (Venezuela) o Rusia -> deterioro o pérdida cambiaria en LatAm"
+    category: operational
+    pillar: ""
+    driver: latam_ebitda
+    probability: 2
+    impact: 1
+    mitigation: "Venezuela fuera de consolidación desde 2017; ventas de marca Bimbo en Rusia suspendidas; LatAm es 5.8% del EBITDA por segmentos"
+    priced_in: "yes"

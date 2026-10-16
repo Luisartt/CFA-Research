@@ -1,0 +1,34 @@
+# Written by /research-challenge:init-skills. Every skill reads this file.
+# Edit by hand if something changes; keep the keys.
+company:
+  name: "Grupo Bimbo, S.A.B. de C.V."
+  ticker: "BIMBOA"
+  exchange: "BMV"          # BMV | BIVA | B3 | BCS | BVC | BVL | BYMA | NYSE | NASDAQ
+  country: "Mexico"
+  sector: "Consumer Staples — Packaged Foods"
+  issuer_type: "non_financial"    # non_financial | bank | insurer | reit
+accounting:
+  framework: "ifrs"        # ifrs | us_gaap | nif
+  framework_confirmed_by_team: true
+  reporting_currency: "MXN"
+  fiscal_year_end: "12-31"   # MM-DD
+  units: "millions"                # millions | thousands
+report:
+  language: "en"                    # always English (CFA Institute Official Rules 2.6c)
+  presentation_language: "en"   # en | es | pt, local round only; English from sub-regional up
+  report_deadline: "2026-11-04"      # YYYY-MM-DD
+  presentation_date: "2026-12-08"  # YYYY-MM-DD
+team:
+  - name: "Luis Arturo Romo"
+    role: "Captain"
+  - name: "Diego Benavides"
+    role: "ESG"
+  - name: "Alexa Zaldivar"
+    role: "Financials"
+  - name: "Jorge Alejandro"
+    role: "Risks"
+  - name: "Carolina del Rosario"
+    role: "Business overview"
+compliance:
+  public_information_only_confirmed: true
+created: "2026-10-14"

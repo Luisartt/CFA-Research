@@ -1,0 +1,1 @@
+# decision (propuesta, pendiente del equipo): key risks = R1, R2, R3, R4, R5 (+R6); material ESG = nutrición/IEPS, clima, agua, empaques, abastecimiento; gobernanza = descuento de múltiplo, no prima de WACC

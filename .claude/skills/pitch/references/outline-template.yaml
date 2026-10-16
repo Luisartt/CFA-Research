@@ -1,0 +1,23 @@
+# pitch/outline.yaml - written by the pitch skill, read by deck/tools/build_pptx.py.
+# kind: title | section | content | chart. Every slide except the title needs sources.
+# chart: a PNG name from report/charts without .png (revenue-margin, free-cash-flow,
+#        football-field, sensitivity, risk-matrix).
+deck:
+  title: ""                 # e.g. "Company (BMV: TICKER) - BUY, target MXN 00.0"
+  language: en              # the presentation language for this round
+  minutes: 10
+slides:
+  - kind: title
+    title: ""
+    subtitle: ""            # rating, target, upside
+    notes: ""
+    speaker: ""
+    minutes: 0.5
+  - kind: content
+    title: ""               # the slide's message, as a sentence
+    bullets: []             # at most 6, each at most 20 words
+    chart: ""               # optional
+    sources: ""             # required
+    notes: ""               # what the speaker says
+    speaker: ""
+    minutes: 1.0
