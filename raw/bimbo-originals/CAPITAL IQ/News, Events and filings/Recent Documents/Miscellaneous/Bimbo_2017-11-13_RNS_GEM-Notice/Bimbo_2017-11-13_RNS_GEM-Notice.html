@@ -1,0 +1,194 @@
+﻿<html>
+  <head>
+    <META http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>RNS - Market News</title>
+  </head>
+  <body>
+    <style type="text/css">
+          body{
+          font-family:"verdana";
+          background-color: white;
+          color:black;
+          padding:20px;
+          }
+          a{
+          color:#0000ff;
+          text-decoration:none;
+          }
+          #topHeaderLine{
+          font-family: Verdana;
+          font-size:18px;
+          color: #003366;
+          padding-bottom:5px;
+          }
+          #header{
+          padding-bottom: 4px;
+          }
+          #horizontalRule
+          {
+          height: 2px;
+          width: auto;
+          margin: 0 3px 0 3px;
+          background: #fff url(data:image/gif;base64,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) no-repeat bottom right;
+          font-size: 0.2 em;
+          }
+
+          #bottomHeaderLine{
+          padding-top:5px;
+          font-size:10px;
+          font-weight:bold;
+          }
+          #announcement{
+          margin-top:10px;
+          margin-bottom:10px;
+          }
+          #announcementMetaData{
+          padding:5px;
+          margin-top:10px;
+          margin-bottom:10px;
+          font-size:10px;
+          }
+          #footer{
+          margin-top:5px;
+          margin-bottom:5px;
+          }
+          #footerTextBlock{
+          font-size:10px;
+          font-weight:bold;
+          border-top:#dfdfdf solid 2px;
+          border-bottom:#dfdfdf solid 2px;
+          margin-top:10px;
+          margin-bottom:10px;
+          }
+          #footerCopyriteInformation{
+          font-size:9px;
+          color:#999;
+          }
+        </style>
+    <div align="center">
+      <div id="AnnouncementContainer">
+        <div id="header">
+          <div align="right" style="float:right;"><img src="data:image/gif;base64,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"></div>
+          <div id="topHeaderLine">
+            <div align="left">GEM Notice:
+                  Irish Stock Exchange</div>
+          </div>
+        </div>
+        <div id="horizontalRule"> </div>
+        <div id="announcement">
+          <div id="announcementHTMLData">
+            <div align="left">			<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+<title></title>
+<meta name="generator" content="RNS" />
+<style type="text/css">
+/**/
+
+
+
+
+.j {
+        MARGIN: 72pt; size: 595.3pt 841.9pt
+}
+DIV.j {
+        
+}
+P.w {
+        TEXT-ALIGN: right; MARGIN: 0cm 0cm 0pt 36.85pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt
+}
+P.x {
+        TEXT-ALIGN: center; MARGIN: 0cm 0cm 0pt 36.85pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt; FONT-WEIGHT: bold
+}
+SPAN.t {
+        FONT-SIZE: 14pt
+}
+P.y {
+        TEXT-ALIGN: center; MARGIN: 0cm 0cm 0pt 36.85pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt
+}
+SPAN.q {
+        FONT-SIZE: 14pt
+}
+P.z {
+        TEXT-ALIGN: right; MARGIN: 0cm 0cm 0pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt
+}
+P.aa {
+        MARGIN: 0cm 0cm 0pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt
+}
+SPAN.o {
+        COLOR: #404040
+}
+P.ab {
+        MARGIN: 0cm 0cm 0pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt; FONT-WEIGHT: bold
+}
+SPAN.m {
+        FONT-SIZE: 12pt
+}
+P.a {
+        MARGIN: 0cm 0cm 0pt 36.85pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt
+}
+LI.a {
+        MARGIN: 0cm 0cm 0pt 36.85pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt
+}
+DIV.a {
+        MARGIN: 0cm 0cm 0pt 36.85pt; FONT-FAMILY: "Arial","sans-serif"; COLOR: #464646; FONT-SIZE: 10pt
+}
+SPAN.k {
+        FONT-FAMILY: "Garamond","serif"; FONT-SIZE: 11pt
+}
+
+
+
+/**/
+</style>
+</head>
+<body><div>RNS Number : 3578W</div>  <div>Irish Stock Exchange</div>  <div>13 November 2017</div>  <div>&#160;</div>
+<div class="j">
+<p class="w">&#160;</p>
+<p class="x"><span class="t">REPORT OF THE BOARD OF THE IRISH</span></p>
+<p class="x"><span class="t">STOCK EXCHANGE</span></p>
+<p class="x">&#160;</p>
+<p class="x"><span class="t">&#160;</span></p>
+<p class="y"><span class="t">&#160;</span></p>
+<p class="y"><span class="t">ADMISSION NOTICE</span></p>
+<p class="y">&#160;</p>
+<p class="w">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;</p>
+<p class="w"><span class="q">Irish Stock Exchange</span></p>
+<p class="w"><span class="q">28 Anglesea Street</span></p>
+<p class="w"><span class="q">Dublin 2</span></p>
+<p class="w">&#160;</p>
+<p class="w">&#160;</p>
+<p class="z"><span class="t">13th November 2017</span></p>
+<p class="aa"><span class="o">&#160;</span></p>
+<p class="ab"><span class="m">The board of the Irish Stock Exchange approves the admission of the undermentioned securities to listing on the Official List and trading on the Global Exchange Market of the ISE.</span></p>
+<p class="aa"><span class="m">&#160;</span></p>
+<p class="ab"><span class="m">GRUPO BIMBO, S.A.B. DE C.V.</span></p>
+<p class="a"><span class="t">&#160;</span></p>
+<p class="aa"><span class="m">USD 650,000,000 4.700% Senior Notes due 2047&#160;&#160; &#160;USP4R52QAC92</span></p>
+<p class="a"><span class="t">&#160;</span></p>
+<p class="aa"><span class="m">Debt Security</span></p>
+<p class="y"><span class="k">&#160;</span></p>
+<p class="y">This announcement has been issued through the Companies Announcement Service of</p>
+<p class="y">the Irish Stock Exchange.</p>
+</div>
+<div style="text-align:center;"><br/>This information is provided by RNS</div><div style="text-align:center;">The company news service from the London Stock Exchange</div><div>&#160;</div>  END<div>&#160;</div><div>&#160;</div>ISEBJBATMBJBBPR</body>
+</html>
+</div>
+          </div>
+        </div>
+        <div id="footer">
+          <div id="footerTextBlock">
+            <div align="left">
+                  London Stock Exchange plc is not responsible for and does not check content on this Website.  Website users are responsible for checking content.  Any news item (including any prospectus) which is addressed solely to the persons and countries specified therein should not be relied upon other than by such persons and/or outside the specified countries. <a href="http://www.londonstockexchange.com/en-gb/Global/F/disclaimer/"> Terms and conditions</a>, including restrictions on use and distribution apply.
+                </div>
+          </div>
+          <div id="footerCopyriteInformation">
+            <div align="left">
+                  ©2008 London Stock Exchange plc. All rights reserved
+                </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
