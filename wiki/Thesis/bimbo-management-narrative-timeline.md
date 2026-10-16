@@ -21,12 +21,17 @@ Source:
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
   - filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Transcript & Presentation/Bimbo_2024-02-19_EP_Q4-2023-Earnings-Call/Bimbo_2024-02-19_EP_Q4-2023-Earnings-Call.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Jul-24 - BIMBOA.MX - Grupo Bimbo SAB de CV - Half Year Presentation - gb investor ppt 2q26 vf 0 pdf - cr22276039.pdf
 tags: [Thesis, management-narrative]
 ---
 
 # What management said each quarter, 4Q21 to 2Q26
 
 External/management evidence only. Source is the opening CEO and CFO statements (PDF p.1) and the "highlights" pages (p.2-3) of each earnings release, in Spanish; paraphrased here. No assessment of whether management was right. Links: [[bimbo-north-america-turnaround-evidence]] (the numbers behind the NA story), [[bimbo-catalyst-calendar-facts]], [[bimbo-quarterly-trend-4q21-2q26]], [[bimbo-guidance-2026]].
+
+> [!question] Open check
+> LSEG dates the start of CEO Alejandro Rodriguez Bas at 2026-06-10, while company documents say November 2025 (4Q25 release p.2; deck 2026-02-27 p.3). The company date is used here; the LSEG date is not asserted [[bimbo-board-and-officers-lseg]]. Also: the 1Q24 call was held on 22-Apr-2024 and the CEO change took effect 1-May-2024 [[bimbo-ceo-and-management-changes]].
 
 **Conventions.** Release dates are as printed on the cover (4T21: call date, 4T21 p.8). Speakers: Daniel Servitje (Chairman and CEO until 30 Apr 2024; Executive Chairman from 1 May 2024, 1T24 p.2); Rafael Pamias (CEO 1 May 2024 to Oct/Nov 2025); Alejandro Rodriguez Bas (CEO from November 2025, 4T25 p.2); Diego Gaxiola (Global CFO throughout). Group figures in MXN millions; "ex-FX" per management. Net debt / EBITDA excludes IFRS 16. Every figure `[sourced]` to the release named unless tagged otherwise.
 
@@ -58,6 +63,9 @@ External/management evidence only. Source is the opening CEO and CFO statements 
 
 Phases are the compiler's grouping of the wording above; the quotes and numbers are management's.
 
+> [!warning] Superseded
+> Timing refined: the 19-Feb-2024 call (4Q23) already announced a transformational programme for North America to start in 2024 and called 2024 a transition year (call p.4, p.6), before the 1Q24 release dated here as the first use [[bimbo-call-themes-by-year]].
+
 | Phase | Quarters | Dominant wording | What changed |
 |---|---|---|---|
 | A. Price-led growth through inflation | 4Q21-4Q22 | "Exceptional", record sales, volume growth "despite price increases", "right levers" against inflation | Offence: capex records, share gains, Ricolino sale, acquisitions; margins slightly down on raw materials (-120bp to -40bp YoY) |
@@ -68,6 +76,10 @@ Phases are the compiler's grouping of the wording above; the quotes and numbers 
 
 - Keyword counts `[calc]` (occurrences of "diversific-" in release pages 1-6, my count): 4Q21 1; 1Q22-4Q23 0 each; 1Q24 2; 2Q24 2; 3Q24 2; 4Q24 3; 1Q25 1; 2Q25 1; 3Q25 2; 4Q25 1; 1Q26 0; 2Q26 1. Diversification is used as an explicit defence mainly in 2024-3Q25, when NA lagged. "Estabiliz-" (stabilise) appears only in 3Q25 and 1Q26. Counts are rough and Spanish-only.
 - ==The CFO language on NA moved from "investing" (1Q24-2Q25) to "productivity benefits" (3Q25 onward)==; the CEO language moved from "project" (4Q24) to "transformation initiatives... tangible progress" (2Q26) `[sourced]` 4T24 p.1; 3T25 p.5; 2T26 p.1.
+
+> [!warning] Superseded
+> Numeric guidance exists on the calls and decks, including FY2026 [[bimbo-guidance-vs-delivery-2011-2026]], [[bimbo-investor-presentations-2024-2026]]; it is only the releases that omit it.
+
 - Guidance language: the releases carry no numeric guidance. They refer to it indirectly: 4Q21 (sales and tax-rate guidance beaten, EBITDA met, 4T21 p.1), 4Q23 (financial guidance met, 4T23 p.1), 4Q25 (profitability expectation exceeded, 4T25 p.1), 2Q26 ("commitments for the year", 2T26 p.1). Numeric 2026 targets, if any, are in [[bimbo-guidance-2026]] `[unverified]` in these releases.
 
 ## 3. Recurring themes by quarter (where to look)

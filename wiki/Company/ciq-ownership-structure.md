@@ -13,6 +13,9 @@ Source:
   - filings/bmv/Reporte Anual 2022 VF.pdf
   - filings/bmv/Reporte Anual 2021_0.pdf
   - filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Jun_26.pdf
+  - filings/capitaliq/OwnerShip/OwnerShip History/SPGlobal_GrupoBimbo,S.A.B.deC.V._OwnershipHistory_10-Oct-2026.xlsx
+  - filings/capitaliq/OwnerShip/OwnerShip Detailed/SPGlobal_GrupoBimbo,S.A.B.deC.V._OwnershipDetailed_10-Oct-2026.xlsx
+  - filings/capitaliq/OwnerShip/OwnerShip CrossHoldings/SPGlobal_GrupoBimbo,S.A.B.deC.V._OwnershipCrossholdings_10-Oct-2026.xlsx
 tags: [Company, ownership]
 ---
 
@@ -20,8 +23,14 @@ tags: [Company, ownership]
 
 S&P Capital IQ (CIQ) ownership exports downloaded **2026-10-06**, priced at the BMV close of **MXN 55.41** (2026-10-06). Holder positions carry their own filing dates (2025-05 to 2026-10). Tidy data: `data/capitaliq/ownership_summary.csv`, `ownership_detailed.csv`, `ownership_history.csv`, `cross_holdings.csv`. Related: [[bimbo-governance-and-ownership]] (filing-based view), [[bimbo-shareholder-returns]], [[ciq-corporate-issuance-history]], [[ciq-public-holdings-and-investments]].
 
+> [!warning] Superseded
+> CIQ does carry the controlling holders in its history: Normaciel, Promociones Monser, Philae, Marlupag and Valacci (plus Sendamos / Distribuidora Comercial Senda in earlier years) appear every year 2007-2024, 2,929m shares or 67.7% of CIQ shares at FY2024. They disappear from the 31-Dec-2025 and Latest columns of the 10-Oct-2026 export, so the 94.5% 'public' figure is an artifact of the 2025 refresh; the warning about using CIQ float and 'public' figures stands [[ciq-ownership-and-holdings-history]].
+
 > [!warning] CIQ misses the controlling shareholders
 > CIQ classifies **94.51%** of shares as "Public and Other" and reports **0 shares excluded from float** (float shown as 100%). The company's share register shows six family-linked holding companies with **72.03%** (RA25 p.181). CIQ float and "public" figures must not be used for liquidity, index-weight or free-float market-cap work. Use the filing-based float below.
+
+> [!warning] Superseded
+> The 10-Oct-2026 refresh changes prices and positions (compiled 2026-10-14): price MXN 55.92 (was 55.41), market cap 240,248, institutions 5.48%; BlackRock 104,061,882 (+179,612); Dimensional 11,969,309 (+710,644; 30-Sep-2026); Deutsche Bank rank 5 (5,018,549); Schwab 4,669,676 rank 6 (-413,613; 1-Oct-2026); State Street 4,428,082 (+35,337); sum of holders 235,410,638. The 06-Oct values in sections 1, 4 and 6 below are the older snapshot [[ciq-ownership-and-holdings-history]].
 
 ## 1. Headline split (CIQ, as of 2026-10-06)
 
@@ -103,6 +112,9 @@ All [sourced] CIQ OwnershipDetailed, sheet 'Ownership Detailed' (97 holder rows,
 
 ## 6. Change over time (CIQ OwnershipHistory, 31-Dec-2025 vs latest)
 
+> [!warning] Superseded
+> In the 10-Oct history the 31-Dec-2025 sum is 237,282,121 (Legal & General restated from 436,791 to 210,791) and the change to Latest is -0.8% [calc]. Vanguard Group Inc. fell from 86.6m (2024) to 52.6m (2025), so the -3.7% shown understates the like-for-like fall; the Latest entity holds 50.65m plus 2.50m under Vanguard Asset Management [[ciq-ownership-and-holdings-history]].
+
 | Holder | 31-Dec-2025 | Latest | Change [calc] |
 |---|---|---|---|
 | BlackRock | 102,522,272 | 104,120,971 | +1.6% |
@@ -141,6 +153,9 @@ All [sourced]. The ADR programme is Level 1 under ticker BMBOY (RA25 p.205) [sou
 | Dividend yield | 1.94% | 1.075 / 55.41 = 1.94% [calc] | ties |
 
 - [[bimbo-governance-and-ownership]] was not yet written when this article was compiled; check its holder table against section 2 once available.
+
+> [!warning] Superseded
+> Partly answered: CIQ shows Sendamos S.A.P.I. de C.V. at 150.0m shares (135.0m in FY2020) in FY2017-FY2021 and, possibly its predecessor, Distribuidora Comercial Senda at 175.0-183.8m in FY2007-FY2015 [unverified]; there is no entry after FY2021, although the Apr-2022 register still listed 150,000,000. Who is behind it remains open [[ciq-ownership-and-holdings-history]].
 
 > [!question] Open items
 > (1) Size of the directors' restricted 1-10% stakes (RA25 p.181) — not quantified in filings. (2) Afore holdings: obtain from CONSAR/BMV or a broker note. (3) Who is behind Sendamos (in the 2022 register, absent from 2023 onward)?

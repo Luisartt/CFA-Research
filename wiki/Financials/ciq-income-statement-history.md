@@ -16,6 +16,11 @@ Source:
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%203T25_VF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/capitaliq/Financials/As-Reported/Cash Flow/SPGlobal_GrupoBimbo,S.A.B.deC.V._CashFlow(AsReported)_19-Sep-2026.xlsx
+  - filings/capitaliq/Financials/As-Reported/Income Statement/SPGlobal_GrupoBimbo,S.A.B.deC.V._IncomeStatement(AsReported)_19-Sep-2026.xlsx
+  - filings/capitaliq/Corporate Issuance/Dividends & Splits/SPGlobal_GrupoBimbo,S.A.B.deC.V._DividendsAndSplits_06-Oct-2026.xlsx
+  - filings/capitaliq/Financials/As-Reported/Balance Sheet/SPGlobal_GrupoBimbo,S.A.B.deC.V._BalanceSheet(AsReported)_19-Sep-2026.xlsx
+  - filings/capitaliq/Estimates/Consensus/SPGlobal_GrupoBimbo,S.A.B.deC.V._Consensus_20-Sep-2026.xlsx
 tags: [Financials, income-statement]
 ---
 
@@ -27,7 +32,14 @@ S&P Capital IQ (CIQ) "Standard" template income statement for BIMBOA, **download
 
 ## 1. What the export contains (read before using)
 
+> [!warning] Superseded
+> True for the Templated sheets only. The As-Reported Cash Flow export is annual (FY1995-FY2025) and Key Stats holds FY2023-FY2025 multiples [[ciq-long-history-income-balance-cashflow]] (CIQ delta 10-Oct-2026).
+
 - ==The export has no annual columns.== Every FY figure below is the **sum of four CIQ quarters** and is tagged `[calc]`. CIQ's Q4 is itself derived (calculation code `Q4` = annual less 9M), so Q1-Q4 sums should equal CIQ's annual figure.
+
+> [!warning] Superseded
+> FY2024 can be built: 9M24 (298,023) plus 4Q24 from the As-Reported income statement (110,312) gives revenue 408,335 (equal to the company), gross profit 215,207 and net income 12,545 (equal to the company). EBITDA and EBIT remain unavailable in CIQ [[ciq-long-history-income-balance-cashflow]].
+
 - ==2024 FQ4 is empty.== The column carries restatement code `DO` and calculation code `NA` and holds no income-statement values (only "Shares per Depositary Receipt" = 4) [sourced] CIQ-IS col DK. FY2024 therefore cannot be built from CIQ; only 9M24 is available. The same gap runs through the cash flow, highlights and ratio sheets ([[ciq-cash-flow-history]], [[ciq-key-ratios-and-performance]]).
 - The two Income Statement files are the same data: the "(1)" copy is a formula-linked version (CIQ plug-in formulas render as `#NAME?` in the header); all 7,800 values match the plain file one-for-one [calc]. Same for the two Financial Highlights files (6,480 values match) [calc].
 - Restatement codes in row 90 (not defined in the file; meaning per CIQ convention, not verified here): from 2020 FQ1 to 2025 FQ2 almost every quarter is `RS` (restated); 2025 FQ3 `NC`; 2025 FQ4 and 2026 FQ2 `O` (original); 2026 FQ1 `RS` [sourced] CIQ-IS rows 90-91. Filing dates in row 16 show each quarter was last taken from the following year's filing (e.g., 2024 FQ1 from the filing of 2025-04-29), i.e. ==CIQ carries the comparative-period restated figures, not the originally published ones==.
@@ -68,6 +80,10 @@ Derived margins `[calc]` (line ÷ Total Revenue, same inputs):
 - FY2022 net income is inflated by discontinued operations (Ricolino sale, 16,586 in CIQ "Earnings of Discontinued Ops." [calc]) and by a non-operating gain CIQ booked in 2022 FQ4 "Other Non-Operating Inc." of 17,887 [sourced] CIQ-IS 2022 FQ4. The company attributes 2022's extraordinary items to the Ricolino sale and the non-cash reversal of the MEPP (multi-employer pension plan) provision [sourced] 4T22 p.2, p.7. CIQ "NI to Common Excl. Extra Items" FY22 = 30,324 [calc].
 - FY2021 in CIQ is the **restated** figure (Ricolino reclassified to discontinued ops): quarterly revenue 76,929 + 81,654 + 85,659 + 94,550 = 338,792 [calc]; see Reconciliation.
 - Interest burden: CIQ net interest expense rose from 8,786 (FY23) to 13,404 (FY25) [calc], +52.6% [calc].
+
+> [!warning] Superseded
+> FY2024 DPS is 1.00 (declared 14-Apr-2025, paid 14-May-2025) per the CIQ Dividends & Splits file [[ciq-long-history-multiples-and-returns]]. Note this is the declared-year basis; CIQ's consensus 'actual' DPS uses a pay-year basis [[ciq-consensus-estimates]].
+
 - Dividends per share sit in the FQ4 column: FY19 0.50; FY20 1.00; FY21 0.65; FY22 0.78; FY23 0.94; FY25 1.075 MXN [sourced] CIQ-IS row 67, FQ4 columns. FY24 not available (empty column). Detail: [[bimbo-shareholder-returns]].
 - Weighted average diluted shares (FQ4 column): 4,679 mn (2019) → 4,326 mn (2025 FQ4) [sourced] CIQ-IS row 64.
 
@@ -125,10 +141,16 @@ Company figures are as published in the FY earnings release or the audited state
 
 - Quarter-level: CIQ shows the restated comparatives, which differ from first publication: 1Q24 93,641 (first published 93,221 [sourced] 1T24 p.8; restated 93,641 in 1T25 p.8); 1Q25 103,448 (first published 103,726 [sourced] 1T25 p.8; restated 103,448 in 1T26 p.9); 2Q25 107,389 (first published 107,503 [sourced] 2T25 p.8; restated 107,389 in 2T26 p.8). 3Q25 107,421 = 3T25 p.8. 4Q25 CIQ 108,706 vs release 108,688 [sourced] 4T25 p.11 → **+18**. 2Q26 105,026 = 2T26 p.8.
 
+> [!note] Clarification
+> 'CIQ carries the restated basis' is true of the Templated income statement only. CIQ Consensus, Surprise and Guidance actuals carry FY2021 as first reported (348,887; EBITDA 49,178). State the file when quoting FY2021 [[ciq-consensus-estimates]], [[ciq-delta-vs-previous-export]].
+
 > [!warning] Superseded
 > FY2021 net sales of 348,887 and adjusted EBITDA of 49,178 [sourced] 4T21 p.2, p.9 were superseded by 338,792 and 47,372 after Ricolino was classified as discontinued [sourced] 4T22 p.3. CIQ carries the restated basis.
 
 ### EBITDA
+
+> [!warning] Superseded
+> The gap is not monotonic and has not always been negative. CIQ income-statement EBITDA is below the company basis only from FY2020 (-4,201, -3,637, -3,358, -2,954 for FY2020-FY2023 and -4,641 for FY2025) and above it in FY2012-FY2019 (+1.4 to +3.2 bn); CIQ EBIT is above the company's by 3.0-6.1 bn in FY2013-FY2019. Do not apply one correction factor across the history [[ciq-long-history-income-balance-cashflow]].
 
 CIQ EBITDA is **not** the company's "UAFIDA Ajustada" (EBITDA before impairments and MEPPs, per 4T22 p.2 footnote 2). The gap is systematic and widening:
 
@@ -162,6 +184,10 @@ Net debt reconciliation: see [[ciq-balance-sheet-history]].
 
 - CIQ income-statement data for BIMBOA are quarterly only; annual figures must be summed, and ==FY2024 is missing because the 2024 FQ4 column is empty==.
 - Revenue and net income tie to company filings to within MXN 11 mn (FY25 revenue) on the restated basis; CIQ carries restated comparatives, not first-published numbers.
+
+> [!warning] Superseded
+> Holds for FY2020-FY2025 only; before FY2020 CIQ EBITDA was above the company basis [[ciq-long-history-income-balance-cashflow]].
+
 - CIQ EBITDA runs MXN 1.8-4.6 bn below company Adjusted EBITDA (FY21-FY25); never mix the two in a leverage or multiple calculation.
 - CIQ EBIT exceeds company operating income by ~MXN 2 bn (FY23, FY25) because CIQ reclassifies restructuring and M&A-related items below EBIT.
 - 1H26 CIQ EBITDA rose 14.8% on 2.6% lower revenue [calc]; LTM-2Q26 CIQ EBITDA margin 13.9% [calc].

@@ -153,6 +153,8 @@ Method: paragraph-level overlap comparison of the risk-factor sections (RA23 →
 > - Whether the MEPP withdrawal liabilities (985) represent plans where exit is "highly probable" or contingent amounts is not itemised by plan; plan names are not in the sources reviewed.
 > - Enterprise-risk view: the integrated report lists "global risks" and mitigation plans (cybersecurity, natural-resource/water crisis, consumption habits, food safety, "Mexican context", workplace safety) without ranking (IC25 p.155 [sourced]); ranking and weighting is a team call.
 
+- See also: [[bimbo-sp-global-esg-score-history]] (S&P recorded the Canada Bread conviction as a 'Minor' controversy in 2023 and dropped it in 2024 although class actions remain open) and [[bimbo-press-release-timeline-2010-2026]] (the 29-Nov-2024 release describes the Maple Leaf claim as misrepresentation in the sale process).
+
 ## Key Takeaways
 
 - The FY2025 risk section is 40 pages (RA25 pp.22–61) and its largest additions versus FY2024 are Mexico-policy items: water-law reform, circular-economy law, energy reform, customs and tax enforcement, labour changes, and the 2026 USMCA review.

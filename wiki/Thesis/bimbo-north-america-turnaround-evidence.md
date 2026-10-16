@@ -125,6 +125,8 @@ Physical footprint facts:
 - 1Q26 group EBITDA margin 14.0% (+160bp) was helped by a gain on the sale of a minority stake in an associate in Mexico, booked in Mexico's EBITDA `[sourced]` 1T26 p.2, p.5-6. NA's 1Q26 +120bp is not affected by it.
 - Translation matters: NA MXN sales fell 13.0% (1Q26) and 9.7% (2Q26) while ex-FX they rose, because of a stronger peso. Closing FX used in the 2T26 debt chart: MXN 17.47/USD (2T26 p.6 note 12), vs 18.38 at Sep 2025 (3T25 p.6) and 20.27 at Dec 2024 (4T24 p.8 note 11) `[sourced]`. See [[bimbo-fx-exposure]].
 
+- See also: [[bimbo-volume-and-price-disclosures]] (the calls also give no North America volume series; they add 2023 category tonnage and the Feb-2026 CFO admission that US volumes were still declining in 2025) and [[bimbo-covid-2020-impact]] (North America sales grew +6% to +11.5% each quarter of 2020, so the later declines are measured against a post-peak base).
+
 ## Key Takeaways
 
 - Evidence of a bottom: NA EBITDA margin hit ==5.9% in 4Q24== (FY24 8.4%, from 10.5% in FY23) and has expanded YoY for four straight quarters to 10.0% in 2Q26 `[sourced]`/`[calc]`.

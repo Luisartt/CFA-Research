@@ -16,6 +16,8 @@ Source:
   - filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf
   - filings/bmv/Reporte Anual 2023_XBRL_VF.PDF
   - filings/bmv/Reporte Anual 2022 VF.pdf
+  - filings/capitaliq/Corporate Issuance/Dividends & Splits/SPGlobal_GrupoBimbo,S.A.B.deC.V._DividendsAndSplits_06-Oct-2026.xlsx
+  - filings/refinitiv/Filings/Receipt Date - 2026-Jul-24 - BIMBOA.MX - Grupo Bimbo SAB de CV - Half Year Presentation - gb investor ppt 2q26 vf 0 pdf - cr22276039.pdf
 tags: [Valuation, consensus]
 ---
 
@@ -57,6 +59,9 @@ FY2025 "actual" column = CIQ actual `[sourced]` same file; reconciled to company
 ## 2. Per-share consensus (MXN)
 
 `[sourced]` CIQ Consensus 20-Sep-2026, sheet 'Consensus', rows 20–99; EPS Normalized also in CIQ Detailed Estimates, sheet 'Detailed Estimates', rows 27–37 (identical values).
+
+> [!warning] Superseded
+> CIQ consensus 'actual' DPS is a pay-year series (0.00 for FY2014, FY2015, FY2019 and FY2021; 1.30 for FY2022). On a declared-year basis FY2025 DPS is 1.075 and payout 41.7% [calc]; FY2026E of 1.01 is below the 1.075 already declared and paid in May-2026 [[ciq-guidance-and-estimate-history]], [[ciq-long-history-multiples-and-returns]].
 
 | Item | FY2025A | FY2026E | FY2027E | FY2028E |
 |---|---|---|---|---|
@@ -106,8 +111,14 @@ FY2026 revision path (announcement date: revenue / EBITDA / capex, MXN millions)
 - 15-Jun-2026: unchanged revenue and EBITDA / capex 20,640–24,080 (same USD range at a new FX rate `[calc]`).
 - 23-Jul-2026: unchanged revenue / 60,465–64,470 / ==17,520–21,024 (≈US$1.0–1.2bn)==.
 
+> [!warning] Superseded
+> Resolved: the CIQ FY2026 figures tie to the investor decks, which carry quantified guidance (raised in July 2026) [[bimbo-investor-presentations-2024-2026]], [[bimbo-guidance-vs-delivery-2011-2026]]. A transcript is no longer needed to confirm that guidance exists.
+
 > [!warning] Cross-check against [[bimbo-guidance-2026]]
 > That article finds ==no quantified FY2026 guidance in the company filings== (releases 4T25, 1T26, 2T26; RA25). The CIQ figures above therefore cannot be tied to a filing page; CIQ derives them from management statements (most likely earnings calls or presentations, not in `filings/`). The percentage, margin and USD readings in the table are back-solved `[calc]`, not quoted. Treat them as `[sourced]` to CIQ but `[unverified]` against the company until a call transcript or presentation confirms the wording. The FY2025 capex outcome is consistent in direction: company reported capex of about US$1,200m `[sourced]` 4T25 release p.2; CIQ actual 22,529 `[sourced]` CIQ Surprise row for Capital Expenditures.
+
+> [!note] Clarification
+> Extension: guidance versus actual is available for FY2018-FY2026. The last EBITDA guide was missed in FY2022-FY2024 and beaten in FY2025; the first guide was too high in FY2023 (-4.8%), FY2024 (-2.4%) and FY2025 (-10.0%) [[ciq-guidance-and-estimate-history]].
 
 FY2024–FY2025 guidance history (context) `[sourced]` CIQ Guidance (1): FY2025 revenue guidance started at ≥449,169 (= +10% vs FY2024 `[calc]`) on 27-Feb-2025, cut to 436,918–445,085 (+7% to +9%) on 29-Apr-2025 and to 424,668–432,835 (+4% to +6%) on 24-Jul-2025; FY2025 actual 426,952 landed inside the last range. FY2025 EBITDA guidance moved from ≥66,028 to 56,029–58,802; actual 59,456 was +1.1% above the top `[sourced]` CIQ Guidance row 49.
 
@@ -140,6 +151,10 @@ CIQ actuals `[sourced]` CIQ Surprise 20-Sep-2026, sheet 'Surprise' (rows for Rev
 | 2025 | Net debt | 149,031 | ==145,128== | ==+3,903 (+2.7%)== | RA25 p.299; EEFF25 p.75 |
 
 Differences `[calc]` = CIQ − filing. Notes:
+
+> [!note] Clarification
+> Consensus, Surprise and Guidance actuals carry FY2021 as first reported (348,887; EBITDA 49,178), whereas the Templated income statement carries the restated 338,792; both are correct for their file [[ciq-income-statement-history]], [[ciq-delta-vs-previous-export]].
+
 - Net sales, Adj. EBITDA and net income match to the million in every year on an as-first-reported basis. CIQ does ==not== carry the 2021 restatement for the Ricolino divestment.
 - Net debt matches through FY2023 but CIQ is higher by 1,200 (FY2024) and 3,903 (FY2025). Company net debt = total debt minus cash (FY2025: 153,663 − 8,535 = 145,128 `[calc]` from 4T25 p.9 and RA25 p.299). The source of CIQ's extra amount is not shown in the export `[unverified]` (possibly a different debt or derivative scope).
 - FY2022 CIQ "EPS Normalized" actual is 6.81 while CIQ "Net Income Normalized" actual equals GAAP net income (46,910); the two CIQ normalized fields are not consistent with each other `[calc]` 46,910 / about 4.4bn shares ≈ 10.6, close to CIQ EPS (GAAP) 10.54.

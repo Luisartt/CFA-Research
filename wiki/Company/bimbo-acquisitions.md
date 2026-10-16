@@ -11,12 +11,18 @@ Source:
   - filings/annual/IA25_GB_Celebramos_ESP_200826.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
+  - filings/bmv/infoanua_0.pdf
+  - filings/bmv/BIMBO_Reporte_Anual_2015_FINAL.pdf
+  - filings/annual/INFORME ANUAL 2007.pdf
 tags: [Company, m-and-a]
 ---
 
 # Acquisitions and divestitures, FY21 to 2Q26
 
 **Citation key.** `RA25`/`RA24`/`RA23`/`RA22`/`RA21` = annual reports to BMV for that fiscal year (`filings/bmv/...`); `p.` = PDF page index (equals the "N de 205" footer up to p.207 in RA25; later pages are the unnumbered statements). `IA25-EEFF` = audited FY25 statements; `Celebramos` = FY25 integrated report; `BMV-2Q26` = 2Q26 quarterly filing. MXN millions unless stated. IFRS. Latest data point: 2Q26 (period ended 2026-06-30).
+
+> [!warning] Superseded
+> The statement that individual purchase prices are not disclosed in the annual reports holds only for FY21 onward. Earlier annual reports and deal documents print prices: FY1998-FY2007 (Weston USD 610m, Plus Vita USD 63.5m, Joyco MXN 290m and others) [[bimbo-history-1998-2007]]; FY2009-FY2011 (Weston, Sara Lee, Iberia, Fargo, with multiples) [[bimbo-history-2008-2013]]; FY2014-FY2020 (Canada Bread CAD 1,830m, Panrico EUR 190m agreed and EUR 214m paid, East Balt US$650m, Mankattan US$200m) [[bimbo-history-2014-2020]]. Deal-level multiples: [[bimbo-major-deals-terms]] (Canada Bread 9.3x EV/EBITDA, Sara Lee 9.1x on US$709m EV). The FY21+ gap is a change in disclosure practice.
 
 **What the filings disclose, and what they do not.** Dates, targets, stakes, segments and business descriptions are disclosed. **Individual purchase prices are not disclosed in the annual reports** (the notes give the aggregate cash paid and a preliminary purchase-price allocation per year). Where a deal-level figure is shown below it is derived from the allocation tables and tagged [calc]. Deal-level prices would have to come from press releases or the team's own sources.
 

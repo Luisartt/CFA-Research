@@ -13,6 +13,7 @@ Source:
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Proxies/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30.pdf
 tags: [Financials, cash-flow]
 ---
 
@@ -72,6 +73,9 @@ Notes:
 - CFO FY22 fell as cash tax rose to 11,824 (7,578 in FY21) and working capital reversed to −2,737 (+5,451 in FY21) `[calc]`; FY23 CFO is the low point (31,411) on cash tax of 13,831 and a 6,542 working-capital outflow `[sourced]` RA23 EEFF p.11.
 
 ## 2. Capex, acquisitions and shareholder returns
+
+> [!warning] Superseded
+> The 2026 dividend per share is MXN 1.075, not 1.75 (AGM notice; typo in the BMV Jun-26 filing); total 4,626.7m unchanged [[bimbo-agm-dividends-and-buybacks]]. This also applies to the bullets on 'MXN 1.75' below and in Key Takeaways.
 
 | | FY2021 | FY2022 | FY2023 | FY2024 | FY2025 | 1H25 | 1H26 | Tag / source |
 |---|---|---|---|---|---|---|---|---|

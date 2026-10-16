@@ -6,6 +6,7 @@ Source:
   - filings/annual/IA25_GB_Celebramos_ESP_200826.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/annual/INFORME ANUAL 2007.pdf
 tags: [Company, brands]
 ---
 
@@ -23,6 +24,9 @@ tags: [Company, brands]
 ## 2. Brand register (as listed in the annual report)
 
 Brand lists are those named by the company [sourced] RA25 p.83-87, p.100-101.
+
+> [!note] Clarification
+> Fargo (Argentina) was only a 30% indirect holding through FY2007 and its owner was in insolvency proceedings from Jun-2002, with a creditor agreement on 28-Nov-2007 [[bimbo-history-1998-2007]] (FY2007 annual report p.26). The brand list above is the RA25 position.
 
 | Region / segment | Named brands |
 |---|---|

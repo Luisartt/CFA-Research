@@ -26,6 +26,10 @@ All CIQ figures below: [sourced] CIQ SegmentAnalysis, sheet 'Segment Analysis'. 
 | Geographic | North America, Mexico, Latin America, Europe Asia & Africa (EAA), Elimination Consolidated, Segment Adjustment | Revenue, EBITDA, operating income, total assets (most quarters); gross profit (sporadic); net income, interest, tax, D&A (FQ1/FQ4 of some years only) |
 
 - The sheet's third block ("Segments", rows 180+) is a re-layout of the same numbers; it was checked cell-for-cell against the first two blocks (identical) and not re-extracted.
+
+> [!note] Clarification
+> Extension: the same sheet also holds regional net sales FY2003-FY2005 and FY2015-FY2018, EBITDA FY2015-FY2018 and total assets since 2001 [[ciq-segment-and-geography-long-history]]; Iberia revenue exists only for 2012 FQ1-2013 FQ1 (assets 2011 FQ4-2014 FQ1). The 'EAA from 2016FQ2' label is a CIQ convention: the company introduced the EAA label with the 1H17 release and recast the 2Q16 comparative then (EAA 2,346 vs Europe 2,116 first reported) [[bimbo-income-statement-fy14-fy20]].
+
 - **Label history** [sourced]: "Foreign" 2007FQ3–2010FQ3; "Iberia" 2011FQ4–2014FQ1; "Europe" 2013FQ4–2016FQ1; EAA from 2016FQ2. One stray "Europe" label in 2023FQ3 (revenue 9,919) is the EAA value for that quarter — it is treated as EAA below [calc check: FY23 EAA 30,626 + 9,919 = 40,545 = company 40,545].
 - CIQ "EBITDA" by region **equals the company's Adjusted EBITDA** (UAFIDA Ajustada, pre-MEPP charges): FY25 North America 17,117 and Mexico 31,630 match the 4T25 release p.6 exactly.
 - The geographic header skips 2008FQ1, 2009FQ1–FQ2 and 2011FQ1–FQ2; geographic **2024FQ4 is entirely "NA"** (all regions, all metrics), and the line-of-business block is also NA for 2024FQ4 except total assets.
@@ -143,6 +147,10 @@ All [sourced]. North America's share of regional assets (before eliminations) fe
 
 - CIQ regional data cover North America, Mexico, EAA and Latin America quarterly from 2016FQ2 (EAA label) with good tie-out to company releases for FY21, FY23 and FY25 (differences ≤17 per region).
 - CIQ regional "EBITDA" equals company Adjusted EBITDA; FY25 margins [calc]: Mexico 20.4%, EAA 10.8%, North America 9.0%, Latin America 8.0%.
+
+> [!warning] Superseded
+> Mexico was already larger in FY2015-FY2019 (for example 18,200 vs 12,994 in FY2018); North America led only in FY2020-FY2021 [[ciq-segment-and-geography-long-history]].
+
 - Mexico overtook North America as the largest Adj. EBITDA contributor from FY22 (FY25: 31,630 vs 17,117), while North America margin fell from 12.9% (FY20) to 9.0% (FY25).
 - Data gaps: 2024FQ4 is NA in both segment blocks; eliminations only appear in FQ1/FQ4; 2026FQ1 has a −8,545 "Segment Adjustment" that breaks the geographic subtotal.
 - Do not use CIQ for Mexico FY22 sales (−3,667 vs company) or FY23 net income (+7,285 vs company).

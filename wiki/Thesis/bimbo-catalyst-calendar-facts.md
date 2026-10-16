@@ -24,6 +24,10 @@ Source:
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Proxies/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Feb-26 - BIMBOA.MX - Grupo Bimbo SAB de CV - Full Year Presentation - Q4 2025 presentation - cr21198567.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Apr-30 - BIMBOA.MX - Grupo Bimbo SAB de CV - Quarterly Presentation - first quarter investor presentation - cr21571676.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Jul-24 - BIMBOA.MX - Grupo Bimbo SAB de CV - Half Year Presentation - gb investor ppt 2q26 vf 0 pdf - cr22276039.pdf
 tags: [Thesis, catalyst-calendar]
 ---
 
@@ -52,6 +56,9 @@ Release dates printed on each earnings release cover (4Q21: call date).
 - Quarterly BMV filings (XBRL "Reporte Definitivo") accompany each release (2T26: Jun_26 p.2).
 
 ## 2. Corporate and shareholder-meeting calendar
+
+> [!warning] Superseded
+> The AGM dividend is MXN 1.075 per share, not 1.75 (AGM notice of 13-Apr-2026; the 1.75 is a typo in the BMV Jun-26 filing) [[bimbo-agm-dividends-and-buybacks]]; the same applies to the later bullet on shareholder returns.
 
 | Date | Fact | Source |
 |---|---|---|
@@ -144,6 +151,9 @@ Note: the 2024-25 acquisition dates come from a scrambled PDF table in RA25 p.77
 - **US tariffs**: on 2 Apr 2025 reciprocal tariffs announced; goods imported from Mexico that do not meet USMCA origin rules face a 25% tariff, per the company's risk factor `[sourced]` RA25 p.53. Product moved from Mexico to NA is a margin driver management cited in 2023-24 (see [[bimbo-north-america-turnaround-evidence]]).
 - **Football World Cup 2026**: management cited a (smaller) sales benefit in 2Q26 in NA and Mexico `[sourced]` 2T26 p.3, p.5. Dates are not in the filings.
 - **Mexico investment plan**: more than US$2,000 mm of investment in Mexico 2025 to 2028, announced with 2Q25 `[guidance]` 2T25 p.2.
+
+> [!warning] Superseded
+> Numeric FY2026 guidance exists in the decks and was raised in July 2026 [[bimbo-investor-presentations-2024-2026]], [[bimbo-guidance-vs-delivery-2011-2026]].
 
 > [!question] Open items for the team
 > (1) Official date of the 3Q26 earnings release. (2) Outcome of the July 2026 USMCA review and any new tariff steps after 23 Jul 2026. (3) Whether Bimbo 23-2L (24 Jul 2026) and the 11 Aug 2026 BofA instalment were repaid from cash or refinanced. (4) Numeric 2026 guidance, if any: see [[bimbo-guidance-2026]]; none appears in the releases.

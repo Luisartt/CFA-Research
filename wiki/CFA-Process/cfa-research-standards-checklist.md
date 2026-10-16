@@ -27,13 +27,13 @@ Working standards for the BIMBOA team, drawn ==only from project files== (`AGENT
 
 Team per `company-profile.yaml` `[sourced]`:
 
-| Member | Role in profile |
-|---|---|
-| Luis Arturo Romo Alba | captain (all) |
-| Diego Benavides Pro | not assigned yet |
-| Alexa Garcia Saldivar | not assigned yet |
-| Jorge Alejandro Gaytan | not assigned yet |
-| Carolina del Rosario Benites | not assigned yet |
+| Member                       | Role in profile    |
+| ---------------------------- | ------------------ |
+| Luis Arturo Romo Alba        | captain (all)      |
+| Diego Benavides Pro          | ESG                |
+| Alexa Garcia Saldivar        | Financials         |
+| Jorge Alejandro Gaytan       | Risks              |
+| Carolina del Rosario Benites | Business Overview  |
 
 > [!question] Four of five members have no assigned role. Assigning owners (for example model, valuation, industry, risks/ESG) would help the team defend its sections in Q&A, but the team decides, not the assistant.
 

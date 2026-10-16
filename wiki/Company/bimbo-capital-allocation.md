@@ -11,6 +11,11 @@ Source:
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Transcript & Presentation/Bimbo_2022-07-21_EP_Q2-2022-Earnings-Call/Bimbo_2022-07-21_EP_Q2-2022-Earnings-Call.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Transcript & Presentation/Bimbo_2023-02-22_EP_Q4-2022-Earnings-Call/Bimbo_2023-02-22_EP_Q4-2022-Earnings-Call.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Jul-24 - BIMBOA.MX - Grupo Bimbo SAB de CV - Half Year Presentation - gb investor ppt 2q26 vf 0 pdf - cr22276039.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Proxies/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30.pdf
+  - filings/bmv/Grupo-Bimbo-Reporte-Anual-2020-BMV.pdf
 tags: [Company, capital-allocation]
 ---
 
@@ -21,6 +26,10 @@ tags: [Company, capital-allocation]
 ## 1. Stated financial policy
 
 The company describes its financial policy as [sourced] RA25 p.81-82: (a) a strong, resilient balance sheet; (b) efficient working capital; (c) flexibility and significant liquidity backed by a **US$2,350 million committed revolver**; (d) a reinvestment focus that prioritises growth and long-term profitability; (e) conservative risk-management guidelines. Ratings are cited as BBB+ (S&P and Fitch) and Baa1 (Moody's), described as the best-rated among global peers [sourced] RA25 p.82.
+
+> [!warning] Superseded
+> Numeric leverage targets were given on earnings calls and decks (compiled 2026-10-14): below 2x (2012-2014), at or slightly below 3x (Dec-2018), about 2.5x (Feb-2019), 2.0-2.5x net debt/EBITDA (Apr-Jul 2022 and Feb-2023) and around 2.5x (Oct-2024) [[bimbo-leverage-and-deleveraging-commentary]]. Numeric FY2026 sales, margin and capex guidance also exists in the investor decks [[bimbo-investor-presentations-2024-2026]]; see [[bimbo-guidance-vs-delivery-2011-2026]]. A payout ratio and a yearly buy-back ceiling are still not stated anywhere reviewed.
+> The claim below is about annual reports and releases only.
 
 - No numeric dividend payout, leverage target or buy-back ceiling in pesos per year is stated in the annual report or releases reviewed. What exists: a shareholder-approved **buy-back reserve of 15,200** (nominal value) [sourced] RA25 p.309, and the dividend practice described in §4.
 - The CFO frames FY25 as having "advanced" the "gradual deleveraging phase": net debt/Adj. EBITDA 2.7x, down 0.2x [sourced] 4T25 p.1-2. Deleveraging continued to 2.5x at 30 June 2026 [sourced] 2T26 p.1-2, p.6.
@@ -84,6 +93,9 @@ Deal list with dates and rationale: [[bimbo-acquisitions]]. 1Q26: gain on the sa
 
 **Practice** [sourced] RA25 p.121: the board proposes and the ordinary AGM approves the dividend; Bimbo has historically paid dividends out of each period's profits and expects to continue but does not guarantee it. Dividends are paid from the net tax profit account (CUFIN 130,698 at end-2025) [sourced] RA25 p.121, p.308-309; additional 10% withholding on dividends to individuals and foreign residents (profits since 2014) [sourced] RA25 p.121. Legal reserve fully funded at 500 [sourced] RA25 p.121.
 
+> [!note] Clarification
+> The 2020 cash-flow statement shows dividends paid of 2,433 (not 2,286) because 147 went to non-controlling interests [[bimbo-cash-flow-and-capex-fy14-fy20]] (RA20 PDF p.197-198). The 2,286 above is the amount declared on the 0.50 per share.
+
 | Dividend | Approved / paid | MXN m | MXN per share | Cite |
 |---|---|---|---|---|
 | 2020 | AGM 29 Apr 2020, paid 12 May 2020 | 2,286 | 0.50 | [sourced] RA22 p.306 |
@@ -94,6 +106,9 @@ Deal list with dates and rationale: [[bimbo-acquisitions]]. 1Q26: gain on the sa
 | 2024 | AGM 30 Apr 2024, paid from 14 May 2024 | 4,125 | 0.94 | [sourced] RA25 p.308 |
 | 2025 | AGM 30 Apr 2025, paid from 14 May 2025 | 4,316 | 1.00 | [sourced] RA25 p.308 |
 | 2026 | AGM 30 Apr 2026, paid from 13 May 2026 | 4,627 | stated "1.75" | [sourced] BMV-2Q26 p.97 |
+
+> [!warning] Superseded
+> The 30-Apr-2026 AGM notice and proposal show a dividend of MXN 1.075 per share (the 1.75 in the BMV filing is a typo); the MXN 4,627m total is unchanged [[bimbo-agm-dividends-and-buybacks]]. CIQ also records 1.075 [[ciq-corporate-issuance-history]].
 
 > [!question] The 2026 dividend: the 2Q26 filing says MXN 4,626,695 thousand, "that is 1.75 pesos per share" [sourced] BMV-2Q26 p.97. Divided by the 4.30 billion shares that is ~1.08 pesos per share [calc] 4,626.7 / 4,296.3 (shares outstanding at 30 Jun 2026) and the 2Q26 release says only ">5,000" went to shareholders through dividends plus buybacks in 1H26 [sourced] 2T26 p.1-2. Either the per-share figure is a typo or the amount is a partial instalment. Confirm against the AGM notice and company press release.
 

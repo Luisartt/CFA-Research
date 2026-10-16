@@ -1,6 +1,8 @@
 ---
 Writer: AI-compiled (Claude)
 Source: filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf, filings/bmv/GB_RA_2024_BMV_VFF1_0.pdf, filings/bmv/Reporte Anual 2023_XBRL_VF.PDF, filings/bmv/Reporte Anual 2022 VF.pdf, filings/bmv/Reporte Anual 2021_0.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Jun_26.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Mar_26.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Proxies/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Registration Statements/Bimbo_2016-04-12_F6_Periodo-2016-04-12/Bimbo_2016-04-12_F6_Periodo-2016-04-12.pdf
 tags: [Valuation, shareholder-returns]
 ---
 
@@ -12,6 +14,10 @@ Dividends per share, payout, buybacks, share count and listing data, FY21 to 2Q2
 
 - Series "A" common shares, no par value, registered in the RNV and listed on the BMV under **BIMBO** since February 1980 (IPO); in the IPC index since 1-Feb-1999 [sourced RA25 p.20].
 - Classified "high liquidity" by the BMV liquidity index; part of the IPC Sustentable index since 2011; no market maker at the report date; trading never suspended in the past four years [sourced RA25 p.20].
+
+> [!warning] Superseded
+> The ADR ratio and depositary are now sourced: depositary Citibank, N.A.; each ADS = 4 Series A shares; Form F-6 filed 11-Apr-2016 [[bimbo-agm-dividends-and-buybacks]].
+
 - **ADR:** sponsored Level 1 programme in the US, ticker **BMBOY**, established May 2016 (OTC, not exchange-listed) [sourced RA25 p.73–74, p.78]. The ADR-to-share ratio and depositary are not stated in the filings [unverified].
 - Only Series A shares are issued (4,327,482,333 issued at Dec-25) [sourced RA25 p.308]; the variable-capital Series B and limited-voting shares allowed by the by-laws are not issued.
 - Market capitalisation at 31-Dec-2025: **MXN 254,496m** [sourced RA25 p.20]; cross-check [calc]: 59.12 close x 4,304.744m shares = 254,496.6.
@@ -48,6 +54,9 @@ Sources [sourced]: 2021 and 2022 declarations RA22 p.305–306; 2021 DPS RA21 p.
 
 > [!warning] 2022 dividend count differs by source
 > The FY22 annual report headline (RA22 p.14, p.121) and FY23 table (RA23 p.25) show DPS of 0.65 for 2022, but the equity note records **two** 0.65 distributions in 2022 (April AGM, MXN 2,909m; November 17 meeting, MXN 2,882m) (RA22 p.306). Total 1.30 is a [calc]; confirm which figure drives any "dividend growth" calculation.
+
+> [!warning] Superseded
+> Resolved: the AGM notice and proposal show MXN 1.075 per share (the 1.75 is a typo in the BMV filing); the total of 4,626.7m is unchanged [[bimbo-agm-dividends-and-buybacks]]. CIQ also records 1.075 [[ciq-corporate-issuance-history]].
 
 > [!warning] 2026 dividend per share looks inconsistent
 > The Jun-26 BMV filing says the 30-Apr-2026 AGM declared MXN 4,626.7m, "that is $1.75 per share" (BMV Jun-26 p.97). 4,626.7 / 4,296.3m shares outstanding = **MXN 1.08 per share** [calc]; 1.75 x 4,296m would be about MXN 7,518m [calc]. Either the per-share figure or the total is mis-stated. The 2Q26 release says only that more than MXN 5,000m was returned in 1H26 through dividends and buybacks (2Q26 p.1–2). Verify with the AGM notice or the BMV relevant-event filing before using a 2026 DPS.
@@ -101,6 +110,9 @@ All sourced except where marked. Issued shares fall each year only because treas
 - Net reduction in outstanding shares Dec-21 to Jun-26: 178,784,776 shares, or 4.0% [calc: 4,475,068,991 − 4,296,284,215]. Dec-24 to Jun-26: 31,198,118 shares [calc: 4,327,482,333 − 4,296,284,215].
 - Basic and diluted EPS are identical (no dilutive instruments): 1H26 0.68 in 2Q26 and 1.23 for six months (vs 0.65 and 1.07 in 2025) [sourced BMV Jun-26 p.14].
 - Basic EPS (MXN): FY21 3.55; FY22 10.54 (incl. Ricolino gain); FY23 3.50; FY24 2.92 (the FY25 report shows 2.88 in its explanatory table, RA25 p.122); FY25 2.58 [sourced RA22 p.14; RA25 p.16, p.122].
+
+> [!warning] Superseded
+> The ADR ratio is now sourced (4 shares per ADS; Citibank) [[bimbo-agm-dividends-and-buybacks]].
 
 > [!question] To confirm with filings outside this set
 > Weighted-average share count by period and the ADR ratio are not in the extracted text. The ownership split (founding-family trusts, free float) sits in [[bimbo-governance-and-ownership]]; if the team needs free float for market-based comparisons, an external source is needed.

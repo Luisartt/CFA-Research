@@ -17,12 +17,19 @@ Source:
   - filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Mar_26.pdf
   - filings/annual/IA25_GB_EEFF_V10.pdf
   - filings/annual/IA25_GB_Celebramos_ESP_200826.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Feb-26 - BIMBOA.MX - Grupo Bimbo SAB de CV - Full Year Presentation - Q4 2025 presentation - cr21198567.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Apr-30 - BIMBOA.MX - Grupo Bimbo SAB de CV - Quarterly Presentation - first quarter investor presentation - cr21571676.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Jul-24 - BIMBOA.MX - Grupo Bimbo SAB de CV - Half Year Presentation - gb investor ppt 2q26 vf 0 pdf - cr22276039.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Proxies/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30.pdf
 tags: [Financials, guidance]
 ---
 
 # Grupo Bimbo — Management Guidance and Forward-Looking Statements (as of 2Q26)
 
 Every forward-looking statement found in the company's releases and filings, dated and tagged. Latest document: 2Q26 release of ==23-Jul-2026==. Units: MXN millions unless stated. Related: [[bimbo-quarterly-trend-4q21-2q26]], [[bimbo-cash-flow-and-fcf]], [[bimbo-balance-sheet-and-leverage]], [[bimbo-management-narrative-timeline]], [[bimbo-capital-allocation]], [[bimbo-north-america-turnaround-evidence]].
+
+> [!warning] Superseded
+> Numeric FY2026 guidance exists in the investor decks and call slides, and was raised in July 2026 (compiled 2026-10-14): net sales growth ex-FX mid-single digit, adjusted EBITDA margin +70-120 bp (from +60-110 bp in April), capex cut to US$1.0-1.2bn, inflation assumption US$70-90m, Ps. 17.60/US$ [[bimbo-investor-presentations-2024-2026]] (2Q26 deck p.23); path and track record in [[bimbo-guidance-vs-delivery-2011-2026]]. The finding below holds only for earnings releases, the annual report and BMV filings.
 
 > [!warning] No numeric FY2026 guidance in the files
 > A keyword search of all 19 earnings releases, the FY25 BMV annual report (RA25), the 2025 integrated report and the 1Q26/2Q26 BMV filings found ==no quantified full-year 2026 guidance== (no sales growth, EBITDA, margin, capex, tax-rate or leverage target) `[calc]` text search of the extracted documents for guía, guidance, esperamos, se espera, perspectiva, estimamos. The releases do say that guidance existed in earlier years (FY21 and FY23), but the numbers are not in the documents provided. Numeric guidance is normally given on the earnings call or in the investor presentation; neither is in `filings/` `[unverified]`.
@@ -44,7 +51,13 @@ Every forward-looking statement found in the company's releases and filings, dat
 | 2026 (integrated report, file stamped Aug-2026) | IA25 CEO letter (about p.10–11) `[unverified]` page | Work continues so that the rest of the portfolio is free of artificial colours in 2026 | `[guidance]` (non-financial) |
 | 2025-02-27 | 4Q24 release cover (CEO quote) | The North America transformation project is expected to deliver benefits gradually in the second half of 2025 | `[guidance]` (tested below) |
 
+> [!warning] Superseded
+> Per-share amount corrected: the AGM notice shows MXN 1.075 per share, not 1.75; total 4,626.7m unchanged [[bimbo-agm-dividends-and-buybacks]]; CIQ also records 1.075 [[ciq-corporate-issuance-history]]. The same applies to the 'dividend MXN 1.75' bullet in Key Takeaways.
+
 Dividend and capital-return facts for 2026 (decisions, not guidance): the 30-Apr-2026 shareholders' meeting decreed a dividend of MXN 1.75 per share (4,626.7m total, paid from 13-May-2026) and cancelled 22,738,214 treasury shares `[sourced]` BMV Jun-26 equity note (i)–(ii); 1H26 returns to shareholders exceeded 5,000 `[sourced]` 2Q26 release p.1. In Feb-2026 the company issued 12,000 of peso notes (7,867 fixed 9.22% due 2035; 4,133 floating due 2030) for refinancing `[sourced]` EEFF25 note 27. The sustainability linkage of the US$2,350m revolver ended on 1-Jan-2026 because its 2025 targets expired `[sourced]` IA25 financing section.
+
+> [!warning] Superseded
+> Answered in part: the commitments are the decks' FY2026 guide (sales ex-FX mid-single digit, margin +70-120 bp, capex US$1.0-1.2bn, slight deleveraging by Dec-2026) [[bimbo-investor-presentations-2024-2026]], [[bimbo-guidance-vs-delivery-2011-2026]]. Call transcripts were not needed for the numbers.
 
 > [!question] What are the commitments of the year?
 > The CFO's 2Q26 remark about meeting our commitments for the year implies a set of 2026 targets that the filings do not disclose. The team should obtain the 2Q26 and 4Q25 call transcripts or presentation slides (not in `filings/`) to confirm whether the company guided FY26 net sales growth, margin, capex, tax rate and leverage. Until then, any FY26 driver in the model is an `[assumption]`, not guidance.

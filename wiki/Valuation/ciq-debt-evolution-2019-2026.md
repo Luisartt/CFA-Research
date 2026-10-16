@@ -77,6 +77,8 @@ Source:
   - filings/capitaliq/Financials/Templated/Capital Structure Details/2026FQ2 filed Jul 24, 2026/SPGlobal_GrupoBimbo,S.A.B.deC.V._CapitalStructureDetails_19-Sep-2026 (43).xlsx
   - filings/capitaliq/Financials/Templated/Capital Structure Summary/SPGlobal_GrupoBimbo,S.A.B.deC.V._CapitalStructureSummary_19-Sep-2026.xlsx
   - filings/annual/IA25_GB_EEFF_V10.pdf
+  - filings/capitaliq/Estimates/Consensus/SPGlobal_GrupoBimbo,S.A.B.deC.V._Consensus_20-Sep-2026.xlsx
+  - filings/bmv/Reporte-Anual-2019-Grupo-Bimbo-Consolidado_0.pdf
 tags: [Valuation, debt-evolution]
 ---
 
@@ -114,6 +116,9 @@ Instrument amounts: [sourced] CIQ CapitalStructureDetails for the period named, 
 - ==Principal ex leases rose 77% from FY22 to 2Q26 [calc: 154,497 / 84,741 − 1]==, the MXN bond book tripled (17,339 → 51,639) and tenor fell from 15.6 to 9.4 years [calc].
 
 ## 2. Refinancing timeline (from quarterly CIQ files)
+
+> [!note] Clarification
+> The company's opening IFRS 16 lease liability at 1-Jan-2019 is 24,220 (including 3,197 of finance leases), or 21,023 for operating leases alone (RA19 PDF p.209); CIQ's 21,928 at 2019FQ1 is consistent with an operating-only measure [unverified] [[bimbo-balance-sheet-and-debt-fy14-fy20]].
 
 | Period first seen | Event in CIQ data | Amount (MXN m) |
 |---|---|---|
@@ -163,6 +168,9 @@ All rows [sourced] from the CIQ file of the period named unless marked [calc].
 | 2016 | 85,428 | 72,925 | 15 |
 | 2017 | 97,238 | 88,060 | 15 |
 | 2018 | 92,662 | 87,426 | 11 |
+
+> [!warning] Superseded
+> Upgraded to [sourced]: CIQ flags FY1996-FY2011 as 'Mexican GAAP' and FY2012 onward as 'IFRS' (Consensus accounting-standard row), matching the company's 1-Jan-2011 transition date and first IFRS annual report for FY2012 [[bimbo-history-2008-2013]]; CIQ FY2002 and FY2005 debt tie to company notes within 0.4% [[bimbo-balance-sheet-and-debt-fy98-fy07]].
 
 All [calc] sums of the CIQ FY files. Older files are "as reported" under the accounting basis of the time (pre-IFRS for the early years [unverified]) and include oddities (e.g. 2006FY "Receivables of the Stock Exchange", type "Other Borrowings", 6,500); use with care. Step changes in 2009, 2011, 2014 and 2016–2017 line up in time with acquisitions covered in [[bimbo-acquisitions]] [unverified link — CIQ gives no use of proceeds].
 

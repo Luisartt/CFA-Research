@@ -13,6 +13,10 @@ Source:
   - filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf
   - filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Jun_26.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/bmv/infoanua_0.pdf
+  - filings/bmv/Bimbo_ReporteAnual_2010_port_1_0.pdf
+  - filings/annual/INFORME ANUAL 1998.pdf
+  - filings/annual/INFORME ANUAL 1999.pdf
 tags: [Company, corporate-issuance]
 ---
 
@@ -127,7 +131,15 @@ All [sourced]. Subsidiaries: Compañía de Alimentos Fargo NR (previous D, 2003)
 
 DPS and dates [sourced] CIQ, sheet 'Dividends & Splits'. Current yield 1.94% (BMV) and 2.09% (ADR) [sourced] = 1.075 / 55.41 [calc]. ADR distributions (labelled "Mex$" by CIQ) were 4.3359 in 2026 and 4.0134 in 2025 [sourced], about 4x the share DPS [calc].
 - ==The CIQ 2026 DPS of 1.075 resolves the conflict flagged in [[bimbo-shareholder-returns]]==: the Jun-26 BMV filing's "1.75 per share" is inconsistent with its own MXN 4,626.7m total, while 1.075 reconciles to it [calc].
+
+> [!warning] Superseded
+> The filings show a 4-for-1 split effective 29-Apr-2011 (issue 2011-I) and a 4-for-1 split approved 19-Feb-1998 and effective in early March 1998; there was no 20% stock dividend in 1999 (the share count rose in May-1999 through a 54.2m-share cash offering) [[bimbo-history-2008-2013]], [[bimbo-history-1998-2007]]. CIQ's 1.1:1 factor is wrong, and its pre-2011 dividend amounts and the 2010 holdings snapshot are unadjusted for the 2011 split [[ciq-ownership-and-holdings-history]].
+
 - Splits/adjustments [sourced]: 1.1:1 split (ex 2011-04-25), 20% stock dividend (1999-04-29), 1.1:1 split (1998-03-03). Not verified against filings (pre-2021).
+
+> [!note] Clarification
+> True for the CIQ window; the filings show two primary issues in 1998-1999 (27.4m shares in Apr-1998; 54.2m in May-1999) before the 2001 buy-back and the Apr-2002 cancellation of 245.8m treasury shares [[bimbo-history-1998-2007]].
+
 - No primary equity issuance appears in the CIQ files; equity has only shrunk through buybacks and cancellations (see [[ciq-ownership-structure]] for share counts).
 
 ## 7. Reconciliation with company filings

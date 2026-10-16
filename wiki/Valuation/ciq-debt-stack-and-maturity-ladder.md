@@ -6,6 +6,15 @@ Source:
   - filings/capitaliq/Financials/Templated/Capital Structure Details/2025FY filed May 01, 2026/SPGlobal_GrupoBimbo,S.A.B.deC.V._CapitalStructureDetails_20-Sep-2026 (22).xlsx
   - filings/capitaliq/Financials/Templated/Capital Structure Summary/SPGlobal_GrupoBimbo,S.A.B.deC.V._CapitalStructureSummary_19-Sep-2026.xlsx
   - filings/annual/IA25_GB_EEFF_V10.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2017-10-03_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-17/Bimbo_2017-10-03_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-17.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Carpetas Current Reports Bimbo/Bimbo_2026-02-12_PR_S-P-National-Ratings-retiro/Bimbo_2026-02-12_PR_S-P-National-Ratings-retiro.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Carpetas Current Reports Bimbo/Bimbo_2025-03-26_PR_Aviso-de-Tenedores-de-BIMBO-17/Bimbo_2025-03-26_PR_Aviso-de-Tenedores-de-BIMBO-17.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Carpetas Current Reports Bimbo/Bimbo_2026-02-17_PR_Fitch-Retira-Calificacion-de-BIMBO/Bimbo_2026-02-17_PR_Fitch-Retira-Calificacion-de-BIMBO.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2023-05-30_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23/Bimbo_2023-05-30_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2023-05-30_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23L/Bimbo_2023-05-30_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23L.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2023-05-31_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23/Bimbo_2023-05-31_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2023-05-31_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23L/Bimbo_2023-05-31_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23L.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Carpetas Current Reports Bimbo/Bimbo_2025-03-05_PR_Aviso-de-Tenedores-de-BIMBO-23-2L/Bimbo_2025-03-05_PR_Aviso-de-Tenedores-de-BIMBO-23-2L.pdf
 tags: [Valuation, debt-stack]
 ---
 
@@ -45,7 +54,14 @@ Implied USD [calc] = MXN amount ÷ 17.47, the conversion rate implied by the 202
 | Bimbo 26 | 9.22% fixed | 26-Jan-2035 | 7,866.6 |
 | **Total** | fixed portion 9.24% wtd [calc] | | **51,639.1** |
 
+> [!warning] Superseded
+> Confirmed: BIMBO 16 was prepaid at par on 10-Feb-2026 (MXN 8,000m face), described by S&P as part of the refinancing of near-term maturities; S&P withdrew its rating on 12-Feb-2026 and Fitch on 17-Feb-2026 [[bimbo-bond-prospectus-terms]]. The balances below issue size for BIMBO 16 and 17 are carrying values: the March-2025 coupon notice shows MXN 10,000m still outstanding for BIMBO 17.
+
 - Bimbo 16 (7.56%, due 2-Sep-2026) is **absent** at 2026FQ2 and shows 0 at 2026FQ1 [sourced], i.e. it was retired before 31-Mar-2026, ahead of its maturity.
+
+> [!warning] Superseded
+> The +6.0 equals 3,000 x 1.002, the 0.20% redemption premium payable because the 23-2L Scope 3 KPI step was not met [[bimbo-bond-prospectus-terms]], [[bimbo-sustainable-financing]]. A bond notice, not CIQ, is the evidence.
+
 - Bimbo 23-2L carries 3,006.0 vs 3,000 face in the company table at Dec-25 (EEFF25 p.49) — a +6.0 difference [calc] not explained in CIQ. It matured on 24-Jul-2026, the CIQ filing date.
 
 ### 1c. Bank debt and other

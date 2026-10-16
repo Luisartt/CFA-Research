@@ -51,6 +51,10 @@ What the covering analysts say in aggregate: ratings, target prices and the dire
 | 18 months ago | Hold (2.82) | 69.36 | 6.32% | Low (1.00) |
 
 - The mean score improved from 2.92 to 2.58 over 12 months (lower = more positive) and the mean target rose from 65.42 to 70.17 (+7.3%) `[calc]`.
+
+> [!warning] Superseded
+> Year-end consensus target path 2004-2025: 7.75 (2004), 55.24 (2016), 95.14 (2023 peak), 75.34 (2024), 68.58 (2025). The rating consensus was Hold or Outperform every year since 2000 (3.20 in 2013, 3.09 in 2024, 2.58 now) [[ciq-guidance-and-estimate-history]].
+
 - Longer path: the consensus mean target was MXN 94.13 after a change on 21-Jan-2024 and MXN 70.17 after the last change on 27-Aug-2026 (−25.5%) `[sourced]` CIQ Recent Changes, consensus "after" column; `[calc]` change.
 
 ## 3. Rating and target changes (Recent Changes, to 05-Oct-2026)

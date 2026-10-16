@@ -13,6 +13,9 @@ tags: [Valuation, estimate-revisions]
 
 # S&P Capital IQ Estimate Revisions, Trends and Earnings Surprises
 
+> [!warning] Superseded
+> The last dated change in the Recent Changes sheet is 28-Sep-2026 (the header range runs to 05-Oct-2026). The sheet holds 2,368 dated rows from 24-May-2000 [[ciq-guidance-and-estimate-history]].
+
 How sell-side estimates for Grupo Bimbo have moved and how reported results compared with consensus. As-of dates: Revisions and Surprise files ==20-Sep-2026==; Trends and Recent Changes files ==06-Oct-2026== (Recent Changes covers estimate changes to 05-Oct-2026). MXN millions for company items (CIQ Mex$000 / 1,000), MXN for per-share items. Tidy data: `data/capitaliq/revisions.csv`, `trends.csv`, `surprises.csv`, `recent_changes.csv`. Related: [[ciq-consensus-estimates]], [[ciq-sell-side-sentiment-facts]], [[bimbo-quarterly-trend-4q21-2q26]], [[bimbo-north-america-turnaround-evidence]].
 
 ## 1. Consensus drift (Trends, 06-Oct-2026)
@@ -89,6 +92,9 @@ Actual vs estimate, latest two quarters (MXN millions; EPS MXN) `[sourced]` same
 - 1Q26: revenue 100,319 vs 100,772; EBITDA 14,036 vs 13,323; EPS 0.55 vs 0.53.
 - 2Q26: revenue 105,026 vs 106,016; EBITDA 15,113 vs 15,248; EPS 0.68 vs 0.75; net income 2,935 vs 3,324.
 - These actuals match the company releases (1Q26 Adj. EBITDA 14,036; 2Q26 15,113) `[sourced]` [[bimbo-guidance-2026]] section 2 (1T26, 2T26 releases).
+
+> [!warning] Superseded
+> Over the full record since 2004 (79 quarters), EBITDA beat in 52 quarters (median +3.4%) and normalized EPS beat in 36 and missed in 37 [[ciq-guidance-and-estimate-history]]; the 22-quarter rates here cover 1Q21-2Q26 only.
 
 Hit rates `[calc]` from the '%' rows, 22 quarters 1Q21–2Q26: revenue 12 beats / 10 misses; EBITDA 14 / 8; EPS normalized 11 / 11. Since 1Q24 (10 quarters): ==EBITDA beat 6 times (median +3.2%) while EPS normalized beat only twice (median −8.2%)==; revenue beat 4 times (median −0.3%).
 

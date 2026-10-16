@@ -166,5 +166,9 @@ Fleet: the filing prints a header-less vehicle table (delivery 41,901; transport
 - Route model is **geography-dependent**: owned routes in Mexico/LatAm, independent distributors (financed by BBU up to 97.5% of route price, consolidated as structured entities) in the US, Canada and Europe [sourced] RA25 p.100, p.249-250.
 - Plants run well below 24/7 capacity (43%-66% utilization), so volume recovery or footprint consolidation both lift margins [sourced] RA25 p.116-117.
 - Customer concentration is moderate: Walmart ~15% of sales, no other customer >10% [sourced] RA25 p.103.
+
+> [!warning] Superseded
+> Partly superseded: the integrated reports carry a group-level tonnage series (TPE) for FY14-FY25, and North America US-dollar growth by quarter for 2017-2020 [[bimbo-income-statement-fy14-fy20]]; calls and decks add Mexico volume to 2017 and some category tonnage [[bimbo-volume-and-price-disclosures]]. Regional and segment volumes are still not available, and releases still print no numeric price/volume split.
+
 - Pricing is cost-plus-market driven; filings quantify price/mix only qualitatively, so a numeric price/volume bridge must come from outside the filings [sourced] 4T25, 2T26.
 - Data gaps to close: split of distribution and selling expense; headcount by region (only rounded figures in the integrated report); route economics by owned vs independent.

@@ -11,6 +11,7 @@ Source:
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/bmv/Grupo_Bimbo_Reporte_Anual_2013__0.pdf
 tags: [Company, segments]
 ---
 
@@ -177,6 +178,10 @@ LTM inputs [sourced]: 1Q26 EBITDA North America 3,468, Mexico 8,159, EAA 1,116, 
 ## 7. Segment profiles (what is in each, as described in the filings)
 
 **North America (44.6% of FY25 sales, 28.8% of Adj. EBITDA)** [sourced] RA25 p.83-84, p.110
+
+> [!note] Clarification
+> As of FY2013 the annual report placed BBU's head office in Horsham, Pennsylvania (RA13 p.40) [[bimbo-history-2008-2013]]; RA25 states Dallas, Texas, so a relocation occurred (date not in the files reviewed).
+
 - US: BBU is headquartered in Dallas, reaches 50 states and 92% of US households (Circana); named the top supplier of baked goods in the US by Circana in 2025; 54 bakeries. Estimated 7.4% share of US bakery (Global Data, 2024). Barcel USA is the sixth-largest US salty-snack maker by sales (Circana), producing locally and importing from Mexico. Bimbo QSR is based in Ohio.
 - Canada: Bimbo Canada (ex Canada Bread, acquired 2014), 17 bakeries, mostly independent distributors; brands include Dempster's, Villaggio, POM, Vachon; ~13.3% share of Canadian bakery (Global Data, 2024).
 - Transformation programme: record productivity benefits, fewer restructuring costs and margin expansion in FY25 and 2026 [sourced] 4T25 p.2; 2T26 p.2. In 2024 the segment's EBITDA fell 21.8% on value-chain investments and exits from some private-label business [sourced] RA25 p.135, p.137; North America FY25 volumes were pressured by a weak industry consumption backdrop, with share gains in sweet baked goods, snacks and mainstream bread [sourced] 4T25 p.3. In 2Q26 the group says North America gained market share in all US categories, "something that had not happened since 2020" [sourced] 2T26 p.3.

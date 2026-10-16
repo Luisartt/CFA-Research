@@ -1,6 +1,7 @@
 ---
 Writer: AI-compiled (Claude)
 Source: filings/annual/IA25_GB_EEFF_V10.pdf, filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Jun_26.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/refinitiv/Debt & Credit/Debt/Issuer Ratings/IssuerRatings_Grupo Bimbo SAB de CV_Sat Oct 10 2026_T22_21_45.xls
 tags: [Valuation, data-gaps]
 ---
 
@@ -32,6 +33,9 @@ The filings contain company-reported facts, not market data. This article lists 
 > The discount rates above are management's after-tax rates for impairment testing by cash-generating unit. They are a useful sanity check (e.g. US 7.27% vs a WACC built bottom-up) but are not market-derived inputs, and the filing does not say how they were built (RA25 / EEFF25 p.47 only states they use the WACC concept incl. cost of equity and cost of financial debt).
 
 ## 2. External inputs needed (all [unverified] until sourced)
+
+> [!warning] Superseded
+> Item 12 (outlooks) is now closed: LSEG shows S&P negative outlook since 20-Mar-2025, Fitch stable (affirmed 29-Jul-2026) and Moody's stable (15-Nov-2024) [[bimbo-credit-risk-lseg]]. Agency reports and CDS remain open.
 
 | # | Input | Why needed | Status | Suggested public sources (to be cited with date when sourced) |
 |---|---|---|---|---|

@@ -1,6 +1,11 @@
 ---
 Writer: AI-compiled (Claude)
 Source: filings/financing/Grupo Bimbo - Sustainable Financing Framework (April 2023)_ESP_SELLADO.pdf, filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf, filings/bmv/GB_RA_2024_BMV_VFF1_0.pdf, filings/bmv/Reporte Anual 2023_XBRL_VF.PDF, filings/annual/IA25_GB_Celebramos_ESP_200826.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Dic_25.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Jun_26.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2023-05-30_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23/Bimbo_2023-05-30_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2023-05-30_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23L/Bimbo_2023-05-30_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23L.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2023-05-31_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23/Bimbo_2023-05-31_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Prospectus/Bimbo_2023-05-31_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23L/Bimbo_2023-05-31_PROSPECTUS_Aviso-Oferta-Publica-Deuda-BIMBO-23L.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Carpetas Current Reports Bimbo/Bimbo_2023-05-30_PR_Anuncia-la-Existosa-Colocacion-de/Bimbo_2023-05-30_PR_Anuncia-la-Existosa-Colocacion-de.pdf
 tags: [Risks-ESG, sustainable-financing]
 ---
 
@@ -67,6 +72,9 @@ Facts only. The framework PDF is a scanned image (35 pages, no text layer); cont
 
 [sourced unless stated; amounts in the currency shown]
 
+> [!warning] Superseded
+> The 23L adjustment terms are stated in the offer notices: a coupon step-up of +25 bp (9.24% to 9.49%) from the interest period beginning 21-Nov-2031 if the 28% Scope 3 target is not verified as met (about MXN 30m a year); for 23-2L the penalty is redemption at nominal + 0.20% (MXN 6.0m) [[bimbo-bond-prospectus-terms]].
+
 | Instrument | Date and size | Maturity and pricing | Sustainability link | Status per FY2025 reports |
 |---|---|---|---|---|
 | Syndicated RCF (first sustainability-linked) | Sep 2021: USD 1,750 million (SFF p.11) | Five-year facility | KPIs: renewable electricity share and treated-water reuse (SFF p.11) | Superseded by 2023 and 2025 renewals |
@@ -113,6 +121,9 @@ Facts only. The framework PDF is a scanned image (35 pages, no text layer); cont
 | 2026-01-01 | RCF, BBVA, Bank of America and Citi lines no longer classified as SL | RA25 pp.126–127 [sourced] |
 | 2026-07-24 | Bimbo 23-2L matures (after the 2Q26 balance-sheet date) | RA25 p.125; 2Q26 p.53 [sourced] |
 | 2030-12-31 | Observation for Scope 1 (−50%) and Scope 3 (−28%) targets; 23L maturity 2033-05-20 | SFF pp.24–25; RA25 p.125 [sourced] |
+
+> [!note] Clarification
+> The final terms for 23L and 23-2L (step-up mechanics) are now covered in [[bimbo-bond-prospectus-terms]]; the Sustainalytics SPO is still not in the files.
 
 > [!question] Open items
 > - Obtain the Sustainalytics SPO and the bond final terms for Bimbo 23L and 23-2L to confirm KPI definitions, observation date, step-up mechanics for 23L, and notification dates (not in the sources reviewed).

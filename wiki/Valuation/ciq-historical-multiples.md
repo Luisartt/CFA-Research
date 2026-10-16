@@ -83,11 +83,18 @@ Year-end quarter (4Q) average, TEV / LTM EBITDA `[sourced]` CIQ Multiples row 20
 
 Year-end quarter (4Q) average, P / NTM EPS `[sourced]` row 40: 2016 26.48x; 2017 25.92x; 2018 24.84x; 2019 22.50x; 2020 19.29x; 2021 19.83x; 2022 19.76x; 2023 19.23x; 2024 16.70x; 2025 18.06x; then 1Q26 18.26x, 2Q26 18.15x.
 
+> [!note] Clarification
+> The 10-year mean (7.78x) blends regimes: 2000-2008 7.35x, 2012-2018 11.31x, 2019-2026 7.36x [[ciq-long-history-multiples-and-returns]]. Pick the reference regime explicitly.
+
 Position vs history `[calc]`: the 18-Sep-2026 TEV/LTM EBITDA close (6.29x) is ==1.49x below the 10-year mean== (7.78x), about 19% lower, and below every full-quarter average of the last five years (5-year low 6.62x in 2Q26). The NTM P/E close (17.02x) is 4.0x below the 10-year mean (21.04x) and above the 1Q25 low (15.69x).
 
 Data caveats:
 - Price / tangible book is NM in every quarter since 2016 (goodwill and intangibles exceed equity) `[sourced]` rows 52–55.
 - FCF multiples are volatile: FY2023 levered FCF was negative (CIQ FCF actual −2,307 `[sourced]` CIQ Surprise, Free Cash Flow row), so some 4Q23 values are NM or extreme (TEV/unlevered FCF 124.8x average, 159.2x close). Medians are more representative than means for these two rows.
+
+> [!warning] Superseded
+> A long-history mean is meaningful from 1999/2000: TEV/LTM EBITDA mean 8.64x, median 8.03x (2000-2026); 7.35x (2000-2008), 11.31x (2012-2018), 7.36x (2019-2026). Today's 6.29x is the 8th percentile since 2000. Outliers are confined to 1996-1998 (TEV multiples) and 2012-2019 (P/E LTM) [[ciq-long-history-multiples-and-returns]].
+
 - Full history starts in 1994–2001 depending on the multiple; pre-2010 values include extreme outliers (e.g. TEV/LTM revenue 52.96x in 1Q98), so the "all-history" mean is not meaningful and is not shown.
 
 ## 4. Reconciliation of the inputs

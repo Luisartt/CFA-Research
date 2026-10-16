@@ -10,6 +10,9 @@ Source:
   - filings/capitaliq/Financials/Templated/Balance Sheet/SPGlobal_GrupoBimbo,S.A.B.deC.V._BalanceSheet_19-Sep-2026.xlsx
   - filings/capitaliq/Financials/Templated/Cash Flow Statement/SPGlobal_GrupoBimbo,S.A.B.deC.V._CashFlow_19-Sep-2026.xlsx
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
+  - filings/capitaliq/Financials/As-Reported/Cash Flow/SPGlobal_GrupoBimbo,S.A.B.deC.V._CashFlow(AsReported)_19-Sep-2026.xlsx
+  - filings/capitaliq/Financials/As-Reported/Income Statement/SPGlobal_GrupoBimbo,S.A.B.deC.V._IncomeStatement(AsReported)_19-Sep-2026.xlsx
+  - filings/capitaliq/Financials/As-Reported/Balance Sheet/SPGlobal_GrupoBimbo,S.A.B.deC.V._BalanceSheet(AsReported)_19-Sep-2026.xlsx
 tags: [Financials, key-ratios]
 ---
 
@@ -25,6 +28,10 @@ Margins, returns, working-capital days, liquidity and leverage as calculated by 
 - ==The EBITDA inside CIQ's ratios is not the "EBITDA" line of the CIQ income statement.== It equals CIQ EBIT plus cash-flow D&A, annualised: 4Q25 EBIT 11,651 + CF D&A 5,591 = 17,242 [calc]; EBITDA/interest 17,242 ÷ 3,945 = 4.37x (CIQ 4.37) and Total Debt/EBITDA 190,767 ÷ (4 × 17,242) = 2.77x (CIQ 2.77) [calc]. 2Q26 checks the same way (8,827 + 6,097 = 14,924; 189,679 ÷ 59,697 = 3.18x, CIQ 3.18) [calc]. EBIT/interest uses CIQ EBIT directly (4Q25 2.95x) [calc].
 - Leverage ratios use CIQ Total Debt / Net Debt, which **include IFRS 16 leases** ([[ciq-balance-sheet-history]]).
 - Days metrics use CIQ average balances and annualised quarterly revenue / COGS.
+
+> [!warning] Superseded
+> For FY2024, revenue (408,335), gross margin (52.7%) and net margin (3.1%) are computable from the As-Reported income statement, and cash-flow ratios from the As-Reported cash flow (FCF 10,505). EBITDA-based ratios remain unavailable (Key Stats implies 62,141 on CIQ's own ratio definition) [[ciq-long-history-income-balance-cashflow]].
+
 - 2024 FQ4 ratios are `NA` except balance-sheet-only ratios (current, quick, debt/equity, debt/capital, liabilities/assets), because the 2024 FQ4 income statement is empty in CIQ.
 
 ## 2. CIQ ratio snapshot (quarter basis)
@@ -65,6 +72,9 @@ Margins, returns, working-capital days, liquidity and leverage as calculated by 
 - The cash conversion cycle is negative throughout: suppliers are paid ~68-76 days after purchase while receivables plus inventory turn in ~50-54 days combined [sourced] CIQ-PA. It shortened from −25.6 days (4Q23) to −17.4 days (4Q25) as DPO fell 8.3 days [calc].
 
 ## 3. Fiscal-year ratios rebuilt from CIQ statements
+
+> [!warning] Superseded
+> 'FY24 not computable' applies to EBITDA-based ratios only; see the callout on 2024 FQ4 above [[ciq-long-history-income-balance-cashflow]].
 
 `[calc]` from sum-of-quarters P&L and year-end balances ([[ciq-income-statement-history]], [[ciq-balance-sheet-history]]); days on year-end (not average) balances, so they differ from CIQ's quarterly figures. FY24 not computable.
 

@@ -1,6 +1,11 @@
 ---
 Writer: AI-compiled (Claude)
 Source: filings/annual/IA25_GB_Celebramos_ESP_200826.pdf, filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf, filings/bmv/GB_RA_2024_BMV_VFF1_0.pdf, filings/bmv/Reporte Anual 2023_XBRL_VF.PDF, filings/annual/informe-anual-grupo-bimbo-2024-Acciones-que-transforman.pdf, filings/financing/Grupo Bimbo - Sustainable Financing Framework (April 2023)_ESP_SELLADO.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Dic_25.pdf
+  - filings/refinitiv/ESG/Climate/Climate MAP/Performance/Climate Performance for BIMBOA.MX Absolute (tCO2e).xlsx
+  - filings/refinitiv/ESG/Climate/Climate MAP/Performance/Climate Performance for BIMBOA.MX Emissions to Revenues (tCO2eMil USD).xlsx
+  - filings/refinitiv/ESG/Climate/Climate MAP/Performance/Climate Performance for BIMBOA.MX Emissions to EVIC (tCO2eMil USD).xlsx
+  - filings/refinitiv/Filings/Receipt Date - 2026-Jul-25 - BIMBOA.MX - Grupo Bimbo SAB de CV - Social _Corporate Respons... - Performance Data - cr22301802.pdf
+  - filings/refinitiv/Filings/Receipt Date - 2026-Jun-02 - BIMBOA.MX - Grupo Bimbo SAB de CV - Social _Corporate Respons... - Performance Data - cr21813041.pdf
 tags: [Risks-ESG, esg-framework]
 ---
 
@@ -28,6 +33,9 @@ Facts only: strategy structure, targets with years, reported values with years, 
 ## 2. Targets and latest reported status
 
 All targets as stated; status as of the cited report. "Base" = baseline year.
+
+> [!note] Clarification
+> The annex filed to LSEG (Performance Data p.27, marked preliminary) states 99% renewable electricity globally in 2025 under RE100 criteria, with 1% offset by RECs and 43,967 t of residual Scope 2, against '100%' from the integrated report [[bimbo-esg-lseg-scores-and-policies]].
 
 | Area | Target (year) | Latest reported value (period) | Source |
 |---|---|---|---|

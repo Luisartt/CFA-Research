@@ -15,6 +15,8 @@ Source:
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/bmv/Reporte_Anual_2012_FINAL.pdf
+  - filings/bmv/Grupo_Bimbo_Reporte_Anual_2013__0.pdf
 tags: [Financials, ifrs-adjustments]
 ---
 
@@ -83,6 +85,9 @@ Source: RA23 EEFF note 26 (PDF p.358–359) for FY21–FY23; EEFF25 p.85–86 fo
 - Annual contributions expensed in general expenses: 2,430 (2023), 2,609 (2024), 2,700 (2025); 2,406 expected for 2026 (2,419.7 per the 1Q26 filing) `[sourced]` EEFF25 p.79; BMV Mar-26 pension note.
 - Exit liabilities on the balance sheet (other long-term liabilities): 2,033 (Dec-23), 1,205 (Dec-24), 985 (Dec-25) `[sourced]` EEFF25 p.79 note 19.
 - The provision is revalued each year; changes sit in operating income and are **added back/removed in Adjusted EBITDA** via the "other non-cash items" line above.
+
+> [!note] Clarification
+> The MEPP exposure originates earlier than 1Q21: it arises from the Sara Lee deal (Nov-2011), with an exit liability recognised at acquisition and charges equivalent to MXN 1,102 in FY2012 and 368 in FY2013 [[bimbo-income-statement-fy08-fy13]], [[bimbo-balance-sheet-and-debt-fy08-fy13]]. The timeline below covers FY2021 onward only.
 
 **Timeline of MEPP effects (non-cash)**
 

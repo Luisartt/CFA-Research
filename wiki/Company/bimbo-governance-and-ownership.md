@@ -8,6 +8,15 @@ Source:
   - filings/bmv/Reporte Anual 2021_0.pdf
   - filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Jun_26.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Transcript & Presentation/Bimbo_2022-05-18_SPECIALCALL_Special-Call_n2/Bimbo_2022-05-18_SPECIALCALL_Special-Call_n2.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Transcript & Presentation/Bimbo_2022-05-18_SPECIALCALL_Special-Call_n3/Bimbo_2022-05-18_SPECIALCALL_Special-Call_n3.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Transcript & Presentation/Bimbo_2023-02-22_EP_Q4-2022-Earnings-Call/Bimbo_2023-02-22_EP_Q4-2022-Earnings-Call.pdf
+  - filings/refinitiv/Corporate Governance & Officers/Officers and Directors/OfficersDirectors.xlsx
+  - filings/capitaliq/News, Events and filings/Recent Documents/Proxies/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30/Bimbo_2026-04-13_PROXY_DEF-14A-Asamblea-2026-04-30.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Proxies/Bimbo_2023-04-10_PROXY_DEF-14A-Asamblea-2023-04-26/Bimbo_2023-04-10_PROXY_DEF-14A-Asamblea-2023-04-26.pdf
+  - filings/capitaliq/News, Events and filings/Recent Documents/Proxies/Bimbo_2024-04-12_PROXY_DEF-14A-Asamblea-2024-04-30/Bimbo_2024-04-12_PROXY_DEF-14A-Asamblea-2024-04-30.pdf
+  - filings/refinitiv/OwnerShip/OwnerShip Summary/Firm OwnerShip Summary/BIMBOA.MX Firm Ownership Summary.xlsx
+  - filings/refinitiv/Filings/Receipt Date - 2024-Nov-20 - BIMBOA.MX - Grupo Bimbo SAB de CV - Investor Presentation - Grupo Bimbo Sab De Cv_investor Presentation - cr19026781.pdf
 tags: [Company, governance]
 ---
 
@@ -54,6 +63,9 @@ tags: [Company, governance]
 > [!question] RA25 p.119 states capital stock "at theoretical value" of 1,737 (MXN millions) while note 20 shows share capital of 3,866 for the same shares [sourced] RA25 p.119 vs p.308. The two probably differ because of inflation restatement/accounting basis, but the report does not reconcile them. Use the note 20 figure for IFRS equity work and the share count for per-share work.
 
 ## 3. Ownership
+
+> [!note] Clarification
+> A 3Q22 company deck (figures at 30-Sep-2022; filed to LSEG 20-Nov-2024) shows 'Control Group 81% / Float 19%' on its p.2, against 72.5% in the Apr-2022 register and 72.03% now. No register reproduces 81%; use 72% [[bimbo-ownership-lseg]], [[bimbo-governance-checklist-latam]]. LSEG states 72.37% on its own base with free float 27.63%.
 
 Holders above 3.5% per the share register at 30 April 2026 [sourced] RA25 p.181-182, p.191:
 
@@ -144,7 +156,17 @@ Committees [sourced] RA25 p.174-176 (changes ratified 26 Feb 2026 board and 30 A
 | Jorge Guillermo Zarate Lupercio | Global Operations, Logistics and Engineering | 60 | 39 | In role since Jan 2024 [sourced] RA25 p.178, p.180, p.190 |
 
 - 100% of principal officers are men; 0% women among "relevant directors" [sourced] RA25 p.178, p.190.
+
+> [!warning] Superseded
+> The COO and BBU appointments are dated 2023, not 2022: RA25 lists them under the 2023 entry of its history (Pamias named Group COO, Gavin BBU President after Fred Penny retired), and the calls place the announcement on the 22-Feb-2023 call (4Q22 results), effective around April 2023 [[bimbo-ceo-and-management-changes]]. In May 2022 Pamias was named Executive VP and Chief Sustainability Officer. The rest of the path below is unchanged.
+
+> [!question] Open check
+> LSEG gives the CEO start date of Alejandro Rodriguez Bas as 2026-06-10, while company documents say November 2025 (4Q25 presentation p.3; RA25 p.76-77). Not asserted either way; the company date is used here and the LSEG date looks like a data-entry date [[bimbo-board-and-officers-lseg]]. Confirm with Investor Relations.
+
 - Succession path [sourced] RA25 p.73, p.76-77: Daniel Servitje Montull became Chairman in 2013 (succeeding Roberto Servitje Sendra); in 2022 Rafael Pamias was named Group COO and Tony Gavin BBU President (Mark Bendix's scope widened to BBU, Canada and QSR); 1 May 2024 Servitje Montull became Executive Chairman and Pamias CEO; November 2025 Rodriguez Bas became CEO; January 2026 Koehrsen named BBU President.
+
+> [!note] Clarification
+> Partial answer: a CIQ news item (Dow Jones, 6-Nov-2025) says Pamias resigned to address personal and health matters [[bimbo-press-release-timeline-2010-2026]]; LSEG corroborates the 2025 exits of Pamias, Bendix and Gavin without reasons [[bimbo-board-and-officers-lseg]]; the calls and decks give no reason [[bimbo-ceo-and-management-changes]]. The open question on who leads Bimbo QSR stands.
 
 > [!question] The sources reviewed do not say what happened to Rafael Pamias (CEO from May 2024) when Rodriguez Bas was named CEO in November 2025, nor who now leads Bimbo QSR. Check the Bimbo investor-relations announcements.
 
@@ -157,6 +179,9 @@ Committees [sourced] RA25 p.174-176 (changes ratified 26 Feb 2026 board and 30 A
 ## 7. Related-party transactions
 
 Policy: transactions with associates/affiliates need board approval case by case, with prior Audit Committee review, except immaterial, ordinary-course or at-market items (and minor waivers below 5% of consolidated assets). From 1 Jan 2025 to 30 Apr 2026 there were no relevant related-party transactions other than the commercial ones below; terms are described as at market [sourced] RA25 p.166-167.
+
+> [!warning] Superseded
+> The first raw-material line is now confirmed as Beta San Miguel (associate): 2,847 / 3,641 / 2,500. The table omits Frexport, a related party that is not an associate and the second-largest line (1,069 / 1,929 / 1,669 for FY23-FY25 per the related-party schedule in the AGM proposals) [[bimbo-related-party-and-compensation-disclosures]]. The stationery group totals scrambled in extraction are also resolved there.
 
 | MXN m | FY23 | FY24 | FY25 | Cite |
 |---|---|---|---|---|

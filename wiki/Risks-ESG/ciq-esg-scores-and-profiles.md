@@ -9,6 +9,15 @@ Source:
   - filings/annual/IA25_GB_Celebramos_ESP_200826.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T24.pdf
+  - filings/capitaliq/Sustainability/ESG Profiles/ESG Scores History/ESG Scores History 2013 - 2016.xlsx
+  - filings/capitaliq/Sustainability/ESG Profiles/ESG Scores History/ESG Scores History 2017 - 2021.xlsx
+  - filings/capitaliq/Sustainability/ESG Profiles/ESG Scores History/ESG Scores History 2022 - 2026.xlsx
+  - filings/capitaliq/Sustainability/ESG Profiles/ESG Scores/SPGlobal_GrupoBimbo,S.A.B.deC.V._ESGScores_10-Oct-2026.xlsx
+  - filings/capitaliq/Sustainability/ESG Profiles/ESG Scores Raw Data/
+  - filings/capitaliq/Sustainability/Sustainability Overview/SPGlobal_GrupoBimbo,S.A.B.deC.V.BMVBIMBOA(MIKEY4276592;SPCIQKEY877906;TCUID53231)_SustainabilityAndClimateOverview_10-Oct-2026.xlsx
+  - filings/capitaliq/Sustainability/Business Involvement  Screens/SPGlobal_GrupoBimbo,S.A.B.deC.V._BusinessInvolvementScreens_10-Oct-2026.xlsx
+  - filings/capitaliq/Investment and Market research/Bimbo_2024-04-17_SP-Global_ESG-Scores-Report-2023/S_P Global Sustainable1 Company Research_S_P Global ESG Scores Report (2023)_17_Apr_2024.pdf
+  - filings/capitaliq/News, Events and filings/Press Release/Bimbo_2023-06-20_PR_Canada-Bread-resuelve-la-investigacion/Bimbo_2023-06-20_PR_Canada-Bread-resuelve-la-investigacion.pdf
 tags: [Risks-ESG, esg-ratings]
 ---
 
@@ -19,6 +28,9 @@ tags: [Risks-ESG, esg-ratings]
 ## 1. Headline score (2026 methodology year, updated 2026-10-06)
 
 All figures [sourced] CIQ ESGScores, sheet 'ESG Scores'.
+
+> [!note] Clarification
+> CIQ shows no controversy data, but the S&P Global ESG Score reports record one 'Minor' case in the 2023 report (Canada Bread's bread price-fixing conviction, fined CAD 50m in Jun-2023), absent from the 2024-2025 reports while class actions remain open [[bimbo-sp-global-esg-score-history]].
 
 | Item | Value |
 |---|---|
@@ -37,6 +49,9 @@ All figures [sourced] CIQ ESGScores, sheet 'ESG Scores'.
 
 ## 2. History (2022-2026)
 
+> [!warning] Superseded
+> The history now extends to 2013-2026 (2013-2014 level 43, 2018 trough 39) with question-level data for 2020-2026 (875 PDFs) [[ciq-esg-profile-history]]. The 2022-2026 table below is unchanged.
+
 [sourced] CIQ ESGScoresHistory, sheet 'ESG Scores History'. Years before 2023 include modeled scores "for comparative assessment"; S&P says these are not restatements.
 
 | Methodology year | 2022 | 2023 | 2024 | 2025 | 2026 |
@@ -45,6 +60,9 @@ All figures [sourced] CIQ ESGScores, sheet 'ESG Scores'.
 | Environmental (weight %) | 67 (32) | 68 (33) | 72 (38) | 71 (37) | 69 (37) |
 | Social (weight %) | 52 (35) | 51 (34) | 61 (33) | 58 (32) | 63 (31) |
 | Governance & Economic (weight %) | 46 (33) | 46 (33) | 46 (29) | 43 (31) | 46 (32) |
+
+> [!warning] Superseded
+> Governance & Economic was 47-52 in 2013-2017, 36 in 2018 and 44-51 in 2019-2021, then 46, 46, 46, 43, 46 in 2022-2026: a post-2018 weakness, not a permanent level. Its weight fell from 42% (2016-2020) to 32% (2026) [[ciq-esg-profile-history]].
 
 - The score peaked at 61 in 2024 and has stayed between 58 and 59 since [sourced]. Governance & Economic has been stuck at 43-46 for five years and is the structural drag.
 
@@ -64,6 +82,9 @@ All figures [sourced] CIQ ESGScores, sheet 'ESG Scores'.
 > The 2026 drops are concentrated in emissions-performance and climate-disclosure questions. The company says it asked SBTi to temporarily suspend certification of its targets while it re-baselines 2025 emissions (IC25 p.101, via [[bimbo-esg-framework]]). That could explain part of the fall, but S&P gives no reason. [unverified] link.
 
 ## 3. Strengths and weaknesses vs industry (2026)
+
+> [!warning] Superseded
+> 10-Oct-2026 refresh of industry average / highest: Corporate Governance (43 / 82), Information Security (19 / 83), Health & Nutrition (13 / 93), Packaging (25 / 91), Materiality (38 / 100), Energy (43 / 98), Water (35 / 96), Policy Influence (18 / 84), Climate Strategy (33 / 90). Company scores and the total (59) are unchanged [[ciq-esg-profile-history]].
 
 [sourced] CIQ ESGScores; industry average and best score in brackets.
 
@@ -85,6 +106,9 @@ All figures [sourced] CIQ ESGScores, sheet 'ESG Scores'.
 
 [sourced] CIQ SustainabilityAndClimateOverview, single sheet.
 
+> [!warning] Superseded
+> 10-Oct-2026 comparators: biodiversity policy 44.00%; Scope 1 intensity 54.00% below average; Paris-aligned 2.94%; physical risk 3.80% above; women in management 6.51% below (now 'Lagging', was 'Adequate' at 3.96%); LTIFR 46.63% below; human rights 70.67%; ethics 77.33% [[ciq-esg-profile-history]].
+
 | Theme | Metric | Bimbo | vs industry |
 |---|---|---|---|
 | Biodiversity & land use | Published biodiversity policy / commitment | Yes | "Minority": 40.85% of industry say yes |
@@ -101,6 +125,10 @@ All figures [sourced] CIQ ESGScores, sheet 'ESG Scores'.
 ## 5. Business Involvement Screens (as of 2026-04-03; FY2025; analysis date 2026-03-30)
 
 [sourced] CIQ BusinessInvolvementScreens, sheet 'Business Involvement Screens'.
+
+> [!warning] Superseded
+> The 10-Oct-2026 file shows MXN 413,359 M (-3.2% vs FY25 net sales, same basis gap); involvement in screened activities is unchanged at 0% [[ciq-esg-profile-history]].
+
 - Total revenue used: MXN 413,096 M. Revenue exposed to screened activities: ==0 (0%)==. Expansion exposure: 0 of 3 involvements.
 - Consumer Products & Services: "No Involvement" on every screen. That covers tobacco, alcohol, gambling, cannabis, adult entertainment, predatory lending, pesticides, fur, animal testing, GMO development or growth, and palm oil **growers / processors and traders**. The palm-oil screen covers growing and processing, not use of palm oil as an ingredient.
 - Defense & Weapons, Energy & Fossil Fuels and Healthcare: totals show no screen revenue and 0 exclusionary ownership counts, but the details are "locked due to subscription permissions" [sourced]. Treat these three as **not fully verified**.

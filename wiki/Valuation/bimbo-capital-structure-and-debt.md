@@ -1,6 +1,8 @@
 ---
 Writer: AI-compiled (Claude)
 Source: filings/annual/IA25_GB_EEFF_V10.pdf, filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Jun_26.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Mar_26.pdf, filings/bmv/GB_RA_2024_BMV_VFF1_0.pdf, filings/bmv/Reporte Anual 2023_XBRL_VF.PDF, filings/bmv/Reporte Anual 2022 VF.pdf, filings/bmv/Reporte Anual 2021_0.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T24.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T23_VF.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T22_0.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T21.pdf
+  - filings/refinitiv/Debt & Credit/Debt/Issuer Ratings/IssuerRatings_Grupo Bimbo SAB de CV_Sat Oct 10 2026_T22_21_45.xls
+  - filings/capitaliq/News, Events and filings/Recent Documents/Carpetas Current Reports Bimbo/Bimbo_2026-02-12_PR_S-P-National-Ratings-retiro/Bimbo_2026-02-12_PR_S-P-National-Ratings-retiro.pdf
 tags: [Valuation, capital-structure]
 ---
 
@@ -189,6 +191,10 @@ Source: EEFF25 p.52; BMV Jun-26 p.56. Foot checks [calc]: Dec-25 sums to 141,028
 | Moody's | Baa1 | Upgraded in 1H23 (text reads "from BBB to Baa1"); RA23 p.98, RA25 p.82 |
 
 - The company states this makes it the "best-rated player among its global peers" (RA25 p.82) [guidance, company claim].
+
+> [!warning] Superseded
+> LSEG supplies the outlooks: S&P negative (since 20-Mar-2025), Fitch stable (29-Jul-2026), Moody's stable (15-Nov-2024) [[bimbo-credit-risk-lseg]]. Bimbo's own decks show Baa1 / BBB+ / BBB+ without outlooks.
+
 - Rating outlooks, rating-action dates after 2023 and agency reports are **not in the filings** (see [[bimbo-valuation-data-gaps]]).
 - Credit-rating downgrades may raise financing costs (RA25 p.43) and trigger the change-of-control put described below.
 
@@ -224,6 +230,9 @@ Source: EEFF25 p.43 (opening 1-Jan-2023 balance 29,185). Total at 30-Jun-2026: c
 - Equity market capitalisation at 31-Dec-2025: MXN 254,496m (company figure, RA25 p.20). Market data after Dec-25 is not in the filings. Share data in [[bimbo-shareholder-returns]].
 - Non-controlling interest fell from 3,306 (Dec-23) to 1,754 (Dec-24) to 743 (Dec-25) [sourced RA25 p.18].
 - A perpetual hybrid is no longer outstanding (redeemed 2023); no preferred equity.
+
+> [!warning] Superseded
+> Question (1) is answered: BIMBO 16 was prepaid at par on 10-Feb-2026; balances below issue size are carrying values [[bimbo-bond-prospectus-terms]]. Question (4), outlooks, is answered in [[bimbo-credit-risk-lseg]].
 
 > [!question] Open items
 > (1) Why do Bimbo 16 (7,706 vs 8,000) and Bimbo 17 (9,633 vs 10,000) show balances below issue size, and what happened to Bimbo 16 (due 2-Sep-2026) before 30-Apr-2026? (2) The covenant threshold for EBITDA / interest. (3) Fixed / floating split after swaps. (4) Rating outlooks. All need the 2026 offering documents, rating reports or an investor-relations call.

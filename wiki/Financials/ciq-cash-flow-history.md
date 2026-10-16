@@ -4,6 +4,7 @@ Source:
   - filings/capitaliq/Financials/Templated/Cash Flow Statement/SPGlobal_GrupoBimbo,S.A.B.deC.V._CashFlow_19-Sep-2026.xlsx
   - filings/capitaliq/Financials/Templated/Financial Highlights/SPGlobal_GrupoBimbo,S.A.B.deC.V._FinancialHighlights_19-Sep-2026 (1).xlsx
   - filings/annual/IA25_GB_EEFF_V10.pdf
+  - filings/capitaliq/Financials/As-Reported/Cash Flow/SPGlobal_GrupoBimbo,S.A.B.deC.V._CashFlow(AsReported)_19-Sep-2026.xlsx
 tags: [Financials, cash-flow]
 ---
 
@@ -16,6 +17,10 @@ S&P Capital IQ (CIQ) "Standard" cash flow statement for BIMBOA, **downloaded 202
 ## 1. Coverage and gaps
 
 - Quarterly only; most quarters carry calculation code `CFQ` (CIQ derives the discrete quarter from year-to-date figures) [sourced] CIQ-CF row "CIQ Calculation Type Code".
+
+> [!warning] Superseded
+> Both years can be built from the As-Reported Cash Flow export. FY2021: CFO 45,776, capex (20,671), acquisitions (10,637), dividends (4,636), CFI (32,459), CFF (14,116). FY2024: CFO 39,907, capex (29,402), CFI (36,138), CFF (2,696), interest paid (8,376), lease payments (7,072), buybacks (4,433), acquisitions (5,988), dividends (4,234) [[ciq-long-history-income-balance-cashflow]].
+
 - ==Two years cannot be built from CIQ==: **FY2021** (2021 FQ2 column empty, restatement code `DO`) and **FY2024** (2024 FQ4 column empty, code `DO`) [sourced] CIQ-CF. Only "Change in Net Working Capital" is populated in those columns.
 - Some lines are reported only in some quarters (CIQ `NA`, not zero): acquisitions, dividends and buybacks. Sums below flag how many quarters were reported.
 - "Change In Income Taxes" appears only in FQ4 columns (e.g., (8,955) in 4Q25) [sourced] CIQ-CF; CIQ reclassifies the full-year tax-paid line into Q4.
@@ -23,6 +28,15 @@ S&P Capital IQ (CIQ) "Standard" cash flow statement for BIMBOA, **downloaded 202
 ## 2. Annual history (sum of quarters)
 
 MXN millions; every cell `[calc]` = sum of CIQ-CF quarterly values (inputs in `cash_flow.csv`). Bracketed note = quarters reported where fewer than 4.
+
+> [!warning] Superseded
+> As-reported annual dividends paid differ from the sums above: FY19 2,103; FY20 2,433; FY22 5,885; FY23 3,549 (FY25 4,451 and 9M24 4,234 unchanged). FY20 includes 147 paid to non-controlling interests [[bimbo-cash-flow-and-capex-fy14-fy20]]; the reason for the other gaps is not given in the export [unverified] [[ciq-long-history-income-balance-cashflow]].
+
+> [!warning] Superseded
+> As-reported buy-back lines are FY19 1,748 and FY20 3,740, not 2,359 and 4,388. The FY20 gap of 648 equals the perpetual-bond coupons in the company's FY20 distribution total (2,433 + 3,740 + 648 = 6,821) [calc], so CIQ's buy-back line includes coupons [[bimbo-cash-flow-and-capex-fy14-fy20]], [[ciq-long-history-income-balance-cashflow]].
+
+> [!warning] Superseded
+> Cash Acquisitions 9M24 (7,898) versus the as-reported full-year FY2024 line of (5,988): the two CIQ views are inconsistent; do not add 4Q24 to 9M24 [[ciq-long-history-income-balance-cashflow]].
 
 | Line (CIQ label) | FY19 | FY20 | FY22 | FY23 | 9M24 | FY25 | LTM 2Q26 |
 |---|---|---|---|---|---|---|---|
@@ -95,6 +109,10 @@ MXN millions, `[sourced]` CIQ-CF.
 ## Key Takeaways
 
 - CIQ cash flow ties to the audited FY25 and FY23 statements line for line (CFO, capex, investing, financing, interest paid).
+
+> [!warning] Superseded
+> Both can be built from the As-Reported export; see the callout in section 1 and [[ciq-long-history-income-balance-cashflow]].
+
 - FY2021 and FY2024 cannot be built from CIQ because one quarter of each year is empty; use the audited FY24 figures (CFO 39,907; capex 29,402).
 - CIQ "Total Debt Repaid" includes lease principal (8,060 in FY25), and interest paid sits in financing; adjust before computing an FCF that deducts leases.
 - Capex fell from 34,754 (FY23) to 22,530 (FY25) and 6,892 in 1H26, lifting CFO − capex to 32,207 LTM-2Q26 [calc].

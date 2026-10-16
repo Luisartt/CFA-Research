@@ -87,6 +87,8 @@ MXN millions, `[sourced]` CIQ-PEN (FQ4 columns). CIQ's label is "Actuarial Gain"
 
 All IA25-EEFF figures `[sourced]` IA25-EEFF p.77-78. ==CIQ pension data tie exactly to the audited note for 2023-2025.==
 
+- See also: [[ciq-long-history-income-balance-cashflow]]: projected benefit obligation and plan assets are available from 2004 (PBO 4,676 and assets 4,315 in 2004; gap 9,331 at 2016; 1,524 at 2025), beyond the 2019-2025 roll-forward here.
+
 ## Key Takeaways
 
 - CIQ's DB pension data are annual (FQ4) and tie exactly to the audited FY25 note for 2023-2025 (PBO 29,033; assets 27,509; deficit 1,524 at Dec-25).

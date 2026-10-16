@@ -14,6 +14,9 @@ Source:
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf
   - filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf
+  - filings/bmv/infoanua_0.pdf
+  - filings/bmv/Reporte_Anual_2012_FINAL.pdf
+  - filings/bmv/Grupo-Bimbo-Reporte-Anual-2020-BMV.pdf
 tags: [Financials, balance-sheet]
 ---
 
@@ -142,6 +145,10 @@ Inputs `[sourced]` 4Q22 release p.11 (Dec-21 restated, Dec-22); 4Q23 release p.9
 - **MEPP exit liabilities** (BBU multi-employer pension plans) `[sourced]` EEFF25 p.79–80 note 19: 985 (Dec-25), 1,205 (Dec-24), 2,033 (Dec-23). Annual MEPP contributions expensed in G&A: 2,700 (2025), 2,609 (2024), 2,430 (2023); 2,406 expected for 2026 `[sourced]` EEFF25 note 18 (p.79). The 1Q26 filing puts the 2026 expectation at 2,419.7 (thousands of pesos 2,419,691) `[sourced]` BMV Mar-26 note on MEPP. See [[bimbo-ifrs-adjustments]].
 - **Employee benefits (non-current)**: 6,507 (Dec-25), 6,635, 7,217, 9,382, 30,712 (Dec-21) `[sourced]` as in section 1; the 2022 step-down is the MEPP provision release.
 - **Provisions in other long-term liabilities**: 10,684 (Dec-25) of which uncertain tax positions 8,537, tax 1,196, labour 439, civil 511 `[sourced]` EEFF25 p.80.
+
+> [!note] Clarification
+> Extension: the perpetual notes were issued on 17-Apr-2018 (US$500m, 5.95%) and carried at 9,138 (Dec-18), 8,931 (Dec-19) and 8,996 (Dec-20); they were never in the company's debt ratio [[bimbo-balance-sheet-and-debt-fy14-fy20]].
+
 - **Perpetual subordinated USD notes**: carried as an equity instrument of 8,867 (Dec-21) and 8,098 (Dec-22), principal 8,699 at Dec-22; redeemed at first call in 1Q–2Q 2023, reclassified to debt 8,844 and cancelled 17-Apr-2023 `[sourced]` RA23 EEFF p.7; EEFF25 p.15, p.82. ==Dec-21 and Dec-22 financial debt is therefore not like-for-like with Dec-23 onwards: adding the notes would lift Dec-22 net debt by ~8.1bn, taking net debt / EBITDA from 1.5x to roughly 1.6–1.7x on the company's method)== `[calc]` (71,741 + 8,098 = 79,839, divided by the EBITDA ex-IFRS 16 implied by the reported ratios: 71,741 / 1.5 = 47.8bn or 84,054 / 1.7 = 49.4bn; approximate, RA22 PDF p.16).
 - **Goodwill** (72,568 at Dec-25, 17.7% of total assets) and intangibles (62,947) are 33% of total assets `[calc]` (72,568 + 62,947) / 409,805. They fluctuate with the peso because most goodwill sits in US-dollar operations: goodwill was 74,565 (Dec-21), 68,085, 62,000 (Dec-23), 75,100 (Dec-24) `[sourced]` as in section 1; goodwill impairments were 315 (FY21), 1,597 (FY22), 303 (FY23) `[sourced]` RA23 PDF p.354.
 - **Equity and returns**: equity attributable fell from 125,944 (Dec-24) to 119,512 (Dec-25) mainly through other comprehensive income of −11,244 (translation −10,811) against net income of 11,133 `[sourced]` EEFF25 p.15; the company-adjusted return on equity (adjusted for MEPP) is 15.2% (FY21, original), 15.1% (FY22), 14.1% (FY23), 10.1% (FY24), 9.1% (FY25), 9.9% (2Q26 LTM) `[sourced]` 4Q21 release p.2; 4Q22 release p.2; RA25 p.18; 2Q26 release p.2.
@@ -158,6 +165,9 @@ Inputs `[sourced]` 4Q22 release p.11 (Dec-21 restated, Dec-22); 4Q23 release p.9
 - RA25 prints the long-term share of debt as 92]% (typo) (the releases give 92%) `[sourced]` RA25 p.135; 4Q25 release p.8.
 
 ## Key Takeaways
+
+> [!note] Clarification
+> 'Peaked at 2.9x (Dec-24)' holds only for FY2021 onward. On the older basis the company reported total debt/EBITDA of 3.00x (NIF) / 3.12x (IFRS) at Dec-2011 and 2.98x at Dec-2012 [[bimbo-balance-sheet-and-debt-fy08-fy13]]; the intra-year peak in 2020 was 2.8x at Mar-2020 [[bimbo-covid-2020-impact]]. Definitions differ (total vs net, before IFRS 16) [[bimbo-leverage-and-deleveraging-commentary]].
 
 - ==Net debt more than doubled from 71.7bn (Dec-22) to 145.1bn (Dec-25)==; the ratio peaked at 2.9x (Dec-24) and had fallen to 2.5x by Jun-26 (net debt 137.1bn) `[sourced]`.
 - Net debt excludes leases (34.8bn at Dec-25) and MEPP/pension items; on a with-leases basis against reported EBITDA, leverage is about 3.0x at Dec-25 and 2.8x at Jun-26 `[calc]`.
