@@ -27,7 +27,7 @@ Leyenda: 🔴 abierto, sin fuente verificable · 🟡 parcial, solo fuentes secu
 | 9 | Accionistas de control de Gruma, Arca y Lala | 🔴 | Solo «grupo de control ~51%» de Gruma, sin nombres; Lala salió de bolsa en 2022 por prensa |
 | 10 | IEPS 2027 y Ley de Ingresos | 🟡 | 8% vigente; texto final del Congreso sin publicar al 10-oct (plazo 20-oct / 31-oct) |
 | 11 | Botanas: US$106.9bn (RA25) vs US$183bn (informe integrado) y Top 10 vs Top 5 | 🔴 | Contradicción interna de Bimbo sin explicación |
-| 12 | Múltiplos y márgenes de los pares | 🟡 | Heredados del 08-oct (agregador gratuito); sin repasar |
+| 12 | Múltiplos y márgenes de los pares | 🟡 | Refrescados el 16-oct con Capital IQ (§11); faltan Gruma, EV de Yamazaki y Arca, y múltiplos históricos |
 | 13 | Split volumen/precio de Bimbo en EE.UU. | 🔴 | No publicado |
 | 14 | Ruta de reparto vigente (54,000 vs 53,000) | 🔴 | Menor; sin aclaración |
 | 15 | Marca propia en pan de EE.UU. | 🟡 | ~26% $ y ~35% unidades (10-K de Flowers, sin periodo ni proveedor de datos) |
@@ -83,7 +83,7 @@ Resumen: 🔴 8 · 🟡 7 · 🟢 0 resueltos por completo.
 
 **Lectura para márgenes de largo plazo** `[assumption]`: son **dos industrias en una**.
 - **México/LatAm**: comprador atomizado, red DSD propia, líder con distancia amplia. Estructura que sostiene márgenes EBITDA de ~20% (Mexico LTM 2T26: 33,119/158,321 = 20.9% `[calc]`).
-- **EE.UU./Canadá/Europa**: comprador concentrado, marca propia, categoría que se encoge en volumen. La escala de Bimbo protege volumen, pero **no se ha traducido en margen superior al de pares** (NA 9.6% LTM vs Flowers 10.2%). El techo razonable del margen de NA es el del panificador puro de EE.UU. (~10-12%) salvo que haya evidencia de una ventaja de costo que hoy no existe.
+- **EE.UU./Canadá/Europa**: comprador concentrado, marca propia, categoría que se encoge en volumen. La escala de Bimbo protege volumen, pero **no se ha traducido en margen superior al de pares** (NA 9.6% LTM vs Flowers 9.3% LTM `[sourced]` CIQ 2026-10-16). El techo razonable del margen de NA es el del panificador puro de EE.UU. (~10-12%) salvo que haya evidencia de una ventaja de costo que hoy no existe.
 
 ---
 
@@ -117,7 +117,7 @@ Resumen: 🔴 8 · 🟡 7 · 🟢 0 resueltos por completo.
 
 | Fuente de ventaja | Evidencia | ¿Aparece en números? | Veredicto |
 |---|---|---|---|
-| **Red de distribución DSD** | 54,000+ rutas, 1,700+ centros de venta, 249 plantas en 39 países; reposición gratis de producto no vendido (RA25 p.14, p.100) | **México sí**: margen EBITDA LTM 20.9%, 19.0% en FY21 → 20.4% en FY25 `[calc]`/`[sourced]`; ventas nominales crecieron los 19 trimestres de 4T21 a 2T26 `[sourced]` Tesis. **EE.UU. no**: NA 9.0% FY25 vs 12.2% FY21; Flowers 10.2% con ¼ del tamaño | **Ancho en México/LatAm; angosto en NA** |
+| **Red de distribución DSD** | 54,000+ rutas, 1,700+ centros de venta, 249 plantas en 39 países; reposición gratis de producto no vendido (RA25 p.14, p.100) | **México sí**: margen EBITDA LTM 20.9%, 19.0% en FY21 → 20.4% en FY25 `[calc]`/`[sourced]`; ventas nominales crecieron los 19 trimestres de 4T21 a 2T26 `[sourced]` Tesis. **EE.UU. no**: NA 9.0% FY25 vs 12.2% FY21; Flowers 9.3% LTM con ¼ del tamaño | **Ancho en México/LatAm; angosto en NA** |
 | **Marca** | 9,000+ SKUs; 12.6% de ventas FY25 de innovación (RA25 p.80, p.87); marcas #1 en pan y pastelitos de México | **México sí** (28.2% pastelitos, +4.8 pp en un año según Global Data) | Fuerte en México; medio en EE.UU., donde compite contra marca propia y Nature's Own/Dave's |
 | **Escala de compras** | Bimbo cita escala en compras de materias primas (RA25 p.109), sin cifra | **No visible**: el costo de materias primas es commodity y todos los panificadores lo cubren; Flowers tiene un margen bruto comparable | Neutra |
 | **QSR global** | Proveedor principal en 40 países (RA25 p.87, p.112); contratos multianuales | Parcial: EAA creció +8.4% ex-FX en 2T26, margen EAA 11.4% LTM `[calc]` | Medio; cliente concentrado |
@@ -131,8 +131,8 @@ Resumen: 🔴 8 · 🟡 7 · 🟢 0 resueltos por completo.
 
 ### Coach moment 2 — moat (decide el equipo)
 - **Mi recomendación:** declarar un moat **regional**: ancho en México/LatAm, **sin evidencia hoy en EE.UU.**
-- **Por qué:** el margen de México (20.9% LTM) está por encima de comparables locales; el margen de NA no supera al de Flowers pese a ser 4× más grande.
-- **El mejor argumento en contra:** Mexico mezcla Barcel y pastelitos (categorías más rentables que pan de caja), así que el margen alto puede ser mezcla de producto y no distribución; y Arca (20.2%) logra el mismo margen con distribución propia sin ser panificador.
+- **Por qué:** el margen de México (20.9% LTM) está por encima de comparables locales; el margen de NA (9.6%) apenas supera al de Flowers (9.3% LTM, definiciones de EBITDA distintas) pese a ser 4× más grande.
+- **El mejor argumento en contra:** Mexico mezcla Barcel y pastelitos (categorías más rentables que pan de caja), así que el margen alto puede ser mezcla de producto y no distribución; y Arca (19.4% LTM) logra el mismo margen con distribución propia sin ser panificador.
 - **Pregunta para el equipo:** ¿qué número del P&L de EE.UU. demostraría que la escala de Bimbo es una ventaja y no solo tamaño? (margen sobre Flowers, estabilidad de share con datos Circana, precio/mezcla sostenido con volumen estable).
 
 ---
@@ -160,23 +160,23 @@ Resumen: 🔴 8 · 🟡 7 · 🟢 0 resueltos por completo.
 
 ## 6. Universo de comparables
 
-Cifras y múltiplos heredados del reporte 08-oct (stockanalysis.com, 2026-10-08 y filings de cada emisora; ver URLs en ese reporte) `[unverified]` hasta repasarlas. Cierres fiscales distintos: calendarizar antes de usar en Val_Comps.
+EV/EBITDA LTM actualizado el 2026-10-16 con Capital IQ (detalle y discrepancias en `capiq-leverage-comps_2026-10-16.md`); reemplaza las cifras del 08-oct. Flowers, Aryzta, Smucker, Campbell's, Mondelez y PepsiCo son EV/EBITDA recalculados con EV y EBITDA de la misma tabla; Yamazaki y Arca vienen de la herramienta de múltiplos (sin EV); Gruma sigue en el valor del 08-oct. Cierres fiscales distintos: calendarizar antes de usar en Val_Comps.
 
 | Par | Ticker | Por qué comparable (una frase) | Marco | EV/EBITDA | Salvedad |
 |---|---|---|---|---|---|
-| **Flowers Foods** | FLO | Panificador puro de EE.UU. con DSD e independientes: el mejor espejo del margen de NA | US GAAP | 6.6x | Sin México ni Europa; en deterioro (recorte de guía y dividendo) |
-| **Gruma** | GRUMAB | Emisora BMV, IFRS, México + EE.UU., competidor directo en tortilla y harinas | IFRS | 5.7x | Es masa de maíz y tortilla, no pan; margen bruto 39% vs 52% de Bimbo |
-| **Yamazaki** | 2212.T | Mayor panificador puro fuera de América; ancla del múltiplo del pure-play | J-GAAP | 6.3x | Mercado, moneda y contabilidad distintos; solo ancla |
-| **Aryzta** | ARYN | Panificación europea con canal QSR/congelado; traslapa con EAA y QSR de Bimbo | IFRS | 7.2x | Congelado B2B, mucho más pequeño |
-| J.M. Smucker | SJM | Hostess compite con Marinela/Bimbo en pastelitos en EE.UU. | US GAAP | 8.7x | Bimbo es un % pequeño del negocio; café domina |
-| Campbell's | CPB | Pepperidge Farm (pan fresco) y snacks en EE.UU. | US GAAP | 7.9x | Mayormente sopas y snacks |
-| Mondelez | MDLZ | Galletas en México y EE.UU.; #2 global en panificación 3.0% | US GAAP | 16.1x | Prima de calidad, chocolate/galletas; no es par operativo |
-| Arca Continental | AC | Consumo mexicano con ruta propia; Bokados compite con Barcel | IFRS | 8.1x | Bebidas, no panificación |
-| PepsiCo | PEP | Sabritas vs Barcel; Gamesa | US GAAP | 10.8x | Mega-cap global |
+| **Flowers Foods** | FLO | Panificador puro de EE.UU. con DSD e independientes: el mejor espejo del margen de NA | US GAAP | 6.68x `[calc]` | Sin México ni Europa; en deterioro (recorte de guía y dividendo) |
+| **Gruma** | GRUMAB | Emisora BMV, IFRS, México + EE.UU., competidor directo en tortilla y harinas | IFRS | 5.7x `[unverified]` | Es masa de maíz y tortilla, no pan; margen bruto 39% vs 52% de Bimbo |
+| **Yamazaki** | 2212.T | Mayor panificador puro fuera de América; ancla del múltiplo del pure-play | J-GAAP | 6.58x `[sourced]` | Mercado, moneda y contabilidad distintos; solo ancla |
+| **Aryzta** | ARYN | Panificación europea con canal QSR/congelado; traslapa con EAA y QSR de Bimbo | IFRS | 8.33x `[calc]` | Congelado B2B, mucho más pequeño |
+| J.M. Smucker | SJM | Hostess compite con Marinela/Bimbo en pastelitos en EE.UU. | US GAAP | 9.06x `[calc]` | Bimbo es un % pequeño del negocio; café domina |
+| Campbell's | CPB | Pepperidge Farm (pan fresco) y snacks en EE.UU. | US GAAP | 8.20x `[calc]` | Mayormente sopas y snacks |
+| Mondelez | MDLZ | Galletas en México y EE.UU.; #2 global en panificación 3.0% | US GAAP | 16.77x `[calc]` | Prima de calidad, chocolate/galletas; no es par operativo |
+| Arca Continental | AC | Consumo mexicano con ruta propia; Bokados compite con Barcel | IFRS | 8.47x `[sourced]` | Bebidas, no panificación |
+| PepsiCo | PEP | Sabritas vs Barcel; Gamesa | US GAAP | 11.48x `[calc]` | Mega-cap global |
 
 **Excluidos:** Kellanova (privatizada por Mars), Hostess (dentro de SJM), Grupo Lala (no cotiza), Grupo Nutresa (iliquida tras compra de Gilinski), Herdez (distorsión por desconsolidación de McCormick México), General Mills (traslape parcial), McKee y Uno Bakery (privadas).
 
-**Lectura de valuación relativa (nueva)** `[calc]`: mediana EV/EBITDA del **core de panificación** (FLO, GRUMAB, 2212.T, ARYN) = **6.45x**, contra Bimbo 6.29x (base CIQ) o 6.68x (base de la empresa). Es decir: **Bimbo cotiza en línea con los panificadores puros, no con descuento.** El descuento solo existe frente a (i) su propio promedio de 7.7-7.8x a 5-10 años y (ii) los consumidores mexicanos y globales (AC 8.1x, PEP 10.8x, MDLZ 16.1x). Esto matiza el Pilar 3.
+**Lectura de valuación relativa (nueva)** `[calc]`: mediana EV/EBITDA del **core de panificación** (FLO, GRUMAB, 2212.T, ARYN) = **6.63x** (6.68x sin Gruma), contra Bimbo 6.29x (base CIQ) o 6.68x (base de la empresa). Es decir: **Bimbo cotiza en línea con los panificadores puros, no con descuento.** El descuento solo existe frente a (i) su propio promedio de 7.7-7.8x a 5-10 años y (ii) los consumidores mexicanos y globales (AC 8.1x, PEP 10.8x, MDLZ 16.1x). Esto matiza el Pilar 3.
 
 ### Coach moment 3 — comparables (decide el equipo)
 - **Mi recomendación:** usar **core (4) para la mediana** y el resto como rango secundario.
@@ -197,7 +197,7 @@ Cifras y múltiplos heredados del reporte 08-oct (stockanalysis.com, 2026-10-08 
 | Share Bimbo EE.UU. | Estable o +0.2 pp/año; sin dato Circana | `[assumption]`; `[guidance]` 2T26 |
 | Share Bimbo México | Estable en 18.2%/28.2%; no extrapolar la alza de pastelitos | `[sourced]` RA25 p.111 |
 | LatAm / EAA mercado (valor) | 5.5% / 3.4-6.6% | `[sourced]` RA25 p.108; incluye inflación |
-| Margen EBITDA NA | 9.6% LTM; techo de referencia 10-12% | `[calc]`; par FLO 10.2% |
+| Margen EBITDA NA | 9.6% LTM; techo de referencia 10-12% | `[calc]`; par FLO 9.3% LTM |
 | Margen EBITDA México | ~20.5-21% con presión de costo laboral 2027 | `[calc]` |
 | IEPS | 8% base; 20% solo escenario bajista | `[sourced]` ver §5 |
 | Insumos 2027 | Trigo US$7.0-7.2/bu base; margen bruto bajo presión 1S27 | `[sourced]` Macro |
@@ -206,7 +206,7 @@ Cifras y múltiplos heredados del reporte 08-oct (stockanalysis.com, 2026-10-08 
 
 | Pilar | Efecto de la industria | Razón |
 |---|---|---|
-| **1. El margen de NA se recupera por productividad** | **Debilita en parte** | La estructura no respalda un margen >12% en EE.UU.: el par más cercano gana 10.2% y la categoría pierde volumen. Sirve si el objetivo es llegar a ~10-11%; el escenario de 12.2% (FY21) necesita una razón estructural que la industria no da hoy. Además, la ganancia de share que Bimbo reporta es suma cero en una categoría que cae y es cualitativa. Apoya: Flowers y Campbell's en defensa dejan espacio de share |
+| **1. El margen de NA se recupera por productividad** | **Debilita en parte** | La estructura no respalda un margen >12% en EE.UU.: el par más cercano gana 9.3% y la categoría pierde volumen. Sirve si el objetivo es llegar a ~10-11%; el escenario de 12.2% (FY21) necesita una razón estructural que la industria no da hoy. Además, la ganancia de share que Bimbo reporta es suma cero en una categoría que cae y es cualitativa. Apoya: Flowers y Campbell's en defensa dejan espacio de share |
 | **2. Capex a la baja libera FCF y reduce deuda** | **Neutral / apoya** | Capacidad en exceso en la categoría respalda no invertir; el riesgo es lo opuesto: una guerra de precios por capacidad ociosa |
 | **3. Valuación bajo su promedio, con México de respaldo** | **Apoya México; matiza la valuación** | Estructura de México (comprador atomizado, líder) respalda el piso de márgenes; pero frente a los panificadores puros Bimbo ya cotiza en línea (6.3x vs 6.45x). El descuento es contra su historia, no contra el sector. Riesgos propios de México: IEPS, NOM-051, jornada de 40 horas |
 
@@ -291,6 +291,17 @@ Corrida verificada por votación adversarial. Solo se listan hallazgos que sobre
 **Efecto en la tesis (Pilar 1):** el dato de Circana de ~27% para BBU cambia el tono: Bimbo es **líder de marca en pan fresco de EE.UU.** y la marca propia (26%) apenas lo iguala. Eso no prueba ganancia de share (es una foto), pero sí frena leer el 7.4% como debilidad: es el mercado total de panificación. La debilidad sigue en la variación: pan de caja −2.8% contra marca propia −0.4%.
 
 ---
+
+## 11. Apalancamiento y múltiplos de pares con Capital IQ (2026-10-16)
+
+Detalle, fórmulas y registro de 14 discrepancias en `capiq-leverage-comps_2026-10-16.md`. Citable en la wiki: [[peer-leverage-capiq-2026-10]], [[peer-multiples-and-operations-capiq-2026-10]], [[capiq-data-discrepancies-2026-10]].
+
+- **«Bimbo tiene el doble de deuda que su competencia» no se sostiene contra pares de EE.UU. y Europa.** Deuda neta/EBITDA LTM: Bimbo 2.5x `[sourced]` 2T26 p.6 (≈2.9x con arrendamientos `[calc]`) contra mediana de pares 3.20x y núcleo 3.57x `[calc]`; Campbell's 4.36x, Flowers 4.02x, Aryzta 3.57x, Mondelez 3.35x, Smucker 3.05x, PepsiCo 2.12x.
+- **Sí se sostiene contra Arca Continental (0.74x; Bimbo 3.4x–3.9x mayor) y contra Yamazaki (caja neta).** En términos absolutos la deuda neta de Bimbo es ~4× la de Flowers, pero es tamaño. Gruma no se obtuvo.
+- Flowers bajó a **BB+ (negativa)** de BBB- el 2026-09-09 `[sourced]` S&P vía CIQ. Bimbo: BBB+ / BBB+ / Baa1, S&P con perspectiva negativa desde 2025-03-20 `[sourced]` wiki.
+- La mediana de EV/EBITDA del núcleo sube de 6.45x a 6.63x; la conclusión no cambia: Bimbo cotiza en línea con los panificadores puros.
+- El margen EBITDA LTM de Flowers es 9.3% (no 10.2%) y el de Arca 19.4% (no 20.2%); el margen de NA de Bimbo (9.6%) queda apenas por encima del de Flowers.
+- Se descartaron todas las cifras en US$ de Bimbo y las ventas por segmento de la salida de CIQ: no son datos de Capital IQ y no cuadran entre sí.
 
 ## Lente LatAm (checklist)
 

@@ -1,0 +1,100 @@
+{
+ "as_of": "2026-10-17",
+ "files": {
+  "dcf": {
+   "path": "valuation/BIMBOA_DCF_v3.xlsx",
+   "sha256": "e651ef05abfc25abaa94974fe5145500746b6a6c75656e9edc12daada4a40545",
+   "formulas": 1168,
+   "missing_cache": 0,
+   "errors": 0,
+   "status_ok": 115,
+   "status_not_ok": [],
+   "explained_flags": {}
+  },
+  "wacc": {
+   "path": "valuation/BIMBOA_WACC_v3.xlsx",
+   "sha256": "dcf5d1c4ee485c4c2ba565fb8e7c2726ec64dfce7b2d7e188a460b6a14a197d9",
+   "formulas": 182,
+   "missing_cache": 0,
+   "errors": 0,
+   "status_ok": 9,
+   "status_not_ok": [],
+   "explained_flags": {}
+  },
+  "peers": {
+   "path": "valuation/BIMBOA_PeerAnalysis_v3.xlsx",
+   "sha256": "a67af285156e86419d35d7c0da3590b61889a3b8df6d3b057f1481a973041b24",
+   "formulas": 1751,
+   "missing_cache": 0,
+   "errors": 0,
+   "status_ok": 118,
+   "status_not_ok": [],
+   "explained_flags": {
+    "Checks!F9 FLAG": "PepsiCo EV vs the CIQ table: our claim basis adds operating leases 3,846 that CIQ excludes (explained in Checks!G9; same as v2)"
+   }
+  },
+  "dcf_es": {
+   "path": "valuation/BIMBOA_DCF_v3_ES.xlsx",
+   "sha256": "96e22889069c4fb4f7bfdf2dfd8e1b4d5b82e78c592f1d2f11e92da9fb955bb5",
+   "formulas": 1168,
+   "missing_cache": 0,
+   "errors": 0,
+   "status_ok": 115,
+   "status_not_ok": [],
+   "explained_flags": {},
+   "numbers_equal_english": true,
+   "numeric_cells": 1759
+  },
+  "wacc_es": {
+   "path": "valuation/BIMBOA_WACC_v3_ES.xlsx",
+   "sha256": "f14cd3147eea2898d67d40f302377e83fd97fb38f2cae4d23ce8d6ed3400f52c",
+   "formulas": 182,
+   "missing_cache": 0,
+   "errors": 0,
+   "status_ok": 9,
+   "status_not_ok": [],
+   "explained_flags": {},
+   "numbers_equal_english": true,
+   "numeric_cells": 474
+  },
+  "peers_es": {
+   "path": "valuation/BIMBOA_PeerAnalysis_v3_ES.xlsx",
+   "sha256": "bc64f0fb16a10cb106e91a5b29cc666df7a1590dba7aa34e23701535cae6a879",
+   "formulas": 1751,
+   "missing_cache": 0,
+   "errors": 0,
+   "status_ok": 118,
+   "status_not_ok": [],
+   "explained_flags": {
+    "Checks!F9 FLAG": "PepsiCo EV vs the CIQ table: our claim basis adds operating leases 3,846 that CIQ excludes (explained in Checks!G9; same as v2)"
+   },
+   "numbers_equal_english": true,
+   "numeric_cells": 2407
+  }
+ },
+ "formula_cells_dcf_wacc": 1350,
+ "formula_errors": 0,
+ "dcf": {
+  "checks_ok": 24,
+  "checks_total": 24,
+  "engine_ok": 30,
+  "engine_total": 30,
+  "replica_ok": 61,
+  "replica_total": 61
+ },
+ "peers": {
+  "spec_ok": 102,
+  "spec_total": 102
+ },
+ "published": {
+  "gordon": 33.551593182470384,
+  "exit": 45.7150846928446,
+  "wacc": 0.10323275673541572,
+  "ke": 0.12943651126550315
+ },
+ "engine_model": "model/BIMBOA_model_v7.xlsx",
+ "engine_checks": {
+  "ok": 123,
+  "total": 123
+ }
+}

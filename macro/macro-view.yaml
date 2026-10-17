@@ -1,0 +1,68 @@
+# macro-view.yaml — house view macro COMPARTIDO por toda la cobertura
+# Vive en <raiz>/macro/macro-view.yaml (nombre fijo — lo consume código), FUERA de las carpetas por emisora.
+# Lo llena el analista. El plugin lo PROPONE desde macro/sources/ y macro/series/ (/update-macro): cada valor
+# lo confirma el analista; el plugin jamás lo decide.
+# Snapshot previo: macro/history/macro-view_2026-10-17.yaml (plantilla vacía: es la primera actualización).
+#
+# 2026-10-17 — primera carga por /research-analyst:update-macro, en modo automático (el equipo pidió no ser
+# consultado durante la corrida). Por eso cada campo lleva status: propuesto. Solo se cargaron datos OBSERVADOS
+# con cita (filings, Capital IQ, Banxico, FMI, Damodaran) y un cálculo sobre datos observados; ningún supuesto.
+# Pendiente del equipo: confirmar, corregir o rechazar campo por campo (BIMBOA/journal/decisions.md, 2026-10-17).
+# FRED no se corrió: falta la API key gratuita (ver macro/series/README.md).
+# Etiquetas: observado / guidance / supuesto / output (research-analyst) y, en la fuente, la etiqueta del
+# proyecto ([sourced] / [calc]).
+
+updated_at: "2026-10-17"
+owner: "team BIMBOA (CFA Research Challenge) - assistant proposal, pending field-by-field confirmation"
+staleness_warn_months: 3
+
+rates:
+  policy_rate_path:
+    - {date: "2025-12-31", value: 0.07, label: observado, status: propuesto,
+       source: "Banxico target rate 7.00% after 300 bp of cuts in 2025: Grupo Bimbo RA25 p.57-58 (wiki/Macro/bimbo-macro-by-region.md) [sourced]. The Oct-2026 rate was not returned by Capital IQ (data/capitaliq/capiq-ai-model-gaps-2_2026-10-17.md Task 2B: N/A)"}
+  risk_free_10y: {value: 0.0926, label: observado, status: propuesto, as_of: "2026-10-16",
+                  source: "Mexico M-Bono 10Y benchmark yield 9.260%, 16-Oct-2026, S&P Capital IQ (data/capitaliq/capiq-ai-model-gaps-2_2026-10-17.md Task 2A) [sourced]. The DCF base (route B, proposal) uses 9.26% - Mexico default spread 1.75% = 7.51% (valuation/valuation.yaml)"}
+  # Extra evidence (outside the template contract; nothing reads it by code)
+  curve_observations:
+    - {series: "Mexico M-Bono 1Y", value: 0.06679, date: "2026-10-16", label: observado, status: propuesto, source: "S&P Capital IQ, prompt 2 Task 2A [sourced]"}
+    - {series: "Mexico M-Bono 5Y", value: 0.08298, date: "2026-10-16", label: observado, status: propuesto, source: "S&P Capital IQ, prompt 2 Task 2A [sourced]"}
+    - {series: "Mexico M-Bono 30Y", value: 0.09782, date: "2026-10-16", label: observado, status: propuesto, source: "S&P Capital IQ, prompt 2 Task 2A [sourced]"}
+    - {series: "US Treasury 10Y", value: 0.0509, date: "2026-10-16", label: observado, status: propuesto, source: "S&P Capital IQ, prompt 2 Task 2A [sourced]"}
+    - {series: "Mexico 5Y sovereign CDS, mid (USD)", value: 0.009530, date: "2026-10-16", label: observado, status: propuesto, source: "S&P Capital IQ composite 95.2953 bp, prompt 2 Task 2B [sourced]"}
+    - {series: "Mexico 10Y sovereign CDS, mid (USD)", value: 0.016408, date: "2026-10-16", label: observado, status: propuesto, source: "S&P Capital IQ composite 164.0839 bp, prompt 2 Task 2B [sourced]"}
+    - {series: "Mexico rating-based default spread (Moody's Baa3)", value: 0.0174988, date: "2026-07-01", label: observado, status: propuesto, source: "Damodaran July 2026 update, ctrypremJuly26.xlsx (default spreads corrected 9-Jul-2026); third-party estimate, attributed (valuation/inputs/spg_inputs.yaml wacc_variants.rf.def_spread) [sourced]"}
+
+fx:
+  usdmxn_path:
+    - {date: "2025-12-31", value: 17.97, label: observado, status: propuesto, source: "Closing rate, Banxico DOF 31-Dec-2025, used by Grupo Bimbo for USD debt: RA25 p.147 (wiki/Macro/bimbo-fx-exposure.md) [sourced]"}
+    - {date: "2026-06-30", value: 17.47, label: observado, status: propuesto, source: "Closing rate in Grupo Bimbo's 2Q26 release p.6 (wiki/Macro/bimbo-fx-exposure.md) [sourced]"}
+    - {date: "2026-10-16", value: 18.479, label: observado, status: propuesto, source: "USD/MXN close 16-Oct-2026, Yahoo Finance MXN=X (data/market/usdmxn_daily_2026-09-15_2026-10-16.csv); Capital IQ charts imply about 18.49 [sourced]"}
+  # Extra (outside the template contract): average rates used by Bimbo for income-statement translation
+  usdmxn_annual_average:
+    - {year: 2023, value: 17.7620, label: observado, status: propuesto, source: "Grupo Bimbo filings via wiki/Macro/bimbo-fx-exposure.md section 4 [sourced]"}
+    - {year: 2024, value: 18.3024, label: observado, status: propuesto, source: "Grupo Bimbo filings via wiki/Macro/bimbo-fx-exposure.md section 4 [sourced]"}
+    - {year: 2025, value: 19.2244, label: observado, status: propuesto, source: "Grupo Bimbo filings via wiki/Macro/bimbo-fx-exposure.md section 4 [sourced]"}
+
+inflation:
+  mx_3y_trailing_cumulative: {value: 0.130907, label: output, status: propuesto, period: "2023-2025",
+                              source: "[calc] (1 + 4.66%) x (1 + 4.21%) x (1 + 3.69%) - 1, Mexico CPI (INEGI) December annual rates as printed in Grupo Bimbo RA25 p.57-58 [sourced]. Monitor NIF B-10: Bimbo reports under IFRS, so B-10 does not apply; hyperinflation accounting (IAS 29) applies to Argentina only"}
+  # Extra (outside the template contract): latest actual prints
+  mx_cpi_yoy_latest: {value: 0.0345, date: "2026-09-30", label: observado, status: propuesto, source: "Mexico CPI YoY Sep-2026 (latest actual), S&P Capital IQ, prompt 2 Task 2B [sourced]"}
+  us_cpi_yoy_latest: {value: 0.0374, date: "2026-09-30", label: observado, status: propuesto, source: "US CPI YoY Sep-2026 (latest actual), S&P Capital IQ, prompt 2 Task 2B [sourced]"}
+  mx_forecast_path:
+    - {period: "2029-2031", value: 0.030, label: observado, status: propuesto, source: "IMF World Economic Outlook October 2026, DataMapper PCPIPCH (Mexico), last modified 2026-10-08 (valuation/inputs/spg_inputs.yaml sources) [sourced]"}
+    - {period: "long run (2031-2034)", value: 0.037, label: observado, status: propuesto, source: "Banxico, Encuesta sobre las expectativas de los especialistas en economía del sector privado, Sep-2026 (published 1-Oct-2026), Cuadro 5 p.6: long-run inflation expectation 3.7-3.8% (valuation/valuation.yaml lt_nominal_gdp_growth note) [sourced]"}
+  us_forecast_path: []
+
+gdp:
+  mx_growth_path:
+    - {period: "2029-2031", value: 0.021, label: observado, status: propuesto, source: "IMF World Economic Outlook October 2026, DataMapper NGDP_RPCH (Mexico), 2.1% a year, last modified 2026-10-08 [sourced]"}
+    - {period: "2027-2036 average", value: 0.0188, label: observado, status: propuesto, source: "Banxico private-sector survey Sep-2026 (published 1-Oct-2026), Cuadro 6 p.8: mean 1.88% (median 1.80%) [sourced]"}
+  us_growth_path: []
+
+commodity_decks: []           # wheat, soybean oil, sugar, polyethylene and natural gas prices are not in the local
+                              # sources (wiki/Macro/bimbo-input-costs.md, open items); nothing proposed
+
+equity_risk_premium: {value: 0.042, label: observado, status: propuesto, as_of: "2026-10-01",
+                      source: "Damodaran implied ERP for the S&P 500 (mature-market premium) 4.20%, 1-Oct-2026; third-party estimate, attributed (valuation/inputs/wacc_inputs.yaml G1) [sourced]. The US country premium (0.22%, July 2026) is not inside it"}
+notes: "First load 2026-10-17, observed data only, every field status: propuesto until the team confirms it. Not proposed (no source in macro/sources or macro/series): US forecasts, commodity decks, the current Banxico rate, USD/MXN forwards (Capital IQ returned N/A). Sources index: macro/sources/sources-index.md."

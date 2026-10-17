@@ -1,0 +1,85 @@
+{
+ "source": "data/market/bimbo_ipc_monthly_2021-11_2026-10.csv (Yahoo Finance BIMBOA.MX and ^MXX month-ends; checked against Capital IQ, data/market/README.md)",
+ "window_end": "2026-10-16",
+ "de": 0.7431,
+ "tax": 0.3,
+ "ciq_check": {
+  "months_compared": 23,
+  "max_abs_diff_mxn": 0.5300000000000011
+ },
+ "cases": {
+  "price_60m": {
+   "n": 59,
+   "beta": 0.8245416435539852,
+   "r2": 0.2952986190811674,
+   "se": 0.1687124064266726,
+   "ci95_low": 0.48711683070064,
+   "ci95_high": 1.1619664564073304,
+   "blume": 0.8824429011811701,
+   "unlevered": 0.5424009443377946,
+   "blume_unlevered": 0.5804896170699133
+  },
+  "price_36m": {
+   "n": 36,
+   "beta": 1.2913758343502377,
+   "r2": 0.4341502000497295,
+   "se": 0.252838833055759,
+   "ci95_low": 0.7856981682387197,
+   "ci95_high": 1.7970535004617556,
+   "blume": 1.1952218090146594,
+   "unlevered": 0.8494943554669793,
+   "blume_unlevered": 0.7862422025264671
+  },
+  "price_24m": {
+   "n": 24,
+   "beta": 1.100667212025552,
+   "r2": 0.3735243826054748,
+   "se": 0.30390461632877463,
+   "ci95_low": 0.4928579793680028,
+   "ci95_high": 1.7084764446831013,
+   "blume": 1.0674470320571199,
+   "unlevered": 0.7240421874037458,
+   "blume_unlevered": 0.7021892499241006
+  },
+  "total_return_60m": {
+   "n": 59,
+   "beta": 0.8233383930000069,
+   "r2": 0.2979722510336378,
+   "se": 0.16739025387629478,
+   "ci95_low": 0.48855788524741733,
+   "ci95_high": 1.1581189007525965,
+   "blume": 0.8816367233100046,
+   "unlevered": 0.5416094206569048,
+   "blume_unlevered": 0.5799592962037172
+  },
+  "total_return_36m": {
+   "n": 36,
+   "beta": 1.288346341515592,
+   "r2": 0.44268833510160355,
+   "se": 0.24790951597572683,
+   "ci95_low": 0.7925273095641383,
+   "ci95_high": 1.7841653734670457,
+   "blume": 1.1931920488154468,
+   "unlevered": 0.8475014909619267,
+   "blume_unlevered": 0.784906983308082
+  },
+  "total_return_24m": {
+   "n": 24,
+   "beta": 1.1083575061857522,
+   "r2": 0.38922149000427264,
+   "se": 0.2960138251912622,
+   "ci95_low": 0.5163298558032279,
+   "ci95_high": 1.7003851565682766,
+   "blume": 1.0725995291444541,
+   "unlevered": 0.7291010256653877,
+   "blume_unlevered": 0.7055786715594008
+  }
+ },
+ "selected_evidence": {
+  "case": "total_return_60m",
+  "levered": 0.8233383930000069,
+  "unlevered": 0.5416094206569048,
+  "blume_unlevered": 0.5799592962037172,
+  "note": "5-year monthly total-return regression on the IPC; 59 monthly returns (the 60 month-ends give 59 returns). It corroborates the Damodaran global food-processing unlevered beta of 0.53; the 36- and 24-month windows are higher (the 2023-24 de-rating) and less precise."
+ }
+}

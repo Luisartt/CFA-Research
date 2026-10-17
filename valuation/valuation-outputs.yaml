@@ -1,0 +1,364 @@
+# valuation/valuation-outputs.yaml - PUBLICATION GATE: the downstream source for the report, deck and pitch skills.
+# v3 (2026-10-17): route B cost of capital (proposal) with Damodaran's July 2026 country data; peer workbook v3
+#   (Capital IQ prompts 4-7, USD/MXN 18.479 at the pricing date, Gruma in the NTM and P/E medians).
+# PUBLISHED basis = valuation/BIMBOA_DCF_v3.xlsx key outputs: engine mechanics plus two technical corrections
+#   (1) FCFF also deducts the growth in the lease liability, held at the FY2025 share of revenue (8.15%);
+#   (2) the exit method subtracts only the claims inside the peer-EV definition (net debt incl. leases, NCI at market).
+# ENGINE basis = model engine summary: kept untouched for reconciliation only. Written by valuation/build/write_outputs.py
+#   after the Excel recalculation; verification record (hashes, checks) in valuation/verification-v3.json.
+# All values rest on assistant PROPOSALS (WACC route, terminal, forecast, bridge) until the team confirms them.
+# target_price and rating are the team's decisions (null). Values per share in MXN; money in MXN millions.
+as_of: '2026-10-17'
+version: 3
+valuation_date: '2026-10-16'
+currency: MXN
+share_price:
+  value: 58.6
+  status: usable
+  note: BMV official close 16-Oct-2026 = PPP 58.60 (last trade 58.62), bmv.com.mx/es/emisoras/estadisticas/BIMBO-5163
+inputs_status: assistant proposals - not confirmed by the team
+sources:
+  dcf: valuation/BIMBOA_DCF_v3.xlsx
+  wacc: valuation/BIMBOA_WACC_v3.xlsx
+  peers: valuation/BIMBOA_PeerAnalysis_v3.xlsx
+  engine: model/BIMBOA_model_v7.xlsx; model/model-summary.json
+  verification: valuation/verification-v3.json
+published:
+  value_today_gordon:
+    value: 33.551593
+    status: usable
+    label: value per share today, Gordon (published basis, route B proposal)
+  value_today_exit:
+    value: 45.715085
+    status: usable
+    label: value per share today, exit 6.0x, peer-EV-consistent claims
+  value_12m_gordon:
+    value: 36.844394
+    status: usable
+    label: 12-month value = 33.5516 x (1 + ke 12.9437%) - next unpaid dividend 1.05
+  next_unpaid_dividend:
+    value: 1.05
+    status: usable
+    note: consensus DPS FY2027E (CIQ 2026-09-20); FY2026 dividend 1.075 paid 13-May-2026
+  premium_today_gordon: -0.427447
+  premium_today_exit: -0.219879
+  upside_12m_gordon: -0.371256
+  wacc_route:
+    value: B
+    status: proposal
+    note: rf = M-Bono 10y 9.26% - Mexico default spread 1.75% (Damodaran July 2026, Baa3); ke = rf + beta_l x ERP + CRP (CRP weighted by FY2025
+      Adj. EBITDA over Bimbo's countries); route A (M-Bono, CRP 0) kept as the alternative
+  risk_free: 0.075101
+  country_risk_premium: 0.020496
+  wacc: 0.1032327567
+  cost_of_equity: 0.1294365113
+  terminal_growth: 0.0425
+  exit_multiple: 6.0
+  ev_gordon: 342034.15
+  ev_exit: 370093.87
+  tv_share_gordon: 0.543362
+  tv_share_exit: 0.577983
+  tv_ronic:
+    value: 0.146184
+    note: return on new capital implied by the published terminal value; WACC 10.32%
+  terminal_net_reinvestment_rate: 0.29073
+  implied_exit_multiple_from_gordon: 5.21294
+  implied_g_exit: 0.050788
+  market_implied_terminal_growth:
+    value: 0.064107
+    note: above the 5.0% long-term nominal GDP cap [assumption]
+  reverse_dcf_growth_shift:
+    gordon: 0.034227
+    exit: 0.017773
+    note: uniform revenue-growth shift that equates value to price
+  lower_return_cases_gordon:
+    ronic_equals_wacc: 25.454699
+    ronic_12_5pct: 30.253543
+    ronic_15pct: 34.046688
+  bridge_judgements:
+    without_nci_uplift_gordon: 38.022115
+    without_nci_uplift_exit: 50.185606
+    nci_zero_growth_gordon: 34.631736
+    status: provisional
+    note: NCI uplift 17,499.80 = NCI income 1,814 / (ke - 3%) - book 743, live at ke (Ps 4.47 per share)
+  dated_cross_check:
+    gordon: 34.1073
+    exit: 45.5983
+    vs_fye_gordon: 0.0166
+    vs_fye_exit: -0.0026
+    status: usable
+    note: '30-Jun-2026 anchor (Dated_Check sheet); open: ebit_1h basis (~+Ps 0.33 each)'
+  sensitivity:
+    status: usable
+    note: published-basis grids in BIMBOA_DCF_v3.xlsx (NCI claim and roll factor at the base ke)
+  levers_gordon:
+    capex_minus_50bp: 42.98886
+    capex_plus_50bp: 24.114327
+    gross_margin_plus_50bp: 39.685154
+    gross_margin_minus_50bp: 27.418032
+    growth_plus_50bp: 36.794547
+    growth_minus_50bp: 30.437369
+  comps_indicative:
+    core_bakery_5_53x: 35.95
+    exit_6_0x: 42.68
+    all_eligible_8_27x: 74.87
+    bimbo_ltm_multiple_peer_claims: 7.122
+    status: provisional
+    note: LTM EBITDA 60,919; Jun-26 bridge; net debt incl. leases and NCI at market (at the base ke); medians from BIMBOA_PeerAnalysis_v3.xlsx
+  scenarios:
+    status: usable
+    note: one change at a time against the base (DCF v3 'Scenarios' sheet)
+    rows:
+    - scenario: 'Base: route B, CRP weighted by FY2025 Adj. EBITDA (additive); proposals for drivers and terminal'
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.0425
+      gordon: 33.551593
+      exit: 45.715085
+      ronic_tv: 0.146184
+      note: valuation.yaml / drivers.yaml
+    - scenario: 'Route A local: M-Bono 10y as risk-free, no country risk premium'
+      wacc: 0.101513
+      ke: 0.126439
+      g: 0.0425
+      gordon: 35.717554
+      exit: 46.604264
+      ronic_tv: 0.146184
+      note: project guide's preferred local route
+    - scenario: Route B, CRP weighted by FY2025 sales
+      wacc: 0.101254
+      ke: 0.125988
+      g: 0.0425
+      gordon: 36.053921
+      exit: 46.738485
+      ronic_tv: 0.146184
+      note: CRP 1.70%
+    - scenario: Route B, CRP weighted by FY2023-25 average Adj. EBITDA
+      wacc: 0.102891
+      ke: 0.12884
+      g: 0.0425
+      gordon: 33.973047
+      exit: 45.891538
+      ronic_tv: 0.146184
+      note: CRP 1.99%
+    - scenario: Route B, CRP weighted by FY2023-25 average sales
+      wacc: 0.10095
+      ke: 0.125457
+      g: 0.0425
+      gordon: 36.453471
+      exit: 46.896602
+      ronic_tv: 0.146184
+      note: CRP 1.65%
+    - scenario: Route B, EBITDA weights, Argentina excluded
+      wacc: 0.103035
+      ke: 0.129091
+      g: 0.0425
+      gordon: 33.795065
+      exit: 45.817227
+      ronic_tv: 0.146184
+      note: CRP 2.02%
+    - scenario: 'Route B, CRP scaled by beta: ke = rf + beta_l x (ERP + CRP)'
+      wacc: 0.100948
+      ke: 0.125454
+      g: 0.0425
+      gordon: 36.455716
+      exit: 46.897486
+      ronic_tv: 0.146184
+      note: Damodaran operations-weighted ERP
+    - scenario: 'Beta: Bimbo 5-year regression vs IPC, unlevered'
+      wacc: 0.103658
+      ke: 0.130178
+      g: 0.0425
+      gordon: 33.033777
+      exit: 45.49596
+      ronic_tv: 0.146184
+      note: valuation/inputs/beta_regression.json
+    - scenario: 'Beta: same, Blume-adjusted'
+      wacc: 0.105063
+      ke: 0.132626
+      g: 0.0425
+      gordon: 31.370541
+      exit: 44.774389
+      ronic_tv: 0.146184
+      note: 0.67 x b + 0.33
+    - scenario: 'Beta: Bimbo 3-year regression, unlevered'
+      wacc: 0.114862
+      ke: 0.149708
+      g: 0.0425
+      gordon: 21.46403
+      exit: 39.853109
+      ronic_tv: 0.146184
+      note: 2023-24 de-rating window
+    - scenario: 'PPP at inflation targets (3% MX vs 2% US): depreciation 0.98% a year replaces 1.5%'
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.040609
+      gordon: 31.365492
+      exit: 44.802799
+      ronic_tv: 0.140426
+      note: NA growth FY2027+ 2.47%; NA share FY2035 35.9%; g 4.06%; NCI growth moved too
+    - scenario: 'PPP at Banxico survey inflation (3.70% vs 2%): depreciation 1.67% a year replaces 1.5%'
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.04313
+      gordon: 34.303464
+      exit: 46.011427
+      ronic_tv: 0.148091
+      note: NA growth FY2027+ 3.17%; NA share FY2035 37.3%; g 4.31%
+    - scenario: Capex held at 5.5% (the FY2030 level)
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.0425
+      gordon: 39.931555
+      exit: 46.728856
+      ronic_tv: 0.20184
+      note: no further ramp
+    - scenario: 'Capex 5.0% (Bimbo consensus FY2027-28: about 5.0%)'
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.0425
+      gordon: 47.053102
+      exit: 48.484213
+      ronic_tv: 0.32593
+      note: near-term consensus, not a perpetual reinvestment estimate
+    - scenario: Capex 4.5%
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.0425
+      gordon: 54.174648
+      exit: 50.239569
+      ronic_tv: 0.846117
+      note: near FY2025 D&A excl. right-of-use (4.4%)
+    - scenario: Capex at the peer consensus median FY3 (3.8%)
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.0425
+      gordon: 64.35593
+      exit: 52.749105
+      ronic_tv: null
+      note: peers' FY3 consensus; RONIC shows whether it is sustainable
+    - scenario: Core bakery median EV/EBITDA LTM (5.53x)
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.0425
+      gordon: 33.551593
+      exit: 41.394318
+      ronic_tv: 0.146184
+      note: BIMBOA_PeerAnalysis_v3 (recalculated)
+    - scenario: All eligible peers median EV/EBITDA LTM (8.27x)
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.0425
+      gordon: 33.551593
+      exit: 66.383026
+      ronic_tv: 0.146184
+      note: BIMBOA_PeerAnalysis_v3 (recalculated)
+    - scenario: Bimbo's own LTM multiple on the same claim basis (7.12x)
+      wacc: 0.103233
+      ke: 0.129437
+      g: 0.0425
+      gordon: 33.551593
+      exit: 55.93701
+      ronic_tv: 0.146184
+      note: Jun-26 bridge, NCI at market at the base ke
+engine_fields:
+  wacc:
+    engine: 0.103233
+    status: usable
+  terminal_growth:
+    engine: 0.0425
+    status: usable
+  exit_multiple:
+    engine: 6.0
+    status: usable
+  de_market:
+    engine: 0.746062
+    status: usable
+    note: engine uses FY2025 debt and weighted shares; 0.743 at Jun-26 debt and outstanding shares
+  ev_gordon:
+    engine: 365246.620874
+    status: reconciliation
+    use: published.ev_gordon
+  ev_exit:
+    engine: 379350.402062
+    status: reconciliation
+    use: published.ev_exit
+  price_gordon:
+    engine: 39.481483
+    status: superseded
+    use: 33.551593
+    reason: engine proxy (new leases = principal) keeps the lease liability flat while revenue grows
+  price_exit:
+    engine: 43.084454
+    status: superseded
+    use: 45.715085
+    reason: peer EVs exclude pensions, provisions, MEPP and derivatives; lease growth in the explicit years
+  dps_next:
+    engine: 1.181339
+    status: superseded
+    use: 1.05
+    reason: FY2026 dividend already paid on 13-May-2026; next unpaid = consensus DPS FY2027E
+  target_12m_gordon:
+    engine: 43.410489
+    status: superseded
+    use: 36.844394
+  tv_ronic:
+    engine: 0.178971
+    status: superseded
+    use: 0.146184
+  implied_g:
+    engine: 0.058377
+    status: superseded
+    use: 0.064107
+  price_comps_ev_ebitda:
+    engine: 71.8176
+    status: superseded
+    use: published.comps_indicative
+    reason: engine applies FY2026 Bimbo EBITDA to NTM peer multiples of the P/E-eligible set
+  price_comps_pe:
+    engine: 36.434973
+    status: superseded
+    use: see valuation/BIMBOA_PeerAnalysis_v3.xlsx
+  football:
+    status: provisional
+    note: 52-week row usable; DCF and comps rows superseded by the published values
+v1_to_v2_walk:
+  v1_engine:
+  - 46.144022
+  - 47.421921
+  working_capital_fix:
+  - -1.495442
+  - -0.587494
+  bridge_benefits_and_provisions:
+  - -2.835962
+  - -2.835962
+  v2_engine:
+  - 41.812617
+  - 43.998465
+  peer_ev_claims_exit:
+  - 0.0
+  - 4.984817
+  lease_growth:
+  - -6.095063
+  - -2.379018
+  v2_published:
+  - 35.717554
+  - 46.604264
+v2_to_v3_walk:
+  v2_published:
+  - 35.717554
+  - 46.604264
+  rf_default_spread_removed:
+  - 15.514463
+  - 5.254634
+  crp_operations_weighted:
+  - -17.680423
+  - -6.143813
+  route_b_cost_of_capital:
+  - -2.165961
+  - -0.889179
+  v3_published:
+  - 33.551593
+  - 45.715085
+target_price: null
+rating: null

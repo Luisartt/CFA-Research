@@ -9,6 +9,7 @@
 - [[bimbo-business-model]] — Grupo Bimbo (BIMBOA): how the business makes money
 - [[bimbo-capital-allocation]] — Capital allocation: capex, M&A, dividends, buybacks and leverage
 - [[bimbo-governance-and-ownership]] — Governance, management, ownership and related parties
+- [[bimbo-ownership-and-deals-capiq-2026-10]] — Grupo Bimbo — Holders, Own Deals and Sector Deals (Capital IQ, Oct-2026)
 - [[bimbo-history-1998-2007]] — Grupo Bimbo 1998–2007: expansion, acquisitions, structure, management and capital
 - [[bimbo-history-2008-2013]] — Grupo Bimbo — Corporate History 2008–2013
 - [[bimbo-history-2014-2020]] — Grupo Bimbo — Company History 2014–2020: Deals, Financing, Accounting
@@ -63,9 +64,13 @@
 - [[bimbo-agm-dividends-and-buybacks]] — Grupo Bimbo — AGM Decisions, Dividends per Share and Buybacks (2008–2026)
 - [[bimbo-bond-prospectus-terms]] — Grupo Bimbo — Bond Issue Terms from Offering Notices and Current Reports (2017–2026)
 - [[bimbo-capital-structure-and-debt]] — Grupo Bimbo — Capital Structure and Debt
+- [[bimbo-consensus-dashboard-capiq-2026-10]] — Grupo Bimbo — Consensus Dashboard, Target Price and Recommendations (Capital IQ, Oct-2026)
 - [[bimbo-credit-risk-lseg]] — Grupo Bimbo — credit risk per LSEG (ratings, model scores, debt structure) and reconciliation
+- [[bimbo-debt-hedging-and-leverage-target-capiq-2026-10]] — Grupo Bimbo — Debt Mix, Hedging, Leverage Target and Financing Activity (Capital IQ AI, Oct-2026)
 - [[bimbo-shareholder-returns]] — Grupo Bimbo — Shareholder Returns and Share Count
 - [[bimbo-valuation-data-gaps]] — Valuation Data Gaps (what the filings cannot give)
+- [[bimbo-wacc-market-inputs-capiq-2026-10]] — WACC Market Inputs — Rates, Sovereign Risk and Capital Structure (Capital IQ AI, 16-Oct-2026)
+- [[capiq-data-discrepancies-2026-10]] — Capital IQ Prompt 1 — Discrepancies, Discarded Data and Gaps (2026-10-16)
 - [[ciq-consensus-estimates]] — S&P Capital IQ Consensus Estimates — FY2026 to FY2028 (as of 20-Sep-2026)
 - [[ciq-debt-evolution-2019-2026]] — Grupo Bimbo — Debt Evolution 2019–2026 (Capital IQ)
 - [[ciq-debt-stack-and-maturity-ladder]] — Grupo Bimbo — Debt Stack and Maturity Ladder, 30-Jun-2026 (Capital IQ)
@@ -73,6 +78,8 @@
 - [[ciq-guidance-and-estimate-history]] — Grupo Bimbo — Guidance and Estimate History (Capital IQ, 2000-2026)
 - [[ciq-historical-multiples]] — S&P Capital IQ Historical Trading Multiples — BIMBO A (to 18-Sep-2026)
 - [[ciq-long-history-multiples-and-returns]] — Grupo Bimbo — Long-History Multiples and Returns (Capital IQ, 1999-2026)
+- [[peer-leverage-capiq-2026-10]] — Peer Leverage — Bimbo vs 9 Comparables (Capital IQ, 2026-10-16)
+- [[peer-multiples-and-operations-capiq-2026-10]] — Peer Multiples, Margins and Consensus — Capital IQ (2026-10-16)
 
 ## Macro
 
@@ -84,6 +91,7 @@
 
 - [[bimbo-board-and-officers-lseg]] — Grupo Bimbo — board and officers per LSEG (Refinitiv), with filing cross-check
 - [[bimbo-esg-framework]] — Grupo Bimbo (BIMBOA) — ESG framework, targets and disclosed metrics
+- [[bimbo-climate-metrics-capiq-2026-10]] — Grupo Bimbo — Climate Metrics, Targets and Commodity Sensitivity (Capital IQ AI, Oct-2026)
 - [[bimbo-esg-lseg-scores-and-policies]] — Grupo Bimbo — LSEG ESG scores, climate, SFDR indicators and policy inventory
 - [[bimbo-governance-checklist-latam]] — Grupo Bimbo — LatAm governance checklist (controlling shareholder, board, related parties, takeover defences)
 - [[bimbo-related-party-and-compensation-disclosures]] — Grupo Bimbo — Related-Party Transactions, Executive Compensation and Director Fees
@@ -99,6 +107,7 @@
 - [[bimbo-call-themes-by-year]] — Recurring themes and tone shifts on the calls, year by year, 2011 to 2Q26
 - [[bimbo-catalyst-calendar-facts]] — Dated facts for the catalyst calendar (facts only)
 - [[bimbo-ceo-and-management-changes]] — Executives and CEO transitions evidenced in the calls, 2011 to 2Q26, and the track record behind the new CEO
+- [[bimbo-ceo-rodriguez-bas-and-guidance-capiq-2026-10]] — Grupo Bimbo — New CEO, Management Changes and Guidance Delivery (Capital IQ AI, Oct-2026)
 - [[bimbo-cross-source-connections]] — Cross-source connections for BIMBOA: 15 patterns, contradictions between sources, data gaps and kill criteria
 - [[bimbo-event-study-inputs]] — Event-Study Inputs for BIMBO A: Dated Events, Timing Rules and In-Document Price Evidence
 - [[bimbo-evidence-vs-mentor-tests]] — Evidence against the mentor tests: M&A, Europe, new CEO, AI, inelastic demand, commodities, deleveraging, volume x price

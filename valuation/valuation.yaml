@@ -1,0 +1,43 @@
+# valuation/valuation.yaml - written by the valuation skill workflow (assistant proposal), read by the model engine.
+# Rates as decimals. Money in MXN millions. Sources and the team decisions still open: valuation/valuation.md.
+# WACC, terminal and bridge values below are PROPOSALS (team confirms); target_price stays null (team decision).
+share_price: 58.60                # [sourced] BMV official close 16-Oct-2026 = PPP 58.60 (last trade 58.62; prior close 57.97; change +1.0868% = 58.60 / 57.97 - 1),
+                                  # bmv.com.mx/es/emisoras/estadisticas/BIMBO-5163, serie A (retrieved 2026-10-17); investing.com and Yahoo agree
+price_52w_low: 53.03              # CIQ, as of 06-Oct-2026
+price_52w_high: 68.67             # CIQ, as of 06-Oct-2026
+mid_year: true
+years_since_fiscal_year_end: 0.7918   # 31-Dec-2025 to 16-Oct-2026 = 289 / 365
+non_operating_assets: 7018.0      # investments in associates at book, Dec-25 (EEFF25 p.12); their results sit below EBIT
+debt_like_items: 37053.896101     # after tax, EEFF25 notes 18-19 (valuation/inputs/spg_inputs.yaml bridge_items):
+                                  # retirement net 1,515.25 + US welfare 2,454.0 + LT bonuses 520.1 + MEPP 738.75
+                                  # + deferred compensation 742.0 + provisions incl. uncertain tax positions 10,399.0
+                                  # + net derivative liabilities 3,185.0 + NCI market-value uplift 17,499.80
+                                  # (= NCI income 1,814 / (ke 12.94% - 3%) - book 743; IO structured entities).
+                                  # Recompute when the team changes ke: the DCF workbook computes the uplift live.
+wacc:
+  risk_free: 0.07510118776169417  # route B (proposal): M-Bono 10y 9.26% (S&P Capital IQ 16-Oct-2026) - Mexico default spread 1.75% (Damodaran July 2026, Baa3) = MXN default-free
+  equity_risk_premium: 0.042      # Damodaran implied ERP, 1-Oct-2026
+  country_risk_premium: 0.02049633930380898 # route B (proposal): equity CRP weighted by FY2025 Adj. EBITDA over the countries where Bimbo operates (Damodaran July 2026); BIMBOA_WACC_v3.xlsx
+                                  # route A alternative: M-Bono 9.26% with CRP 0 (it embeds Mexico's sovereign spread, 1.75%)
+  beta_unlevered: 0.53            # [sourced] Damodaran Food Processing, Global, Jan-2026 dataset (betaGlobal.xls 'Date updated' 5-Jan-2026; the
+                                  # page footer 'January 2025' is stale); peer 5Y betas 0.04-0.43 too low to use alone
+  target_debt_to_equity: 0.7431   # current market D/E incl. leases (153,660 + 33,361) / 251,684
+  pre_tax_cost_of_debt: 0.0971    # M-Bono 10y + 0.45pp BIMBO 26 issue spread (matched maturity)
+  tax_rate: 0.30                  # Mexico statutory
+terminal:
+  growth: 0.0425                  # proposal: long-run MXN growth of the regional mix (team decision)
+  exit_ev_ebitda: 6.0             # [assumption] judgment above the core bakery LTM median 5.53x (Flowers 5.61x, Gruma 5.44x;
+                                  # IFRS 16 basis; BIMBOA_PeerAnalysis_v3) for the Mexico mix; all eligible peers 8.27x; Bimbo today 6.94x (team decision)
+  lt_nominal_gdp_growth: 0.05     # [assumption] ~2% real + 3% Banxico target. Real [sourced]: IMF WEO Oct-2026 2.1% a year for 2029-31;
+                                  # Banxico survey Sep-2026 (1-Oct-2026) 10-year average 2027-36 mean 1.88% / median 1.80%.
+                                  # Compounded with 3.0% inflation (target = IMF CPI 2029-31): 4.85-5.16%; 5.0% is the round midpoint.
+                                  # The survey's own long-run inflation is 3.7-3.8% (Cuadro 5 p.6), which would give ~5.6%
+peers:                            # from valuation/inputs/peers.yaml: in_median AND in_median_pe = yes only (NTM, USD,
+                                  # IFRS 16-equivalent EV incl. leases + NCI book incl. redeemable; US GAAP EBITDA + operating lease cost)
+                                  # Excluded: Smucker (P/E excluded: depressed earnings), Yamazaki (J-GAAP lease basis), Aryzta and Arca (NCI not verified)
+  - {name: "Flowers Foods, Inc.", ticker: "NYSE:FLO", price: 6.108911, shares: 212.1, net_debt: 1950.536, ebitda_fwd: 528.077493, eps_fwd: 0.684089}
+  - {name: "Gruma, S.A.B. de C.V.", ticker: "BMV:GRUMA B", price: 13.097029, shares: 336.207985, net_debt: 1631.0, ebitda_fwd: 1070.189945, eps_fwd: 1.344767}   # IFRS 16; NTM from CIQ consensus FY26E-FY27E (prompt 4C), company EBITDA basis
+  - {name: "The Campbell's Company", ticker: "NasdaqGS:CPB", price: 19.872233, shares: 298.2, net_debt: 7362.0, ebitda_fwd: 1589.942466, eps_fwd: 1.695583}
+  - {name: "Mondelez International, Inc.", ticker: "NasdaqGS:MDLZ", price: 63.910366, shares: 1276.3, net_debt: 20560.0, ebitda_fwd: 7399.233973, eps_fwd: 3.222913}   # + current operating leases 164 (Dec-25 proxy) [assumption]
+  - {name: "PepsiCo, Inc.", ticker: "NasdaqGS:PEP", price: 131.503999, shares: 1362.7, net_debt: 45247.0, ebitda_fwd: 20353.899452, eps_fwd: 8.467740}
+target_price: null                # the TEAM's 12-month target; null until decided

@@ -1,0 +1,135 @@
+# research/risks.yaml - written by the risks-esg skill (2026-10-17), read by report/tools/charts.py.
+# probability and impact: whole numbers 1-5 (references/risk-framework.md). Assistant PROPOSAL: the team decides the key
+# risks, the scores and what is priced in. Impact = change in the published DCF value per share (Gordon 33.55; exit 45.72
+# shown in research/risks.md), sized with valuation/build/dcf_core.py on valuation v3. Pillars = research/thesis.md v1
+# (1 climate change and input costs; 2 new CEO execution; 3 debt management, hold). Supersedes BIMBOA/research/risks.yaml
+# (2026-10-14, sized on a static multiple bridge before the model existed).
+# Tags: probability, impact and every priced_in call are [assumption]; figures quoted inside risk text carry the tag of
+# research/risks.md (value impacts [calc] from the DCF v3 replica; history and market data [sourced]).
+risks:
+  - id: R1
+    risk: "Climate-driven wheat costs (CBOT Dec-26 +35% y/y; gross margin follows wheat with ~1-year lag) cut gross margin 50 bp for good after hedges and pricing -> EBITDA -> value"
+    category: ESG
+    pillar: "1"
+    driver: gross_margin
+    probability: 3
+    impact: 4
+    mitigation: "1:1 cash-flow hedges on wheat and natural gas (book ~Ps 315m at end-2025, 64% wheat), pricing, productivity; hedges cover about a year, so they delay rather than remove the cost"
+    priced_in: "no - consensus gross margin 52.3% / 52.0% / 52.05% (FY26-28) has no structural step down; the model has only a 40 bp dip in FY2027"
+  - id: R2
+    risk: "The North America turnaround stalls under the new CEO and the NA Adj. EBITDA margin falls back to FY2024's 8.4% (9.6% LTM) -> consolidated EBITDA margin -0.5 pp -> value"
+    category: operational
+    pillar: "2"
+    driver: opex_pct_revenue
+    probability: 3
+    impact: 4
+    mitigation: "Transformation program (record productivity 3Q25-2Q26), 11 bakery closures, price/mix; NA margin 10.0% in 2Q26"
+    priced_in: "partly [assumption] - the model has ~20 bp a year of consolidated EBITDA-margin gains to FY2030, not a North America path; consensus EBITDA is in line with the model"
+  - id: R3
+    risk: "Capital allocation breaks the debt hold: capex re-accelerates or a large deal at 8-9x EBITDA (+0.29x leverage per US$1bn) keeps net debt / EBITDA above 2.5-2.9x; S&P BBB+ negative outlook turns into a downgrade -> FCF and cost of debt -> value"
+    category: financial
+    pillar: "3"
+    driver: capex_pct_revenue
+    probability: 3
+    impact: 3
+    mitigation: "2026 capex guide cut to US$1.0-1.2bn; net debt 137,097 at Jun-26 (from 145,128 at Dec-25); undrawn US$2,350m revolver; light maturities until 2028"
+    priced_in: "partly - consensus capex ~5.0% of sales; the model already ends at 6.0%, but a near-term re-acceleration or a deal is not in it"
+  - id: R4
+    risk: "Mexico policy raises cost or cuts margin: 46-hour week in 2027 and 40 hours by 2030, IEPS above 8% (tail), NOM-051 phase 3 in 2028 -> Mexico margin -100 to -150 bp (33% of sales, 55% of EBITDA) -> value"
+    category: regulatory
+    pillar: "2 (assistant's proposed link)"
+    driver: opex_pct_revenue
+    probability: 3
+    impact: 4
+    mitigation: "Reformulation (98-99% of the daily portfolio without artificial colours or flavours), pricing, route productivity; the 2027 economic package shows no new IEPS rate (Ley de Ingresos not final at 17-Oct)"
+    priced_in: "partly - IEPS 8% is in the base; labour-hour cuts are not modelled"
+  - id: R5
+    risk: "The exit multiple lands at the core bakery median of 5.53x (Flowers and Gruma on one claim basis) instead of the 6.0x base -> terminal value -> exit value (-4.32 per share; -14.54 from Bimbo's 7.12x today)"
+    category: market
+    pillar: "valuation (no pillar yet)"
+    driver: exit_ev_ebitda
+    probability: 3
+    impact: 3
+    mitigation: "None at company level; Mexico's ~20% margins and the DSD network are the argument for a premium to pure US bakers"
+    priced_in: "partly - the base exit is 6.0x, between the two; the market pays 7.12x today"
+  - id: R6
+    risk: "Peso depreciation runs below the ~1.5% a year inside the North America MXN growth (US CPI 3.74% vs Mexico 3.45% in Sep-2026) -> NA revenue in MXN grows less -> value"
+    category: financial
+    pillar: "none"
+    driver: seg_north_america_growth
+    probability: 3
+    impact: 3
+    mitigation: "44% of debt in USD hedges part of it; net-investment hedges"
+    priced_in: "no - PPP at the inflation targets is a scenario, not the base"
+  - id: R7
+    risk: "USMCA not renewed (annual reviews to 2036) and tariffs on inputs or Mexican goods -> cost of imported product and inputs"
+    category: regulatory
+    pillar: "1"
+    driver: gross_margin
+    probability: 3
+    impact: 2
+    mitigation: "Local production in each market; the company says Mexico's Dec-2025 tariff decree does not hit its imports"
+    priced_in: "partly"
+  - id: R8
+    risk: "GLP-1 drugs and health habits lower volume of sweet baked goods and snacks -> revenue growth"
+    category: market
+    pillar: "none"
+    driver: seg_north_america_growth
+    probability: 3
+    impact: 2
+    mitigation: "Protein, clean label and smaller-portion innovation"
+    priced_in: "no - no number for bread; grocery spend -5.3% six months after starting (observational study)"
+  - id: R9
+    risk: "Governance: the Servitje family controls 72.03%, 7 of 18 directors are independent, strong anti-takeover clauses -> minority investors carry a governance discount and no convergence to consumer-peer multiples"
+    category: governance
+    pillar: "valuation (no pillar yet)"
+    driver: exit_ev_ebitda
+    probability: 4
+    impact: 2
+    mitigation: "Fully independent audit committee (5 of 5); separate CEO and chair since May 2024"
+    priced_in: "yes - structural and visible to every investor"
+  - id: R10
+    risk: "Canada Bread antitrust class actions without a booked provision (fine US$38m paid in 2023)"
+    category: governance
+    pillar: "none"
+    driver: debt_like_items
+    probability: 2
+    impact: 1
+    mitigation: "Claim against Maple Leaf above CAD 2bn"
+    priced_in: "no"
+  - id: R11
+    risk: "US multi-employer pension plans: withdrawal liabilities and contributions (2,700 in 2025; 2,406 expected in 2026)"
+    category: financial
+    pillar: "3"
+    driver: debt_like_items
+    probability: 2
+    impact: 1
+    mitigation: "Withdrawals already negotiated; recorded liability fell from 2,033 (2023) to 985 (2025)"
+    priced_in: "yes - in the bridge (MEPP 738.75 after tax) and in opex"
+  - id: R12
+    risk: "Water stress (101 plants by one count, 89 by another), the new water law and the circular-economy law raise capex and opex; Scope 3 target missed"
+    category: ESG
+    pillar: "1"
+    driver: capex_pct_revenue
+    probability: 4
+    impact: 1
+    mitigation: "100% treated-water reuse vs the 2020 base; 99% of packaging recyclable; sustainability-linked bond step-ups are small (MXN 6m; ~MXN 30m a year from 2031)"
+    priced_in: "partly"
+  - id: R13
+    risk: "Cyber attack on plants or the route network"
+    category: operational
+    pillar: "none"
+    driver: revenue
+    probability: 2
+    impact: 2
+    mitigation: "Insurance with exclusions (RA25 pp.36-37)"
+    priced_in: "no"
+  - id: R14
+    risk: "Argentina (IAS 29), Venezuela (deconsolidated) and Russia exposure"
+    category: operational
+    pillar: "none"
+    driver: revenue
+    probability: 2
+    impact: 1
+    mitigation: "Latin America is about 6% of segment EBITDA"
+    priced_in: "yes"

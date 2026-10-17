@@ -1,0 +1,1168 @@
+# valuation/inputs/peer_extras_v3.yaml - inputs for BIMBOA_PeerAnalysis_v3.xlsx, read by valuation/build/build_peer_workbook.py.
+# Transcribed unchanged by the writer agent from the calculator agent's spec (2026-10-17). fx, overrides and template values carry a
+# tag and a source; expected values are [calc] results of the independent calculation; eligibility flags are proposals with notes.
+# Do not edit numbers by hand: change the spec, re-transcribe, rebuild and recalculate the workbooks.
+
+as_of: '2026-10-17'
+fx:
+  mxn_per_usd:
+    value: 18.479
+    tag: sourced
+    source: 'USD/MXN close 16-Oct-2026 = 18.479 (Yahoo Finance MXN=X, last bar 2026-10-16T21:00:38Z; data/market/usdmxn_daily_2026-09-15_2026-10-16.csv). Capital IQ chart cross-check (data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md and data/capitaliq/capiq-ai-model-gaps-1_2026-10-17.md): Gruma USD 13.09 vs MXN 242.02, BIMBO A USD 3.17 vs MXN 58.60 and Arca USD 11.34 vs MXN 209.66 each imply about 18.49. Replaces the 17.46 of v1/v2, which was the rate implied in the Capital IQ consensus dashboard (wiki/Valuation/bimbo-consensus-dashboard-capiq-2026-10.md: MXN 426,275m revenue / USD 24,418.7m), not a pricing-date rate.'
+  usd_per_jpy:
+    value: 0.006329634717
+    tag: calc
+    source: '1 / 157.987 JPY per USD = Yahoo Finance JPY=X close 16-Oct-2026 (query1.finance.yahoo.com/v8/finance/chart/JPY=X?range=1mo&interval=1d, fetched 2026-10-17; last bar 2026-10-16 20:59 UTC = regularMarketPrice 157.987). Capital IQ chart cross-check: Yamazaki USD 24.17 vs TSE close JPY 3,816 implies 157.88 (0.07% apart).'
+  usd_per_eur:
+    value: 1.1213151216506958
+    tag: sourced
+    source: Yahoo Finance EURUSD=X daily bar for Friday 16-Oct-2026 (stamp 2026-10-15 23:00 UTC = 16-Oct London), close 1.1213151 (query1.finance.yahoo.com/v8/finance/chart/EURUSD=X?range=1mo&interval=1d, fetched 2026-10-17). The response's last element, 1.1242270, is a Saturday 17-Oct 12:20 UTC weekend tick and is not used. Used only for the EUR cross-check of ARYZTA.
+overrides:
+- key: fx_mxn_spot
+  value: 18.479
+  tag: sourced
+  source: 'USD/MXN close 16-Oct-2026 = 18.479 (Yahoo Finance MXN=X, last bar 2026-10-16T21:00:38Z; data/market/usdmxn_daily_2026-09-15_2026-10-16.csv). Capital IQ chart cross-check (data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md and data/capitaliq/capiq-ai-model-gaps-1_2026-10-17.md): Gruma USD 13.09 vs MXN 242.02, BIMBO A USD 3.17 vs MXN 58.60 and Arca USD 11.34 vs MXN 209.66 each imply about 18.49. Replaces the 17.46 of v1/v2, which was the rate implied in the Capital IQ consensus dashboard (wiki/Valuation/bimbo-consensus-dashboard-capiq-2026-10.md: MXN 426,275m revenue / USD 24,418.7m), not a pricing-date rate.'
+- key: fx_bmv_disp
+  value: =$D$10
+  tag: calc
+  source: 'Same pricing-date rate as fx_mxn_spot (18.479). Display only: Bimbo multiples are computed in MXN and do not depend on this rate.'
+- key: fx_cic_mxn_old
+  value: 0.05569
+  tag: sourced
+  source: Memo, not used. The Capital IQ AI says it converted the LTM 06/30/2026 figures at 0.055690 USD per MXN (17.957) (data/capitaliq/capiq-ai-prompt1_2026-10-16.md Task 1A; data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md). It is not the 30-Jun-2026 closing rate (17.47 per the company, 2Q26 release p.6 note 12; Capital IQ's own USD figures for Bimbo's 30-Jun debt also imply 17.47 = 189,679.4 / 10,855) nor the 16-Oct-2026 rate (18.479); probably an LTM average used for income-statement items [unverified].
+- key: GRUMA.price_local
+  value: 242.02
+  tag: sourced
+  source: Delayed quote MXN 242.02 (Yahoo Finance, 16-Oct-2026 1:59 PM CST; no official BMV close found). Corroborated by the Capital IQ chart close USD 13.09 x 18.479 = MXN 241.89 (-0.05%) (data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table).
+- key: GRUMA.fx
+  value: =1/$D$10
+  tag: calc
+  source: USD per MXN = 1 / fx_mxn_spot (18.479, 16-Oct-2026). v2 held 1/17.46.
+- key: GRUMA.cons1_ebitda
+  value: 1111.37
+  tag: sourced
+  source: 'data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4C: EBITDA FY2026E consensus mean USD 1,111.37m (12 analysts, as of 14-Oct-2026; USD as converted by Capital IQ). Company EBITDA (UAFIRDA) basis, the same basis as the LTM 1,108.9 (test in judgment_calls). Gruma now enters the NTM medians.'
+- key: GRUMA.pe_ltm
+  value: =$D$54*$D$56/1.4
+  tag: calc
+  source: Price in USD (GRUMA.price_local row 54 x GRUMA.fx row 56 = 13.097) / diluted EPS LTM USD 1.40 (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4B) = 9.36x. patch_gruma() may link the EPS to the new template row GRUMA.eps_ltm instead of the constant.
+- key: GRUMA.pe_ntm
+  value: =$D$54*$D$56/('Detail_PeerAnalysis'!$D$62*1.4+'Detail_PeerAnalysis'!$E$62*1.33)
+  tag: calc
+  source: 'Price in USD / NTM EPS: FY2026E 1.40 and FY2027E 1.33 consensus (EPS normalized, data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4C), day-weighted 0.211 / 0.789 (Detail D62/E62) = 9.74x.'
+- key: GRUMA.rev_fy26
+  value: 6648.35
+  tag: sourced
+  source: Revenue FY2026E consensus mean USD 6,648.35m (12 analysts; data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4C; same value in data/capitaliq/capiq-ai-model-gaps-7_2026-10-17.md Task 7B).
+- key: GRUMA.ebitda_fy26
+  value: =Inputs_Sources!$D$283
+  tag: calc
+  source: Link to GRUMA.cons1_ebitda (FY2026E consensus mean).
+- key: GRUMA.cons3_rev
+  value: 6615.66
+  tag: sourced
+  source: Revenue FY2028E consensus mean USD 6,615.66m (9 analysts; data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4C).
+- key: GRUMA.cons3_ebitda
+  value: 1101.24
+  tag: sourced
+  source: EBITDA FY2028E consensus mean USD 1,101.24m (9 analysts; data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4C).
+- key: YMZ.price_local
+  value: 3816
+  tag: sourced
+  source: TSE close JPY 3,816 on 16-Oct-2026 (Yahoo Finance Japan history, aggregator). Corroborated by the Capital IQ chart close USD 24.17 x 157.987 = JPY 3,818.5 (+0.07%) (data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md).
+- key: YMZ.shares
+  value: 196.9
+  tag: sourced
+  source: Basic shares outstanding 196.9m at 30-Jun-2026 (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A; diluted returned N/A).
+- key: YMZ.fx
+  value: =1/157.987
+  tag: calc
+  source: USD per JPY = 1 / 157.987 (Yahoo Finance JPY=X close 16-Oct-2026, see fx.usd_per_jpy). v2 used Capital IQ's 0.006482 (LTM 30-Jun-2026 conversion).
+- key: YMZ.rev_fy25
+  value: 8773.2
+  tag: sourced
+  source: 'data/capitaliq/capiq-ai-model-gaps-7_2026-10-17.md Task 7A corrected revenue table: FY2025 USD 8,773.2m = JPY 1,353,459m (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4B) x 0.006482. Resolves wiki discrepancy #11: the copy error was the Prompt 1 FY2021 value (FY2021 is 9,592.8).'
+- key: YMZ.lease_incl
+  value: 'no'
+  tag: sourced
+  source: 'Text value. J-GAAP: CIQ total debt JPY 92,699m = short-term borrowings 51,337 + long-term debt 33,503 + lease obligations 7,853 (current 3,278 + non-current 4,575), within 6. These are J-GAAP (finance) lease obligations; operating leases are off balance sheet and no operating lease cost is available to add back (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A).'
+- key: YMZ.lease_liab
+  value: =7853*$D$7
+  tag: calc
+  source: J-GAAP lease obligations JPY 7,853m x Capital IQ rate 0.006482 (fx_cic_jpy) = USD 50.9m; already inside CIQ total debt and net debt. Operating leases not included.
+- key: YMZ.ifrs_basis_ok
+  value: 'no'
+  tag: calc
+  source: 'Text value. Rule: yes only if CIQ or company debt includes leases and EBITDA is before lease costs. J-GAAP: operating leases are off balance sheet and EBITDA is after operating lease costs, with no add-back available. Fails.'
+- key: ARYN.shares
+  value: 24.8
+  tag: sourced
+  source: '24.8m in three Capital IQ pulls: Task 1A diluted (data/capitaliq/capiq-ai-prompt1_2026-10-16.md), basic at 30-Jun-2026 (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A) and latest (data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md).'
+- key: ARYN.fin_debt
+  value: =678.2*$D$8
+  tag: calc
+  source: Long-term debt EUR 678.2m x Capital IQ rate 1.166559 (fx_cic_eur) = USD 791.2m (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A). No short-term borrowings returned; the current 'LT debt & leases' line equals current leases.
+- key: ARYN.lease
+  value: =167.8*$D$8
+  tag: calc
+  source: IFRS 16 lease liabilities EUR 167.8m (current 35.5 + non-current 132.3) x 1.166559 = USD 195.7m. The output's 'EUR 167.8 - 35.5 = 119.1' is a subtraction error (132.3). 678.2 + 167.8 = 846.0 ties to CIQ total debt EUR 845.9.
+- key: ARYN.nci_book
+  value: -17.4
+  tag: calc
+  source: 'Value kept from v2 so that the descriptive EV ties to CIQ TEV 2,103.3 (= TEV - market cap 1,218.8 - CIQ net debt 901.9). It is not a book NCI: it is negative and unexplained. Capital IQ returns minority interest as N/A for every company, including CPB (306), MDLZ (53), PEP (195) and Gruma (2.8), whose filings show NCI, so N/A is not zero; ARYZTA''s NCI is not verified.'
+- key: ARYN.claims
+  value: 'Long-term debt 791.2 (EUR 678.2) + IFRS 16 lease liabilities 195.7 (EUR 167.8: current 35.5 + non-current 132.3) = CIQ total debt 986.9; + CIQ TEV residual -17.4 (unexplained, not a book NCI) - cash 85.0 (EUR 72.9). USD at Capital IQ''s 1.166559. Lease basis reconciled; NCI not verified, so descriptive only.'
+  tag: sourced
+  source: Text value; components from data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A. Copy the same text to Detail_PeerAnalysis R15.
+- key: ARYN.lease_incl
+  value: 'yes'
+  tag: sourced
+  source: Text value. CIQ total debt EUR 845.9m = long-term debt 678.2 + IFRS 16 lease liabilities 167.8 (within 0.1), so Capital IQ debt includes the leases (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A).
+- key: ARYN.lease_liab
+  value: =167.8*$D$8
+  tag: calc
+  source: IFRS 16 lease liabilities EUR 167.8m x 1.166559 = USD 195.7m (same as ARYN.lease).
+- key: ARYN.lease_addback_ltm
+  value: 0
+  tag: calc
+  source: 'Not needed: ARYZTA reports under IFRS 16, so CIQ EBITDA is before lease costs (right-of-use depreciation and lease interest sit below EBITDA). Same inference as for Gruma.'
+- key: ARYN.ifrs_basis_ok
+  value: 'yes'
+  tag: calc
+  source: 'Text value. Rule: yes only if CIQ or company debt includes leases and EBITDA is before lease costs. Both now hold (debt reconciled incl. leases; IFRS 16 EBITDA). ARYZTA stays out of the medians on NCI (claim basis), not on leases.'
+- key: AC.price_local
+  value: 209.66
+  tag: sourced
+  source: Quote MXN 209.66 on 16-Oct-2026 (Yahoo header and Rankia, aggregators; no BMV primary). Corroborated by the Capital IQ chart close USD 11.34 x 18.479 = MXN 209.55 (-0.05%) (data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md; the BMV:AC column is Arca's own series).
+- key: AC.shares
+  value: 1696.2
+  tag: sourced
+  source: Basic shares outstanding 1,696.2m at 30-Jun-2026 (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A; diluted N/A). A BMV buyback notice shows 1,698.2m (+0.1%).
+- key: AC.fx
+  value: =1/$D$10
+  tag: calc
+  source: USD per MXN = 1 / fx_mxn_spot (18.479, 16-Oct-2026). v2 held 1/17.46.
+- key: AC.lease_incl
+  value: 'yes'
+  tag: sourced
+  source: 'Text value. CIQ total debt MXN 65,427m includes IFRS 16 leases: current LT debt & leases 17,753 + long-term debt 46,487 + non-current leases 1,190.7 (= leases 1,832.2 - current 641.5) = 65,430.7 (within 3.7). The output''s derived 17,027 (17,753 - 641.5 = 17,111.5) and 1,174.0 (1,832.2 - 641.5 = 1,190.7) are arithmetic slips; with them the components are 97.5 short (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A).'
+- key: AC.lease_liab
+  value: =1832.2*$D$9
+  tag: calc
+  source: IFRS 16 lease liabilities MXN 1,832.2m (current 641.5 + non-current 1,190.7) x Capital IQ rate 0.055690 (fx_cic_mxn_old) = USD 102.0m; already inside CIQ total debt and net debt.
+- key: AC.lease_addback_ltm
+  value: 0
+  tag: calc
+  source: 'Not needed: Arca reports under IFRS 16, so CIQ EBITDA is before lease costs. Same inference as for Gruma.'
+- key: AC.ifrs_basis_ok
+  value: 'yes'
+  tag: calc
+  source: 'Text value. Rule: yes only if CIQ or company debt includes leases and EBITDA is before lease costs. Both now hold. Arca stays out of the medians on NCI (claim basis), not on leases.'
+- key: SJM.cons3_rev
+  value: 9190.85
+  tag: sourced
+  source: FY3 = FY2029E (year to 30-Apr-2029) revenue consensus mean USD 9,190.85m (10 analysts; data/capitaliq/capiq-ai-model-gaps-7_2026-10-17.md Task 7B). Makes STM revenue available.
+- key: CPB.cons3_rev
+  value: 9555.92
+  tag: sourced
+  source: FY3 = FY2029E (year to about 31-Jul-2029) revenue consensus mean USD 9,555.92m (10 analysts; data/capitaliq/capiq-ai-model-gaps-7_2026-10-17.md Task 7B). Makes STM revenue available.
+- key: FLO.gp_ltm
+  value: 2540.4
+  tag: sourced
+  source: CIQ LTM gross profit to 18-Jul-2026 (data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, USD m).
+- key: YMZ.gp_ltm
+  value: 2834.9
+  tag: sourced
+  source: CIQ LTM gross profit to 30-Jun-2026 (data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, USD m).
+- key: ARYN.gp_ltm
+  value: 514.8
+  tag: sourced
+  source: CIQ LTM gross profit to 30-Jun-2026 (data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, USD m).
+- key: SJM.gp_ltm
+  value: 3475.1
+  tag: sourced
+  source: CIQ LTM gross profit to 31-Jul-2026. The SEC research had flagged an unexplained Q1 FY27 vs Q1 FY26 gap; the CIQ standardized figure is shown for display only (no multiple uses it) (data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, USD m).
+- key: AC.gp_ltm
+  value: 6537.9
+  tag: sourced
+  source: CIQ LTM gross profit to 30-Jun-2026 (data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, USD m).
+- key: CPB.gp_ltm
+  value: 2781.0
+  tag: sourced
+  source: CIQ LTM gross profit to 2-Aug-2026 (= FY2026). Replaces the SEC calculation 2,742 so that LTM, the CIQ FY2024/FY2025 columns and the CIQ revenue denominator are on one basis (data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, USD m).
+- key: PEP.gp_ltm
+  value: 53371.0
+  tag: sourced
+  source: CIQ LTM gross profit to 5-Sep-2026. Replaces the SEC calculation 53,216 for one basis with CIQ revenue and the FY columns (data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, USD m).
+- key: FLO.dps
+  value: 0.87
+  tag: sourced
+  source: DPS last 12 months USD 0.87 (LTM to 18-Jul-2026; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table).
+- key: FLO.gp_fy24
+  value: 2526.3
+  tag: sourced
+  source: Gross profit FY2024 USD 2,526.3m (fiscal years ending about 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: FLO.gp_fy25
+  value: 2568.9
+  tag: sourced
+  source: Gross profit FY2025 USD 2,568.9m (fiscal years ending about 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: GRUMA.dps
+  value: 0.32
+  tag: sourced
+  source: DPS last 12 months USD 0.32 (LTM to 30-Jun-2026; USD as converted by CIQ; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table).
+- key: GRUMA.gp_fy24
+  value: 2498.6
+  tag: sourced
+  source: Gross profit FY2024 USD 2,498.6m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: GRUMA.gp_fy25
+  value: 2492.7
+  tag: sourced
+  source: Gross profit FY2025 USD 2,492.7m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: YMZ.dps
+  value: 0.39
+  tag: sourced
+  source: DPS last 12 months USD 0.39 (LTM to 30-Jun-2026; USD as converted by CIQ; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table).
+- key: YMZ.gp_fy24
+  value: 2678.3
+  tag: sourced
+  source: Gross profit FY2024 USD 2,678.3m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: YMZ.gp_fy25
+  value: 2865.9
+  tag: sourced
+  source: Gross profit FY2025 USD 2,865.9m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: ARYN.dps
+  value: 0.0
+  tag: sourced
+  source: 'No dividend: Capital IQ returns N/A for LTM, FY2024 and FY2025 and states that ARYZTA does not pay a dividend (data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md, Items Not Retrieved); FY2026E consensus DPS is 0.00 (data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6B).'
+- key: ARYN.gp_fy24
+  value: 507.6
+  tag: sourced
+  source: Gross profit FY2024 USD 507.6m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: ARYN.gp_fy25
+  value: 506.5
+  tag: sourced
+  source: Gross profit FY2025 USD 506.5m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: SJM.dps
+  value: 4.42
+  tag: sourced
+  source: DPS last 12 months USD 4.42 (LTM to 31-Jul-2026; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table).
+- key: SJM.gp_fy24
+  value: 3118.3
+  tag: sourced
+  source: Gross profit FY2024 USD 3,118.3m (fiscal years ending April; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: SJM.gp_fy25
+  value: 3393.8
+  tag: sourced
+  source: Gross profit FY2025 USD 3,393.8m (fiscal years ending April; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: CPB.dps
+  value: 1.56
+  tag: sourced
+  source: DPS last 12 months USD 1.56 (LTM to 2-Aug-2026 (= FY2026); data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table).
+- key: CPB.gp_fy24
+  value: 3017.0
+  tag: sourced
+  source: Gross profit FY2024 USD 3,017.0m (fiscal years ending about 1-Aug; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: CPB.gp_fy25
+  value: 3151.0
+  tag: sourced
+  source: Gross profit FY2025 USD 3,151.0m (fiscal years ending about 1-Aug; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: MDLZ.dps
+  value: 2.0
+  tag: sourced
+  source: DPS last 12 months USD 2.00 (LTM to 30-Jun-2026; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table).
+- key: MDLZ.gp_fy24
+  value: 14257.0
+  tag: sourced
+  source: Gross profit FY2024 USD 14,257.0m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: MDLZ.gp_fy25
+  value: 10935.0
+  tag: sourced
+  source: 'Gross profit FY2025 USD 10,935.0m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A). FY2025 looks like the one-off year of wiki discrepancy #13 (FY2025 EBITDA 4,990); descriptive only.'
+- key: AC.dps
+  value: 0.24
+  tag: sourced
+  source: DPS last 12 months USD 0.24 (LTM to 30-Jun-2026; USD as converted by CIQ; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table).
+- key: AC.gp_fy24
+  value: 6131.3
+  tag: sourced
+  source: Gross profit FY2024 USD 6,131.3m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: AC.gp_fy25
+  value: 6074.7
+  tag: sourced
+  source: Gross profit FY2025 USD 6,074.7m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: PEP.dps
+  value: 5.81
+  tag: sourced
+  source: DPS last 12 months USD 5.81 (LTM to 5-Sep-2026; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table).
+- key: PEP.gp_fy24
+  value: 50419.0
+  tag: sourced
+  source: Gross profit FY2024 USD 50,419.0m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: PEP.gp_fy25
+  value: 51152.0
+  tag: sourced
+  source: Gross profit FY2025 USD 51,152.0m (fiscal years ending 31-Dec; data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A).
+- key: FLO.perf_qtd
+  value: 0.100901
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 6.11 / 30-Sep-2026 5.55 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: FLO.perf_ytd
+  value: -0.438419
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 6.11 / 31-Dec-2025 10.88 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: FLO.perf_1y
+  value: -0.487846
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 6.11 / 31-Oct-2025 11.93 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: FLO.perf_2y
+  value: -0.725146
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 6.11 / 31-Oct-2024 22.23 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: FLO.perf_3y
+  value: -0.721386
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 6.11 / 31-Oct-2023 21.93 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: FLO.perf_5y
+  value: -0.753131
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 6.11 / 29-Oct-2021 24.75 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: GRUMA.perf_qtd
+  value: 0.004605
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 13.09 / 30-Sep-2026 13.03 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: GRUMA.perf_ytd
+  value: -0.240279
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 13.09 / 31-Dec-2025 17.23 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: GRUMA.perf_1y
+  value: -0.229547
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 13.09 / 31-Oct-2025 16.99 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: GRUMA.perf_2y
+  value: -0.240719
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 13.09 / 31-Oct-2024 17.24 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: GRUMA.perf_3y
+  value: -0.245533
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 13.09 / 31-Oct-2023 17.35 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: GRUMA.perf_5y
+  value: 0.113095
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 13.09 / 29-Oct-2021 11.76 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: YMZ.perf_qtd
+  value: 0.053159
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 24.17 / 30-Sep-2026 22.95 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: YMZ.perf_ytd
+  value: 0.147129
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 24.17 / 31-Dec-2025 21.07 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: YMZ.perf_1y
+  value: 0.233793
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 24.17 / 31-Oct-2025 19.59 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: YMZ.perf_2y
+  value: 0.183643
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 24.17 / 31-Oct-2024 20.42 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: YMZ.perf_3y
+  value: 0.14279
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 24.17 / 31-Oct-2023 21.15 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: YMZ.perf_5y
+  value: 0.593276
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 24.17 / 29-Oct-2021 15.17 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: ARYN.perf_qtd
+  value: 0.079358
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 49.10 / 30-Sep-2026 45.49 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: ARYN.perf_ytd
+  value: -0.246933
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 49.10 / 31-Dec-2025 65.20 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: ARYN.perf_1y
+  value: -0.234129
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 49.10 / 31-Oct-2025 64.11 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: ARYN.perf_2y
+  value: -0.304237
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 49.10 / 31-Oct-2024 70.57 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: ARYN.perf_3y
+  value: -0.328501
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 49.10 / 31-Oct-2023 73.12 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: ARYN.perf_5y
+  value: -0.059747
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 49.10 / 29-Oct-2021 52.22 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: SJM.perf_qtd
+  value: 0.071651
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 127.43 / 30-Sep-2026 118.91 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: SJM.perf_ytd
+  value: 0.302832
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 127.43 / 31-Dec-2025 97.81 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: SJM.perf_1y
+  value: 0.230613
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 127.43 / 31-Oct-2025 103.55 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: SJM.perf_2y
+  value: 0.122632
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 127.43 / 31-Oct-2024 113.51 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: SJM.perf_3y
+  value: 0.119378
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 127.43 / 31-Oct-2023 113.84 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: SJM.perf_5y
+  value: 0.037197
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 127.43 / 29-Oct-2021 122.86 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: CPB.perf_qtd
+  value: 0.002017
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 19.87 / 30-Sep-2026 19.83 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: CPB.perf_ytd
+  value: -0.287047
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 19.87 / 31-Dec-2025 27.87 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: CPB.perf_1y
+  value: -0.340524
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 19.87 / 31-Oct-2025 30.13 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: CPB.perf_2y
+  value: -0.574062
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 19.87 / 31-Oct-2024 46.65 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: CPB.perf_3y
+  value: -0.50829
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 19.87 / 31-Oct-2023 40.41 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: CPB.perf_5y
+  value: -0.502628
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 19.87 / 29-Oct-2021 39.95 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: MDLZ.perf_qtd
+  value: 0.105327
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 63.91 / 30-Sep-2026 57.82 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: MDLZ.perf_ytd
+  value: 0.187256
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 63.91 / 31-Dec-2025 53.83 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: MDLZ.perf_1y
+  value: 0.112252
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 63.91 / 31-Oct-2025 57.46 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: MDLZ.perf_2y
+  value: -0.066735
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 63.91 / 31-Oct-2024 68.48 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: MDLZ.perf_3y
+  value: -0.034738
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 63.91 / 31-Oct-2023 66.21 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: MDLZ.perf_5y
+  value: 0.05219
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 63.91 / 29-Oct-2021 60.74 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: AC.perf_qtd
+  value: 0.055866
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 11.34 / 30-Sep-2026 10.74 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: AC.perf_ytd
+  value: 0.048059
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 11.34 / 31-Dec-2025 10.82 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: AC.perf_1y
+  value: 0.170279
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 11.34 / 31-Oct-2025 9.69 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: AC.perf_2y
+  value: 0.326316
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 11.34 / 31-Oct-2024 8.55 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: AC.perf_3y
+  value: 0.268456
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 11.34 / 31-Oct-2023 8.94 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: AC.perf_5y
+  value: 0.855974
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 11.34 / 29-Oct-2021 6.11 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: PEP.perf_qtd
+  value: 0.037642
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 131.49 / 30-Sep-2026 126.72 - 1 (exact quarter-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: PEP.perf_ytd
+  value: -0.083821
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 131.49 / 31-Dec-2025 143.52 - 1 (exact year-to-date base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: PEP.perf_1y
+  value: -0.099938
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 131.49 / 31-Oct-2025 146.09 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: PEP.perf_2y
+  value: -0.208273
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 131.49 / 31-Oct-2024 166.08 - 1 (month-end approximation of the 2-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: PEP.perf_3y
+  value: -0.194696
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 131.49 / 31-Oct-2023 163.28 - 1 (month-end approximation of the 3-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: PEP.perf_5y
+  value: -0.186324
+  tag: calc
+  source: Capital IQ chart USD close 16-Oct-2026 131.49 / 29-Oct-2021 161.60 - 1 (month-end approximation of the 5-year base; data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table). Price return in USD, dividends excluded.
+- key: BIMBO.perf_qtd
+  value: 0.067395
+  tag: calc
+  source: BIMBO A MXN close 16-Oct-2026 58.60 / 30-Sep-2026 54.90 - 1 (exact quarter-to-date base; data/market/bimbo_ipc_monthly_2021-11_2026-10.csv). Price return in MXN, dividends excluded.
+- key: BIMBO.perf_ytd
+  value: -0.00678
+  tag: calc
+  source: BIMBO A MXN close 16-Oct-2026 58.60 / 31-Dec-2025 59.00 - 1 (exact year-to-date base; data/market/bimbo_ipc_monthly_2021-11_2026-10.csv). Price return in MXN, dividends excluded.
+- key: BIMBO.perf_1y
+  value: -0.086658
+  tag: calc
+  source: BIMBO A MXN close 16-Oct-2026 58.60 / 31-Oct-2025 64.16 - 1 (month-end approximation of the 1-year base 16-Oct-2025; data/market/bimbo_ipc_monthly_2021-11_2026-10.csv). Price return in MXN, dividends excluded.
+- key: BIMBO.perf_2y
+  value: -0.054381
+  tag: calc
+  source: BIMBO A MXN close 16-Oct-2026 58.60 / 31-Oct-2024 61.97 - 1 (month-end approximation of the 2-year base; data/market/bimbo_ipc_monthly_2021-11_2026-10.csv). Price return in MXN, dividends excluded.
+- key: BIMBO.perf_3y
+  value: -0.199235
+  tag: calc
+  source: BIMBO A MXN close 16-Oct-2026 58.60 / 31-Oct-2023 73.18 - 1 (month-end approximation of the 3-year base; data/market/bimbo_ipc_monthly_2021-11_2026-10.csv). Price return in MXN, dividends excluded.
+- key: BIMBO.perf_5y
+  value: -0.038398
+  tag: calc
+  source: BIMBO A MXN close 16-Oct-2026 58.60 / 29-Oct-2021 60.94 - 1 (month-end approximation of the 5-year base; data/market/bimbo_ipc_monthly_2021-11_2026-10.csv, 29-Oct-2021 close from data/capitaliq/capiq-ai-model-gaps-1_2026-10-17.md). Price return in MXN, dividends excluded.
+eligibility:
+- key: FLO
+  in_median: 'yes'
+  in_median_pe: 'yes'
+  changed_vs_v2: false
+  note: 'US GAAP, lease basis reconciled: CIQ total debt 2,007.8 vs financial debt 1,686.2 + operating leases 317.1 (-0.2%); EBITDA + LTM operating lease cost 91.8; NCI nil (filings). P/E available (23.45x / 8.93x) and not distorted. Unchanged.'
+- key: GRUMA
+  in_median: 'yes'
+  in_median_pe: 'yes'
+  changed_vs_v2: true
+  note: 'IFRS 16, USD statements: debt + IFRS 16 leases reconcile to CIQ total debt 2,111.8; EBITDA before lease costs (company UAFIRDA); NCI 2.8 from filings. Consensus FY2026E-FY2028E is now available on the same company basis (FY26E 1,111.37 vs LTM 1,108.9), so Gruma enters the NTM medians. P/E now available: price USD 13.10 / diluted EPS LTM 1.40 = 9.36x, NTM 9.74x; earnings not depressed, so P/E-eligible (it was ''no'' only for lack of data).'
+- key: YMZ
+  in_median: 'no'
+  in_median_pe: 'no'
+  changed_vs_v2: false
+  note: 'Fails the lease test. Under J-GAAP operating leases are off balance sheet (CIQ''s JPY 7,853m are finance-lease obligations) and no operating lease cost is available to add back, so EBITDA is after operating lease costs: neither ''debt includes leases'' nor ''EBITDA before lease costs'' holds. NCI not returned (CIQ N/A). Peers without a reconciled basis are excluded from all medians, P/E included. Unchanged.'
+- key: ARYN
+  in_median: 'no'
+  in_median_pe: 'no'
+  changed_vs_v2: false
+  note: 'Lease basis now passes: CIQ total debt EUR 845.9m = long-term debt 678.2 + IFRS 16 leases 167.8 (35.5 + 132.3); IFRS 16 EBITDA is before lease costs; shares 24.8m in three CIQ pulls. Fails the claim basis on NCI: Capital IQ returns minority interest as N/A for every company, including CPB (306), MDLZ (53), PEP (195) and Gruma (2.8), whose filings show NCI, so N/A is not zero, and the CIQ TEV residual (-17.4) is unexplained. NCI not verified, so excluded from all medians. Unchanged.'
+- key: SJM
+  in_median: 'yes'
+  in_median_pe: 'no'
+  changed_vs_v2: false
+  note: 'US GAAP, lease basis reconciled (exact tie incl. finance leases 9.6); EBITDA + operating lease cost 46.9; in EV medians. P/E excluded: LTM 58.6x reflects depressed earnings [assumption]. Unchanged.'
+- key: CPB
+  in_median: 'yes'
+  in_median_pe: 'yes'
+  changed_vs_v2: false
+  note: US GAAP, lease basis reconciled (exact tie); EBITDA + operating lease cost 114.0; EV includes redeemable NCI 304 and NCI 2. P/E 15.11x / 11.72x. Unchanged.
+- key: MDLZ
+  in_median: 'yes'
+  in_median_pe: 'yes'
+  changed_vs_v2: false
+  note: US GAAP, lease basis reconciled on noncurrent leases (exact tie) + current leases 164 (Dec-25 proxy) [assumption]; EBITDA + FY25 operating lease cost 246 [assumption]; NCI 53. P/E 23.1x / 19.8x. Unchanged.
+- key: AC
+  in_median: 'no'
+  in_median_pe: 'no'
+  changed_vs_v2: false
+  note: 'Lease basis now passes: CIQ total debt MXN 65,427m includes IFRS 16 leases 1,832.2 (reconciles within 3.7 once two derivation slips in the output are corrected); IFRS 16 EBITDA; shares 1,696.2m; price corroborated by the CIQ chart. Fails the claim basis on NCI: CIQ N/A, and the CIQ tool''s 8.47x vs 8.06x ex-NCI implies about MXN 19.9bn of claims missing from our EV, consistent with a material NCI. Excluded from all medians. Unchanged.'
+- key: PEP
+  in_median: 'yes'
+  in_median_pe: 'yes'
+  changed_vs_v2: false
+  note: 'US GAAP: CIQ debt excludes operating leases, so EV adds 3,846 (27-Dec-2025 10-K) [assumption]; EBITDA + FY25 operating lease cost 880 [assumption]; NCI 195. P/E 16.15x / 15.53x. Unchanged.'
+template:
+  px_dates:
+  - '2026-10-16'
+  - '2026-09-30'
+  - '2025-12-31'
+  - '2025-10-31'
+  - '2024-10-31'
+  - '2023-10-31'
+  - '2021-10-29'
+  px:
+    FLO:
+    - 6.11
+    - 5.55
+    - 10.88
+    - 11.93
+    - 22.23
+    - 21.93
+    - 24.75
+    GRUMA:
+    - 13.09
+    - 13.03
+    - 17.23
+    - 16.99
+    - 17.24
+    - 17.35
+    - 11.76
+    YMZ:
+    - 24.17
+    - 22.95
+    - 21.07
+    - 19.59
+    - 20.42
+    - 21.15
+    - 15.17
+    ARYN:
+    - 49.1
+    - 45.49
+    - 65.2
+    - 64.11
+    - 70.57
+    - 73.12
+    - 52.22
+    SJM:
+    - 127.43
+    - 118.91
+    - 97.81
+    - 103.55
+    - 113.51
+    - 113.84
+    - 122.86
+    CPB:
+    - 19.87
+    - 19.83
+    - 27.87
+    - 30.13
+    - 46.65
+    - 40.41
+    - 39.95
+    MDLZ:
+    - 63.91
+    - 57.82
+    - 53.83
+    - 57.46
+    - 68.48
+    - 66.21
+    - 60.74
+    AC:
+    - 11.34
+    - 10.74
+    - 10.82
+    - 9.69
+    - 8.55
+    - 8.94
+    - 6.11
+    PEP:
+    - 131.49
+    - 126.72
+    - 143.52
+    - 146.09
+    - 166.08
+    - 163.28
+    - 161.6
+  px_bimbo_mxn:
+  - 58.6
+  - 54.9
+  - 59.0
+  - 64.16
+  - 61.97
+  - 73.18
+  - 60.94
+  dps_ltm:
+    FLO: 0.87
+    GRUMA: 0.32
+    YMZ: 0.39
+    ARYN: 0.0
+    SJM: 4.42
+    CPB: 1.56
+    MDLZ: 2.0
+    AC: 0.24
+    PEP: 5.81
+  dps_fy24:
+    FLO: 0.95
+    GRUMA: 0.28
+    YMZ: 0.3
+    ARYN: 0.0
+    SJM: 4.24
+    CPB: 1.48
+    MDLZ: 1.79
+    AC: 0.23
+    PEP: 5.33
+  dps_fy25:
+    FLO: 0.98
+    GRUMA: 0.32
+    YMZ: 0.4
+    ARYN: 0.0
+    SJM: 4.32
+    CPB: 1.54
+    MDLZ: 1.94
+    AC: 0.22
+    PEP: 5.62
+  gp:
+    FLO:
+    - 2526.3
+    - 2568.9
+    GRUMA:
+    - 2498.6
+    - 2492.7
+    YMZ:
+    - 2678.3
+    - 2865.9
+    ARYN:
+    - 507.6
+    - 506.5
+    SJM:
+    - 3118.3
+    - 3393.8
+    CPB:
+    - 3017.0
+    - 3151.0
+    MDLZ:
+    - 14257.0
+    - 10935.0
+    AC:
+    - 6131.3
+    - 6074.7
+    PEP:
+    - 50419.0
+    - 51152.0
+  gp_ltm:
+    FLO: 2540.4
+    GRUMA: 2522.1
+    YMZ: 2834.9
+    ARYN: 514.8
+    SJM: 3475.1
+    CPB: 2781.0
+    MDLZ: 12357.0
+    AC: 6537.9
+    PEP: 53371.0
+  gm_cons:
+    FLO:
+    - 47.77
+    - 47.17
+    - 48.1
+    GRUMA:
+    - 38.55
+    - 38.55
+    - 38.6
+    YMZ:
+    - 33.11
+    - 33.15
+    - 33.27
+    ARYN:
+    - 26.17
+    - 26.35
+    - 26.64
+    SJM:
+    - 38.69
+    - 38.28
+    - 38.8
+    CPB:
+    - 27.73
+    - 28.46
+    - 28.69
+    MDLZ:
+    - 33.09
+    - 34.85
+    - 35.21
+    AC:
+    - 47.43
+    - 47.54
+    - 47.58
+    PEP:
+    - 54.09
+    - 54.0
+    - 54.07
+  fcf_cons:
+    FLO:
+    - 220.77
+    - 179.9
+    - 177.0
+    GRUMA:
+    - 175.03
+    - 533.25
+    - 530.94
+    YMZ:
+    - 184.4
+    - 228.4
+    - 264.12
+    ARYN:
+    - 139.41
+    - 179.49
+    - 200.92
+    SJM:
+    - 1184.1
+    - 1266.68
+    - 1297.75
+    CPB:
+    - 767.37
+    - 712.08
+    - 647.5
+    MDLZ:
+    - 3275.97
+    - 4264.3
+    - 4840.25
+    AC:
+    - 1228.78
+    - 1377.51
+    - 1558.23
+    PEP:
+    - 10493.88
+    - 11880.63
+    - 12827.85
+  dps_cons:
+    FLO:
+    - 0.62
+    - 0.5
+    - 0.5
+    GRUMA:
+    - 0.32
+    - 0.31
+    - 0.42
+    YMZ:
+    - 0.38
+    - 0.42
+    - 0.44
+    ARYN:
+    - 0.0
+    - 0.37
+    - 0.75
+    SJM:
+    - 4.48
+    - 4.63
+    - 4.79
+    CPB:
+    - 1.03
+    - 1.01
+    - 1.03
+    MDLZ:
+    - 2.06
+    - 2.21
+    - 2.38
+    AC:
+    - 0.55
+    - 0.47
+    - 0.52
+    PEP:
+    - 5.85
+    - 6.15
+    - 6.53
+  capex_cons:
+    BIMBO:
+    - 1259.73
+    - 1208.81
+    - 1240.85
+    FLO:
+    - 119.81
+    - 123.98
+    - 123.86
+    GRUMA:
+    - 219.79
+    - 236.23
+    - 248.4
+    YMZ:
+    - 382.77
+    - 374.45
+    - 364.32
+    ARYN:
+    - 108.93
+    - 100.87
+    - 99.64
+    SJM:
+    - 326.5
+    - 344.81
+    - 347.89
+    CPB:
+    - 324.76
+    - 339.2
+    - 350.48
+    MDLZ:
+    - 1430.32
+    - 1475.32
+    - 1523.35
+    AC:
+    - 994.47
+    - 975.83
+    - 997.15
+    PEP:
+    - 4401.09
+    - 4360.64
+    - 4547.41
+  rev_cons:
+    BIMBO:
+    - 24418.7
+    - 24069.22
+    - 25313.57
+    FLO:
+    - 5075.79
+    - 5058.25
+    - 5032.6
+    GRUMA:
+    - 6648.35
+    - 6444.43
+    - 6615.66
+    YMZ:
+    - 8564.43
+    - 8794.96
+    - 8960.59
+    ARYN:
+    - 2594.73
+    - 2562.57
+    - 2609.11
+    SJM:
+    - 8930.34
+    - 9037.53
+    - 9190.85
+    CPB:
+    - 9496.56
+    - 9469.38
+    - 9555.92
+    MDLZ:
+    - 40101.18
+    - 41232.89
+    - 42656.12
+    AC:
+    - 14453.82
+    - 14628.59
+    - 15637.75
+    PEP:
+    - 99300.54
+    - 101773.09
+    - 105151.36
+  fy_labels:
+    default:
+    - FY2026E
+    - FY2027E
+    - FY2028E
+    SJM:
+    - FY2027E
+    - FY2028E
+    - FY2029E
+    CPB:
+    - FY2027E
+    - FY2028E
+    - FY2029E
+  gruma:
+    rev:
+    - 6648.35
+    - 6444.43
+    - 6615.66
+    ebitda:
+    - 1111.37
+    - 1059.18
+    - 1101.24
+    eps:
+    - 1.4
+    - 1.33
+    - 1.43
+    eps_ltm: 1.4
+    basis: company
+sources:
+  px_dates: data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table (month-end USD closes; 16-Oct-2026 = pricing date; QTD base 30-Sep-2026, YTD base 31-Dec-2025, 1Y-5Y month-end bases).
+  px: data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md chart table, columns NYSE:FLO, BMV:GRUMA B, TSE:2212, SWX:ARYN, NYSE:SJM, NASDAQGS:CPB, NASDAQGS:MDLZ, BMV:AC (Arca's own series) and NASDAQGS:PEP (USD).
+  px_bimbo_mxn: data/market/bimbo_ipc_monthly_2021-11_2026-10.csv column bimbo_close_mxn, rows 2026-10-16, 2026-09, 2025-12, 2025-10, 2024-10 and 2023-10; 29-Oct-2021 = 60.94 from data/capitaliq/capiq-ai-model-gaps-1_2026-10-17.md Task 1B.
+  dps_ltm: data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table, row 'DPS - Last 12 Months (USD)' (LTM end dates in its LTM table). ARYN N/A = no dividend per its Items Not Retrieved note (0.0).
+  dps_fy24: data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table, row 'DPS - FY2024 (USD)'. ARYN 0.0 (no dividend).
+  dps_fy25: data/capitaliq/capiq-ai-model-gaps-5_2026-10-17.md market data table, row 'DPS - FY2025 (USD)'. ARYN 0.0 (no dividend). The note saying SJM 4.40 and CPB 1.56 sit in this column contradicts the table (4.32, 1.54).
+  gp: 'data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, columns FY2024 and FY2025 (USD m; fiscal years: SJM April, CPB about August, others December).'
+  gp_ltm: data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6A, column LTM Gross Profit (end dates per table). Inputs take these for all peers except GRUMA (company 2,522.2) and MDLZ (equal).
+  gm_cons: data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6B, Gross Margin % mean consensus FY1-FY3 (in %).
+  fcf_cons: data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6B, Free Cash Flow mean consensus FY1-FY3 (USD m).
+  dps_cons: data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6B, Dividends Per Share mean consensus FY1-FY3 (USD).
+  capex_cons: data/capitaliq/capiq-ai-model-gaps-7_2026-10-17.md Task 7B, consensus mean capital expenditures FY1-FY3 (USD m), incl. Grupo Bimbo.
+  rev_cons: data/capitaliq/capiq-ai-model-gaps-7_2026-10-17.md Task 7B, consensus mean revenue FY1-FY3 (USD m), incl. Grupo Bimbo.
+  fy_labels: data/capitaliq/capiq-ai-model-gaps-6_2026-10-17.md Task 6B and data/capitaliq/capiq-ai-model-gaps-7_2026-10-17.md Task 7B fiscal-year mapping (SJM FY1 = year to 30-Apr-2027; CPB FY1 = year to 31-Jul-2027).
+  gruma: data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4C (EBITDA, revenue and EPS normalized consensus means FY2026E-FY2028E) and Task 4B (diluted EPS LTM 1.40). Basis = company (UAFIRDA); see judgment_calls.
+expected:
+  per_company:
+    FLO:
+      price_usd: 6.108911
+      mcap_usd: 1295.7
+      ev_usd: 3246.236
+      ev_ebitda_ltm: 5.609444
+      ev_ebitda_ntm: 6.147272
+      pe_ltm: 23.45
+      pe_ntm: 8.93
+    GRUMA:
+      price_usd: 13.097029
+      mcap_usd: 4403.32575
+      ev_usd: 6034.32575
+      ev_ebitda_ltm: 5.441722
+      ev_ebitda_ntm: 5.638556
+      pe_ltm: 9.355021
+      pe_ntm: 9.739254
+    YMZ:
+      price_usd: 24.153886
+      mcap_usd: 4755.900169
+      ev_usd: 4282.400169
+      ev_ebitda_ltm: 6.059714
+      ev_ebitda_ntm: 5.844155
+      pe_ltm: 17.74
+      pe_ntm: 16.84
+      local_ccy_ev_ebitda_ltm: 6.226179
+    ARYN:
+      price_usd: 49.145161
+      mcap_usd: 1218.8
+      ev_usd: 2103.308914
+      ev_ebitda_ltm: 8.333237
+      ev_ebitda_ntm: 5.814704
+      pe_ltm: 10.21
+      pe_ntm: 9.01
+      local_ccy_ev_ebitda_ltm: 8.590292
+    SJM:
+      price_usd: 127.457865
+      mcap_usd: 13612.5
+      ev_usd: 20509.5
+      ev_ebitda_ltm: 8.875498
+      ev_ebitda_ntm: 9.215747
+      pe_ltm: 58.63
+      pe_ntm: 12.6
+    CPB:
+      price_usd: 19.872233
+      mcap_usd: 5925.9
+      ev_usd: 13287.9
+      ev_ebitda_ltm: 7.663149
+      ev_ebitda_ntm: 8.357472
+      pe_ltm: 15.11
+      pe_ntm: 11.72
+    MDLZ:
+      price_usd: 63.910366
+      mcap_usd: 81568.8
+      ev_usd: 102128.8
+      ev_ebitda_ltm: 16.144293
+      ev_ebitda_ntm: 13.802618
+      pe_ltm: 23.1
+      pe_ntm: 19.83
+    AC:
+      price_usd: 11.345852
+      mcap_usd: 19244.834244
+      ev_usd: 21260.234244
+      ev_ebitda_ltm: 7.853799
+      ev_ebitda_ntm: 7.109861
+      pe_ltm: 18.71
+      pe_ntm: 16.5
+      local_ccy_ev_ebitda_ltm: 8.060738
+    PEP:
+      price_usd: 131.503999
+      mcap_usd: 179200.5
+      ev_usd: 224447.5
+      ev_ebitda_ltm: 11.193831
+      ev_ebitda_ntm: 11.027248
+      pe_ltm: 16.15
+      pe_ntm: 15.53
+  medians:
+    core_ev_ltm: 5.525583
+    core_ev_ntm: 5.892914
+    all_ev_ltm: 8.269323
+    all_ev_ntm: 8.786609
+    all_pe_ltm: 16.15
+    all_pe_ntm: 11.72
+    n_core_ev_ltm: 2
+    n_all_ev_ltm: 6
+    n_all_pe_ntm: 5
+  medians_v2:
+    core_ev_ltm: 5.641458
+    core_ev_ntm: 6.147272
+    all_ev_ltm: 8.269323
+    all_ev_ntm: 9.215747
+    all_pe_ltm: 19.625
+    all_pe_ntm: 13.625
+    n_core_ev_ltm: 2
+    n_all_ev_ltm: 6
+    n_all_pe_ntm: 4
+  capex_to_revenue:
+    BIMBO:
+    - 0.051589
+    - 0.050222
+    - 0.049019
+    FLO:
+    - 0.023604
+    - 0.02451
+    - 0.024612
+    GRUMA:
+    - 0.033059
+    - 0.036656
+    - 0.037547
+    YMZ:
+    - 0.044693
+    - 0.042576
+    - 0.040658
+    ARYN:
+    - 0.041981
+    - 0.039363
+    - 0.038189
+    SJM:
+    - 0.036561
+    - 0.038153
+    - 0.037852
+    CPB:
+    - 0.034198
+    - 0.035821
+    - 0.036677
+    MDLZ:
+    - 0.035668
+    - 0.03578
+    - 0.035712
+    AC:
+    - 0.068803
+    - 0.066707
+    - 0.063766
+    PEP:
+    - 0.044321
+    - 0.042847
+    - 0.043246
+    peer_median:
+    - 0.036561
+    - 0.038153
+    - 0.037852
+  bimbo_ev_ebitda_ltm: 6.941367
+changes_vs_v2:
+- 'FX: fx_mxn_spot 17.46 -> 18.479 (fx_bmv_disp, GRUMA.fx and AC.fx follow by formula). Gruma market cap USD 4,660.3m -> 4,403.3m, EV 6,291.3 -> 6,034.3, EV/EBITDA LTM 5.67x -> 5.44x. Core LTM median 5.64x -> 5.53x. All-peer LTM median unchanged at 8.27x (Gruma stays below the middle pair). Bimbo''s multiples are unchanged (computed in MXN; EV/EBITDA LTM 6.9414x); its USD display falls (market cap 14,414.7 -> 13,619.8, EV 24,218.9 -> 22,883.3).'
+- 'Gruma consensus (prompt 4C, company EBITDA basis) wired through patch_gruma(): Detail F62 -> Inputs GRUMA.cons1_ebitda; G62, I62, J62, L62 and M62 -> new template rows GRUMA.cons2_ebitda 1,059.18, cons1_rev 6,648.35, cons2_rev 6,444.43, eps_fy1 1.40 and eps_fy2 1.33; N62 = D62*L62+E62*M62 (build() does not call patch_gruma() yet). NTM EBITDA 1,070.2; EV/EBITDA NTM n/a -> 5.64x. Core NTM median 6.15x (n=1) -> 5.89x (n=2); all-peer NTM median 9.22x (n=5) -> 8.79x (n=6).'
+- 'Gruma becomes P/E-eligible (Detail Q13 no -> yes): P/E LTM 9.36x, NTM 9.74x. All-peer P/E LTM median 19.62x (n=4) -> 16.15x (n=5); P/E NTM median 13.62x -> 11.72x (n=5).'
+- 'Yamazaki: shares 196.9m; USD per JPY 1/157.987 (was 0.006482); price tag unverified -> sourced. Market cap n/a -> USD 4,755.9m. Descriptive EV 4,282.4 = market cap + CIQ net debt incl. J-GAAP lease obligations (YMZ.nd -473.5; NCI not available): EV/EBITDA LTM 6.06x in USD vs 6.23x in JPY. Requires Detail N14 = Inputs_Sources D75 (YMZ.nd), because J14:M14 are hard-coded n/a and no YMZ debt, cash or NCI keys exist. Excluded, so no median moves.'
+- 'ARYZTA: lease split built (fin_debt 986.9 -> 791.2, lease 0 -> 195.7; the sum equals CIQ total debt); lease_incl and ifrs_basis_ok -> yes; lease add-back 0. EV (2,103.3) and EV/EBITDA LTM (8.33x) are unchanged because the CIQ TEV residual -17.4 is kept; in EUR the multiple is 8.59x. Still excluded (NCI), so no median moves.'
+- 'Arca: shares 1,696.2m; price tag unverified -> sourced; lease_incl and ifrs_basis_ok -> yes. Market cap n/a -> USD 19,244.8m. Descriptive EV 21,260.2 = market cap + CIQ net debt incl. leases (AC.nd 2,015.4; NCI not available): EV/EBITDA LTM 7.85x in USD vs 8.06x in MXN vs 8.47x in the CIQ tool. Requires Detail N19 = Inputs_Sources D160 (AC.nd). Excluded, so no median moves.'
+- 'Template fills from prompts 5-7 (no multiple or median moves): {peer}.dps (LTM), gp_fy24, gp_fy25 and gp_ltm for all nine peers (gp_ltm for CPB 2,742 -> 2,781.0 and PEP 53,216 -> 53,371.0 on the CIQ basis, gross margin LTM +0.4 pp and +0.2 pp); price performance QTD, YTD, 1Y, 2Y, 3Y and 5Y for the peers (USD) and Bimbo (MXN); consensus gross margin, FCF, DPS, capex and revenue FY1-FY3; DPS FY2024 and FY2025 as new template rows.'
+- SJM.cons3_rev 9,190.85 and CPB.cons3_rev 9,555.92 (FY2029E) make STM revenue available for both (cons3_ebitda stays pending). GRUMA.rev_fy26, ebitda_fy26, cons3_rev, cons3_ebitda and dps filled. No multiple uses them.
+- 'YMZ.rev_fy25 n/a -> 8,773.2 (= JPY 1,353,459m x 0.006482), which resolves wiki discrepancy #11. Display only.'
+- 'Builder leftovers that must change: (a) FX_MXN = 17.46 is hard-coded in build_peer_workbook.py and used in the front-sheet formulas for Bimbo (52-week high and low, DPS, revenue, gross profit and FCF) and in the texts pa_n1, Detail A6 and Checks section 8; point them at Inputs fx_bmv_disp. (b) Checks row 32 divides by fx_bmv_disp to test the CIQ dashboard; at 18.479 it reads -196.9 instead of about 0, so it should keep dividing by the dashboard''s own 17.46. (c) The Checks section 10 regression rows will FLAG the core LTM and all-peer NTM medians: reset them to the v3 values (5.525583 and 8.786609); Mondelez 16.144 and the all-peer LTM median 8.269323 stay. (d) Update the Detail R and T texts for rows 13, 14, 15 and 19 from the eligibility notes, and O62 for Gruma.'
+judgment_calls:
+- Gruma EBITDA basis = company (UAFIRDA), not Capital IQ's. The test uses margins, which do not depend on FX. Consensus EBITDA margin is 16.7% FY26E, 16.4% FY27E and 16.6% FY28E; company-basis margins are 17.4% FY24, 17.8% FY25, 17.1% LTM and 16.4% in 1H26. On the company basis FY26E implies 2H26 EBITDA 572.9 on revenue 3,373.7 (17.0% vs 17.7% in 2H25), a plausible continuation of the 1H26 compression. On the CIQ basis (FY25 1,033.5, LTM 995.0, margin 15.3%) FY26E would be +7.5% on FY25 and +11.7% on LTM while CIQ LTM EBITDA is falling and revenue grows about 4%, which needs a 2H26 jump of about 20%. So NTM (consensus) and LTM (1,108.9) are on one basis.
+- 'Gruma consensus FX translation: Capital IQ says the estimates are MXN converted at the query-date spot. Bimbo''s MXN consensus (consensus.csv) against the prompt-7 USD values implies 17.46 for FY1 and 18.50 / 18.51 for FY2 / FY3, and Gruma''s FY27E fall (-3.1% revenue, -4.7% EBITDA, -5.0% EPS) fits the same pattern. CIQ''s USD values are used as given, as for every other peer. If FY2 were rebased to the FY1 rate (x1.0598): Gruma NTM 5.39x (vs 5.64x), core NTM median 5.77x (vs 5.89x), Gruma P/E NTM 9.31x; the all-peer NTM EV and P/E medians do not move.'
+- 'P/E eligibility follows the rule as applied in v1/v2: ''peers without a reconciled basis are shown but excluded from medians'' (Detail A4), and every in_median_pe = yes also has in_median = yes; P/E further needs available, non-depressed earnings (Smucker out at 58.6x). Alternative reading (P/E independent of the lease/NCI basis, adding the CIQ-tool P/Es of YMZ, ARYN and AC): P/E LTM median 16.95x and NTM 13.62x (n=8).'
+- 'ARYZTA NCI: kept the v2 CIQ TEV residual (-17.4) in ARYN.nci_book rather than a zero or a blank. A blank counts as 0 in L15 (EV 2,120.7, 8.40x); the text ''n/a'' would turn the EV into n/a. The EUR check leaves the residual out: the gap between 8.33x (USD workbook) and 8.59x (EUR) is +0.07x from the residual and +0.19x from FX (EBITDA and balance sheet at CIQ''s 1.166559 vs market cap at 1.1213).'
+- 'Local-currency multiples: the workbook keeps Capital IQ''s USD conversions for the non-USD reporters (balance sheet and EBITDA at CIQ''s 30-Jun/LTM rates, market cap at the 16-Oct rate). Cross-check: market cap from the CIQ chart USD price at the 16-Oct rate, debt, cash and EBITDA in local currency, NCI excluded. YMZ 6.23x JPY vs 6.06x USD; ARYN 8.59x EUR vs 8.33x USD; AC 8.06x MXN (MXN price 209.66) vs 7.85x USD. If any of them becomes eligible, use the local-currency multiple.'
+- 'Arca omitted claims [calc]: CIQ tool 8.47x x LTM EBITDA MXN 48,607m = EV MXN 411,701m vs our EV ex-NCI 391,808m (market cap 355,625 + CIQ net debt 36,183), so the tool carries about MXN 19,893m (USD 1,077m, 5.1% of EV) of claims our EV lacks, consistent with a material NCI. Rounding of 8.47 moves this by +/-243; on the 15-Oct close (206.85) it would be about 24,659. The tool''s basis differs from table EVs for six peers (wiki discrepancy #7), so the figure is indicative only.'
+- 'Gruma shares: kept 336.207985m (30-Jun-2026 filing, = CIQ basic 336.2 in prompt 4, same date as the balance sheet). Prompt 5''s latest 332.6m (CIQ market cap 4,355.1) would give EV/EBITDA LTM 5.40x (vs 5.44x) and a core LTM median of 5.504x (vs 5.526x).'
+- PEP market cap kept at 179,200.5 (prompt 1). Prompt 5's 179,186.8 fits the 16-Oct chart close 131.49 slightly better but differs by -0.008% (-0.0007x). FLO, SJM, CPB, MDLZ and ARYN market caps are identical in prompts 1 and 5.
+- 'Gross profit LTM moved to the CIQ basis for CPB and PEP (alternative: keep the SEC calculations 2,742 and 53,216). Gruma (company 2,522.2 vs CIQ 2,522.1) and Mondelez (12,357 in both) are unchanged in the Inputs; template gp_ltm lists the CIQ values for all nine.'
+- 'ARYZTA DPS LTM, FY2024 and FY2025 set to 0.0 (CIQ: does not pay a dividend; FY2026E consensus 0.00) rather than null.'
+- SJM and CPB DPS FY2024 / FY2025 use the table values (SJM 4.24 / 4.32 for the years to April 2024 / 2025; CPB 1.48 / 1.54 for the years to August 2024 / 2025). The prompt-5 note says the FY2026 values (SJM 4.40, CPB 1.56) sit in the FY2025 column, but the table does not show them; labels follow the revenue columns (SJM FY2025 revenue 8,726.1 = year to April 2025).
+- 'Price performance: peers in USD from the CIQ chart (it includes the FX move for GRUMA, AC, YMZ and ARYN), Bimbo in MXN; price return only. QTD and YTD exact; 1Y to 5Y month-end approximations. Peers'' 52-week high/low and 1-day change stay null (pending).'
+- 'Capex/revenue: the peer median uses all nine peers (an operating benchmark, so the valuation flags do not apply). FY1 for SJM and CPB is FY2027E (years to April and July 2027), so FY1-FY3 mix fiscal years by design. Bimbo''s USD ratio equals its MXN consensus ratio (5.16% / 5.02% / 4.90%), so FX does not affect it. Core-bakery median (FLO, GRUMA, YMZ, ARYN): 3.75% / 3.80% / 3.79%.'
+- YMZ.fx uses the Yahoo close (1/157.987); the builder draft's chart-implied 24.17 / 3,816 differs by 0.07%. The EUR rate is the Friday 16-Oct bar (1.1213); the Saturday tick (1.1242) would move ARYZTA's EUR multiple by about -0.01x.
+- Seven overrides carry text values (lease_incl and ifrs_basis_ok for YMZ, ARYN and AC, plus ARYN.claims) because those keys are text flags; no Detail formula reads them.
+unresolved:
+- 'ARYZTA NCI at book: read it in the H1-2026 report. Capital IQ''s N/A is not zero and the -17.4 TEV residual is unexplained; until then ARYZTA stays out of the medians.'
+- 'Arca NCI at book: read it in the 2Q26 report. The CIQ tool implies about MXN 19.9bn of claims missing from our EV; Arca stays out until then.'
+- Yamazaki NCI and operating lease commitments (J-GAAP footnote in the yuho or kessan tanshin) are needed for any IFRS 16-equivalent basis.
+- 'Conflict with the brief: the Capital IQ AI says it converted the 30-Jun-2026 balance sheets at 0.055690 (17.957), but the company''s 30-Jun closing rate is 17.47 (2Q26 p.6 note 12) and CIQ''s own USD Bimbo debt implies 17.47 (189,679.4 / 10,855). If CIQ''s USD balance sheets are at 17.47, the AI''s MXN back-conversions for Arca are about 2.8% high: Arca''s MXN multiple would be about 8.04x instead of 8.06x and the implied omitted claims about MXN 20.9bn. Immaterial for the medians.'
+- 'Gruma consensus currency: pull the estimates in their native currency with the conversion rate stated, to remove the FY1 vs FY2 translation effect (see judgment_calls).'
+- Gruma price is still a delayed quote (Yahoo, 1:59 PM CST), now corroborated by the CIQ chart within 0.05%; replace it with the BMV official close before the report.
+- 'Gruma latest shares 332.6m (prompt 5) vs 336.2m at 30-Jun-2026: confirm the buyback count at the pricing date.'
+- 'EUR/USD 16-Oct close: Friday bar 1.1213 vs weekend tick 1.1242; confirm with the ECB reference rate if ARYZTA ever enters the medians.'
+- 'Peers'' 52-week high/low and 1-day change: not returned by Capital IQ (pending).'
+- ARYZTA's CIQ-tool P/E LTM 10.21 implies EPS 4.81, the FY2025 diluted EPS, not the LTM 4.93 (price / LTM EPS = 9.96x); the tool may be stale. Display only.
+- Gruma levered FCF (LTM, FY2024, FY2025) and FY2023 EBITDA are still pending; prompt 7A returned no historical capex or D&A for any company.
+- Bimbo 52-week high/low (68.67 / 53.03) are as of 06-Oct-2026 (CIQ corporate_issuance.csv), not 16-Oct-2026.

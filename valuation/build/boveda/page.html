@@ -1,0 +1,1045 @@
+<title>Bóveda Vision</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: a vault control room - verdict band up top, the picture, then the options desk with a sticky readout. */
+:root {
+  --bg: #eef1f5; --panel: #ffffff; --panel-2: #f5f7fa; --ink: #121c28; --muted: #566476; --line: #d5dce6;
+  --brass: #8f6219; --brass-soft: #f1e5cb; --steel: #2a5b8c; --steel-soft: #dde8f4; --price: #b23f29;
+  --good: #2b7648; --good-soft: #dcefe3; --warn: #94660a; --warn-soft: #f5eacd; --bad: #ab3337; --bad-soft: #f6dddd;
+  --f-display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-data: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+  --radius: 10px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #0d131a; --panel: #141c25; --panel-2: #19232e; --ink: #e4eaf1; --muted: #95a3b4; --line: #283441;
+    --brass: #d9a84f; --brass-soft: #3a2e18; --steel: #78ace3; --steel-soft: #1c2c3d; --price: #ee7c63;
+    --good: #62c28a; --good-soft: #17301f; --warn: #e2b24c; --warn-soft: #362a12; --bad: #f06d70; --bad-soft: #3a1b1d;
+    color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #0d131a; --panel: #141c25; --panel-2: #19232e; --ink: #e4eaf1; --muted: #95a3b4; --line: #283441;
+  --brass: #d9a84f; --brass-soft: #3a2e18; --steel: #78ace3; --steel-soft: #1c2c3d; --price: #ee7c63;
+  --good: #62c28a; --good-soft: #17301f; --warn: #e2b24c; --warn-soft: #362a12; --bad: #f06d70; --bad-soft: #3a1b1d;
+  color-scheme: dark;
+}
+body { background: var(--bg); color: var(--ink); font-family: var(--f-body); font-size: 15px; line-height: 1.5; }
+.bv * { box-sizing: border-box; }
+.bv h1, .bv h2, .bv h3 { font-family: var(--f-display); text-wrap: balance; margin: 0; letter-spacing: -0.01em; }
+.bv h2 { font-size: 1.55rem; font-weight: 700; }
+.bv h3 { font-size: 1.05rem; font-weight: 700; }
+.bv p { margin: 0; }
+.num, .bv table, .tile-val, .ro-val { font-variant-numeric: tabular-nums; }
+.mono { font-family: var(--f-data); }
+.eyebrow { font-family: var(--f-data); font-size: 0.72rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+
+.topbar { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; background: var(--bg); border-bottom: 1px solid var(--line); }
+.topbar-in { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 10px; display: flex; flex-wrap: wrap;
+  align-items: center; justify-content: space-between; gap: 8px 20px; }
+.brand { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; min-width: 0; }
+.brand-name { font-family: var(--f-display); font-weight: 800; font-size: 1.2rem; letter-spacing: -0.02em; }
+.brand-mark { width: 14px; height: 14px; border: 2px solid var(--brass); border-radius: 50%; display: inline-block;
+  box-shadow: inset 0 0 0 3px var(--bg), inset 0 0 0 5px var(--brass); transform: translateY(1px); }
+.brand-sub { color: var(--muted); font-size: 0.85rem; }
+.nav { display: flex; gap: 4px; flex-wrap: wrap; }
+.nav a { color: var(--ink); text-decoration: none; font-size: 0.85rem; padding: 4px 10px; border-radius: 999px; }
+.nav a:hover { background: var(--panel-2); }
+.nav a:focus-visible, .bv button:focus-visible, .bv input:focus-visible, .bv select:focus-visible, .bv label.seg:focus-within {
+  outline: 2px solid var(--brass); outline-offset: 2px; }
+
+.page { max-width: 1240px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 22px 56px; display: grid; gap: 40px; }
+.section { display: grid; gap: 16px; scroll-margin-top: 84px; }
+.section-head { display: grid; gap: 6px; max-width: 72ch; }
+.lede { color: var(--muted); }
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 18px; min-width: 0; }
+
+/* verdict */
+.verdict { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1.4fr); gap: 22px; align-items: stretch; }
+.verdict-copy { display: grid; gap: 12px; align-content: start; }
+.verdict h1 { font-size: clamp(1.8rem, 3.6vw, 2.7rem); font-weight: 800; line-height: 1.05; }
+.verdict-line { font-size: 1.02rem; max-width: 56ch; }
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chip { font-family: var(--f-data); font-size: 0.74rem; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line);
+  background: var(--panel); color: var(--ink); white-space: nowrap; }
+.chip.good { background: var(--good-soft); color: var(--good); border-color: transparent; }
+.chip.warn { background: var(--warn-soft); color: var(--warn); border-color: transparent; }
+.chip.bad { background: var(--bad-soft); color: var(--bad); border-color: transparent; }
+.chip.brass { background: var(--brass-soft); color: var(--brass); border-color: transparent; }
+.tiles { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border: 1px solid var(--line); border-radius: var(--radius);
+  background: var(--panel); overflow: hidden; }
+.tile { padding: 16px; display: grid; gap: 4px; align-content: start; border-right: 1px solid var(--line); min-width: 0; }
+.tile:last-child { border-right: 0; }
+.tile-val { font-family: var(--f-display); font-weight: 800; font-size: clamp(1.6rem, 3vw, 2.25rem); line-height: 1.05; }
+.tile-sub { font-family: var(--f-data); font-size: 0.78rem; color: var(--muted); }
+.tile.price .tile-val { color: var(--price); }
+.tile.ours .tile-val { color: var(--steel); }
+.tile.blend .tile-val { color: var(--brass); }
+
+/* picture */
+.picture { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 16px; }
+.ff { display: grid; gap: 12px; position: relative; padding-top: 4px; }
+.ff-row { display: grid; gap: 4px; }
+.ff-label { display: flex; justify-content: space-between; gap: 10px; font-size: 0.85rem; flex-wrap: wrap; }
+.ff-label span:last-child { font-family: var(--f-data); color: var(--muted); font-size: 0.78rem; }
+.track { position: relative; height: 22px; background: var(--panel-2); border-radius: 4px; }
+.range { position: absolute; top: 4px; bottom: 4px; border-radius: 3px; background: var(--steel-soft); border: 1px solid var(--steel); }
+.range.market { background: transparent; border: 1px dashed var(--muted); }
+.range.comps { background: var(--brass-soft); border-color: var(--brass); }
+.range.consensus { background: var(--panel); border: 1px solid var(--muted); }
+.range.thesis { border: 1px solid var(--brass); background: repeating-linear-gradient(45deg, var(--brass-soft) 0 4px, transparent 4px 8px); }
+.dot.muted { background: var(--muted); }
+.callout { background: var(--brass-soft); border-radius: var(--radius); padding: 14px 16px; display: grid; gap: 6px; }
+.callout p { max-width: 95ch; }
+.callout b { color: var(--brass); }
+.need { display: grid; gap: 4px; }
+.dot { position: absolute; top: 50%; width: 12px; height: 12px; margin: -6px 0 0 -6px; border-radius: 50%; background: var(--steel);
+  border: 2px solid var(--panel); }
+.ff-overlay { position: absolute; inset: 0; pointer-events: none; }
+.vline { position: absolute; top: 0; bottom: 22px; width: 0; border-left: 2px dashed var(--price); }
+.vline.blend { border-left: 2px solid var(--brass); }
+.vline-tag { position: absolute; top: -2px; transform: translateX(-50%); font-family: var(--f-data); font-size: 0.7rem;
+  padding: 1px 6px; border-radius: 4px; background: var(--panel); white-space: nowrap; }
+.axis { position: relative; height: 18px; font-family: var(--f-data); font-size: 0.72rem; color: var(--muted); }
+.axis span { position: absolute; transform: translateX(-50%); }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: 0.8rem; color: var(--muted); }
+.legend i { display: inline-block; width: 18px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+.walk { display: grid; gap: 7px; }
+.walk-head { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 56px 56px; gap: 8px; font-size: 0.72rem; color: var(--muted);
+  font-family: var(--f-data); text-transform: uppercase; letter-spacing: 0.06em; }
+.walk-row { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) 56px 56px; gap: 8px; align-items: center; font-size: 0.84rem; }
+.walk-row.total { font-weight: 600; }
+.walk-bar { position: relative; height: 14px; background: var(--panel-2); border-radius: 3px; }
+.walk-bar b { position: absolute; top: 2px; bottom: 2px; border-radius: 2px; background: var(--steel); }
+.walk-bar b.neg { background: var(--bad); }
+.walk-bar b.pos { background: var(--good); }
+.walk-bar b.ex { top: 8px; bottom: 2px; background: var(--brass); }
+.walk-bar b.ex.neg { background: var(--bad); opacity: 0.6; }
+.walk-row .v { font-family: var(--f-data); text-align: right; }
+
+/* options desk */
+.desk { display: grid; grid-template-columns: minmax(0, 1.65fr) minmax(280px, 1fr); gap: 16px; align-items: start; }
+.controls { display: grid; gap: 14px; min-width: 0; }
+.presets { display: flex; flex-wrap: wrap; gap: 6px; }
+.bv button { font: inherit; cursor: pointer; }
+.btn { border: 1px solid var(--line); background: var(--panel); color: var(--ink); border-radius: 999px; padding: 6px 12px; font-size: 0.84rem; }
+.btn:hover { border-color: var(--brass); }
+.btn.on { background: var(--brass); border-color: var(--brass); color: var(--panel); }
+.btn.solid { background: var(--ink); color: var(--panel); border-color: var(--ink); }
+fieldset.group { border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); padding: 14px 16px 16px; margin: 0;
+  display: grid; gap: 14px; min-width: 0; }
+fieldset.group legend { padding: 0 6px; font-family: var(--f-display); font-weight: 700; font-size: 1rem; }
+.ctl { display: grid; gap: 6px; min-width: 0; }
+.ctl-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.ctl-top label, .ctl-top .lab { font-weight: 600; font-size: 0.9rem; }
+.ctl-top output { font-family: var(--f-data); font-size: 0.85rem; color: var(--brass); font-weight: 600; }
+.ctl-note { font-size: 0.78rem; color: var(--muted); }
+.bv input[type="range"] { width: 100%; accent-color: var(--brass); }
+.bv select { font: inherit; font-size: 0.88rem; padding: 7px 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--panel-2);
+  color: var(--ink); width: 100%; max-width: 100%; }
+.segs { display: flex; flex-wrap: wrap; gap: 6px; }
+label.seg { display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px;
+  font-size: 0.84rem; cursor: pointer; background: var(--panel-2); }
+label.seg input { accent-color: var(--brass); margin: 0; }
+label.seg:has(input:checked) { border-color: var(--brass); background: var(--brass-soft); }
+.grid2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.chiprow { display: flex; flex-wrap: wrap; gap: 6px; }
+.chipbtn { border: 1px solid var(--line); background: var(--panel-2); color: var(--ink); border-radius: 6px; padding: 3px 8px;
+  font-family: var(--f-data); font-size: 0.74rem; }
+.chipbtn:hover { border-color: var(--brass); }
+
+.readout { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 74px); display: grid; gap: 12px; }
+.ro-main { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.ro-box { display: grid; gap: 2px; padding: 10px 12px; border-radius: 8px; background: var(--panel-2); min-width: 0; }
+.ro-box .ro-val { font-family: var(--f-display); font-weight: 800; font-size: 1.55rem; line-height: 1.1; }
+.ro-box.ours .ro-val { color: var(--steel); }
+.ro-box.blend .ro-val { color: var(--brass); }
+.ro-list { display: grid; gap: 0; margin: 0; }
+.ro-list div { display: flex; justify-content: space-between; gap: 12px; padding: 6px 0; border-bottom: 1px dashed var(--line); font-size: 0.86rem; }
+.ro-list dt { color: var(--muted); }
+.ro-list dd { margin: 0; font-family: var(--f-data); text-align: right; }
+.flags { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; }
+.flags li { font-size: 0.82rem; padding: 6px 10px; border-radius: 6px; background: var(--warn-soft); color: var(--warn); }
+.flags li.ok { background: var(--good-soft); color: var(--good); }
+.ro-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+.copybox { width: 100%; min-height: 120px; font-family: var(--f-data); font-size: 0.78rem; border-radius: 8px; border: 1px solid var(--line);
+  background: var(--panel-2); color: var(--ink); padding: 8px; }
+.status-line { font-size: 0.8rem; color: var(--good); min-height: 1.2em; }
+
+.below-desk { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 16px; }
+.tbl-wrap { overflow-x: auto; }
+.bv table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+.bv th, .bv td { padding: 6px 8px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+.bv th:first-child, .bv td:first-child { text-align: left; white-space: normal; }
+.bv thead th { font-family: var(--f-data); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--muted); font-weight: 500; }
+.bv td.off { color: var(--muted); text-decoration: line-through; }
+.bv tr.total td { font-weight: 600; border-top: 2px solid var(--ink); }
+.bv td.mono, .bv th.mono { font-family: var(--f-data); }
+.fcff-svg { width: 100%; height: auto; display: block; }
+.fcff-svg text { fill: var(--muted); font-family: var(--f-data); font-size: 11px; }
+.fcff-svg .b-pub { fill: var(--steel); }
+.fcff-svg .b-eng { fill: var(--line); }
+.fcff-svg .gridl { stroke: var(--line); stroke-width: 1; }
+
+/* decisions */
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 14px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: grid; gap: 10px;
+  align-content: start; min-width: 0; }
+.card-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+.stake { font-family: var(--f-data); font-size: 0.78rem; color: var(--brass); }
+.card dl { margin: 0; display: grid; gap: 8px; }
+.card dt { font-family: var(--f-data); font-size: 0.7rem; letter-spacing: 0.07em; text-transform: uppercase; color: var(--muted); }
+.card dd { margin: 0; font-size: 0.88rem; }
+.card dd.q { font-weight: 600; }
+.tries { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 4px; border-top: 1px dashed var(--line); }
+.try { border: 1px solid var(--line); background: var(--panel-2); color: var(--ink); border-radius: 8px; padding: 6px 9px; font-size: 0.8rem;
+  display: grid; gap: 1px; text-align: left; }
+.try:hover { border-color: var(--brass); }
+.try b { font-weight: 600; }
+.try span { font-family: var(--f-data); font-size: 0.72rem; color: var(--muted); }
+
+/* grids */
+.grids { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+.sens td.hi { background: var(--good-soft); color: var(--good); }
+.sens td.mid { background: var(--warn-soft); color: var(--warn); }
+.sens td.lo { background: var(--bad-soft); color: var(--bad); }
+.sens td.center { outline: 2px solid var(--ink); outline-offset: -2px; font-weight: 700; }
+.sens th.rowh { text-align: left; }
+
+/* pillars */
+.pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
+.pillar { background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius); padding: 16px; display: grid; gap: 8px;
+  align-content: start; min-width: 0; }
+.pillar .eyebrow { color: var(--brass); }
+.pillar p { font-size: 0.9rem; }
+.lever { font-family: var(--f-data); font-size: 0.8rem; background: var(--panel-2); padding: 8px 10px; border-radius: 6px; }
+
+/* audit */
+.audit { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 16px; }
+.rounds { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; counter-reset: rnd; }
+.rounds li { display: grid; grid-template-columns: 36px minmax(0, 1fr); gap: 10px; align-items: start; }
+.rounds li::before { counter-increment: rnd; content: counter(rnd); width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center;
+  font-family: var(--f-data); font-weight: 600; background: var(--panel-2); border: 1px solid var(--line); }
+.rounds li.pass::before { background: var(--good-soft); color: var(--good); border-color: transparent; }
+.checklist { display: grid; gap: 6px; margin: 0; padding: 0; list-style: none; font-size: 0.86rem; }
+.checklist li { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--line); padding-bottom: 6px; }
+.checklist li span:last-child { font-family: var(--f-data); color: var(--good); }
+.files { font-family: var(--f-data); font-size: 0.78rem; display: grid; gap: 4px; margin: 0; padding: 0; list-style: none; word-break: break-word; }
+.pending { display: grid; gap: 4px; margin: 0; padding-left: 18px; font-size: 0.85rem; }
+.foot { color: var(--muted); font-size: 0.82rem; border-top: 1px solid var(--line); padding-top: 14px; max-width: 90ch; }
+
+@media (max-width: 1080px) {
+  .verdict, .picture, .desk, .below-desk, .grids, .audit { grid-template-columns: minmax(0, 1fr); }
+  .readout { position: static; }
+  .pillars { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 640px) {
+  .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .tile:nth-child(2) { border-right: 0; }
+  .tile:nth-child(-n+2) { border-bottom: 1px solid var(--line); }
+  .grid2 { grid-template-columns: minmax(0, 1fr); }
+  .walk-head, .walk-row { grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.8fr) 48px 48px; font-size: 0.78rem; }
+  .ro-main { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .range, .dot, .vline, .walk-bar b { transition: left 0.25s ease, width 0.25s ease; }
+}
+</style>
+
+<div class="bv">
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand"><span class="brand-mark" aria-hidden="true"></span><span class="brand-name">Bóveda Vision</span>
+      <span class="brand-sub">Grupo Bimbo · BMV: BIMBO A · valuación v2 al 16-oct-2026</span></div>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#pintura">La pintura</a><a href="#opciones">Opciones</a><a href="#financials">Financials y pares</a><a href="#decisiones">Decisiones</a>
+      <a href="#sensibilidad">Sensibilidad</a><a href="#pilares">Pilares</a><a href="#auditoria">Auditoría</a>
+    </nav>
+  </div>
+</header>
+
+<main class="page">
+  <section class="verdict" aria-labelledby="v-title">
+    <div class="verdict-copy">
+      <p class="eyebrow">Escenario activo · <span id="v-preset">Propuesta v2</span></p>
+      <h1 id="v-title">Lo que vale Bimbo con las opciones que elijan</h1>
+      <p class="verdict-line" id="v-line">Calculando…</p>
+      <div class="chips" id="v-chips"></div>
+    </div>
+    <div class="tiles" role="group" aria-label="Resultados del escenario">
+      <div class="tile price"><span class="eyebrow">Precio en bolsa</span><span class="tile-val" id="t-price">—</span><span class="tile-sub">cierre oficial BMV, 16-oct-2026</span></div>
+      <div class="tile ours"><span class="eyebrow">DCF Gordon</span><span class="tile-val" id="t-gordon">—</span><span class="tile-sub" id="t-gordon-sub">—</span></div>
+      <div class="tile ours"><span class="eyebrow">DCF múltiplo</span><span class="tile-val" id="t-exit">—</span><span class="tile-sub" id="t-exit-sub">—</span></div>
+      <div class="tile blend"><span class="eyebrow">Gordon a 12 meses</span><span class="tile-val" id="t-target">—</span><span class="tile-sub" id="t-target-sub">—</span></div>
+    </div>
+  </section>
+
+  <section class="section" id="pintura" aria-labelledby="h-pintura">
+    <div class="section-head">
+      <p class="eyebrow">La pintura completa</p>
+      <h2 id="h-pintura">Dónde cae cada método frente al precio</h2>
+      <p class="lede">Cada barra es un rango por método, en MXN por acción hoy. La línea roja es el precio; la dorada, el valor ponderado del escenario. Las barras del DCF se mueven con las opciones de abajo.</p>
+    </div>
+    <div class="picture">
+      <div class="panel">
+        <div class="ff" id="ff"></div>
+        <div class="legend" style="margin-top:12px">
+          <span><i style="background:var(--steel-soft);border:1px solid var(--steel)"></i>DCF del escenario</span>
+          <span><i style="background:var(--brass-soft);border:1px solid var(--brass)"></i>Comparables (base fija)</span>
+          <span><i style="border:1px solid var(--brass);background:repeating-linear-gradient(45deg,var(--brass-soft) 0 4px,transparent 4px 8px)"></i>Tesis del 08-oct</span>
+          <span><i style="background:var(--panel);border:1px solid var(--muted)"></i>Consenso de analistas</span>
+          <span><i style="border:1px dashed var(--muted)"></i>Mercado 52 semanas</span>
+        </div>
+      </div>
+      <div class="panel">
+        <h3>De v1 a v2: qué cambió el valor</h3>
+        <p class="lede" style="font-size:0.86rem;margin:4px 0 12px">Correcciones técnicas tras la auditoría de Codex. Barra azul: Gordon; barra dorada: múltiplo.</p>
+        <div class="walk" id="walk"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="opciones" aria-labelledby="h-opciones">
+    <div class="section-head">
+      <p class="eyebrow">Todas las opciones</p>
+      <h2 id="h-opciones">Muevan cada supuesto y vean el valor al instante</h2>
+      <p class="lede">El cálculo es el mismo del DCF v2 (BIMBOA_DCF_v2.xlsx), verificado contra el modelo en Python. Los cambios se guardan solo en este navegador.</p>
+    </div>
+    <div class="desk">
+      <div class="controls">
+        <div class="presets" id="presets" role="group" aria-label="Escenarios guardados"></div>
+
+        <fieldset class="group">
+          <legend>Costo de capital</legend>
+          <div class="ctl">
+            <div class="ctl-top"><span class="lab" id="lab-route">Ruta</span><output id="o-route"></output></div>
+            <div class="segs" role="radiogroup" aria-labelledby="lab-route" id="route-segs"></div>
+            <span class="ctl-note">La ruta A no suma prima país porque el M-Bono ya trae el riesgo soberano de México (diferencial de impago 1.62%). La ruta B lo quita de la tasa (7.64%) y suma la prima país de acciones de Damodaran ponderada por región: México 2.46%, Norteamérica 0.18%, Europa 1.55%, Latinoamérica 3.24%. Sumar prima país encima del M-Bono cuenta el riesgo dos veces.</span>
+            <span class="ctl-note">La propia empresa usa tasas de descuento por país en sus pruebas de deterioro (EEFF25, nota 12; después de impuestos, en moneda local): México 10.00%, EUA 7.27%, Canadá 6.50%, España 7.00%, Brasil 10.25%. Ponderadas por región dan 8.4–8.9% tal como se reportan y 9.0–9.3% con la tasa de EUA expresada en pesos: cerca de 1 pp abajo del WACC de esta página. Con 9.0–9.3% el Gordon vale 50–56. La decisión de cómo ponderar es del equipo.</span>
+          </div>
+          <div class="grid2">
+            <div class="ctl"><div class="ctl-top"><label for="opt-beta">Beta desapalancada</label><output id="o-beta"></output></div><select id="opt-beta"></select></div>
+            <div class="ctl"><div class="ctl-top"><label for="opt-de">Deuda / capital objetivo</label><output id="o-de"></output></div><select id="opt-de"></select></div>
+            <div class="ctl"><div class="ctl-top"><label for="opt-kd">Costo de la deuda antes de impuestos</label><output id="o-kd"></output></div><select id="opt-kd"></select></div>
+            <div class="ctl"><div class="ctl-top"><label for="opt-erp">Prima de riesgo de mercado</label><output id="o-erp"></output></div>
+              <input type="range" id="opt-erp" min="0.035" max="0.06" step="0.001"><span class="ctl-note">Damodaran implícita 1-oct-2026: 4.20%</span></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>Valor terminal</legend>
+          <div class="grid2">
+            <div class="ctl"><div class="ctl-top"><label for="opt-g">Crecimiento perpetuo (g)</label><output id="o-g"></output></div>
+              <input type="range" id="opt-g" min="0.03" max="0.055" step="0.0005"><span class="ctl-note">Tope: PIB nominal de largo plazo 5.0%</span></div>
+            <div class="ctl"><div class="ctl-top"><label for="opt-m">Múltiplo de salida EV/EBITDA</label><output id="o-m"></output></div>
+              <input type="range" id="opt-m" min="4" max="10" step="0.05"><div class="chiprow" id="m-chips"></div></div>
+          </div>
+          <div class="ctl">
+            <div class="ctl-top"><span class="lab" id="lab-tv">Valor terminal Gordon</span><output id="o-tv"></output></div>
+            <div class="segs" role="radiogroup" aria-labelledby="lab-tv">
+              <label class="seg"><input type="radio" name="tv" value="fcff" id="tv-fcff">Flujo libre del año 11</label>
+              <label class="seg"><input type="radio" name="tv" value="ronic" id="tv-ronic">Fijar el retorno sobre capital nuevo</label>
+            </div>
+          </div>
+          <div class="ctl" id="ronic-ctl">
+            <div class="ctl-top"><label for="opt-ronic">Retorno sobre capital nuevo (RONIC)</label><output id="o-ronic"></output></div>
+            <input type="range" id="opt-ronic" min="0.08" max="0.3" step="0.005">
+            <label class="seg" style="justify-self:start"><input type="checkbox" id="opt-ronic-wacc">Igual al WACC (el crecimiento no crea valor)</label>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>Pilares de la tesis: palancas del pronóstico</legend>
+          <div class="grid2">
+            <div class="ctl"><div class="ctl-top"><label for="opt-gm">Clima · margen bruto (todos los años)</label><output id="o-gm"></output></div>
+              <input type="range" id="opt-gm" min="-0.01" max="0.01" step="0.0005"><span class="ctl-note">Trigo y otros insumos</span></div>
+            <div class="ctl"><div class="ctl-top"><label for="opt-margin">Nuevo CEO · margen por productividad</label><output id="o-margin"></output></div>
+              <input type="range" id="opt-margin" min="-0.01" max="0.01" step="0.0005"><span class="ctl-note">Gastos de operación sobre ventas, con signo inverso</span></div>
+            <div class="ctl"><div class="ctl-top"><label for="opt-capex">Deuda y flujo · capex sobre ventas</label><output id="o-capex"></output></div>
+              <input type="range" id="opt-capex" min="-0.01" max="0.01" step="0.0005"><span class="ctl-note">Propuesta: 4.6% en FY26 a 6.0% en FY35</span></div>
+            <div class="ctl"><div class="ctl-top"><label for="opt-growth">Crecimiento de ventas (cada año)</label><output id="o-growth"></output></div>
+              <input type="range" id="opt-growth" min="-0.01" max="0.01" step="0.0005"><span class="ctl-note">Se suma a cada región</span></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>Puente de valor y criterios técnicos</legend>
+          <div class="grid2">
+            <div class="ctl"><span class="lab" id="lab-lease" style="font-weight:600;font-size:0.9rem">Arrendamientos</span>
+              <div class="segs" role="radiogroup" aria-labelledby="lab-lease">
+                <label class="seg"><input type="radio" name="lease" value="published" id="lease-pub">Crecen con las ventas (v2)</label>
+                <label class="seg"><input type="radio" name="lease" value="engine" id="lease-eng">Fijos (motor)</label></div></div>
+            <div class="ctl"><span class="lab" id="lab-claims" style="font-weight:600;font-size:0.9rem">Reclamos que resta el múltiplo</span>
+              <div class="segs" role="radiogroup" aria-labelledby="lab-claims">
+                <label class="seg"><input type="radio" name="claims" value="peer" id="claims-peer">Base de los pares (v2)</label>
+                <label class="seg"><input type="radio" name="claims" value="full" id="claims-full">Puente completo</label></div></div>
+            <div class="ctl"><span class="lab" id="lab-nci" style="font-weight:600;font-size:0.9rem">Operadores independientes de BBU (NCI)</span>
+              <div class="segs" role="radiogroup" aria-labelledby="lab-nci">
+                <label class="seg"><input type="radio" name="nci" value="g3" id="nci-g3">Mercado, g 3%</label>
+                <label class="seg"><input type="radio" name="nci" value="g0" id="nci-g0">Mercado, g 0%</label>
+                <label class="seg"><input type="radio" name="nci" value="book" id="nci-book">Solo valor en libros</label></div></div>
+            <div class="ctl"><span class="lab" style="font-weight:600;font-size:0.9rem">Provisiones fiscales y juicios</span>
+              <label class="seg" style="justify-self:start"><input type="checkbox" id="opt-prov">Restar 10,399 (posiciones fiscales inciertas 8,537)</label></div>
+          </div>
+        </fieldset>
+
+        <fieldset class="group">
+          <legend>Peso de cada método</legend>
+          <div class="ctl"><div class="ctl-top"><label for="opt-w">Peso del Gordon en el valor ponderado</label><output id="o-w"></output></div>
+            <input type="range" id="opt-w" min="0" max="1" step="0.05"><span class="ctl-note">El resto va al múltiplo de salida. La guía pide explicar si los métodos difieren más de 20%.</span></div>
+        </fieldset>
+      </div>
+
+      <aside class="panel readout" aria-label="Resultado en vivo">
+        <div class="ro-main">
+          <div class="ro-box ours"><span class="eyebrow">Gordon hoy</span><span class="ro-val" id="r-gordon">—</span><span class="tile-sub" id="r-gordon-p">—</span></div>
+          <div class="ro-box ours"><span class="eyebrow">Múltiplo hoy</span><span class="ro-val" id="r-exit">—</span><span class="tile-sub" id="r-exit-p">—</span></div>
+          <div class="ro-box blend"><span class="eyebrow">Ponderado hoy</span><span class="ro-val" id="r-blend">—</span><span class="tile-sub" id="r-blend-p">—</span></div>
+          <div class="ro-box blend"><span class="eyebrow">A 12 meses</span><span class="ro-val" id="r-target">—</span><span class="tile-sub" id="r-ret">—</span></div>
+        </div>
+        <dl class="ro-list" id="r-list"></dl>
+        <ul class="flags" id="r-flags"></ul>
+        <div class="need"><p class="eyebrow">Para que el Gordon llegue al precio, cada palanca por sí sola</p><dl class="ro-list" id="r-need"></dl></div>
+        <div class="ro-actions">
+          <button type="button" class="btn solid" id="copy-btn">Copiar escenario para el chat</button>
+          <button type="button" class="btn" id="reset-btn">Volver a la propuesta v2</button>
+        </div>
+        <p class="status-line" id="copy-status" role="status"></p>
+        <textarea class="copybox" id="copy-box" hidden readonly aria-label="Texto del escenario"></textarea>
+      </aside>
+    </div>
+
+    <div class="below-desk">
+      <div class="panel">
+        <h3>Del valor de la empresa al valor por acción</h3>
+        <p class="lede" style="font-size:0.84rem;margin:4px 0 10px">MXN millones al 31-dic-2025. Las partidas tachadas están apagadas en este escenario.</p>
+        <div class="tbl-wrap"><table id="bridge-tbl"><thead><tr><th>Partida</th><th>Gordon</th><th>Múltiplo</th></tr></thead><tbody></tbody></table></div>
+      </div>
+      <div class="panel">
+        <h3>Flujo libre por año (FCFF)</h3>
+        <p class="lede" style="font-size:0.84rem;margin:4px 0 10px">MXN millones. Azul: el escenario. Gris: la base del motor, con arrendamientos fijos.</p>
+        <div id="fcff-chart"></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="financials" aria-labelledby="h-fin">
+    <div class="section-head">
+      <p class="eyebrow">Financials y pares</p>
+      <h2 id="h-fin">Los números de Bimbo y contra quién se compara</h2>
+      <p class="lede">Resumen de la plantilla Financials &amp; Peer Analysis v2. A = real; E = consenso de analistas. Los múltiplos usan una sola base de reclamos para todas las empresas (deuda + arrendamientos + NCI en libros − caja).</p>
+    </div>
+    <div class="panel"><h3>Grupo Bimbo, FY2023–FY2029 (millones de MXN)</h3>
+      <div class="tbl-wrap" style="margin-top:10px"><table id="fin-tbl"></table></div>
+      <p class="lede" style="font-size:0.78rem;margin-top:8px" id="fin-src"></p></div>
+    <div class="panel"><h3>Pares: múltiplos con la base de reclamos</h3>
+      <div class="tbl-wrap" style="margin-top:10px"><table id="peer-tbl"></table></div>
+      <p class="lede" style="font-size:0.78rem;margin-top:8px" id="peer-src"></p></div>
+  </section>
+
+  <section class="section" id="decisiones" aria-labelledby="h-dec">
+    <div class="section-head">
+      <p class="eyebrow">Decisiones del equipo</p>
+      <h2 id="h-dec">Lo que falta decidir, con su efecto medido</h2>
+      <p class="lede">Cada botón aplica la opción al escenario activo y muestra el valor que resultaría (Gordon / múltiplo). La decisión es del equipo; aquí está la recomendación del coach, el mejor argumento en contra y la pregunta que deben poder contestar.</p>
+    </div>
+    <div class="callout" id="tension"></div>
+    <div class="cards" id="cards"></div>
+  </section>
+
+  <section class="section" id="sensibilidad" aria-labelledby="h-sens">
+    <div class="section-head">
+      <p class="eyebrow">Sensibilidad</p>
+      <h2 id="h-sens">Las dos tablas que más preguntan los jueces</h2>
+      <p class="lede">Valor por acción hoy con el escenario activo. Verde: igual o arriba del precio; ámbar: hasta 10% abajo; rojo: más de 10% abajo. El factor de traslado y el NCI se quedan en el costo de capital del escenario, como en el Excel.</p>
+    </div>
+    <div class="grids">
+      <div class="panel"><h3>Gordon: WACC × crecimiento perpetuo</h3><div class="tbl-wrap" style="margin-top:10px"><table class="sens" id="grid-g"></table></div></div>
+      <div class="panel"><h3>Múltiplo: WACC × EV/EBITDA de salida</h3><div class="tbl-wrap" style="margin-top:10px"><table class="sens" id="grid-x"></table></div></div>
+    </div>
+  </section>
+
+  <section class="section" id="pilares" aria-labelledby="h-pil">
+    <div class="section-head">
+      <p class="eyebrow">Tesis y pilares</p>
+      <h2 id="h-pil">Cómo entra cada pilar al modelo</h2>
+      <p class="lede">Pilares fijados por el equipo el 16-oct. La nota de tesis del 08-oct (output/bimbo-tesis-3-pilares.md) todavía usa los anteriores: margen de Norteamérica, moderación del capex y valuación contra su historia. Falta reescribirla.</p>
+    </div>
+    <div class="pillars" id="pillars"></div>
+  </section>
+
+  <section class="section" id="auditoria" aria-labelledby="h-aud">
+    <div class="section-head">
+      <p class="eyebrow">Auditoría y fuentes</p>
+      <h2 id="h-aud">Por qué estos números se pueden defender</h2>
+    </div>
+    <div class="audit">
+      <div class="panel">
+        <h3>Revisión independiente de Codex</h3>
+        <ol class="rounds" style="margin-top:12px" id="rounds"></ol>
+        <p class="lede" id="audit-update" style="margin-top:12px;font-size:0.86rem"></p>
+      </div>
+      <div class="panel" style="display:grid;gap:14px">
+        <div><h3>Controles</h3><ul class="checklist" style="margin-top:8px" id="checks"></ul></div>
+        <div><h3>Pendientes y actualizaciones</h3><ul class="pending" style="margin-top:8px" id="pending"></ul></div>
+        <div><h3>Archivos</h3><ul class="files" style="margin-top:8px" id="files"></ul></div>
+      </div>
+    </div>
+  </section>
+
+  <p class="foot">La tesis, los supuestos que cargan la historia, el precio objetivo y la recomendación los decide el equipo (reglas del proyecto, AGENTS.md). Esta página usa los insumos al 17-oct-2026 de valuation/valuation.yaml, valuation/inputs/spg_inputs.yaml y model/drivers.yaml. Etiquetas de datos: [sourced] filing o fuente pública; [assumption] juicio, propuesta hasta que el equipo confirme; [calc] calculado.</p>
+</main>
+</div>
+
+<script type="application/json" id="boveda-data">__DATA_JSON__</script>
+<script>
+/*__MODEL_JS__*/
+</script>
+<script>
+(function () {
+  "use strict";
+  var D = JSON.parse(document.getElementById("boveda-data").textContent);
+  var M = window.BovedaModel;
+  var BASE = M.defaults(D);
+  var KEYS = Object.keys(BASE);
+  var state = Object.assign({}, BASE);
+  var presetName = "Propuesta v2";
+  var STORE = "boveda-vision-v2";
+  var $ = function (id) { return document.getElementById(id); };
+  var nf2 = new Intl.NumberFormat("es-MX", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  var nf1 = new Intl.NumberFormat("es-MX", { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  var nf0 = new Intl.NumberFormat("es-MX", { maximumFractionDigits: 0 });
+  var MINUS = "−";
+  function money(v) { return v == null || !isFinite(v) ? "n.d." : (v < 0 ? MINUS : "") + nf2.format(Math.abs(v)); }
+  function mm(v) { return v == null || !isFinite(v) ? "n.d." : (v < 0 ? "(" + nf0.format(Math.abs(v)) + ")" : nf0.format(v)); }
+  function pct(v, d) { if (v == null || !isFinite(v)) return "n.d."; d = d == null ? 1 : d; return (v < 0 ? MINUS : "") + (Math.abs(v) * 100).toFixed(d) + "%"; }
+  function spct(v, d) { if (v == null || !isFinite(v)) return "n.d."; d = d == null ? 1 : d; return (v < 0 ? MINUS : "+") + (Math.abs(v) * 100).toFixed(d) + "%"; }
+  function bp(v) { var b = Math.round(v * 10000); return (b < 0 ? MINUS : (b > 0 ? "+" : "")) + Math.abs(b) + " pb"; }
+  function sdelta(v) { return (v < 0 ? MINUS : "+") + nf2.format(Math.abs(v)); }
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function clear(n) { while (n.firstChild) n.removeChild(n.firstChild); }
+
+  /* ---------- presets and decision options ---------- */
+  var PRESETS = [
+    { name: "Propuesta v2", opts: {} },
+    { name: "Motor (conciliación)", opts: { lease: "engine", exitClaims: "full" } },
+    { name: "Damodaran ruta B", opts: { route: "B1" } },
+    { name: "Capex −50 pb", opts: { capexShift: -0.005 } },
+    { name: "Crecimiento sin valor (RONIC = WACC)", opts: { tvMethod: "ronic", ronic: "wacc" } },
+    { name: "Sin prima del NCI", opts: { nci: "book" } }
+  ];
+  var betaOpt = function (id) { return D.options.beta.filter(function (b) { return b.id === id; })[0]; };
+  var deOpt = function (id) { return D.options.de.filter(function (b) { return b.id === id; })[0]; };
+  var CARDS = [
+    { title: "Costo de capital", stake: "±1 pp de WACC", rec: "Ruta A (M-Bono, beta 0.53) como base y la ruta B como verificación cruzada.",
+      against: "La ruta B es más rigurosa para un grupo con 55% del EBITDA en México.",
+      q: "¿Qué responderán si un juez pregunta por qué el M-Bono ya incluye el riesgo país?",
+      tries: [{ label: "Ruta A local", o: { route: "A" } }, { label: "Ruta B · EBITDA", o: { route: "B1" } },
+              { label: "Ruta B · ventas", o: { route: "B2" } }, { label: "Beta EUA 0.46", o: { beta: 0.46 } },
+              { label: "D/E de pares", o: { de: deOpt("peer").value } }, { label: "Kd 9.26% (BIMBO 23L)", o: { kd: 0.0926 } }] },
+    { title: "Valor terminal", stake: "g, múltiplo y retorno", rec: "Mantener g en 4.25% o menos y mostrar el DCF inverso: el precio implica un g arriba del tope del PIB.",
+      against: "El crecimiento nominal de México es 5% o más.",
+      q: "¿Qué retorno sobre capital nuevo defienden para el largo plazo?",
+      tries: [{ label: "g 4.25%", o: { g: 0.0425 } }, { label: "g 5.0% (tope)", o: { g: 0.05 } },
+              { label: "Múltiplo 5.64x", o: { exitMultiple: 5.641458 } }, { label: "Múltiplo 8.27x", o: { exitMultiple: 8.269323 } },
+              { label: "RONIC = WACC", o: { tvMethod: "ronic", ronic: "wacc" } }, { label: "RONIC 20%", o: { tvMethod: "ronic", ronic: 0.2 } }] },
+    { title: "Capex de largo plazo", stake: "la palanca más grande", rec: "Ligar el capex de FY31-35 a la depreciación más el crecimiento que crean, no al promedio histórico.",
+      against: "El capex de FY21-25 promedió 7.0% de las ventas.",
+      q: "¿Qué capex sobre ventas necesita el nuevo CEO para sostener un margen EBITDA de 15.3%?",
+      tries: [{ label: "Capex −100 pb", o: { capexShift: -0.01 } }, { label: "Capex −50 pb", o: { capexShift: -0.005 } },
+              { label: "Capex propuesto", o: { capexShift: 0 } }, { label: "Capex +50 pb", o: { capexShift: 0.005 } }] },
+    { title: "Puente de valor", stake: "NCI y posiciones fiscales", rec: "Mantener la prima del NCI y las posiciones fiscales inciertas a su valor en libros.",
+      against: "Las provisiones se pagan a 120–233 por año contra un saldo de 8,537; parte podría no pagarse nunca.",
+      q: "¿Pueden explicar en una frase por qué los operadores de BBU son un derecho sobre el EBITDA de Bimbo?",
+      tries: [{ label: "NCI a mercado g 3%", o: { nci: "g3" } }, { label: "NCI a mercado g 0%", o: { nci: "g0" } },
+              { label: "NCI solo libros", o: { nci: "book" } }, { label: "Sin provisiones fiscales", o: { provisions: false } },
+              { label: "Con provisiones", o: { provisions: true } }] },
+    { title: "Precio objetivo y recomendación", stake: "peso de los métodos", rec: "Elegir un método principal y explicarlo. Si Gordon y múltiplo difieren más de 20%, justificarlo.",
+      against: "La tesis del 08-oct (COMPRA, 60–75) y el consenso (70.17) leen el mismo negocio con múltiplos históricos y llegan arriba del precio.",
+      q: "¿Cuál es su método principal y qué catalizador cierra la brecha con el precio en 12 meses?",
+      tries: [{ label: "Solo Gordon", o: { weightGordon: 1 } }, { label: "50 / 50", o: { weightGordon: 0.5 } },
+              { label: "Solo múltiplo", o: { weightGordon: 0 } }] }
+  ];
+
+  function load() {
+    try {
+      var s = JSON.parse(localStorage.getItem(STORE) || "null");
+      if (s && s.opts) { KEYS.forEach(function (k) { if (k in s.opts) state[k] = s.opts[k]; }); presetName = s.preset || "Personalizado"; }
+    } catch (e) { /* storage unavailable: keep the base scenario */ }
+  }
+  function save() { try { localStorage.setItem(STORE, JSON.stringify({ opts: state, preset: presetName })); } catch (e) { /* ignore */ } }
+
+  /* ---------- build controls ---------- */
+  function fillSelect(sel, list, fmt) {
+    clear(sel);
+    list.forEach(function (it) { var o = el("option", null, it.label + " · " + fmt(it.value)); o.value = String(it.value); sel.appendChild(o); });
+  }
+  function buildControls() {
+    var rs = $("route-segs");
+    Object.keys(D.options.route).forEach(function (k) {
+      var lab = el("label", "seg"); var inp = document.createElement("input");
+      inp.type = "radio"; inp.name = "route"; inp.value = k; inp.id = "route-" + k;
+      lab.appendChild(inp); lab.appendChild(document.createTextNode(D.options.route[k].label)); rs.appendChild(lab);
+    });
+    fillSelect($("opt-beta"), D.options.beta, function (v) { return v.toFixed(2); });
+    fillSelect($("opt-de"), D.options.de, function (v) { return v.toFixed(3) + "x"; });
+    fillSelect($("opt-kd"), D.options.kd, function (v) { return pct(v, 2); });
+    var mc = $("m-chips");
+    D.options.exit_presets.forEach(function (p) {
+      var b = el("button", "chipbtn", p.label); b.type = "button";
+      b.addEventListener("click", function () { set({ exitMultiple: p.value }); });
+      mc.appendChild(b);
+    });
+    var pr = $("presets");
+    PRESETS.forEach(function (p) {
+      var b = el("button", "btn", p.name); b.type = "button"; b.dataset.preset = p.name;
+      b.addEventListener("click", function () { state = Object.assign({}, BASE, p.opts); presetName = p.name; sync(); render(); });
+      pr.appendChild(b);
+    });
+    function on(id, ev, fn) { $(id).addEventListener(ev, fn); }
+    document.querySelectorAll('input[name="route"]').forEach(function (i) { i.addEventListener("change", function () { set({ route: i.value }); }); });
+    on("opt-beta", "change", function (e) { set({ beta: Number(e.target.value) }); });
+    on("opt-de", "change", function (e) { set({ de: Number(e.target.value) }); });
+    on("opt-kd", "change", function (e) { set({ kd: Number(e.target.value) }); });
+    on("opt-erp", "input", function (e) { set({ erp: Number(e.target.value) }); });
+    on("opt-g", "input", function (e) { set({ g: Number(e.target.value) }); });
+    on("opt-m", "input", function (e) { set({ exitMultiple: Number(e.target.value) }); });
+    document.querySelectorAll('input[name="tv"]').forEach(function (i) { i.addEventListener("change", function () { set({ tvMethod: i.value }); }); });
+    on("opt-ronic", "input", function (e) { set({ ronic: Number(e.target.value), tvMethod: "ronic" }); });
+    on("opt-ronic-wacc", "change", function (e) { set({ ronic: e.target.checked ? "wacc" : Number($("opt-ronic").value), tvMethod: "ronic" }); });
+    on("opt-gm", "input", function (e) { set({ gmShift: Number(e.target.value) }); });
+    on("opt-margin", "input", function (e) { set({ opexShift: -Number(e.target.value) }); });
+    on("opt-capex", "input", function (e) { set({ capexShift: Number(e.target.value) }); });
+    on("opt-growth", "input", function (e) { set({ growthShift: Number(e.target.value) }); });
+    document.querySelectorAll('input[name="lease"]').forEach(function (i) { i.addEventListener("change", function () { set({ lease: i.value }); }); });
+    document.querySelectorAll('input[name="claims"]').forEach(function (i) { i.addEventListener("change", function () { set({ exitClaims: i.value }); }); });
+    document.querySelectorAll('input[name="nci"]').forEach(function (i) { i.addEventListener("change", function () { set({ nci: i.value }); }); });
+    on("opt-prov", "change", function (e) { set({ provisions: e.target.checked }); });
+    on("opt-w", "input", function (e) { set({ weightGordon: Number(e.target.value) }); });
+    on("reset-btn", "click", function () { state = Object.assign({}, BASE); presetName = "Propuesta v2"; sync(); render(); });
+    on("copy-btn", "click", copyScenario);
+  }
+  function set(patch) { Object.assign(state, patch); presetName = matchPreset(); sync(); render(); }
+  function matchPreset() {
+    for (var i = 0; i < PRESETS.length; i++) {
+      var cand = Object.assign({}, BASE, PRESETS[i].opts), same = true;
+      for (var k = 0; k < KEYS.length; k++) { if (cand[KEYS[k]] !== state[KEYS[k]]) { same = false; break; } }
+      if (same) return PRESETS[i].name;
+    }
+    return "Personalizado";
+  }
+  function selectClosest(sel, v) {
+    var best = null, bd = Infinity;
+    Array.prototype.forEach.call(sel.options, function (o) { var d = Math.abs(Number(o.value) - v); if (d < bd) { bd = d; best = o; } });
+    if (best && bd < 1e-9) { sel.value = best.value; return true; }
+    return false;
+  }
+  function ensureOption(sel, v, label) {
+    if (!selectClosest(sel, v)) { var o = el("option", null, label); o.value = String(v); sel.appendChild(o); sel.value = o.value; }
+  }
+  function sync() {
+    var r = $("route-" + state.route); if (r) r.checked = true;
+    ensureOption($("opt-beta"), state.beta, "Otro · " + state.beta.toFixed(3));
+    ensureOption($("opt-de"), state.de, "Otro · " + state.de.toFixed(3) + "x");
+    ensureOption($("opt-kd"), state.kd, "Otro · " + pct(state.kd, 2));
+    $("opt-erp").value = state.erp; $("opt-g").value = state.g; $("opt-m").value = state.exitMultiple;
+    $("tv-" + state.tvMethod).checked = true;
+    $("opt-ronic-wacc").checked = state.ronic === "wacc";
+    if (state.ronic !== "wacc") $("opt-ronic").value = state.ronic;
+    $("ronic-ctl").hidden = state.tvMethod !== "ronic";
+    $("opt-gm").value = state.gmShift; $("opt-margin").value = -state.opexShift;
+    $("opt-capex").value = state.capexShift; $("opt-growth").value = state.growthShift;
+    $(state.lease === "published" ? "lease-pub" : "lease-eng").checked = true;
+    $(state.exitClaims === "peer" ? "claims-peer" : "claims-full").checked = true;
+    $("nci-" + state.nci).checked = true;
+    $("opt-prov").checked = !!state.provisions;
+    $("opt-w").value = state.weightGordon;
+    document.querySelectorAll("#presets .btn").forEach(function (b) { b.classList.toggle("on", b.dataset.preset === presetName); });
+    save();
+  }
+
+  /* ---------- render ---------- */
+  function render() {
+    var v = M.value(D, state);
+    var price = D.valuation.price;
+    $("v-preset").textContent = presetName;
+    $("o-route").textContent = "rf " + pct(v.cc.rf, 2) + " · prima país " + pct(v.cc.crp, 2);
+    $("o-beta").textContent = state.beta.toFixed(3) + " → apalancada " + v.cc.betaL.toFixed(3);
+    $("o-de").textContent = state.de.toFixed(3) + "x";
+    $("o-kd").textContent = pct(state.kd, 2) + " · neto " + pct(v.cc.kdA, 2);
+    $("o-erp").textContent = pct(state.erp, 2);
+    $("o-g").textContent = pct(state.g, 2);
+    $("o-m").textContent = state.exitMultiple.toFixed(2) + "x";
+    $("o-tv").textContent = state.tvMethod === "ronic" ? "fórmula de retorno" : "FCFF × (1 + g)";
+    $("o-ronic").textContent = state.ronic === "wacc" ? "= WACC " + pct(v.wacc, 2) : pct(state.ronic, 1);
+    $("o-gm").textContent = bp(state.gmShift);
+    $("o-margin").textContent = bp(-state.opexShift);
+    $("o-capex").textContent = bp(state.capexShift);
+    $("o-growth").textContent = bp(state.growthShift) + " / año";
+    $("o-w").textContent = Math.round(state.weightGordon * 100) + "% Gordon · " + Math.round((1 - state.weightGordon) * 100) + "% múltiplo";
+
+    var conv = M.rating(v.expReturn);
+    $("t-price").textContent = money(price);
+    $("t-gordon").textContent = money(v.gordon); $("t-gordon-sub").textContent = spct(v.premG) + " vs precio";
+    $("t-exit").textContent = money(v.exit); $("t-exit-sub").textContent = spct(v.premX) + " vs precio";
+    var g12 = v.gordon * (1 + v.ke) - D.valuation.next_div;
+    $("t-target").textContent = money(g12);
+    $("t-target-sub").textContent = spct(g12 / price - 1) + " vs precio · hoy × (1 + ke) − dividendo " + money(D.valuation.next_div);
+    $("v-line").textContent = "Con este escenario el DCF vale " + money(v.gordon) + " por acción por Gordon y " + money(v.exit) +
+      " por múltiplo, frente a " + money(price) + " en bolsa. El precio implica un crecimiento perpetuo de " + pct(v.marketImpliedG, 2) +
+      ", contra el " + pct(state.g, 2) + " del escenario.";
+    var chips = $("v-chips"); clear(chips);
+    [["Codex: PASS en la ronda 3", "good"], ["Excel: 23 de 23 controles OK", "good"], ["Página = DCF v2 en 37 de 37 valores", "good"],
+     ["Precio objetivo y recomendación: deciden ustedes", "brass"]].forEach(function (c) { chips.appendChild(el("span", "chip " + c[1], c[0])); });
+
+    $("r-gordon").textContent = money(v.gordon); $("r-gordon-p").textContent = spct(v.premG) + " vs " + money(price);
+    $("r-exit").textContent = money(v.exit); $("r-exit-p").textContent = spct(v.premX) + " vs " + money(price);
+    $("r-blend").textContent = money(v.blend); $("r-blend-p").textContent = spct(v.blend / price - 1) + " vs precio";
+    $("r-target").textContent = money(v.target12); $("r-ret").textContent = "ponderado · retorno esperado " + spct(v.expReturn);
+    var rl = $("r-list"); clear(rl);
+    [["WACC / costo de capital propio", pct(v.wacc, 2) + " / " + pct(v.ke, 2)],
+     ["WACC − g", pct(v.wacc - state.g, 2)],
+     ["Retorno sobre capital nuevo en el valor terminal", pct(v.ronic, 1)],
+     ["Reinversión neta terminal / NOPAT", pct(v.reinvest, 1)],
+     ["Peso del valor terminal en el EV (Gordon)", pct(v.tvShareG, 1)],
+     ["Múltiplo implícito en el Gordon", v.impliedMultiple.toFixed(2) + "x"],
+     ["g implícita en el múltiplo", pct(v.impliedGExit, 2)],
+     ["g implícita en el precio", pct(v.marketImpliedG, 2)],
+     ["Diferencia entre métodos", pct(v.disagreement, 0)],
+     ["Lo que daría la convención de la guía (BUY ≥ 15%, SELL ≤ −10%); no es la recomendación", conv]].forEach(function (p) {
+      var d = el("div"); d.appendChild(el("dt", null, p[0])); d.appendChild(el("dd", null, p[1])); rl.appendChild(d);
+    });
+    var fl = $("r-flags"); clear(fl);
+    var flags = [];
+    if (state.g > D.valuation.lt_gdp + 1e-9) flags.push("g arriba del tope del PIB nominal de largo plazo (5.0%).");
+    if (v.wacc - state.g < 0.02) flags.push("WACC − g menor a 2 puntos: el valor terminal se vuelve muy sensible.");
+    if (v.ronic != null && v.ronic < v.wacc - 1e-9) flags.push("El retorno sobre capital nuevo queda abajo del WACC: crecer destruye valor.");
+    if (v.disagreement > 0.2) flags.push("Gordon y múltiplo difieren " + pct(v.disagreement, 0) + ": la guía pide explicarlo.");
+    if (!flags.length) { fl.appendChild(el("li", "ok", "Sin alertas: los supuestos pasan los controles de consistencia.")); }
+    flags.forEach(function (f) { fl.appendChild(el("li", null, f)); });
+
+    var need = $("r-need"); clear(need);
+    [["Crecimiento extra de ventas, cada año", "growthShift", -0.05, 0.12, function (dx) { return bp(dx) + " / año"; }],
+     ["Margen extra por productividad", "opexShift", -0.12, 0.05, function (dx) { return bp(-dx); }],
+     ["Cambio en el capex sobre ventas", "capexShift", -0.045, 0.03, function (dx) { return bp(dx); }]].forEach(function (p) {
+      var x = solve(p[1], p[2], p[3]);
+      var d = el("div"); d.appendChild(el("dt", null, p[0]));
+      d.appendChild(el("dd", null, x == null ? "no alcanza en el rango probado" : p[4](x - state[p[1]])));
+      need.appendChild(d);
+    });
+
+    var tn = $("tension"); clear(tn);
+    tn.appendChild(el("p", "eyebrow", "Tensión que el equipo tiene que resolver"));
+    tn.appendChild(el("p", null, "La nota de tesis del 08-oct recomienda " + D.refs.thesis.rec + " con un rango central de " + money(D.refs.thesis.low) + " a " +
+      money(D.refs.thesis.high) + " por revaloración a múltiplos históricos, y el consenso está en " + money(D.refs.consensus.mean) +
+      ". Con el escenario activo el DCF da " + money(v.gordon) + " (Gordon) y " + money(v.exit) + " (múltiplo), contra " + money(price) +
+      " en bolsa. Si mantienen la recomendación, tienen que nombrar el supuesto que la sostiene y su número: el panel de resultados dice cuánto haría falta."));
+
+    renderFootball(v); renderBridge(v); renderFcff(v); renderCards(); renderGrids(v); renderPillars(v);
+  }
+
+  /* lever value (absolute, same units as state[param]) at which the Gordon value equals the price; null if outside [lo, hi] */
+  function solve(param, lo, hi) {
+    var price = D.valuation.price;
+    var f = function (x) { var s = Object.assign({}, state); s[param] = x; return M.value(D, s).gordon - price; };
+    var flo = f(lo), fhi = f(hi);
+    if (!isFinite(flo) || !isFinite(fhi) || flo * fhi > 0) return null;
+    for (var i = 0; i < 60; i++) {
+      var mid = (lo + hi) / 2, fm = f(mid);
+      if (Math.abs(fm) < 1e-6) return mid;
+      if (flo * fm < 0) { hi = mid; fhi = fm; } else { lo = mid; flo = fm; }
+    }
+    return (lo + hi) / 2;
+  }
+
+  function pos(x, lo, hi) { return Math.max(0, Math.min(100, (x - lo) / (hi - lo) * 100)); }
+  function renderFootball(v) {
+    var ff = $("ff"); clear(ff);
+    var price = D.valuation.price;
+    var gLo = M.value(D, state, { wacc: v.wacc + 0.01 }).gordon, gHi = M.value(D, state, { wacc: v.wacc - 0.01 }).gordon;
+    var xLo = M.value(D, state, { m: state.exitMultiple - 1 }).exit, xHi = M.value(D, state, { m: state.exitMultiple + 1 }).exit;
+    var rA = M.value(D, Object.assign({}, state, { tvMethod: "ronic", ronic: "wacc" })).gordon;
+    var rB = M.value(D, Object.assign({}, state, { tvMethod: "ronic", ronic: 0.15 })).gordon;
+    var comps = D.comps.points, R = D.refs;
+    var rows = [
+      { label: "Mercado · rango de 52 semanas", note: money(D.valuation.w52_low) + " – " + money(D.valuation.w52_high), lo: D.valuation.w52_low, hi: D.valuation.w52_high, cls: "market" },
+      { label: "Consenso · " + R.consensus.n + " precios objetivo (" + R.consensus.date + ")", note: money(R.consensus.low) + " – " + money(R.consensus.high) + " · media " + money(R.consensus.mean),
+        lo: R.consensus.low, hi: R.consensus.high, cls: "consensus", dot: R.consensus.mean, dotCls: "muted" },
+      { label: "Tesis del 08-oct · múltiplos históricos (" + R.thesis.rec + ")", note: money(R.thesis.low) + " – " + money(R.thesis.high), lo: R.thesis.low, hi: R.thesis.high, cls: "thesis" },
+      { label: "DCF Gordon · WACC ±1 pp", note: money(Math.min(gLo, gHi)) + " – " + money(Math.max(gLo, gHi)), lo: Math.min(gLo, gHi), hi: Math.max(gLo, gHi), dot: v.gordon },
+      { label: "DCF múltiplo · EV/EBITDA ±1x", note: money(xLo) + " – " + money(xHi), lo: xLo, hi: xHi, dot: v.exit },
+      { label: "Comparables EV/EBITDA · 5.64x a 8.27x", note: money(comps[0].v) + " – " + money(comps[2].v), lo: comps[0].v, hi: comps[2].v, cls: "comps", dot: comps[1].v },
+      { label: "Retorno bajo · RONIC = WACC a 15%", note: money(Math.min(rA, rB)) + " – " + money(Math.max(rA, rB)), lo: Math.min(rA, rB), hi: Math.max(rA, rB) }
+    ];
+    var all = [price, v.blend]; rows.forEach(function (r) { all.push(r.lo, r.hi); });
+    var lo = Math.max(0, Math.floor((Math.min.apply(null, all) - 3) / 10) * 10), hi = Math.ceil((Math.max.apply(null, all) + 3) / 10) * 10;
+    rows.forEach(function (r) {
+      var row = el("div", "ff-row");
+      var lab = el("div", "ff-label"); lab.appendChild(el("span", null, r.label)); lab.appendChild(el("span", null, r.note)); row.appendChild(lab);
+      var tr = el("div", "track"); var b = el("div", "range" + (r.cls ? " " + r.cls : ""));
+      b.style.left = pos(r.lo, lo, hi) + "%"; b.style.width = Math.max(0.6, pos(r.hi, lo, hi) - pos(r.lo, lo, hi)) + "%"; tr.appendChild(b);
+      if (r.dot != null) { var d = el("div", "dot" + (r.dotCls ? " " + r.dotCls : "")); d.style.left = pos(r.dot, lo, hi) + "%"; if (r.cls === "comps") d.style.background = "var(--brass)"; tr.appendChild(d); }
+      row.appendChild(tr); ff.appendChild(row);
+    });
+    var ax = el("div", "axis");
+    for (var t = lo; t <= hi + 1e-9; t += 10) { var s = el("span", null, String(t)); s.style.left = pos(t, lo, hi) + "%"; ax.appendChild(s); }
+    ff.appendChild(ax);
+    var ov = el("div", "ff-overlay");
+    var pl = el("div", "vline"); pl.style.left = pos(price, lo, hi) + "%";
+    var pt = el("span", "vline-tag", "precio " + money(price)); pt.style.color = "var(--price)"; pl.appendChild(pt); ov.appendChild(pl);
+    var bl = el("div", "vline blend"); bl.style.left = pos(v.blend, lo, hi) + "%";
+    var bt = el("span", "vline-tag", "ponderado " + money(v.blend)); bt.style.color = "var(--brass)"; bt.style.top = "16px"; bl.appendChild(bt); ov.appendChild(bl);
+    ff.appendChild(ov);
+  }
+
+  function renderWalk() {
+    var w = D.walk, box = $("walk"); clear(box);
+    var head = el("div", "walk-head"); ["Paso", "", "Gordon", "Múltiplo"].forEach(function (h) { head.appendChild(el("span", null, h)); }); box.appendChild(head);
+    var steps = Array.isArray(w.steps) ? w.steps : [
+      { label: "v1 auditada (motor)", d: w.v1_engine, total: true },
+      { label: "Capital de trabajo sin partidas financieras", d: w.working_capital_fix },
+      { label: "Provisiones fiscales y beneficios por país", d: w.bridge_benefits_and_provisions },
+      { label: "v2 motor", d: w.v2_engine, total: true },
+      { label: "Múltiplo: solo reclamos que restan los pares", d: w.peer_ev_claims_exit },
+      { label: "Arrendamientos crecen con las ventas", d: w.lease_growth },
+      { label: "v2 publicada", d: w.v2_published, total: true }
+    ];
+    var hi = Math.ceil(Math.max.apply(null, steps.filter(function (s) { return s.total; })
+      .map(function (s) { return Math.max(s.d[0], s.d[1]); })) / 10) * 10 + 5;
+    var run = [0, 0];
+    steps.forEach(function (s) {
+      var row = el("div", "walk-row" + (s.total ? " total" : ""));
+      row.appendChild(el("span", null, s.label));
+      var bar = el("div", "walk-bar");
+      [0, 1].forEach(function (k) {
+        var b = el("b", k === 1 ? "ex" : "");
+        var a0, a1;
+        if (s.total) { a0 = 0; a1 = s.d[k]; run[k] = s.d[k]; }
+        else { a0 = run[k]; a1 = run[k] + s.d[k]; run[k] = a1; if (s.d[k] < 0) b.classList.add("neg"); else if (s.d[k] > 0) b.classList.add("pos"); }
+        if (Math.abs(a1 - a0) < 1e-9 && !s.total) return;
+        b.style.left = pos(Math.min(a0, a1), 0, hi) + "%"; b.style.width = Math.max(0.8, Math.abs(a1 - a0) / hi * 100) + "%";
+        bar.appendChild(b);
+      });
+      row.appendChild(bar);
+      row.appendChild(el("span", "v", s.total ? money(s.d[0]) : (Math.abs(s.d[0]) < 1e-9 ? "—" : sdelta(s.d[0]))));
+      row.appendChild(el("span", "v", s.total ? money(s.d[1]) : (Math.abs(s.d[1]) < 1e-9 ? "—" : sdelta(s.d[1]))));
+      box.appendChild(row);
+    });
+  }
+
+  function renderBridge(v) {
+    var tb = document.querySelector("#bridge-tbl tbody"); clear(tb);
+    function row(label, a, b, cls, offA, offB) {
+      var tr = el("tr", cls || null); tr.appendChild(el("td", null, label));
+      var ta = el("td", "mono" + (offA ? " off" : ""), a); var tbb = el("td", "mono" + (offB ? " off" : ""), b);
+      tr.appendChild(ta); tr.appendChild(tbb); tb.appendChild(tr);
+    }
+    row("Valor de la empresa (EV)", mm(v.evG), mm(v.evX));
+    row("+ Inversiones en asociadas", mm(D.valuation.non_op), mm(D.valuation.non_op));
+    row("− Deuda neta con arrendamientos", mm(-v.netDebt), mm(-v.netDebt));
+    row("− NCI a valor en libros", mm(-v.nciBook), mm(-v.nciBook));
+    v.items.forEach(function (it) {
+      var inX = it.key === "nci_uplift" || state.exitClaims === "full";
+      row("− " + it.label, mm(-it.value), inX ? mm(-it.value) : "no aplica", null, !it.on, !it.on || !inX);
+    });
+    var eqG = v.evG + D.valuation.non_op - v.netDebt - v.nciBook - v.dlG, eqX = v.evX + D.valuation.non_op - v.netDebt - v.nciBook - v.dlX;
+    row("= Capital de los accionistas", mm(eqG), mm(eqX), "total");
+    row("÷ acciones (" + nf1.format(D.fy_last.shares_diluted) + " m) × traslado " + v.roll.toFixed(4), money(v.gordon), money(v.exit), "total");
+  }
+
+  function renderFcff(v) {
+    var box = $("fcff-chart"); clear(box);
+    var eng = M.value(D, Object.assign({}, state, { lease: "engine" })).lines.fcff;
+    var cur = state.lease === "published" ? v.lines.fcffPub : v.lines.fcff;
+    var years = D.years.fcst;
+    var W = 480, H = 210, padL = 40, padB = 26, padT = 10, inner = W - padL - 6;
+    var maxV = Math.max.apply(null, eng.concat(cur)), minV = Math.min(0, Math.min.apply(null, eng.concat(cur)));
+    var top = Math.ceil(maxV / 10000) * 10000, bot = Math.floor(minV / 10000) * 10000;
+    var y = function (val) { return padT + (top - val) / (top - bot) * (H - padT - padB); };
+    var ns = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(ns, "svg"); svg.setAttribute("viewBox", "0 0 " + W + " " + H); svg.setAttribute("class", "fcff-svg");
+    svg.setAttribute("role", "img"); svg.setAttribute("aria-label", "Flujo libre por año, escenario contra base del motor");
+    for (var t = bot; t <= top + 1; t += 10000) {
+      var ln = document.createElementNS(ns, "line"); ln.setAttribute("x1", padL); ln.setAttribute("x2", W - 4);
+      ln.setAttribute("y1", y(t)); ln.setAttribute("y2", y(t)); ln.setAttribute("class", "gridl"); svg.appendChild(ln);
+      var tx = document.createElementNS(ns, "text"); tx.setAttribute("x", padL - 6); tx.setAttribute("y", y(t) + 4); tx.setAttribute("text-anchor", "end");
+      tx.textContent = nf0.format(t / 1000) + " mil"; svg.appendChild(tx);
+    }
+    var slot = inner / years.length, bw = slot * 0.34;
+    years.forEach(function (yr, i) {
+      var x0 = padL + i * slot + slot * 0.14;
+      [[eng[i], "b-eng", 0], [cur[i], "b-pub", 1]].forEach(function (p) {
+        var r = document.createElementNS(ns, "rect"); var yy = y(Math.max(0, p[0])), h = Math.abs(y(p[0]) - y(0));
+        r.setAttribute("x", x0 + p[2] * (bw + 2)); r.setAttribute("y", yy); r.setAttribute("width", bw); r.setAttribute("height", Math.max(0.5, h));
+        r.setAttribute("class", p[1]); r.setAttribute("rx", 1.5);
+        var ti = document.createElementNS(ns, "title"); ti.textContent = "FY" + yr + ": " + nf0.format(p[0]); r.appendChild(ti); svg.appendChild(r);
+      });
+      var lb = document.createElementNS(ns, "text"); lb.setAttribute("x", x0 + bw + 1); lb.setAttribute("y", H - 8); lb.setAttribute("text-anchor", "middle");
+      lb.textContent = "FY" + String(yr).slice(2); svg.appendChild(lb);
+    });
+    box.appendChild(svg);
+  }
+
+  function renderCards() {
+    var box = $("cards"); clear(box);
+    CARDS.forEach(function (c) {
+      var card = el("article", "card");
+      var top = el("div", "card-top"); top.appendChild(el("h3", null, c.title)); top.appendChild(el("span", "stake", c.stake)); card.appendChild(top);
+      var dl = el("dl");
+      [["Recomendación", c.rec, ""], ["En contra", c.against, ""], ["Pregunta para el equipo", c.q, "q"]].forEach(function (p) {
+        dl.appendChild(el("dt", null, p[0])); dl.appendChild(el("dd", p[2] || null, p[1]));
+      });
+      card.appendChild(dl);
+      var tries = el("div", "tries");
+      c.tries.forEach(function (t) {
+        var s = Object.assign({}, state, t.o); var r = M.value(D, s);
+        var b = el("button", "try"); b.type = "button";
+        b.appendChild(el("b", null, t.label)); b.appendChild(el("span", null, money(r.gordon) + " / " + money(r.exit)));
+        b.setAttribute("aria-label", t.label + ": Gordon " + money(r.gordon) + ", múltiplo " + money(r.exit));
+        b.addEventListener("click", function () { set(t.o); });
+        tries.appendChild(b);
+      });
+      card.appendChild(tries);
+      box.appendChild(card);
+    });
+  }
+
+  function renderGrids(v) {
+    var price = D.valuation.price;
+    function cls(x) { if (x == null) return ""; return x >= price ? "hi" : (x >= price * 0.9 ? "mid" : "lo"); }
+    function build(id, cols, colFmt, cellFn, colLabel) {
+      var t = $(id); clear(t);
+      var thead = el("thead"), hr = el("tr"); hr.appendChild(el("th", null, "WACC \\ " + colLabel));
+      cols.forEach(function (cv) { hr.appendChild(el("th", "mono", colFmt(cv))); }); thead.appendChild(hr); t.appendChild(thead);
+      var tb = el("tbody");
+      [-0.02, -0.01, 0, 0.01, 0.02].forEach(function (dw, i) {
+        var wv = v.wacc + dw, tr = el("tr"); tr.appendChild(el("th", "rowh mono", pct(wv, 2)));
+        cols.forEach(function (cv, j) {
+          var val = cellFn(wv, cv); var td = el("td", "mono " + cls(val) + (i === 2 && j === 2 ? " center" : ""), val == null ? "n.s." : money(val));
+          tr.appendChild(td);
+        });
+        tb.appendChild(tr);
+      });
+      t.appendChild(tb);
+    }
+    var gs = [-0.01, -0.005, 0, 0.005, 0.01].map(function (d) { return state.g + d; });
+    build("grid-g", gs, function (x) { return pct(x, 2); }, function (wv, gv) { return wv - gv < 0.01 ? null : M.value(D, state, { wacc: wv, g: gv }).gordon; }, "g");
+    var ms = [-2, -1, 0, 1, 2].map(function (d) { return state.exitMultiple + d; });
+    build("grid-x", ms, function (x) { return x.toFixed(2) + "x"; }, function (wv, mv) { return M.value(D, state, { wacc: wv, m: mv }).exit; }, "múltiplo");
+  }
+
+  function renderPillars(v) {
+    var box = $("pillars"); clear(box);
+    var d = function (patch) { return M.value(D, Object.assign({}, state, patch)).gordon - v.gordon; };
+    var P = [
+      { eyebrow: "Pilar 1 · Cambio climático", title: "El trigo llega al margen bruto con un año de rezago",
+        text: "El margen bruto se mueve contra el trigo CBOT con cerca de un año de rezago (r = −0.74, 9 años). La propuesta baja el margen 40 pb en FY27 y lo recupera a 52.5%.",
+        lever: "±50 pb de margen bruto: " + sdelta(d({ gmShift: state.gmShift + 0.005 })) + " / " + sdelta(d({ gmShift: state.gmShift - 0.005 })) + " por acción (Gordon)" },
+      { eyebrow: "Pilar 2 · Nuevo CEO", title: "Productividad: de 13.8% a 15.3% de margen EBITDA",
+        text: "La propuesta sube el margen EBITDA de 13.8% (FY25) a 15.3% en FY30 por productividad. Está arriba del mejor año reportado (13.6–14.4% en FY21-25).",
+        lever: "±50 pb de margen por productividad: " + sdelta(d({ opexShift: state.opexShift - 0.005 })) + " / " + sdelta(d({ opexShift: state.opexShift + 0.005 })) + " por acción" },
+      { eyebrow: "Pilar 3 · Deuda (hold)", title: "Apalancamiento en la media de los pares",
+        text: "Bimbo es 6.º de 9 en deuda neta/EBITDA: 2.5x contra 3.20x de mediana de pares (EUA y México). En el modelo la caja se acumula hasta FY35; falta decidir su uso.",
+        lever: "±50 pb de capex: " + sdelta(d({ capexShift: state.capexShift - 0.005 })) + " / " + sdelta(d({ capexShift: state.capexShift + 0.005 })) + " por acción" }
+    ];
+    P.forEach(function (p) {
+      var c = el("article", "pillar"); c.appendChild(el("p", "eyebrow", p.eyebrow)); c.appendChild(el("h3", null, p.title));
+      c.appendChild(el("p", null, p.text)); c.appendChild(el("div", "lever", p.lever)); box.appendChild(c);
+    });
+  }
+
+  function renderAudit() {
+    var rounds = $("rounds"); clear(rounds);
+    D.audit.rounds.forEach(function (r) {
+      var li = el("li", r.pass ? "pass" : null); var d = el("div");
+      d.appendChild(el("b", null, r.title)); d.appendChild(el("p", "lede", r.text)); li.appendChild(d); rounds.appendChild(li);
+    });
+    var ch = $("checks"); clear(ch);
+    D.audit.checks.forEach(function (c) { var li = el("li"); li.appendChild(el("span", null, c[0])); li.appendChild(el("span", null, c[1])); ch.appendChild(li); });
+    $("audit-update").textContent = D.audit.update || "";
+    var pe = $("pending"); clear(pe); D.audit.pending.forEach(function (p) { pe.appendChild(el("li", null, p)); });
+    var fi = $("files"); clear(fi); D.audit.files.forEach(function (f) { fi.appendChild(el("li", null, f)); });
+  }
+
+  function renderFinancials() {
+    if (!D.fin || !D.peer_table) return;
+    var ft = $("fin-tbl"); clear(ft);
+    var th = el("thead"), hr = el("tr"); hr.appendChild(el("th", null, ""));
+    D.fin.years.forEach(function (y, i) { hr.appendChild(el("th", "mono", y + " " + (D.fin.flags[i] || ""))); });
+    th.appendChild(hr); ft.appendChild(th);
+    var tb = el("tbody");
+    D.fin.rows.forEach(function (row) {
+      var tr = el("tr"); tr.appendChild(el("td", null, row.label));
+      row.v.forEach(function (x) {
+        var s = x == null ? "—" : (row.fmt === "p" ? pct(x, 1) : (row.fmt === "d" ? money(x) : mm(x)));
+        tr.appendChild(el("td", "mono", s));
+      });
+      tb.appendChild(tr);
+    });
+    ft.appendChild(tb);
+    $("fin-src").textContent = D.fin.source;
+    var pt = $("peer-tbl"); clear(pt);
+    var hd = el("thead"), h2 = el("tr");
+    ["Empresa", "Grupo", "EV/EBITDA LTM", "EV/EBITDA NTM", "EV/ventas", "P/U LTM", "P/U NTM", "Deuda neta/EBITDA", "Margen EBITDA", "Rend. flujo libre LTM", "Elegible"]
+      .forEach(function (t) { h2.appendChild(el("th", null, t)); });
+    hd.appendChild(h2); pt.appendChild(hd);
+    var b = el("tbody");
+    var grp = function (g) { g = String(g || ""); return g.indexOf("Subject") === 0 ? "Empresa analizada" : (g === "Core" ? "Núcleo" : (g === "Secondary" ? "Secundario" : g)); };
+    var mx = function (v) { return v == null ? "n/a" : v.toFixed(2) + "x"; };
+    D.peer_table.rows.forEach(function (p) {
+      var tr = el("tr", p.ticker === "BMV:BIMBO A" ? "total" : null);
+      tr.appendChild(el("td", null, p.name + " (" + p.ticker + ")"));
+      tr.appendChild(el("td", null, grp(p.group)));
+      [mx(p.ev_ltm), mx(p.ev_ntm), mx(p.ev_sales), mx(p.pe_ltm), mx(p.pe_ntm), mx(p.nd_ebitda), pct(p.margin, 1), pct(p.fcf_yield, 1),
+       p.elig === "yes" ? "sí" : (p.elig === "no" ? "no" : String(p.elig || "—"))].forEach(function (s) { tr.appendChild(el("td", "mono", s)); });
+      b.appendChild(tr);
+    });
+    D.peer_table.stats.forEach(function (s) {
+      var tr = el("tr"); tr.appendChild(el("td", null, s.label)); tr.appendChild(el("td", null, ""));
+      [mx(s.ev_ltm), mx(s.ev_ntm), mx(s.ev_sales), mx(s.pe_ltm), mx(s.pe_ntm), mx(s.nd_ebitda), pct(s.margin, 1), "", ""]
+        .forEach(function (x) { tr.appendChild(el("td", "mono", x)); });
+      b.appendChild(tr);
+    });
+    pt.appendChild(b);
+    $("peer-src").textContent = D.peer_table.source + ". Bimbo: EV/EBITDA LTM con EBITDA ajustado de la empresa (IFRS 16).";
+  }
+
+  function copyScenario() {
+    var v = M.value(D, state);
+    var lines = [
+      "Escenario Bóveda Vision (" + presetName + ")",
+      "Ruta " + state.route + ", beta " + state.beta.toFixed(3) + ", D/E " + state.de.toFixed(3) + ", Kd " + pct(state.kd, 2) + ", ERP " + pct(state.erp, 2),
+      "g " + pct(state.g, 2) + ", múltiplo " + state.exitMultiple.toFixed(2) + "x, valor terminal " + (state.tvMethod === "ronic" ? "con RONIC " + (state.ronic === "wacc" ? "= WACC" : pct(state.ronic, 1)) : "FCFF del año 11"),
+      "Margen bruto " + bp(state.gmShift) + ", productividad " + bp(-state.opexShift) + ", capex " + bp(state.capexShift) + ", crecimiento " + bp(state.growthShift) + " por año",
+      "Arrendamientos " + (state.lease === "published" ? "crecen con ventas" : "fijos") + ", reclamos del múltiplo " + (state.exitClaims === "peer" ? "base pares" : "puente completo") +
+        ", NCI " + ({ g3: "mercado g 3%", g0: "mercado g 0%", book: "libros" })[state.nci] + ", provisiones " + (state.provisions ? "incluidas" : "excluidas"),
+      "Peso Gordon " + Math.round(state.weightGordon * 100) + "%",
+      "Resultado: Gordon " + money(v.gordon) + ", múltiplo " + money(v.exit) + ", ponderado " + money(v.blend) + ", 12 meses " + money(v.target12) +
+        " (retorno esperado " + spct(v.expReturn) + "; la convención de la guía daría " + M.rating(v.expReturn) + ") vs precio " + money(D.valuation.price)
+    ];
+    var text = lines.join("\n");
+    var box = $("copy-box"), st = $("copy-status");
+    function fallback() { box.hidden = false; box.value = text; box.focus(); box.select(); st.textContent = "Selecciona el texto y cópialo."; }
+    try {
+      navigator.clipboard.writeText(text).then(function () { box.hidden = true; st.textContent = "Escenario copiado. Pégalo en el chat para fijar los supuestos."; }, fallback);
+    } catch (e) { fallback(); }
+  }
+
+  function start(hotData) {
+    load();
+    if (hotData && hotData.opts) { KEYS.forEach(function (k) { if (k in hotData.opts) state[k] = hotData.opts[k]; }); presetName = hotData.preset || presetName; }
+    buildControls(); renderWalk(); renderAudit(); renderFinancials(); sync(); render();
+    var resizeT; window.addEventListener("resize", function () { clearTimeout(resizeT); resizeT = setTimeout(function () { renderFcff(M.value(D, state)); }, 150); });
+  }
+  var hot = window.claude && window.claude.hot;
+  try { if (hot && typeof hot.snapshot === "function") hot.snapshot(function () { return { opts: state, preset: presetName }; }); } catch (e) { /* optional */ }
+  if (hot && typeof hot.ready === "function") hot.ready(start); else start(hot && hot.data ? hot.data : {});
+})();
+</script>

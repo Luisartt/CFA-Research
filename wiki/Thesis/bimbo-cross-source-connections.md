@@ -1,6 +1,6 @@
 ---
 Writer: AI-compiled (Claude)
-Source:
+Source:, data/capitaliq/capiq-ai-prompt1_2026-10-16.md
   - filings/annual/INFORME ANUAL 2002_0.pdf
   - filings/bmv/Grupo_Bimbo_Reporte_Anual_CNBV_2009_25.06.10_ESP.pdf
   - filings/bmv/Reporte_Anual_2012_FINAL.pdf
@@ -160,6 +160,9 @@ All `[sourced]` [[bimbo-call-themes-by-year]], [[bimbo-volume-and-price-disclosu
 - Group Adjusted EBITDA margin FY25 13.9% includes IFRS 16 (from 2019). Removing right-of-use depreciation (6,142, the term that reproduces the company's ex-IFRS 16 ratios) gives 12.5%; removing 2025 lease payments (8,060) gives 12.0% `[calc]` (EEFF25 p.41-42; [[bimbo-balance-sheet-and-leverage]]). Comparable first-reported margins: 11.6% (FY16), 10.2% (FY17), 11.0% (FY18), 12.0% (FY07) `[calc]` ([[bimbo-income-statement-fy98-fy07]], [[bimbo-income-statement-fy14-fy20]]). Across FY14-FY25 the group spent MXN 220.5bn of PP&E capex and about 90.0bn on acquisitions (84,434 + 136,026; 47,587 + 42,455) `[calc]` ([[bimbo-cash-flow-and-capex-fy14-fy20]], [[bimbo-cash-flow-and-fcf]]); group margin moved from ~12.0% (FY07) to 12.0-12.5% (FY25) `[calc]` `[assumption]` (comparability of NIF and IFRS definitions).
 - North America: the "11.3% in 2019, 12.9% in 2020, 8.4% in 2024" series in the guidance article mixes pre-IFRS 16 (to 2018) and IFRS 16 (from 2019) margins; FY20 is the COVID pantry-loading year with a 9bn working-capital inflow `[sourced]` [[bimbo-covid-2020-impact]]. The scenario of a return from 9.6% to 12.2% in the team memo uses FY21 as the target `[sourced]`.
 - Flowers (10.2%) reports under US GAAP, where operating lease cost stays above EBITDA. Bimbo NA 9.0% (FY25) on an IFRS 16 basis is therefore not like-for-like with 10.2%: NA's share of right-of-use depreciation is not disclosed `[unverified]`; if NA bears 40-45% of 6,142 its ex-IFRS 16 margin is about 7.5-7.7% `[assumption]`.
+
+> [!warning] Superseded
+> Flowers' EBITDA margin is 9.3% LTM (9.8% FY25); 10.2% was FY24 `[sourced]` S&P Capital IQ, 2026-10-16. See [[peer-multiples-and-operations-capiq-2026-10]]. The US GAAP vs IFRS 16 basis caveat above still applies. Original claim kept above.
 - NA margin targets have been reset: ~10% "over time" (2015), "gradual improvement 2H25, 3-4 years" (Apr 2025), "2-3 more years" (Apr 2026) `[sourced]` [[bimbo-call-themes-by-year]]. 1Q26 group margin included a ~50bp one-off gain on a stake in an associate; the 1Q26 margin change was misquoted on the call (+260bp said, +160bp on the deck) `[sourced]` [[bimbo-ceo-and-management-changes]].
 
 **Implication.** The four-quarter NA margin recovery (5.9% in 4Q24 to 10.0% in 2Q26) is real but is a recovery from a trough, mostly cost (record productivity, raw materials, lower restructuring) with sales volume still negative `[sourced]` [[bimbo-north-america-turnaround-evidence]]. A target of 12% needs a comparable-basis reference the files do not give (gap G2). **Confidence: Medium** (rests on the ROU proxy).
@@ -247,6 +250,9 @@ All `[sourced]` [[bimbo-call-themes-by-year]], [[bimbo-volume-and-price-disclosu
 - Return decomposition (price proxy): 2023 year-end 86.0 to 54.2 (-37%), while LTM EBITDA in US$ rose 10% from Dec-23 to Jun-26 (3.1 to 3.4bn) and market cap fell 37% (US$22.3bn to 14.1bn) `[calc]` ([[bimbo-investor-presentations-2024-2026]]).
 - Versus peers: 6.29x (CIQ) or 6.68x (company EBITDA) against pure-play bakery median 6.45x (FLO 6.6x, GRUMAB 5.7x, 2212.T 6.3x, ARYN 7.2x), `[unverified]` (aggregator multiples in the team memo); the discount exists against Bimbo's own history and Mexican consumer names (AC 8.1x, PEP 10.8x), not against bakeries.
 - Management said in Jul-2022 that Bimbo traded ~8-8.5x vs Flowers ~14x (call 2022-07-21 p.12) `[sourced]`; Flowers is now ~6.6x `[unverified]`: the peer de-rated more than Bimbo.
+
+> [!note] Update 2026-10-16
+> Flowers' EV/EBITDA recomputed from Capital IQ EV and EBITDA is 6.68x `[calc]` (3,250.7 / 486.9), no longer `[unverified]`; see [[peer-multiples-and-operations-capiq-2026-10]].
 
 **Implication.** "Cheap versus history" depends on the chosen regime and on the IFRS 16 treatment (TEV includes 33,361 of leases; a pre-IFRS 16 equivalent is ~6.6x vs 6.29x reported `[calc]`). A sum-of-the-parts (Mexico 56% of EBITDA on 34% of sales, deck 2026-07-23 p.4) is more defensible than a single multiple. **Confidence: Medium.**
 

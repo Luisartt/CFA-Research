@@ -3,6 +3,7 @@ Writer: AI-compiled (Claude)
 Source: filings/annual/IA25_GB_EEFF_V10.pdf, filings/bmv/REPORTE ANUAL 2025 OFICIAL VF.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Jun_26.pdf, filings/bmv/Reporte_Definitivo_BMV_XBRL_Español_Mar_26.pdf, filings/bmv/GB_RA_2024_BMV_VFF1_0.pdf, filings/bmv/Reporte Anual 2023_XBRL_VF.PDF, filings/bmv/Reporte Anual 2022 VF.pdf, filings/bmv/Reporte Anual 2021_0.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%202T26_VF.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%201T26_VFF.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T25.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T24.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T23_VF.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T22_0.pdf, filings/quarterly/Grupo%20Bimbo%20Reporta%20Resultados%20del%204T21.pdf
   - filings/refinitiv/Debt & Credit/Debt/Issuer Ratings/IssuerRatings_Grupo Bimbo SAB de CV_Sat Oct 10 2026_T22_21_45.xls
   - filings/capitaliq/News, Events and filings/Recent Documents/Carpetas Current Reports Bimbo/Bimbo_2026-02-12_PR_S-P-National-Ratings-retiro/Bimbo_2026-02-12_PR_S-P-National-Ratings-retiro.pdf
+  - data/capitaliq/capiq-ai-prompt1_2026-10-16.md
 tags: [Valuation, capital-structure]
 ---
 
@@ -136,6 +137,9 @@ Source: EEFF25 p.51; BMV Jun-26 p.52. Both columns foot to the reported totals (
 ## 4. Update to 30-Jun-2026 (latest BMV filing)
 
 - **Feb-2026 issuance:** Bimbo 26 (MXN 7,866.6m, 9.22% fixed, due 26-Jan-2035) and Bimbo 26-2 (MXN 4,133.4m, TIIE Fondeo + 0.45%, due 1-Feb-2030); total MXN 12,000m issued 6-Feb-2026 (RA25 p.62, p.125, p.78).
+
+> [!note] Check 2026-10-17
+> A Capital IQ AI output printed Bimbo 26-2 as about Ps. 3.2bn due in 2026; the coupon notice of 16-Oct-2026 (interest Ps. 22,439,634 at 6.98% for 28 days) implies Ps. 4,133m, as above. The 82% fixed / 18% floating split in the Q2 2026 presentation is consistent with the 17.7% floating before swaps at Dec-25. See [[bimbo-debt-hedging-and-leverage-target-capiq-2026-10]].
 - **Bimbo 16 (MXN 7,706m, due 2-Sep-2026) is absent** from the Jun-26 instrument table (carried at "-") and from the list of securities registered at 30-Apr-2026 (BMV Jun-26 p.53; RA25 p.61–62). This points to repayment between Jan and Apr 2026 [calc / inference, not stated]. Borrowings 14,482 and repayments 11,554 in 1H26 (BMV Jun-26 p.56).
 - **Bimbo 23-2L (MXN 3,000m, due 24-Jul-2026)** is the main remaining 2026 maturity among bonds; the 2Q26 amortisation chart shows USD 172m of MXN bonds and USD 81m of bank loans due in 2026 (converted at 17.47) (2Q26 p.6).
 - Jun-26 instrument balances: senior notes 79,362 (FX-driven decrease vs Dec-25 as the MXN appreciated); CBs 51,639; bilaterals 12,235 (down from 14,040 on FX translation of the USD / EUR loans and JPMorgan amortisation [calc, explanation inferred]); BBVA revolver 5,000 (BMV Jun-26 p.52–55).
@@ -240,6 +244,9 @@ Source: EEFF25 p.43 (opening 1-Jan-2023 balance 29,185). Total at 30-Jun-2026: c
 ## Key Takeaways
 
 - Total debt is stable at about MXN 153.7bn (Dec-25 and Jun-26) while net debt fell from 145.1bn to 137.1bn and net debt / Adj. EBITDA from 2.7x to 2.5x, all on an ex-IFRS 16 basis; leases add a further 33-35bn outside net debt.
+
+> [!note] Peer comparison (2026-10-16)
+> On Capital IQ's like-for-like basis Bimbo's net debt / EBITDA is about 2.9x including leases (2.5x on the company's ex-IFRS 16 basis), against a peer median of 3.20x and 6th of 9 companies; see [[peer-leverage-capiq-2026-10]]. A Capital IQ AI output printed ~2.3x by mixing ex-IFRS 16 net debt with IFRS 16 EBITDA; see [[capiq-data-discrepancies-2026-10]].
 - The stack at Dec-25 is 53% USD senior notes (4,543 USD m, 2029–2051), 31% Mexican bonds and about 16% bank and other loans [calc: 81,619 / 47,339 / residual 24,705 of 153,663, net of issuance costs].
 - Average maturity has shortened from 16.4 years (Dec-21) to 9.5 years (Jun-26) and the average cost sits at 6.5%; the near-term wall is small (2026: about USD 253m, 2027: about USD 658m, 2028: about USD 833m per the 2Q26 chart).
 - Liquidity is anchored on an undrawn USD 2,350m revolver (A 2030 / B 2028) plus cash of MXN 16.6bn at Jun-26; the only financial covenant disclosed is interest coverage and the company reports compliance.

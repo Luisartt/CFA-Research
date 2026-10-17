@@ -170,6 +170,9 @@ External evidence only. Nothing here is the team's view. Mentor test: the new CE
 
 `[calc]` Turnover count in the files, 2012-2026: CEO changes 2 (Servitje to Pamias, Pamias to Rodriguez); CFO changes 1 (Quiroz to Gaxiola); BBU/US head changes 3 (Prince to Penny 2013, Penny to Gavin 2023, Gavin to Koehrsen 2026, with Bendix in an oversight role from 2023); IR heads named: Arguelles, R. Servitje (treasury and IR), Dib, Poucel, Larrea (leaving 2025). Daniel Servitje is still Executive Chair in Jul 2026 (deck 2026-06-10 p.30). `[sourced]`
 
+> [!note] Update 2026-10-17
+> Rodriguez Bas's background (Barcel Global, Barcel USA, PepsiCo, Acosta, C&S, Lala; Harvard MBA), the 2026 guidance path and peer management changes are in [[bimbo-ceo-rodriguez-bas-and-guidance-capiq-2026-10]]. Pay and executive ownership are not disclosed.
+
 ## 2. Who answered on the calls (continuity of the voice)
 
 | Period | CEO | CFO | US / North America | Notes |

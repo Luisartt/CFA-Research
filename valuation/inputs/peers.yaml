@@ -1,0 +1,324 @@
+# valuation/inputs/peers.yaml: peer inputs for the valuation engine.
+# Generated from valuation/BIMBOA_PeerAnalysis_v3.xlsx (Detail_PeerAnalysis) by valuation/build/build_peer_workbook.py --peers-yaml after an Excel recalc. Change the inputs and re-run; do not edit by hand.
+# Pricing date 2026-10-16. All monetary fields in USD millions; price and eps_fwd in USD per share (converted at the spot rate used in the workbook).
+# EV claim basis (one basis for all eligible peers and for Bimbo): net_debt = financial debt (incl. finance leases) + lease liabilities
+#   (operating or IFRS 16) + NCI at book (incl. redeemable NCI) - cash; EV = market_cap + net_debt. Pensions/OPEB, MEPP, derivatives excluded.
+# ebitda_ltm and ebitda_fwd are IFRS 16-equivalent: US GAAP peers add back operating lease cost (flat for NTM); IFRS names are pre-lease.
+# horizon: NTM from 2026-10-16, calendarised by fiscal year-end day weights. in_median: yes/no for valuation medians; in_median_pe for P/E.
+# distributor_ebitda: whether reported EBITDA includes consolidated distributor / independent-operator earnings.
+# null = not found in the sources so far (never zero). Peers with in_median: no are shown for reference and excluded from medians.
+pricing_date: "2026-10-16"
+horizon: "NTM from 2026-10-16 (calendarised by fiscal year-end day weights)"
+currency: "USD"
+peers:
+  - key: "FLO"
+    name: "Flowers Foods, Inc."
+    ticker: "NYSE:FLO"
+    group: "core"
+    currency: "USD"
+    native_currency: "trading USD, reporting USD"
+    price: 6.108911
+    shares: 212.1
+    net_debt: 1950.536
+    financial_debt: 1686.2
+    lease_liabilities: 317.102
+    nci_book: 0.0
+    cash: 52.766
+    market_cap: 1295.7
+    ev: 3246.236
+    ebitda_ltm: 578.709
+    ebitda_fwd: 528.077493
+    eps_fwd: 0.684089
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "US GAAP: CIQ debt includes operating leases (reconciled); EBITDA + operating lease cost (LTM; held flat for NTM)"
+    ev_claim_basis: "Financial debt 1,686.2 (current 399.9, non-current 1,286.4; no finance leases tagged) + operating lease liabilities 317.1 (75.2 + 241.9) + NCI nil (no minority interest reported) - cash 52.8. CIQ total debt is 2,007.8, 4.5 above these components (not added)."
+    distributor_ebitda: "No: independent distributors not consolidated (coordinator statement; not re-verified in this session)"
+    in_median: "yes"
+    in_median_pe: "yes"
+    in_median_reason: "US GAAP, lease basis reconciled: CIQ debt 2,007.8 vs financial debt 1,686.2 + operating leases 317.1 (-0.2%); EBITDA + LTM operating lease cost 91.8; NTM add-back held flat [assumption]"
+    sources:
+      price: "[calc] CIQ market cap 1,295.7 / CIQ diluted shares 212.1 (Task 1A, 15/16-Oct-2026); USD"
+      shares: "[sourced] CIQ Task 1A diluted shares (LTM 18-Jul-2026)"
+      net_debt: "[sourced] financial debt 1,686.2 + operating leases 317.1 + NCI nil - cash 52.8 (10-Q 18-Jul-2026); CIQ total debt is 4.5 higher (unreconciled)"
+      ebitda_ltm: "[calc] CIQ EBITDA 486.9 + operating lease cost LTM 91.8 (FY25 10-K 92.0 + 28-week YTD 2026 49.5 - YTD 2025 49.6)"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY26E 458.6 / FY27E 430.1 (day-weighted) + operating lease cost 91.8 held flat [assumption]"
+      eps_fwd: "[calc] price / CIQ multiples tool P/E NTM 8.93 (tool-based; NTM as CIQ defines it)"
+  - key: "GRUMA"
+    name: "Gruma, S.A.B. de C.V."
+    ticker: "BMV:GRUMA B"
+    group: "core"
+    currency: "USD"
+    native_currency: "trading MXN, reporting USD"
+    price: 13.097029
+    shares: 336.207985
+    net_debt: 1631.0
+    financial_debt: 1698.6
+    lease_liabilities: 413.2
+    nci_book: 2.8
+    cash: 483.6
+    market_cap: 4403.32575
+    ev: 6034.32575
+    ebitda_ltm: 1108.9
+    ebitda_fwd: 1070.189945
+    eps_fwd: 1.344767
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "IFRS 16: debt includes IFRS 16 leases (carrying); EBITDA before lease costs (inferred)"
+    ev_claim_basis: "Bank loans, carrying (ST 365.2 + LT 1,333.4) + IFRS 16 lease liabilities 413.2 (current 52.8, non-current 360.4) + NCI 2.8 - cash 483.6. Reports in USD."
+    distributor_ebitda: "Not checked"
+    in_median: "yes"
+    in_median_pe: "yes"
+    in_median_reason: "IFRS 16, USD statements: debt + IFRS 16 leases reconcile to CIQ total debt 2,111.8; EBITDA before lease costs (company UAFIRDA); NCI 2.8 from filings. Consensus FY2026E-FY2028E is now available on the same company basis (FY26E 1,111.37 vs LTM 1,108.9), so Gruma enters the NTM medians. P/E now available: price USD 13.10 / diluted EPS LTM 1.40 = 9.36x, NTM 9.74x; earnings not depressed, so P/E-eligible (it was 'no' only for lack of data)."
+    sources:
+      price: "[sourced] MXN 242.02 delayed quote 16-Oct-2026 1:59 PM CST (Yahoo), corroborated by the Capital IQ chart close USD 13.09 x 18.479 = MXN 241.89 (-0.05%); converted at 18.479 MXN/USD, the 16-Oct-2026 close [calc]"
+      shares: "[sourced] 336,207,985 Series B shares outstanding, 30-Jun-2026 (Gruma 2Q26 BMV report p.53)"
+      net_debt: "[sourced/calc] bank loans 1,698.6 + IFRS 16 leases 413.2 + NCI 2.8 - cash 483.6 (2Q26 BMV report, USD)"
+      ebitda_ltm: "[calc] company EBITDA (UAFIRDA) LTM Jun-26 1,108.9 = FY25 1,136.0 + 1H26 538.5 - 1H25 565.6; before lease costs (IFRS 16) [assumption: D&A includes ROU depreciation]"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY26E 1,111.37 / FY27E 1,059.18 (day-weighted), USD as converted by Capital IQ; company EBITDA (UAFIRDA) basis, the same as LTM (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4C)"
+      eps_fwd: "[calc] NTM from CIQ consensus EPS FY26E 1.40 / FY27E 1.33 (day-weighted), USD (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4C); P/E NTM 9.74x"
+  - key: "YMZ"
+    name: "Yamazaki Baking Co., Ltd."
+    ticker: "TSE:2212"
+    group: "core"
+    currency: "USD"
+    native_currency: "trading JPY, reporting JPY"
+    price: 24.153886
+    shares: 196.9
+    net_debt: -473.5
+    financial_debt: null
+    lease_liabilities: null
+    nci_book: null
+    cash: null
+    market_cap: 4755.900169
+    ev: 4282.400169
+    ebitda_ltm: 706.7
+    ebitda_fwd: 732.766301
+    eps_fwd: 1.434316
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "J-GAAP: operating leases off balance sheet (CIQ's JPY 7,853m are finance-lease obligations) and no operating lease cost to add back; not normalised; excluded"
+    ev_claim_basis: "Descriptive only, not the claim basis: EV = market cap + Capital IQ net debt -473.5 (includes J-GAAP finance-lease obligations, JPY 7,853m; operating leases are off balance sheet; NCI not returned). Excluded from medians."
+    distributor_ebitda: "Not checked"
+    in_median: "no"
+    in_median_pe: "no"
+    in_median_reason: "Fails the lease test. Under J-GAAP operating leases are off balance sheet (CIQ's JPY 7,853m are finance-lease obligations) and no operating lease cost is available to add back, so EBITDA is after operating lease costs: neither 'debt includes leases' nor 'EBITDA before lease costs' holds. NCI not returned (CIQ N/A). Peers without a reconciled basis are excluded from all medians, P/E included. Unchanged."
+    sources:
+      price: "[sourced] TSE close JPY 3,816 16-Oct-2026 (Yahoo Finance Japan history, aggregator), corroborated by the Capital IQ chart (USD 24.17 x 157.987 = JPY 3,818.5, +0.07%); converted at 1/157.987 USD per JPY (Yahoo JPY=X close 16-Oct-2026) [calc]"
+      shares: "[sourced] basic shares outstanding 196.9m at 30-Jun-2026 (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A)"
+      net_debt: "[sourced] Capital IQ net debt -473.5 incl. J-GAAP finance-lease obligations (JPY 7,853m); operating leases off balance sheet and NCI not returned, so descriptive only, not the claim basis"
+      ebitda_ltm: "[sourced] CIQ EBITDA LTM 706.7 (J-GAAP: operating leases not normalised)"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY26E 700.1 / FY27E 741.5 (day-weighted), USD; J-GAAP basis [not normalised]"
+      eps_fwd: "[calc] price / CIQ multiples tool P/E NTM 16.84 (tool-based; not normalised)"
+  - key: "ARYN"
+    name: "ARYZTA AG"
+    ticker: "SWX:ARYN"
+    group: "core"
+    currency: "USD"
+    native_currency: "trading USD, reporting EUR"
+    price: 49.145161
+    shares: 24.8
+    net_debt: 884.508914
+    financial_debt: 791.160314
+    lease_liabilities: 195.7486
+    nci_book: -17.4
+    cash: 85.0
+    market_cap: 1218.8
+    ev: 2103.308914
+    ebitda_ltm: 252.4
+    ebitda_fwd: 361.722466
+    eps_fwd: 5.454513
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "IFRS 16: CIQ total debt EUR 845.9m = long-term debt 678.2 + IFRS 16 leases 167.8 (reconciled); EBITDA before lease costs; excluded on NCI"
+    ev_claim_basis: "Long-term debt 791.2 (EUR 678.2) + IFRS 16 lease liabilities 195.7 (EUR 167.8: current 35.5 + non-current 132.3) = CIQ total debt 986.9; + CIQ TEV residual -17.4 (unexplained, not a book NCI) - cash 85.0 (EUR 72.9). USD at Capital IQ's 1.166559. Lease basis reconciled; NCI not verified, so descriptive only."
+    distributor_ebitda: "Not checked"
+    in_median: "no"
+    in_median_pe: "no"
+    in_median_reason: "Lease basis now passes: CIQ total debt EUR 845.9m = long-term debt 678.2 + IFRS 16 leases 167.8 (35.5 + 132.3); IFRS 16 EBITDA is before lease costs; shares 24.8m in three CIQ pulls. Fails the claim basis on NCI: Capital IQ returns minority interest as N/A for every company, including CPB (306), MDLZ (53), PEP (195) and Gruma (2.8), whose filings show NCI, so N/A is not zero, and the CIQ TEV residual (-17.4) is unexplained. NCI not verified, so excluded from all medians. Unchanged."
+    sources:
+      price: "[calc] CIQ market cap 1,218.8 / CIQ shares 24.8 (Task 1A); CHF 40.45 aggregator quote consistent within ~3% [unverified]"
+      shares: "[sourced] 24.8m in three Capital IQ pulls: Task 1A diluted, Task 4A basic at 30-Jun-2026 and prompt 5 latest"
+      net_debt: "[calc] long-term debt 791.2 + IFRS 16 leases 195.7 (= CIQ total debt 986.9, USD at CIQ's 1.166559) + CIQ TEV residual -17.4 (unexplained, not a book NCI) - cash 85.0; NCI not verified, so descriptive only"
+      ebitda_ltm: "[sourced] CIQ EBITDA LTM 252.4 (IFRS 16 inclusion unverified; not normalised)"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY26E 354.7 / FY27E 363.6 (day-weighted), USD"
+      eps_fwd: "[calc] price / CIQ multiples tool P/E NTM 9.01 (tool-based)"
+  - key: "SJM"
+    name: "The J. M. Smucker Company"
+    ticker: "NYSE:SJM"
+    group: "secondary"
+    currency: "USD"
+    native_currency: "trading USD, reporting USD"
+    price: 127.457865
+    shares: 106.8
+    net_debt: 6897.0
+    financial_debt: 6747.4
+    lease_liabilities: 192.8
+    nci_book: 0.0
+    cash: 43.2
+    market_cap: 13612.5
+    ev: 20509.5
+    ebitda_ltm: 2310.8
+    ebitda_fwd: 2225.484384
+    eps_fwd: 10.115704
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "US GAAP: CIQ debt includes operating leases (exact tie); EBITDA + operating lease cost (LTM; held flat for NTM)"
+    ev_claim_basis: "Financial debt 6,737.8 (ST borrowings 193.5, current LTD 150.0, LTD 6,394.3) + finance leases 9.6 + operating lease liabilities 192.8 + NCI nil (not reported) - cash 43.2. Ties exactly to CIQ EV."
+    distributor_ebitda: "Not checked"
+    in_median: "yes"
+    in_median_pe: "no"
+    in_median_reason: "US GAAP, lease basis reconciled (exact tie incl. finance leases 9.6); EBITDA + operating lease cost 46.9; in EV medians; excluded from P/E medians (depressed earnings, assumption)"
+    sources:
+      price: "[calc] CIQ market cap 13,612.5 / CIQ diluted shares 106.8 (Task 1A); USD"
+      shares: "[sourced] CIQ Task 1A diluted shares (LTM 31-Jul-2026)"
+      net_debt: "[sourced] financial debt 6,737.8 + finance leases 9.6 + operating leases 192.8 + NCI nil (not reported) - cash 43.2 (10-Q 31-Jul-2026); ties to CIQ EV"
+      ebitda_ltm: "[calc] CIQ EBITDA 2,263.9 + operating lease cost LTM 46.9 (FY Apr-26 10-K 47.6 + Q1 FY27 11.7 - Q1 FY26 12.4)"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY27E 2,181.3 / FY28E 2,175.4 (FY26 closed), day-weighted + operating lease cost 46.9 held flat [assumption]"
+      eps_fwd: "[calc] price / CIQ multiples tool P/E NTM 12.60 (tool-based); P/E excluded from medians"
+  - key: "CPB"
+    name: "The Campbell's Company"
+    ticker: "NasdaqGS:CPB"
+    group: "secondary"
+    currency: "USD"
+    native_currency: "trading USD, reporting USD"
+    price: 19.872233
+    shares: 298.2
+    net_debt: 7362.0
+    financial_debt: 7137.0
+    lease_liabilities: 313.0
+    nci_book: 306.0
+    cash: 394.0
+    market_cap: 5925.9
+    ev: 13287.9
+    ebitda_ltm: 1734.0
+    ebitda_fwd: 1589.942466
+    eps_fwd: 1.695583
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "US GAAP: CIQ debt includes operating leases (exact tie); EBITDA + operating lease cost (LTM; held flat for NTM)"
+    ev_claim_basis: "Financial debt 7,053.0 + finance leases 84.0 + operating lease liabilities 313.0 + NCI 2.0 + redeemable NCI (mezzanine) 304.0 - cash 394.0. Ties to CIQ EV including the 306 residual."
+    distributor_ebitda: "Not checked"
+    in_median: "yes"
+    in_median_pe: "yes"
+    in_median_reason: "US GAAP, lease basis reconciled (exact tie); EBITDA + operating lease cost 114.0; EV includes redeemable NCI 304 (mezzanine) and NCI 2"
+    sources:
+      price: "[calc] CIQ market cap 5,925.9 / CIQ diluted shares 298.2 (Task 1A); USD"
+      shares: "[sourced] CIQ Task 1A diluted shares (LTM 2-Aug-2026)"
+      net_debt: "[sourced] financial debt 7,053.0 + finance leases 84.0 + operating leases 313.0 + NCI 2.0 + redeemable NCI 304.0 - cash 394.0 (FY26 10-K); ties to CIQ EV"
+      ebitda_ltm: "[calc] CIQ EBITDA 1,620.0 + operating lease cost 114.0 (FY Aug-26 10-K = LTM date)"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY27E 1,464.6 / FY28E 1,519.8 (FY26 closed), day-weighted + operating lease cost 114.0 held flat [assumption]"
+      eps_fwd: "[calc] price / CIQ multiples tool P/E NTM 11.72 (tool-based)"
+  - key: "MDLZ"
+    name: "Mondelez International, Inc."
+    ticker: "NasdaqGS:MDLZ"
+    group: "secondary"
+    currency: "USD"
+    native_currency: "trading USD, reporting USD"
+    price: 63.910366
+    shares: 1276.3
+    net_debt: 20560.0
+    financial_debt: 21450.0
+    lease_liabilities: 773.0
+    nci_book: 53.0
+    cash: 1716.0
+    market_cap: 81568.8
+    ev: 102128.8
+    ebitda_ltm: 6326.0
+    ebitda_fwd: 7399.233973
+    eps_fwd: 3.222913
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "US GAAP: CIQ debt includes noncurrent operating leases (exact tie); EBITDA + operating lease cost (FY25; held flat)"
+    ev_claim_basis: "Financial debt 21,450 (includes finance leases, not separated at 30-Jun-26; 423 at 31-Dec-25) + noncurrent operating lease liabilities 609 (current portion not found; 164 at 31-Dec-25) + NCI 53 - cash 1,716. Ties to CIQ EV."
+    distributor_ebitda: "Not checked"
+    in_median: "yes"
+    in_median_pe: "yes"
+    in_median_reason: "US GAAP, lease basis reconciled on noncurrent leases (exact tie); current lease portion not found at 30-Jun-2026; EBITDA + FY25 operating lease cost 246 (LTM 10-Q not found) [assumption]"
+    sources:
+      price: "[calc] CIQ market cap 81,568.8 / CIQ diluted shares 1,276.3 (Task 1A); USD"
+      shares: "[sourced] CIQ Task 1A diluted shares (LTM 30-Jun-2026)"
+      net_debt: "[sourced] financial debt 21,450 (incl. finance leases, not separated) + noncurrent operating leases 609 + NCI 53 - cash 1,716 (10-Q 30-Jun-2026; ties to CIQ EV) + current operating leases 164 at 31-Dec-2025 as a proxy for 30-Jun-2026 [assumption] (Codex finding 9)"
+      ebitda_ltm: "[calc] CIQ EBITDA 6,080.0 + operating lease cost 246 (FY25 10-K; 10-Q YTD not found) [assumption: LTM = FY25]"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY26E 6,735.2 / FY27E 7,265.0 (day-weighted) + operating lease cost 246 held flat [assumption]"
+      eps_fwd: "[calc] price / CIQ multiples tool P/E NTM 19.83 (tool-based)"
+  - key: "AC"
+    name: "Arca Continental, S.A.B. de C.V."
+    ticker: "BMV:AC"
+    group: "secondary"
+    currency: "USD"
+    native_currency: "trading MXN, reporting MXN"
+    price: 11.345852
+    shares: 1696.2
+    net_debt: 2015.4
+    financial_debt: null
+    lease_liabilities: null
+    nci_book: null
+    cash: null
+    market_cap: 19244.834244
+    ev: 21260.234244
+    ebitda_ltm: 2707.0
+    ebitda_fwd: 2990.246027
+    eps_fwd: 0.687627
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "IFRS 16: CIQ total debt MXN 65,427m includes IFRS 16 leases 1,832.2; IFRS 16 EBITDA; excluded on NCI"
+    ev_claim_basis: "Descriptive only, not the claim basis: EV = market cap + Capital IQ net debt 2,015.4 (includes IFRS 16 leases, MXN 1,832.2m; NCI not returned: the CIQ tool's 8.47x implies about MXN 19.9bn of claims missing from this EV). Excluded from medians."
+    distributor_ebitda: "Not checked"
+    in_median: "no"
+    in_median_pe: "no"
+    in_median_reason: "Lease basis now passes: CIQ total debt MXN 65,427m includes IFRS 16 leases 1,832.2 (reconciles within 3.7 once two derivation slips in the output are corrected); IFRS 16 EBITDA; shares 1,696.2m; price corroborated by the CIQ chart. Fails the claim basis on NCI: CIQ N/A, and the CIQ tool's 8.47x vs 8.06x ex-NCI implies about MXN 19.9bn of claims missing from our EV, consistent with a material NCI. Excluded from all medians. Unchanged."
+    sources:
+      price: "[sourced] MXN 209.66 quote 16-Oct-2026 (Yahoo header; Rankia), corroborated by the Capital IQ chart close USD 11.34 x 18.479 = MXN 209.55 (-0.05%); converted at 18.479 MXN/USD, the 16-Oct-2026 close [calc]"
+      shares: "[sourced] basic shares outstanding 1,696.2m at 30-Jun-2026 (data/capitaliq/capiq-ai-model-gaps-4_2026-10-17.md Task 4A); a BMV buyback notice shows 1,698.2m (+0.1%)"
+      net_debt: "[sourced] Capital IQ net debt 2,015.4 incl. IFRS 16 leases (MXN 1,832.2m); NCI not returned (the CIQ tool implies about MXN 19.9bn of claims missing), so descriptive only, not the claim basis"
+      ebitda_ltm: "[sourced] CIQ EBITDA LTM 2,707.0 (definition vs reported FY25 3.1% lower; not normalised)"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY26E 2,930.2 / FY27E 3,006.3 (day-weighted), USD; CIQ conversion basis not stated"
+      eps_fwd: "[calc] price / CIQ multiples tool P/E NTM 16.50 (tool-based)"
+  - key: "PEP"
+    name: "PepsiCo, Inc."
+    ticker: "NasdaqGS:PEP"
+    group: "secondary"
+    currency: "USD"
+    native_currency: "trading USD, reporting USD"
+    price: 131.503999
+    shares: 1362.7
+    net_debt: 45247.0
+    financial_debt: 51881.0
+    lease_liabilities: 3846.0
+    nci_book: 195.0
+    cash: 10675.0
+    market_cap: 179200.5
+    ev: 224447.5
+    ebitda_ltm: 20051.0
+    ebitda_fwd: 20353.899452
+    eps_fwd: 8.46774
+    horizon: "NTM from 2026-10-16 (calendarised)"
+    lease_basis: "US GAAP: CIQ debt excludes operating leases; EV adds operating lease liabilities (27-Dec-2025); EBITDA + operating lease cost (FY25; held flat)"
+    ev_claim_basis: "Financial debt 51,881 (= CIQ total debt; finance leases not separated) + operating lease liabilities 3,846 (27-Dec-2025 10-K; Sep-2026 not found; CIQ excludes leases) + NCI 195 - cash 10,675. CIQ net debt (40,718) deducts a further 488 that is not cash and is not used."
+    distributor_ebitda: "Not checked (franchise bottler consolidation not verified)"
+    in_median: "yes"
+    in_median_pe: "yes"
+    in_median_reason: "US GAAP: CIQ debt excludes operating leases; EV adds 3,846 (27-Dec-2025 10-K; Sep-2026 not found) [assumption]; EBITDA + FY25 operating lease cost 880 [assumption]"
+    sources:
+      price: "[calc] CIQ market cap 179,200.5 / CIQ diluted shares 1,362.7 (Task 1A); USD"
+      shares: "[sourced] CIQ Task 1A diluted shares (LTM 5-Sep-2026)"
+      net_debt: "[sourced] financial debt 51,881 + operating leases 3,846 (27-Dec-2025 10-K; Sep-2026 not found) + NCI 195 - cash 10,675; CIQ net debt deducts a further 488 (not used)"
+      ebitda_ltm: "[calc] CIQ EBITDA 19,171.0 + operating lease cost 880 (FY25 10-K; 36-week YTD not found) [assumption: LTM = FY25]"
+      ebitda_fwd: "[calc] NTM from CIQ consensus FY26E 19,050.5 / FY27E 19,587.1 (day-weighted) + operating lease cost 880 held flat [assumption]"
+      eps_fwd: "[calc] price / CIQ multiples tool P/E NTM 15.53 (tool-based)"
+subject:
+  key: "BIMBO"
+  name: "Grupo Bimbo, S.A.B. de C.V."
+  ticker: "BMV:BIMBO A"
+  currency: "MXN"
+  price: 58.6
+  price_tag: "[sourced] BMV official close 16-Oct-2026 = PPP 58.60 (bmv.com.mx/es/emisoras/estadisticas/BIMBO-5163)"
+  shares: 4294.9
+  financial_debt: 153660.0
+  lease_liabilities: 33361.0
+  nci_book: 722.0
+  cash: 16563.0
+  net_debt: 171180.0
+  ev: 422861.14
+  ebitda_ltm: 60919.0
+  ebitda_ltm_model_ebit_da: 60326.0
+  ebitda_fwd: 64305.8
+  eps_fwd: 3.290932
+  horizon: "NTM from 2026-10-16 (calendarised)"
+  lease_basis: "IFRS 16: lease liabilities 33,361 in the claim basis; EBITDA = company Adjusted EBITDA (IFRS 16)"
+  ev_claim_basis: "Financial debt 153,660 + IFRS 16 lease liabilities 33,361 + NCI at book 722 - cash 16,563 (MXN m, 30-Jun-2026). Excludes MEPP, pensions/OPEB and derivatives."
+  distributor_ebitda: "Yes: BBU independent operators (US route partners) are consolidated structured entities (RA25 p.249-250); their profit to NCI is the coordinator's statement, not confirmed in the wiki (FY25 NCI profit share 1,813)."
+
