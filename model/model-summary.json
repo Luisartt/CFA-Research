@@ -1,0 +1,1660 @@
+{
+  "company": "Grupo Bimbo, S.A.B. de C.V.",
+  "ticker": "BIMBOA",
+  "framework": "ifrs",
+  "currency": "MXN",
+  "units": "millions",
+  "model_file": "BIMBOA_model_v7.xlsx",
+  "version": 7,
+  "built_on": "2026-10-17",
+  "historical_years": [
+    2021,
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "forecast_years": [
+    2026,
+    2027,
+    2028,
+    2029,
+    2030,
+    2031,
+    2032,
+    2033,
+    2034,
+    2035
+  ],
+  "status": "ALL CHECKS OK",
+  "lines": {
+    "revenue": {
+      "2021": 338792.0,
+      "2022": 398706.0,
+      "2023": 399879.0,
+      "2024": 408335.0,
+      "2025": 426952.0,
+      "2026": 423482.612,
+      "2027": 442713.35589,
+      "2028": 462219.86029,
+      "2029": 482656.372907,
+      "2030": 504070.154642,
+      "2031": 526155.54136,
+      "2032": 549010.72681,
+      "2033": 572642.715518,
+      "2034": 597057.231994,
+      "2035": 622380.093575
+    },
+    "gross_profit": {
+      "2021": 181089.0,
+      "2022": 205381.0,
+      "2023": 205510.0,
+      "2024": 214928.0,
+      "2025": 223487.0,
+      "2026": 221904.888688,
+      "2027": 230210.945063,
+      "2028": 241740.986931,
+      "2029": 253394.595776,
+      "2030": 264636.831187,
+      "2031": 276231.659214,
+      "2032": 288230.631575,
+      "2033": 300637.425647,
+      "2034": 313455.046797,
+      "2035": 326749.549127
+    },
+    "ebitda": {
+      "2021": 48706.0,
+      "2022": 71734.0,
+      "2023": 54384.0,
+      "2024": 56200.0,
+      "2025": 58984.0,
+      "2026": 62251.943964,
+      "2027": 64193.436604,
+      "2028": 68870.759183,
+      "2029": 72881.112309,
+      "2030": 77122.73366,
+      "2031": 80501.797828,
+      "2032": 83998.641202,
+      "2033": 87614.335474,
+      "2034": 91349.756495,
+      "2035": 95224.154317
+    },
+    "ebit": {
+      "2021": 32580.0,
+      "2022": 53696.0,
+      "2023": 35455.0,
+      "2024": 33149.0,
+      "2025": 34146.0,
+      "2026": 37266.469856,
+      "2027": 38073.348607,
+      "2028": 41599.787426,
+      "2029": 44645.714494,
+      "2030": 47634.629614,
+      "2031": 49721.698659,
+      "2032": 51881.513684,
+      "2033": 54114.736616,
+      "2034": 56421.908423,
+      "2035": 58814.918843
+    },
+    "net_income_parent": {
+      "2021": 15916.0,
+      "2022": 46910.0,
+      "2023": 15477.0,
+      "2024": 12544.0,
+      "2025": 11133.0,
+      "2026": 13400.518835,
+      "2027": 14382.202722,
+      "2028": 16875.955154,
+      "2029": 19122.510969,
+      "2030": 21355.119264,
+      "2031": 23133.65607,
+      "2032": 24983.90421,
+      "2033": 26906.205629,
+      "2034": 28900.657733,
+      "2035": 30973.599335
+    },
+    "eps": {
+      "2021": 3.546924,
+      "2022": 10.54467,
+      "2023": 3.50306,
+      "2024": 2.87888,
+      "2025": 2.582744,
+      "2026": 3.108786,
+      "2027": 3.336527,
+      "2028": 3.915052,
+      "2029": 4.436231,
+      "2030": 4.954174,
+      "2031": 5.366776,
+      "2032": 5.796015,
+      "2033": 6.24197,
+      "2034": 6.704663,
+      "2035": 7.185565
+    },
+    "fcf": {
+      "2021": 20366.0,
+      "2022": 4328.0,
+      "2023": -9063.0,
+      "2024": 4412.0,
+      "2025": 18989.0,
+      "2026": 15147.71884,
+      "2027": 15025.570864,
+      "2028": 16577.458891,
+      "2029": 17894.514574,
+      "2030": 19899.626638,
+      "2031": 21221.445138,
+      "2032": 22574.355175,
+      "2033": 23955.409153,
+      "2034": 25361.123752,
+      "2035": 26797.805758
+    },
+    "cash": {
+      "2021": 8748.0,
+      "2022": 12313.0,
+      "2023": 6353.0,
+      "2024": 8057.0,
+      "2025": 8535.0,
+      "2026": 17761.559355,
+      "2027": 26432.203435,
+      "2028": 35552.844932,
+      "2029": 44997.877915,
+      "2030": 55461.521623,
+      "2031": 66461.11873,
+      "2032": 77996.074371,
+      "2033": 90062.69499,
+      "2034": 102653.760674,
+      "2035": 115765.557423
+    },
+    "revolver": {
+      "2021": 0.0,
+      "2022": 0.0,
+      "2023": 0.0,
+      "2024": 0.0,
+      "2025": 0.0,
+      "2026": 0.0,
+      "2027": 0.0,
+      "2028": 0.0,
+      "2029": 0.0,
+      "2030": 0.0,
+      "2031": 0.0,
+      "2032": 0.0,
+      "2033": 0.0,
+      "2034": 0.0,
+      "2035": 0.0
+    },
+    "net_debt": {
+      "2021": 115256.0,
+      "2022": 100926.0,
+      "2023": 130397.0,
+      "2024": 178649.0,
+      "2025": 179918.0,
+      "2026": 170691.440645,
+      "2027": 162020.796565,
+      "2028": 152900.155068,
+      "2029": 143455.122085,
+      "2030": 132991.478377,
+      "2031": 121991.88127,
+      "2032": 110456.925629,
+      "2033": 98390.30501,
+      "2034": 85799.239326,
+      "2035": 72687.442577
+    },
+    "fcff": {
+      "2021": null,
+      "2022": null,
+      "2023": null,
+      "2024": null,
+      "2025": null,
+      "2026": 24161.5903,
+      "2027": 23430.489406,
+      "2028": 24410.114924,
+      "2029": 25125.208268,
+      "2030": 26506.948156,
+      "2031": 27138.166171,
+      "2032": 27765.102799,
+      "2033": 28384.849704,
+      "2034": 28994.167343,
+      "2035": 29599.839014
+    }
+  },
+  "ratios": {
+    "r_revenue_growth": {
+      "2021": null,
+      "2022": 0.176846,
+      "2023": 0.002942,
+      "2024": 0.021146,
+      "2025": 0.045592,
+      "2026": -0.008126,
+      "2027": 0.045411,
+      "2028": 0.044061,
+      "2029": 0.044214,
+      "2030": 0.044367,
+      "2031": 0.043814,
+      "2032": 0.043438,
+      "2033": 0.043045,
+      "2034": 0.042635,
+      "2035": 0.042413
+    },
+    "r_gross_margin": {
+      "2021": 0.534514,
+      "2022": 0.515119,
+      "2023": 0.51393,
+      "2024": 0.526352,
+      "2025": 0.523448,
+      "2026": 0.524,
+      "2027": 0.52,
+      "2028": 0.523,
+      "2029": 0.525,
+      "2030": 0.525,
+      "2031": 0.525,
+      "2032": 0.525,
+      "2033": 0.525,
+      "2034": 0.525,
+      "2035": 0.525
+    },
+    "r_ebitda_margin": {
+      "2021": 0.143764,
+      "2022": 0.179917,
+      "2023": 0.136001,
+      "2024": 0.137632,
+      "2025": 0.138151,
+      "2026": 0.147,
+      "2027": 0.145,
+      "2028": 0.149,
+      "2029": 0.151,
+      "2030": 0.153,
+      "2031": 0.153,
+      "2032": 0.153,
+      "2033": 0.153,
+      "2034": 0.153,
+      "2035": 0.153
+    },
+    "r_ebit_margin": {
+      "2021": 0.096165,
+      "2022": 0.134676,
+      "2023": 0.088664,
+      "2024": 0.081181,
+      "2025": 0.079976,
+      "2026": 0.088,
+      "2027": 0.086,
+      "2028": 0.09,
+      "2029": 0.0925,
+      "2030": 0.0945,
+      "2031": 0.0945,
+      "2032": 0.0945,
+      "2033": 0.0945,
+      "2034": 0.0945,
+      "2035": 0.0945
+    },
+    "r_net_margin": {
+      "2021": 0.046979,
+      "2022": 0.117656,
+      "2023": 0.038704,
+      "2024": 0.03072,
+      "2025": 0.026076,
+      "2026": 0.031644,
+      "2027": 0.032486,
+      "2028": 0.036511,
+      "2029": 0.039619,
+      "2030": 0.042365,
+      "2031": 0.043967,
+      "2032": 0.045507,
+      "2033": 0.046986,
+      "2034": 0.048405,
+      "2035": 0.049766
+    },
+    "r_fcf_margin": {
+      "2021": 0.060114,
+      "2022": 0.010855,
+      "2023": -0.022664,
+      "2024": 0.010805,
+      "2025": 0.044476,
+      "2026": 0.035769,
+      "2027": 0.03394,
+      "2028": 0.035865,
+      "2029": 0.037075,
+      "2030": 0.039478,
+      "2031": 0.040333,
+      "2032": 0.041118,
+      "2033": 0.041833,
+      "2034": 0.042477,
+      "2035": 0.043057
+    },
+    "r_roe": {
+      "2021": null,
+      "2022": 0.42412,
+      "2023": 0.133174,
+      "2024": 0.107092,
+      "2025": 0.090713,
+      "2026": 0.10836,
+      "2027": 0.108726,
+      "2028": 0.118871,
+      "2029": 0.124879,
+      "2030": 0.128897,
+      "2031": 0.128901,
+      "2032": 0.128528,
+      "2033": 0.127838,
+      "2034": 0.126885,
+      "2035": 0.12574
+    },
+    "r_roic": {
+      "2021": null,
+      "2022": 0.190963,
+      "2023": 0.103737,
+      "2024": 0.092294,
+      "2025": 0.071637,
+      "2026": 0.081939,
+      "2027": 0.083592,
+      "2028": 0.090822,
+      "2029": 0.096499,
+      "2030": 0.101517,
+      "2031": 0.104303,
+      "2032": 0.106905,
+      "2033": 0.109296,
+      "2034": 0.111456,
+      "2035": 0.113385
+    },
+    "r_net_debt_ebitda": {
+      "2021": 2.366361,
+      "2022": 1.406948,
+      "2023": 2.397709,
+      "2024": 3.178808,
+      "2025": 3.050285,
+      "2026": 2.741946,
+      "2027": 2.523946,
+      "2028": 2.220103,
+      "2029": 1.968344,
+      "2030": 1.724413,
+      "2031": 1.515393,
+      "2032": 1.314985,
+      "2033": 1.122993,
+      "2034": 0.939239,
+      "2035": 0.76333
+    },
+    "r_interest_cover": {
+      "2021": 4.164643,
+      "2022": 6.671139,
+      "2023": 3.543374,
+      "2024": 2.530458,
+      "2025": 2.360758,
+      "2026": 2.568174,
+      "2027": 2.623779,
+      "2028": 2.8668,
+      "2029": 3.076706,
+      "2030": 3.282683,
+      "2031": 3.426511,
+      "2032": 3.575352,
+      "2033": 3.729252,
+      "2034": 3.888248,
+      "2035": 4.05316
+    },
+    "r_ccc": {
+      "2021": -30.347686,
+      "2022": -31.332639,
+      "2023": -26.198698,
+      "2024": -20.43138,
+      "2025": -18.995244,
+      "2026": -19.0,
+      "2027": -19.0,
+      "2028": -19.0,
+      "2029": -19.0,
+      "2030": -19.0,
+      "2031": -19.0,
+      "2032": -19.0,
+      "2033": -19.0,
+      "2034": -19.0,
+      "2035": -19.0
+    }
+  },
+  "drivers": {
+    "revenue_growth": {
+      "label": "Revenue growth",
+      "source": "engine default",
+      "values": {
+        "2021": null,
+        "2022": 0.176846,
+        "2023": 0.002942,
+        "2024": 0.021146,
+        "2025": 0.045592,
+        "2026": 0.045592,
+        "2027": 0.045592,
+        "2028": 0.045592,
+        "2029": 0.045592,
+        "2030": 0.045592,
+        "2031": 0.045592,
+        "2032": 0.045592,
+        "2033": 0.045592,
+        "2034": 0.045592,
+        "2035": 0.045592
+      }
+    },
+    "gross_margin": {
+      "label": "Gross margin",
+      "source": "team",
+      "values": {
+        "2021": 0.534514,
+        "2022": 0.515119,
+        "2023": 0.51393,
+        "2024": 0.526352,
+        "2025": 0.523448,
+        "2026": 0.524,
+        "2027": 0.52,
+        "2028": 0.523,
+        "2029": 0.525,
+        "2030": 0.525,
+        "2031": 0.525,
+        "2032": 0.525,
+        "2033": 0.525,
+        "2034": 0.525,
+        "2035": 0.525
+      }
+    },
+    "opex_pct_revenue": {
+      "label": "Operating expenses / revenue",
+      "source": "team",
+      "values": {
+        "2021": 0.438349,
+        "2022": 0.380443,
+        "2023": 0.425266,
+        "2024": 0.445171,
+        "2025": 0.443471,
+        "2026": 0.436,
+        "2027": 0.434,
+        "2028": 0.433,
+        "2029": 0.4325,
+        "2030": 0.4305,
+        "2031": 0.4305,
+        "2032": 0.4305,
+        "2033": 0.4305,
+        "2034": 0.4305,
+        "2035": 0.4305
+      }
+    },
+    "da_pct_revenue": {
+      "label": "D&A / revenue",
+      "source": "team",
+      "values": {
+        "2021": 0.047599,
+        "2022": 0.045241,
+        "2023": 0.047337,
+        "2024": 0.056451,
+        "2025": 0.058175,
+        "2026": 0.059,
+        "2027": 0.059,
+        "2028": 0.059,
+        "2029": 0.0585,
+        "2030": 0.0585,
+        "2031": 0.0585,
+        "2032": 0.0585,
+        "2033": 0.0585,
+        "2034": 0.0585,
+        "2035": 0.0585
+      }
+    },
+    "amort_pct_revenue": {
+      "label": "Amortization of intangibles / revenue (part of D&A)",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": null,
+        "2023": null,
+        "2024": null,
+        "2025": null,
+        "2026": 0.0,
+        "2027": 0.0,
+        "2028": 0.0,
+        "2029": 0.0,
+        "2030": 0.0,
+        "2031": 0.0,
+        "2032": 0.0,
+        "2033": 0.0,
+        "2034": 0.0,
+        "2035": 0.0
+      }
+    },
+    "capex_pct_revenue": {
+      "label": "Capex / revenue",
+      "source": "team",
+      "values": {
+        "2021": 0.06285,
+        "2022": 0.073907,
+        "2023": 0.089207,
+        "2024": 0.073895,
+        "2025": 0.053498,
+        "2026": 0.046,
+        "2027": 0.05,
+        "2028": 0.052,
+        "2029": 0.054,
+        "2030": 0.055,
+        "2031": 0.056,
+        "2032": 0.057,
+        "2033": 0.058,
+        "2034": 0.059,
+        "2035": 0.06
+      }
+    },
+    "lease_principal_pct_revenue": {
+      "label": "Lease principal paid / revenue",
+      "source": "team",
+      "values": {
+        "2021": 0.012152,
+        "2022": 0.012681,
+        "2023": 0.012009,
+        "2024": 0.013031,
+        "2025": 0.013873,
+        "2026": 0.0139,
+        "2027": 0.0139,
+        "2028": 0.0139,
+        "2029": 0.0139,
+        "2030": 0.0139,
+        "2031": 0.0139,
+        "2032": 0.0139,
+        "2033": 0.0139,
+        "2034": 0.0139,
+        "2035": 0.0139
+      }
+    },
+    "dso": {
+      "label": "Receivable days (DSO)",
+      "source": "team",
+      "values": {
+        "2021": 20.66802,
+        "2022": 19.773969,
+        "2023": 19.412922,
+        "2024": 21.0552,
+        "2025": 20.332871,
+        "2026": 20.3,
+        "2027": 20.3,
+        "2028": 20.3,
+        "2029": 20.3,
+        "2030": 20.3,
+        "2031": 20.3,
+        "2032": 20.3,
+        "2033": 20.3,
+        "2034": 20.3,
+        "2035": 20.3
+      }
+    },
+    "dio": {
+      "label": "Inventory days (DIO)",
+      "source": "team",
+      "values": {
+        "2021": 31.731483,
+        "2022": 32.075443,
+        "2023": 30.271288,
+        "2024": 35.539975,
+        "2025": 30.767528,
+        "2026": 30.8,
+        "2027": 30.8,
+        "2028": 30.8,
+        "2029": 30.8,
+        "2030": 30.8,
+        "2031": 30.8,
+        "2032": 30.8,
+        "2033": 30.8,
+        "2034": 30.8,
+        "2035": 30.8
+      }
+    },
+    "dpo": {
+      "label": "Payable days (DPO)",
+      "source": "team",
+      "values": {
+        "2021": 82.747189,
+        "2022": 83.182051,
+        "2023": 75.882908,
+        "2024": 77.026555,
+        "2025": 70.095643,
+        "2026": 70.1,
+        "2027": 70.1,
+        "2028": 70.1,
+        "2029": 70.1,
+        "2030": 70.1,
+        "2031": 70.1,
+        "2032": 70.1,
+        "2033": 70.1,
+        "2034": 70.1,
+        "2035": 70.1
+      }
+    },
+    "other_ca_pct_revenue": {
+      "label": "Other current assets / revenue",
+      "source": "team",
+      "values": {
+        "2021": 0.034738,
+        "2022": 0.031522,
+        "2023": 0.037944,
+        "2024": 0.040986,
+        "2025": 0.035604,
+        "2026": 0.03563,
+        "2027": 0.035486,
+        "2028": 0.035352,
+        "2029": 0.035224,
+        "2030": 0.0351,
+        "2031": 0.034983,
+        "2032": 0.034872,
+        "2033": 0.034766,
+        "2034": 0.034666,
+        "2035": 0.03457
+      }
+    },
+    "other_cl_pct_revenue": {
+      "label": "Other current liabilities / revenue",
+      "source": "team",
+      "values": {
+        "2021": 0.084388,
+        "2022": 0.083548,
+        "2023": 0.070271,
+        "2024": 0.079195,
+        "2025": 0.074453,
+        "2026": 0.074643,
+        "2027": 0.073628,
+        "2028": 0.072684,
+        "2029": 0.071777,
+        "2030": 0.070906,
+        "2031": 0.070082,
+        "2032": 0.069299,
+        "2033": 0.068555,
+        "2034": 0.067848,
+        "2035": 0.067173
+      }
+    },
+    "tax_rate": {
+      "label": "Effective tax rate",
+      "source": "team",
+      "values": {
+        "2021": 0.334227,
+        "2022": 0.228756,
+        "2023": 0.331358,
+        "2024": 0.326152,
+        "2025": 0.357295,
+        "2026": 0.34,
+        "2027": 0.34,
+        "2028": 0.34,
+        "2029": 0.34,
+        "2030": 0.34,
+        "2031": 0.34,
+        "2032": 0.34,
+        "2033": 0.34,
+        "2034": 0.34,
+        "2035": 0.34
+      }
+    },
+    "interest_rate_debt": {
+      "label": "Interest rate on opening debt",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": 0.064909,
+        "2023": 0.088362,
+        "2024": 0.095795,
+        "2025": 0.077469,
+        "2026": 0.077,
+        "2027": 0.077,
+        "2028": 0.077,
+        "2029": 0.077,
+        "2030": 0.077,
+        "2031": 0.077,
+        "2032": 0.077,
+        "2033": 0.077,
+        "2034": 0.077,
+        "2035": 0.077
+      }
+    },
+    "interest_rate_cash": {
+      "label": "Interest rate on opening cash",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": 0.084591,
+        "2023": 0.065703,
+        "2024": 0.145443,
+        "2025": 0.111332,
+        "2026": 0.1,
+        "2027": 0.1,
+        "2028": 0.1,
+        "2029": 0.1,
+        "2030": 0.1,
+        "2031": 0.1,
+        "2032": 0.1,
+        "2033": 0.1,
+        "2034": 0.1,
+        "2035": 0.1
+      }
+    },
+    "payout_ratio": {
+      "label": "Dividend payout ratio",
+      "source": "team",
+      "values": {
+        "2021": 0.28286,
+        "2022": 0.123449,
+        "2023": 0.223428,
+        "2024": 0.328842,
+        "2025": 0.387676,
+        "2026": 0.38,
+        "2027": 0.38,
+        "2028": 0.38,
+        "2029": 0.38,
+        "2030": 0.38,
+        "2031": 0.38,
+        "2032": 0.38,
+        "2033": 0.38,
+        "2034": 0.38,
+        "2035": 0.38
+      }
+    },
+    "nci_share": {
+      "label": "Non-controlling share of net income",
+      "source": "team",
+      "values": {
+        "2021": 0.08434,
+        "2022": 0.032484,
+        "2023": 0.085392,
+        "2024": 0.106744,
+        "2025": 0.140043,
+        "2026": 0.14,
+        "2027": 0.14,
+        "2028": 0.14,
+        "2029": 0.14,
+        "2030": 0.14,
+        "2031": 0.14,
+        "2032": 0.14,
+        "2033": 0.14,
+        "2034": 0.14,
+        "2035": 0.14
+      }
+    },
+    "net_new_debt": {
+      "label": "Net new long-term debt",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": -4611.0,
+        "2023": 19384.0,
+        "2024": 49040.0,
+        "2025": -5015.0,
+        "2026": 0.0,
+        "2027": 0.0,
+        "2028": 0.0,
+        "2029": 0.0,
+        "2030": 0.0,
+        "2031": 0.0,
+        "2032": 0.0,
+        "2033": 0.0,
+        "2034": 0.0,
+        "2035": 0.0
+      }
+    },
+    "shares_growth": {
+      "label": "Diluted share count growth",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": -0.008597,
+        "2023": -0.006869,
+        "2024": -0.013781,
+        "2025": -0.010722,
+        "2026": 0.0,
+        "2027": 0.0,
+        "2028": 0.0,
+        "2029": 0.0,
+        "2030": 0.0,
+        "2031": 0.0,
+        "2032": 0.0,
+        "2033": 0.0,
+        "2034": 0.0,
+        "2035": 0.0
+      }
+    },
+    "min_cash": {
+      "label": "Minimum cash balance",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": null,
+        "2023": null,
+        "2024": null,
+        "2025": null,
+        "2026": 8500.0,
+        "2027": 8500.0,
+        "2028": 8500.0,
+        "2029": 8500.0,
+        "2030": 8500.0,
+        "2031": 8500.0,
+        "2032": 8500.0,
+        "2033": 8500.0,
+        "2034": 8500.0,
+        "2035": 8500.0
+      }
+    },
+    "seg_north_america_growth": {
+      "label": "North America growth",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": 0.172807,
+        "2023": -0.063888,
+        "2024": -0.016641,
+        "2025": 0.004653,
+        "2026": -0.074,
+        "2027": 0.03,
+        "2028": 0.03,
+        "2029": 0.03,
+        "2030": 0.03,
+        "2031": 0.03,
+        "2032": 0.03,
+        "2033": 0.03,
+        "2034": 0.03,
+        "2035": 0.03
+      }
+    },
+    "seg_mexico_growth": {
+      "label": "Mexico growth",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": 0.195363,
+        "2023": 0.114922,
+        "2024": 0.039735,
+        "2025": 0.024113,
+        "2026": 0.046,
+        "2027": 0.055,
+        "2028": 0.0525,
+        "2029": 0.0525,
+        "2030": 0.0525,
+        "2031": 0.0515,
+        "2032": 0.051,
+        "2033": 0.0505,
+        "2034": 0.05,
+        "2035": 0.05
+      }
+    },
+    "seg_europe_asia_africa_growth": {
+      "label": "Europe, Asia & Africa growth",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": 0.097704,
+        "2023": 0.080163,
+        "2024": 0.110963,
+        "2025": 0.203579,
+        "2026": 0.006,
+        "2027": 0.045,
+        "2028": 0.045,
+        "2029": 0.045,
+        "2030": 0.045,
+        "2031": 0.0445,
+        "2032": 0.044,
+        "2033": 0.0435,
+        "2034": 0.043,
+        "2035": 0.0425
+      }
+    },
+    "seg_latin_america_growth": {
+      "label": "Latin America growth",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": 0.234723,
+        "2023": -0.045924,
+        "2024": 0.088193,
+        "2025": 0.106347,
+        "2026": 0.085,
+        "2027": 0.07,
+        "2028": 0.065,
+        "2029": 0.065,
+        "2030": 0.065,
+        "2031": 0.063,
+        "2032": 0.061,
+        "2033": 0.059,
+        "2034": 0.057,
+        "2035": 0.055
+      }
+    },
+    "seg_eliminations_growth": {
+      "label": "Inter-regional eliminations growth",
+      "source": "team",
+      "values": {
+        "2021": null,
+        "2022": 0.213856,
+        "2023": 0.144037,
+        "2024": 0.121308,
+        "2025": -0.039808,
+        "2026": 0.036,
+        "2027": 0.045,
+        "2028": 0.045,
+        "2029": 0.045,
+        "2030": 0.045,
+        "2031": 0.045,
+        "2032": 0.045,
+        "2033": 0.045,
+        "2034": 0.045,
+        "2035": 0.045
+      }
+    }
+  },
+  "valuation": {
+    "wacc": 0.103233,
+    "terminal_growth": 0.0425,
+    "exit_multiple": 6.0,
+    "ev_gordon": 365246.620874,
+    "ev_exit": 379350.402062,
+    "price_gordon": 39.481483,
+    "price_exit": 43.084454,
+    "share_price": 58.6,
+    "upside_gordon": -0.259207,
+    "upside_exit": -0.26477,
+    "target_12m_gordon": 43.410489,
+    "dps_next": 1.181339,
+    "tv_ronic": 0.178971,
+    "de_market": 0.746062,
+    "tv_share_gordon": 0.547039,
+    "implied_exit_multiple": 5.604397,
+    "implied_g_exit": 0.046298,
+    "implied_g": 0.058377,
+    "price_comps_ev_ebitda": 71.8176,
+    "price_comps_pe": 36.434973
+  },
+  "football": [
+    {
+      "method": "DCF - Gordon (sensitivity range)",
+      "low": 13.796191,
+      "high": 113.220889
+    },
+    {
+      "method": "DCF - exit multiple +/- 1.0x",
+      "low": 33.976919,
+      "high": 52.191989
+    },
+    {
+      "method": "Comps - EV / EBITDA (peer range)",
+      "low": 32.55148,
+      "high": 150.455456
+    },
+    {
+      "method": "Comps - P / E (peer range)",
+      "low": 27.761443,
+      "high": 61.647229
+    },
+    {
+      "method": "52-week trading range",
+      "low": 53.03,
+      "high": 68.67
+    },
+    {
+      "method": "Current share price",
+      "low": 58.6,
+      "high": 58.6
+    }
+  ],
+  "sensitivity": {
+    "wacc": [
+      0.083233,
+      0.093233,
+      0.103233,
+      0.113233,
+      0.123233
+    ],
+    "growth": [
+      0.0325,
+      0.0375,
+      0.0425,
+      0.0475,
+      0.0525
+    ],
+    "values": [
+      [
+        64.060035,
+        72.319151,
+        82.605902,
+        95.771454,
+        113.220889
+      ],
+      [
+        45.307438,
+        50.543365,
+        56.811354,
+        64.449911,
+        73.963754
+      ],
+      [
+        31.84488,
+        35.37274,
+        39.481483,
+        44.327448,
+        50.128608
+      ],
+      [
+        21.707387,
+        24.192065,
+        27.028021,
+        30.295413,
+        34.100801
+      ],
+      [
+        13.796191,
+        15.6062,
+        17.640406,
+        19.943216,
+        22.571591
+      ]
+    ]
+  },
+  "checks": [
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2021,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2022,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2023,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2024,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2025,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2026,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2027,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2028,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2029,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2030,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2031,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2032,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2033,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2034,
+      "status": "OK"
+    },
+    {
+      "check": "Balance sheet balances (assets = liabilities + equity)",
+      "year": 2035,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2026,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2027,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2028,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2029,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2030,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2031,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2032,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2033,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2034,
+      "status": "OK"
+    },
+    {
+      "check": "Cash-flow closing cash = balance-sheet cash",
+      "year": 2035,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2026,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2027,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2028,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2029,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2030,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2031,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2032,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2033,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2034,
+      "status": "OK"
+    },
+    {
+      "check": "Equity roll-forward (opening + net income - dividends)",
+      "year": 2035,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2026,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2027,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2028,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2029,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2030,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2031,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2032,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2033,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2034,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver balance is not negative",
+      "year": 2035,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2026,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2027,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2028,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2029,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2030,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2031,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2032,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2033,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2034,
+      "status": "OK"
+    },
+    {
+      "check": "Cash at or above the minimum balance",
+      "year": 2035,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2021,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2022,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2023,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2024,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2025,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2026,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2027,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2028,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2029,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2030,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2031,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2032,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2033,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2034,
+      "status": "OK"
+    },
+    {
+      "check": "PP&E stays at or above zero",
+      "year": 2035,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2021,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2022,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2023,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2024,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2025,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2026,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2027,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2028,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2029,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2030,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2031,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2032,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2033,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2034,
+      "status": "OK"
+    },
+    {
+      "check": "Long-term debt stays at or above zero",
+      "year": 2035,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2026,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2027,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2028,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2029,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2030,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2031,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2032,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2033,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2034,
+      "status": "OK"
+    },
+    {
+      "check": "Revolver not drawn (cash flow funds the plan without new borrowing)",
+      "year": 2035,
+      "status": "OK"
+    },
+    {
+      "check": "Total assets tie to the reported figure",
+      "year": 2021,
+      "status": "OK"
+    },
+    {
+      "check": "Total assets tie to the reported figure",
+      "year": 2022,
+      "status": "OK"
+    },
+    {
+      "check": "Total assets tie to the reported figure",
+      "year": 2023,
+      "status": "OK"
+    },
+    {
+      "check": "Total assets tie to the reported figure",
+      "year": 2024,
+      "status": "OK"
+    },
+    {
+      "check": "Total assets tie to the reported figure",
+      "year": 2025,
+      "status": "OK"
+    },
+    {
+      "check": "Net income ties to the reported figure",
+      "year": 2021,
+      "status": "OK"
+    },
+    {
+      "check": "Net income ties to the reported figure",
+      "year": 2022,
+      "status": "OK"
+    },
+    {
+      "check": "Net income ties to the reported figure",
+      "year": 2023,
+      "status": "OK"
+    },
+    {
+      "check": "Net income ties to the reported figure",
+      "year": 2024,
+      "status": "OK"
+    },
+    {
+      "check": "Net income ties to the reported figure",
+      "year": 2025,
+      "status": "OK"
+    },
+    {
+      "check": "Revenue segments add up to revenue",
+      "year": 2021,
+      "status": "OK"
+    },
+    {
+      "check": "Revenue segments add up to revenue",
+      "year": 2022,
+      "status": "OK"
+    },
+    {
+      "check": "Revenue segments add up to revenue",
+      "year": 2023,
+      "status": "OK"
+    },
+    {
+      "check": "Revenue segments add up to revenue",
+      "year": 2024,
+      "status": "OK"
+    },
+    {
+      "check": "Revenue segments add up to revenue",
+      "year": 2025,
+      "status": "OK"
+    },
+    {
+      "check": "WACC is above terminal growth",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Terminal growth at or below long-term nominal GDP growth",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Terminal value is below 75% of enterprise value (Gordon)",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "WACC exceeds terminal growth by at least 2 points",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Gordon value per share is positive",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Exit-multiple value per share is positive",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Exit multiple implied by Gordon is at least half the exit multiple input",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Exit multiple implied by Gordon is at most twice the exit multiple input",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Excel matches the Python value at build: Total assets (stale if inputs are edited in Excel - rebuild)",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Excel matches the Python value at build: Net income to shareholders (stale if inputs are edited in Excel - rebuild)",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Excel matches the Python value at build: Closing cash (stale if inputs are edited in Excel - rebuild)",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Excel matches the Python value at build: WACC (stale if inputs are edited in Excel - rebuild)",
+      "year": null,
+      "status": "OK"
+    },
+    {
+      "check": "Excel matches the Python value at build: Value per share today - Gordon (stale if inputs are edited in Excel - rebuild)",
+      "year": null,
+      "status": "OK"
+    }
+  ],
+  "warnings": []
+}

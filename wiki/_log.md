@@ -18,3 +18,12 @@
 
 ## [2026-10-14] compile | audit of volume disclosure across 237 BMV, release and integrated-report documents (13 batches)
 - wrote: `bimbo-volume-disclosure-audit`
+
+## [2026-10-16] compile | Capital IQ AI output (Prompt 1): peer leverage, multiples, operations and a discrepancy register
+- wrote: `peer-leverage-capiq-2026-10`, `peer-multiples-and-operations-capiq-2026-10`, `capiq-data-discrepancies-2026-10`
+- updated: `bimbo-capital-structure-and-debt`, `bimbo-cross-source-connections`, `_master-index`
+- flagged: `bimbo-cross-source-connections` superseded by `peer-multiples-and-operations-capiq-2026-10` (Flowers EBITDA margin)
+
+## [2026-10-17] compile | Capital IQ AI outputs (Prompts 2 and 3): debt and hedging, CEO and guidance, climate and commodities, WACC inputs, consensus, ownership and deals
+- wrote: `bimbo-debt-hedging-and-leverage-target-capiq-2026-10`, `bimbo-ceo-rodriguez-bas-and-guidance-capiq-2026-10`, `bimbo-climate-metrics-capiq-2026-10`, `bimbo-wacc-market-inputs-capiq-2026-10`, `bimbo-consensus-dashboard-capiq-2026-10`, `bimbo-ownership-and-deals-capiq-2026-10`
+- updated: `peer-leverage-capiq-2026-10`, `capiq-data-discrepancies-2026-10`, `bimbo-capital-structure-and-debt`, `bimbo-ceo-and-management-changes`, `_master-index`

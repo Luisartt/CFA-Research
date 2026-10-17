@@ -1,0 +1,136 @@
+# model/drivers.yaml - written by the forecast skill workflow (assistant proposal), read by the model engine.
+# One value per forecast year (FY2026E-FY2035E): FY2026-FY2030 explicit, FY2031-FY2035 fade to steady state.
+# tag: guidance | assumption | sourced.  pillar: team thesis pillars as of 2026-10-16 -
+#   "1" = climate (input costs / wheat), "2" = new CEO (productivity, execution), "3" = debt management (hold).
+# STORY DRIVERS ARE PROPOSALS ONLY: segment growth, gross_margin, opex_pct_revenue and capex_pct_revenue must be
+# confirmed or changed by the team (AGENTS.md: the team decides the 3-5 assumptions that carry the story).
+# Until the team sets its variant view, this forecast is close to guidance/consensus for FY2026 and to a neutral
+# fade afterwards.
+forecast_years: 10
+revenue_segments:
+  - {key: north_america, label: North America}
+  - {key: mexico, label: Mexico}
+  - {key: europe_asia_africa, label: "Europe, Asia & Africa"}
+  - {key: latin_america, label: Latin America}
+  - {key: eliminations, label: Inter-regional eliminations}
+drivers:
+  seg_north_america_growth:
+    values: [-0.074, 0.030, 0.030, 0.030, 0.030, 0.030, 0.030, 0.030, 0.030, 0.030]
+    tag: assumption
+    rationale: "STORY DRIVER (proposal). FY26 = 1H26 actual (84,901, -11.3% in MXN; ex-FX +0.7%/+1.3% in 1Q/2Q26) plus 2H26 at -3.5% (ex-FX +1.5%, peso about -5% vs 2H25) [calc] wiki quarterly trend. FY27+: USD growth ~+1.5% (category volume -2% to -4%, price/mix +1-2%, share gains claimed by management) plus ~1.5%/yr MXN depreciation (inflation differential) [assumption]. Alternatives in valuation/BIMBOA_DCF_v3.xlsx 'Scenarios': PPP at the 3%/2% inflation targets (0.98%/yr; Gordon -2.18 per share) or at Banxico survey inflation (1.67%/yr; +0.75); Sep-2026 CPI was 3.45% in Mexico vs 3.74% in the US [sourced] macro/macro-view.yaml."
+    pillar: "2"
+  seg_mexico_growth:
+    values: [0.046, 0.055, 0.0525, 0.0525, 0.0525, 0.0515, 0.051, 0.0505, 0.050, 0.050]
+    tag: assumption
+    rationale: "STORY DRIVER (proposal). FY26 = 1H26 +4.6% and 2H26 +4.7% (1Q26 +4.5%, 2Q26 +4.7%) [calc]. FY27+: packaged bakery market ~3.5% value CAGR 2024-29E (RA25 p.111) plus price/mix with ~3.5-3.8% inflation; fades to 5.0% (long-run nominal) [assumption]."
+    pillar: "2"
+  seg_europe_asia_africa_growth:
+    values: [0.006, 0.045, 0.045, 0.045, 0.045, 0.0445, 0.044, 0.0435, 0.043, 0.0425]
+    tag: assumption
+    rationale: "Proposal. FY26 = 1H26 +1.3% in MXN (ex-FX +12.6%/+8.4% incl. 2025 bolt-ons) with flat 2H26 after FX [calc]. FY27+: organic ~4.5% (European market 3.4%, Eastern Europe 6.6% CAGR per RA25 p.108), no new M&A [assumption]."
+    pillar: ""
+  seg_latin_america_growth:
+    values: [0.085, 0.070, 0.065, 0.065, 0.065, 0.063, 0.061, 0.059, 0.057, 0.055]
+    tag: assumption
+    rationale: "Proposal. FY26 = 1H26 +7.1% plus 2H26 ~+10% (Wickbold consolidated from Oct-2025) [calc]. FY27+: LatAm bakery 5.5% CAGR (RA25 p.108) plus Wickbold synergies, fading to 5.5% [assumption]."
+    pillar: ""
+  seg_eliminations_growth:
+    values: [0.036, 0.045, 0.045, 0.045, 0.045, 0.045, 0.045, 0.045, 0.045, 0.045]
+    tag: assumption
+    rationale: "Mechanical: inter-regional eliminations grow with regional sales (1H26 eliminations -8,545 vs -8,202 in 1H25, +4.2%) [calc]."
+    pillar: ""
+  gross_margin:
+    values: [0.524, 0.520, 0.523, 0.525, 0.525, 0.525, 0.525, 0.525, 0.525, 0.525]
+    tag: assumption
+    rationale: "STORY DRIVER (proposal; climate pillar). History 53.4/51.5/51.4/52.6/52.3% (FY21-25, model mapping). 1H26 ~52.6% on the model basis (CIQ 52.9% less the 0.33pp mapping gap) [calc]. CBOT wheat 2026 YTD average +17% vs 2025 and gross margin follows wheat with ~1-year lag (r = -0.74, n = 9; wiki bimbo-climate-metrics-capiq-2026-10) -> FY27 dip of 40bp, recovery to 52.5% [assumption]."
+    pillar: "1"
+  opex_pct_revenue:
+    values: [0.436, 0.434, 0.433, 0.4325, 0.4305, 0.4305, 0.4305, 0.4305, 0.4305, 0.4305]
+    tag: assumption
+    rationale: "STORY DRIVER (proposal; new-CEO pillar). Set so model EBITDA margin = 14.7% FY26 (FY25 13.8% + ~90bp, mid of the +70-120bp guidance raised on 2026-07-23 [guidance] 2Q26 call), 14.5% FY27 (wheat lag), then +20bp/yr productivity to 15.3% by FY30. Includes restructuring at a run-rate (FY24 6,293; FY25 3,908). History 43.8/38.0/42.5/44.5/44.4%."
+    pillar: "2"
+  da_pct_revenue:
+    values: [0.059, 0.059, 0.059, 0.0585, 0.0585, 0.0585, 0.0585, 0.0585, 0.0585, 0.0585]
+    tag: assumption
+    rationale: "Mechanical: FY24-FY25 5.65-5.82% incl. right-of-use depreciation (6,142 in FY25); held near 5.85-5.9% as capex normalises [calc] data/financials.csv."
+    pillar: ""
+  amort_pct_revenue:
+    values: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    tag: assumption
+    rationale: "Intangible amortisation not split out in data/financials.csv; 0 keeps all D&A in the PP&E roll-forward. No effect on FCFF or EBITDA."
+    pillar: ""
+  capex_pct_revenue:
+    values: [0.046, 0.050, 0.052, 0.054, 0.055, 0.056, 0.057, 0.058, 0.059, 0.060]
+    tag: assumption
+    rationale: "STORY DRIVER (proposal; debt/FCF pillar). FY26 = guidance US$1.0-1.2bn (cut on 2026-07-23 [guidance]) at ~Ps 17.6/US$ = ~Ps 19.4bn = 4.6% of revenue; FY27-28 ~5.0-5.2% (consensus capex US$1.21-1.24bn [sourced] CIQ 2026-10-17). Rises to 6.0% by FY35 [assumption] (history 6.3/7.4/8.9/7.4/5.4%, FY21-25 average 7.0%). On the published basis (lease book grows with revenue) total terminal net reinvestment is 29% of NOPAT and the return on new capital implied by the terminal value is 14.6% (engine basis 17.9%); each 50 bp of capex = Ps 9.44 per share (valuation/BIMBOA_DCF_v3.xlsx, Levers). Benchmarks [calc] valuation/BIMBOA_PeerAnalysis_v3.xlsx: peers' consensus capex / revenue 3.66/3.82/3.79% (FY1-FY3), Bimbo consensus 5.16/5.02/4.90% (FY2026-28); the company's impairment tests assume 3.3-4.3% (RA25 p.265, continuity capex). The terminal level is the team's decision (valuation/valuation.md section 11)."
+    pillar: "3"
+  lease_principal_pct_revenue:
+    values: [0.0139, 0.0139, 0.0139, 0.0139, 0.0139, 0.0139, 0.0139, 0.0139, 0.0139, 0.0139]
+    tag: assumption
+    rationale: "Mechanical: FY25 lease principal 5,923 / revenue 426,952 = 1.39% (FY23-25: 1.20/1.30/1.39%) [calc]. Principal is derived (payments 8,060 less lease interest 2,137) and tagged calc in data/financials.csv: the filings do not split the cash interest inside lease payments (data/adjustments.md #6). The engine also uses it as new leases, which keeps the lease liability flat; the published basis in valuation/BIMBOA_DCF_v3.xlsx adds the growth in the lease liability (held at the FY2025 8.15% of revenue)."
+    pillar: ""
+  dso:
+    values: [20.3, 20.3, 20.3, 20.3, 20.3, 20.3, 20.3, 20.3, 20.3, 20.3]
+    tag: assumption
+    rationale: "Mechanical: FY25 20.3 days (FY21-25 range 19.4-21.1) on trade receivables only [calc]."
+    pillar: ""
+  dio:
+    values: [30.8, 30.8, 30.8, 30.8, 30.8, 30.8, 30.8, 30.8, 30.8, 30.8]
+    tag: assumption
+    rationale: "Mechanical: FY25 30.8 days on cost of sales (FY21-25 range 30.3-35.5) [calc]."
+    pillar: ""
+  dpo:
+    values: [70.1, 70.1, 70.1, 70.1, 70.1, 70.1, 70.1, 70.1, 70.1, 70.1]
+    tag: assumption
+    rationale: "Mechanical: FY25 70.1 days on cost of sales; held flat, not rebuilt to the 75-83 days of FY21-24 (rising payables would flatter cash flow) [calc]."
+    pillar: ""
+  other_ca_pct_revenue:
+    values: [0.03563, 0.035486, 0.035352, 0.035224, 0.0351, 0.034983, 0.034872, 0.034766, 0.034666, 0.03457]
+    tag: assumption
+    rationale: "Mechanical, operating part only grows: FY25 other current assets 15,201 = operating 13,796 (other receivables 11,998 + prepayments 1,798; 3.23% of revenue) + non-operating 1,405 (derivatives 60, collateral 459, held-for-sale 886) held flat in pesos so they create no FCFF [calc] data/adjustments.md working-capital table (Codex audit 2026-10-17, finding 1)."
+    pillar: ""
+  other_cl_pct_revenue:
+    values: [0.074643, 0.073628, 0.072684, 0.071777, 0.070906, 0.070082, 0.069299, 0.068555, 0.067848, 0.067173]
+    tag: assumption
+    rationale: "Mechanical, operating part only grows: FY25 other current liabilities 31,788 = operating 21,889 (related-party payables 1,154 + PTU 1,592 + operating accruals 19,143; 5.13% of revenue) + non-operating 9,899 (income and other taxes, tax contributions, accrued interest, derivatives) held flat in pesos [calc] data/adjustments.md #9 and working-capital table (Codex audit finding 1)."
+    pillar: ""
+  tax_rate:
+    values: [0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34, 0.34]
+    tag: assumption
+    rationale: "Effective (not marginal) rate: FY23-25 33.1/32.6/35.7%, 1H26 ~37% [calc]; statutory 30% plus non-deductibles and loss-making units. The WACC uses the 30% marginal rate separately."
+    pillar: ""
+  interest_rate_debt:
+    values: [0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077, 0.077]
+    tag: assumption
+    rationale: "Mechanical: FY25 interest expense 14,464 / opening debt incl. leases 186,706 = 7.75% [calc]; consistent with the 6.5% average cost of financial debt plus lease interest."
+    pillar: ""
+  interest_rate_cash:
+    values: [0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10, 0.10]
+    tag: assumption
+    rationale: "Mechanical: FY23-25 interest income / opening cash 6.6/14.5/11.1% (average 10.7%) [calc]."
+    pillar: ""
+  payout_ratio:
+    values: [0.38, 0.38, 0.38, 0.38, 0.38, 0.38, 0.38, 0.38, 0.38, 0.38]
+    tag: assumption
+    rationale: "Proposal (debt pillar, hold): FY25 38.8%, FY24 32.9%; CFO said dividends and buybacks stay 'to the same extent' (2026-07-23 call) [guidance]."
+    pillar: "3"
+  nci_share:
+    values: [0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.14, 0.14]
+    tag: assumption
+    rationale: "Mechanical: FY25 14.0%, 1H26 14.6% (mostly consolidated BBU independent-operator structured entities) [calc]. Their market value is treated in valuation.yaml debt-like items."
+    pillar: ""
+  net_new_debt:
+    values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    tag: assumption
+    rationale: "Proposal (debt pillar, hold): gross debt held flat; leverage falls with EBITDA growth. Management comfort range 2.0-2.5x net debt / EBITDA ex-IFRS 16 (reached 2.5x at Jun-26)."
+    pillar: "3"
+  shares_growth:
+    values: [0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+    tag: assumption
+    rationale: "Mechanical: no buyback programme size announced; 1H26 weighted shares flat vs FY25 [calc]."
+    pillar: ""
+  min_cash:
+    values: [8500, 8500, 8500, 8500, 8500, 8500, 8500, 8500, 8500, 8500]
+    tag: assumption
+    rationale: "Mechanical: FY25 closing cash 8,535 [sourced] data/financials.csv."
+    pillar: ""

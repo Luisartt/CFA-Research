@@ -1,7 +1,3 @@
-* text=auto eol=lf
-*.xlsx binary
-*.docx binary
-*.pdf binary
 # Append-only logs: keep both sides on merge (no conflicts when teammates log in parallel)
 docs/context/ai-use-log.md merge=union
 docs/context/thesis-journal.md merge=union

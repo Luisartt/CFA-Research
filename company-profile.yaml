@@ -5,7 +5,7 @@ company:
   ticker: "BIMBOA"
   exchange: "BMV"          # BMV | BIVA | B3 | BCS | BVC | BVL | BYMA | NYSE | NASDAQ
   country: "Mexico"
-  sector: "Consumer Staples — Packaged Foods"
+  sector: "Consumer Staples - Packaged Food & Bakery"
   issuer_type: "non_financial"    # non_financial | bank | insurer | reit
 accounting:
   framework: "ifrs"        # ifrs | us_gaap | nif
@@ -19,16 +19,16 @@ report:
   report_deadline: "2026-11-04"      # YYYY-MM-DD
   presentation_date: "2026-12-08"  # YYYY-MM-DD
 team:
-  - name: "Luis Arturo Romo"
-    role: "Captain"
-  - name: "Diego Benavides"
-    role: "ESG"
-  - name: "Alexa Zaldivar"
-    role: "Financials"
-  - name: "Jorge Alejandro"
-    role: "Risks"
-  - name: "Carolina del Rosario"
-    role: "Business overview"
+  - name: "Luis Arturo Romo Alba"
+    role: "captain (all)"
+  - name: "Diego Benavides Pro"
+    role: "not assigned yet"
+  - name: "Alexa Garcia Saldivar"
+    role: "not assigned yet"
+  - name: "Jorge Alejandro Gaytan"
+    role: "not assigned yet"
+  - name: "Carolina del Rosario Benites"
+    role: "not assigned yet"
 compliance:
   public_information_only_confirmed: true
-created: "2026-10-14"
+created: "2026-09-27"

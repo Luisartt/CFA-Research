@@ -1,0 +1,1333 @@
+# valuation/inputs/wacc_inputs.yaml - draft v1 (2026-10-17). Built from one Python dict that also writes wacc_inputs.md.
+# Every value carries tag, source and as_of. Calc items carry their formula. Proposals for the team, not decisions.
+meta:
+  title: WACC inputs - Grupo Bimbo (BIMBOA), valuation date 2026-10-16
+  version: draft v1
+  prepared: 2026-10-17 (missing-data agent)
+  currency: MXN (local route); US$ shown for peers
+  routes:
+    L: 'local MXN: rf = M-Bono 10y, CRP 0'
+    D: 'Damodaran-consistent: rf = M-Bono 10y - Mexico default spread; ERP + lambda CRP'
+  status: proposals for the team; not decisions
+  tags:
+  - sourced
+  - guidance
+  - assumption
+  - calc
+  - unverified
+a_market_data_at_the_valuation_date:
+  title: Market data at the valuation date (2026-10-16)
+  items:
+  - id: A1
+    label: BMV close, BIMBO A (last close found for valuation date)
+    value: 58.6
+    unit: MXN per share
+    tag: sourced
+    source: 'investing.com BIMBOA historical data (row ''Oct 16, 2026: 58.600 MXN'', delayed quote) [WEB-INV]; Yahoo BIMBOA.MX monthly table row ''Oct 16, 2026: 58.60'' [WEB-YHH]'
+    as_of: '2026-10-16'
+    note: Two web sources agree. The official BMV closing file was not retrieved; check against it before the report.
+  - id: A2
+    label: Previous close (15-Oct-2026)
+    value: 57.97
+    unit: MXN per share
+    tag: sourced
+    source: investing.com BIMBOA historical data [WEB-INV]
+    as_of: '2026-10-15'
+    note: Equals Yahoo's implied previous close (58.60 minus the +0.63 change shown on the key-statistics page).
+  - id: A3
+    label: Last CIQ close in the files (fallback anchor)
+    value: 55.41
+    unit: MXN per share
+    tag: sourced
+    source: data/capitaliq/corporate_issuance.csv, equity_listings 'Last Price' [S-CORP]
+    as_of: '2026-10-06'
+    note: Use only if the 16-Oct close is not accepted. Also in cross_holdings.csv [S-XH].
+  - id: A4
+    label: 52-week high (BMV)
+    value: 68.67
+    unit: MXN per share
+    tag: sourced
+    source: data/capitaliq/corporate_issuance.csv '52 Week High' [S-CORP]
+    as_of: '2026-10-06'
+    note: CIQ window as of 6-Oct; not re-verified for 16-Oct.
+  - id: A5
+    label: 52-week low (BMV)
+    value: 53.03
+    unit: MXN per share
+    tag: sourced
+    source: data/capitaliq/corporate_issuance.csv '52 Week Low' [S-CORP]
+    as_of: '2026-10-06'
+  - id: A6
+    label: 'FX: US$ per MXN (CIQ pricing rate)'
+    value: 0.05569
+    unit: US$ per MXN
+    tag: sourced
+    source: data/capitaliq/capiq-ai-prompt1_2026-10-16.md, header note 'MXN converted at 0.055690 USD/MXN' [S-PR1]
+    as_of: 2026-10-15/16 (CIQ pricing)
+    note: Banxico FIX for 16-Oct not retrieved; the CIQ rate is used for all peer conversions.
+  - id: A7
+    label: 'FX: MXN per US$'
+    value: 17.957
+    unit: MXN per US$
+    tag: calc
+    source: 1 / A6
+    as_of: '2026-10-16'
+    formula: 1 / FX (A6)
+  - id: A8
+    label: Shares outstanding, latest sourced count (net of treasury)
+    value: 4294943715
+    unit: shares
+    tag: sourced
+    source: wiki/Valuation/bimbo-agm-dividends-and-buybacks.md section 4, BMV daily 'Shares Outstanding' notice [W-ACT]
+    as_of: '2026-07-29'
+    note: No later notice is in the sources. CIQ's 4,296,284,215 (06-Oct) equals the 30-Jun figure and is one notice stale. The change is 0.03 percent.
+  - id: A9
+    label: Market capitalisation (valuation date)
+    value: 251683.7
+    unit: MXN m
+    tag: calc
+    source: A1 x A8 / 1,000,000
+    as_of: 2026-10-16 (price); shares 2026-07-29
+    formula: A1 x A8 / 1,000,000
+  - id: A10
+    label: Market capitalisation (valuation date), US$
+    value: 14016.3
+    unit: US$ m
+    tag: calc
+    source: A9 x A6
+    as_of: '2026-10-16'
+    formula: A9 x A6
+  - id: A11
+    label: 'Memo: CIQ market cap at 06-Oct (55.41 x 4,296,284,215)'
+    value: 238057.1
+    unit: MXN m
+    tag: sourced
+    source: data/capitaliq/cross_holdings.csv 'Market Capitalization (Mex$M)' [S-XH]
+    as_of: '2026-10-06'
+  - id: A12
+    label: 'Memo: 52-week range is CIQ, not Investing or Yahoo'
+    value: not verified for 16-Oct
+    unit: text
+    tag: unverified
+    source: CIQ corporate_issuance.csv [S-CORP]
+    as_of: '2026-10-06'
+b_shares:
+  title: 'Shares: issued, treasury, outstanding and weighted average'
+  items:
+  - id: B1
+    label: Shares outstanding, 31-Dec-2025 (net of treasury)
+    value: 4304744119
+    unit: shares
+    tag: sourced
+    source: wiki/Company/bimbo-governance-and-ownership.md (RA25 p.308, shares in circulation) [W-GOV]
+    as_of: '2025-12-31'
+  - id: B2
+    label: Treasury shares held at 31-Dec-2025 (cancelled 30-Apr-2026)
+    value: 22738214
+    unit: shares
+    tag: sourced
+    source: wiki/Valuation/bimbo-agm-dividends-and-buybacks.md section 3 (AGM 30-Apr-2026, CONV-2026 p.1) [W-ACT]
+    as_of: '2025-12-31'
+  - id: B3
+    label: Issued shares before the 30-Apr-2026 cancellation
+    value: 4327482333
+    unit: shares
+    tag: calc
+    source: B1 + B2 (matches the 30-Apr-2025 register count 4,327,482,333 in W-GOV)
+    as_of: '2025-12-31'
+    formula: B1 + B2
+  - id: B4
+    label: Treasury shares cancelled at the 30-Apr-2026 AGM
+    value: 22738214
+    unit: shares
+    tag: sourced
+    source: W-ACT section 3
+    as_of: '2026-04-30'
+    note: Cancelling treasury shares reduces issued capital only. Outstanding shares do not change, so B4 is not deducted from outstanding again.
+  - id: B5
+    label: Issued shares after the cancellation (bylaw Article 6)
+    value: 4304744119
+    unit: shares
+    tag: calc
+    source: B3 - B4 (matches bylaw Article 6 in wiki/Risks-ESG/bimbo-governance-checklist-latam.md)
+    as_of: '2026-04-30'
+    formula: B3 - B4
+  - id: B6
+    label: Treasury shares at 30-Jun-2026 (bought in 1H26)
+    value: 8459904
+    unit: shares
+    tag: sourced
+    source: BMV Jun-26 p.25 via wiki/Financials/bimbo-guidance-2026.md [W-GUIDE]
+    as_of: '2026-06-30'
+  - id: B7
+    label: Shares outstanding at 30-Jun-2026
+    value: 4296284215
+    unit: shares
+    tag: calc
+    source: B5 - B6; ties to BMV Jun-26 p.96 and to CIQ Securities Summary [S-CORP]
+    as_of: '2026-06-30'
+    formula: B5 - B6
+  - id: B8
+    label: Treasury shares at 29-Jul-2026
+    value: 9800404
+    unit: shares
+    tag: calc
+    source: B5 - A8 (= 8,459,904 + July buybacks 1,340,500)
+    as_of: '2026-07-29'
+    formula: B5 - A8
+  - id: B9
+    label: Shares bought back in July 2026 (no cash amount disclosed)
+    value: 1340500
+    unit: shares
+    tag: calc
+    source: B7 - A8, from BMV daily notices [W-ACT section 4]
+    as_of: '2026-07-29'
+    formula: B7 - A8
+  - id: B10
+    label: Weighted-average diluted shares, FY2025
+    value: 4310531
+    unit: thousand shares
+    tag: sourced
+    source: wiki/Financials/bimbo-income-statement-fy21-fy25.md table (FY25 4,310,531) [W-IS]; EEFF25 p.13 via bimbo-ifrs-adjustments.md
+    as_of: FY2025
+    note: CIQ quarterly FY25 rows average 4,335.0 m, which does not reconcile (see B13). Use the company figure.
+  - id: B11
+    label: Weighted-average shares, 1H26 (time-weighted outstanding)
+    value: 4303271.7
+    unit: thousand shares
+    tag: calc
+    source: Step-function average of the 2026 BMV notices (B1 and A8 series) over 1-Jan to 30-Jun-2026, 181 days
+    as_of: 1H26
+    formula: sum(outstanding_i x days_i) / 181, from the BMV notices in W-ACT section 4
+    note: 'The company''s own 1H26 figure is not in the wiki. Diluted = basic here: CIQ shows identical basic and diluted counts [assumption].'
+  - id: B12
+    label: Buybacks, 1H26 (shares)
+    value: 8459904
+    unit: shares
+    tag: sourced
+    source: BMV Jun-26 p.25 and p.18 via W-GUIDE
+    as_of: 1H26
+  - id: B13
+    label: 'Memo: CIQ quarterly weighted diluted shares (not used)'
+    value: FQ1-26 4,297.5 m; FQ2-26 4,316.1 m; FY25 quarters 4,354.1 / 4,347.4 / 4,312.7 / 4,325.8 m
+    unit: text
+    tag: sourced
+    source: data/capitaliq/income_statement.csv 'Weighted Avg. Diluted Shares Out.' [S-IS]
+    as_of: 2025-2026
+    note: Quarterly CIQ counts do not reconcile with the outstanding series or with the company FY25 figure (4,310.5 m). Flagged, not used.
+c_2026_dividend_and_buybacks:
+  title: 2026 dividend and buybacks (reconciliation to the valuation-date bridge)
+  items:
+  - id: C1
+    label: Dividend per share paid in 2026
+    value: 1.075
+    unit: MXN per share
+    tag: sourced
+    source: 'AGM 30-Apr-2026 (W-ACT section 3); CIQ dividends table [S-CORP]; Yahoo history row ''May 12, 2026: 1.075 Dividend'' [WEB-YHH]'
+    as_of: 2026-05-12 (ex-date)
+  - id: C2
+    label: Ex-dividend date
+    value: '2026-05-12'
+    unit: date
+    tag: sourced
+    source: CIQ dividends table [S-CORP]; Yahoo history [WEB-YHH]
+    as_of: '2026-05-12'
+  - id: C3
+    label: Payment date
+    value: '2026-05-13'
+    unit: date
+    tag: sourced
+    source: CIQ dividends table [S-CORP]; wiki/Company/ciq-corporate-issuance-history.md section 6 [W-CIQDIV]
+    as_of: '2026-05-13'
+  - id: C4
+    label: Total dividend paid in 2026
+    value: 4626.7
+    unit: MXN m
+    tag: sourced
+    source: BMV Jun-26 p.21 via W-CIQDIV section 6
+    as_of: '2026-05-13'
+  - id: C5
+    label: 'Check: implied shares receiving the dividend'
+    value: 4303.9
+    unit: m shares
+    tag: calc
+    source: C4 / C1 (ties to about 4,304.7 m outstanding)
+    as_of: '2026-05-12'
+    formula: C4 / C1
+  - id: C6
+    label: 'Conflicting DPS: MXN 1.75 per share'
+    value: not used
+    unit: text
+    tag: unverified
+    source: Stated in wiki/Thesis/bimbo-catalyst-calendar-facts.md and W-GUIDE
+    as_of: '2026-04-30'
+    note: 1.75 x 4,304.7 m = MXN 7,533 m, not 4,626.7 m. It would need 2,644 m shares, so it is rejected.
+  - id: C7
+    label: Buybacks, 1H26 (cash)
+    value: 496
+    unit: MXN m
+    tag: sourced
+    source: W-GUIDE (BMV Jun-26 p.18, p.25)
+    as_of: 1H26
+  - id: C8
+    label: Returns to shareholders, 1H26 (dividend + buybacks, calc)
+    value: 5122.7
+    unit: MXN m
+    tag: calc
+    source: C4 + C7
+    as_of: 1H26
+    formula: C4 + C7
+  - id: C9
+    label: Returns to shareholders, 1H26 (company release)
+    value: 5300
+    unit: MXN m
+    tag: sourced
+    source: 2Q26 release p.1 as quoted in W-ACT section 4 ('MXN 5.3bn')
+    as_of: 1H26
+  - id: C10
+    label: Gap between C9 and C8 (unexplained)
+    value: 177.3
+    unit: MXN m
+    tag: calc
+    source: C9 - C8
+    as_of: 1H26
+    note: Not reconciled. Do not force it; ask IR or read the 2Q26 cash-flow statement.
+  - id: C11
+    label: Shares bought back in 2026 to 29-Jul (BMV notices)
+    value: 9800404
+    unit: shares
+    tag: calc
+    source: B1 - A8 (treasury purchases only; the April cancellation is not counted again)
+    as_of: '2026-07-29'
+    formula: B1 - A8
+d_capital_structure:
+  title: Capital structure (filings; MXN m unless stated)
+  items:
+  - id: D1
+    label: Capital structure at 31-Dec-2025 and 30-Jun-2026
+    columns:
+    - Item
+    - 31-Dec-2025
+    - 30-Jun-2026
+    - Tag
+    - Source
+    rows:
+    - - Total debt excl. leases
+      - 153663.0
+      - 153660.0
+      - sourced
+      - EEFF25 p.52; BMV Jun-26 p.52 [W-CAP section 1]
+    - - Cash and equivalents
+      - 8535.0
+      - 16563.0
+      - sourced
+      - RA25 p.16; 2Q26 p.8 [W-CAP section 1]
+    - - Net debt excl. leases (company)
+      - 145128.0
+      - 137097.0
+      - sourced
+      - 2Q26 release p.6 [W-CAP section 1]
+    - - Lease liabilities (IFRS 16)
+      - 34790.0
+      - 33361.0
+      - sourced
+      - EEFF25 p.43 (7,076 + 27,714); 2Q26 p.8 (7,113 + 26,248)
+    - - Total debt incl. leases
+      - 188453.0
+      - 187021.0
+      - calc
+      - debt excl. leases + leases
+    - - Non-controlling interest
+      - 743.0
+      - 722.0
+      - sourced
+      - RA25 p.18; 2Q26 p.7-8 [W-BS]
+    - - Investments in associates
+      - 7018.0
+      - 6497.0
+      - sourced
+      - 2Q26 p.7-8 table in W-BS (candidate non-operating asset)
+    - - Employee benefits, non-current
+      - 6507.0
+      - 6202.0
+      - sourced
+      - W-BS table (candidate debt-like item)
+    - - Defined-benefit net deficit (PBO less plan assets)
+      - 1524.0
+      - n/d
+      - sourced
+      - CIQ pension file, ties to IA25-EEFF p.77-78 [W-PEN]
+    - - MEPP exit liability
+      - 985.0
+      - n/d
+      - sourced
+      - EEFF25 note 19, p.79-80 (via W-BS section 5)
+    - - Equity attributable to controlling shareholders
+      - 119512.0
+      - 115272.0
+      - sourced
+      - EEFF25 p.15; 2Q26 p.8
+    - - Net debt / Adj. EBITDA, ex-IFRS 16 (company)
+      - 2.7x
+      - 2.5x
+      - sourced
+      - RA25 p.18; 2Q26 p.6
+    - - Average cost of debt (company; mixed currencies)
+      - 6.3%
+      - 6.5%
+      - sourced
+      - RA25 p.135; 2Q26 p.6
+    note: '''n/d'' = not in the wiki sources for that date. Leases are excluded from net debt but included in the WACC debt weight.'
+  - id: D2
+    label: Market debt / equity, incl. leases (Jun-26 debt, valuation-date market cap)
+    value: 0.7431
+    unit: x
+    tag: calc
+    source: (153,660 + 33,361) / A9
+    as_of: 2026-10-16 / 2026-06-30
+    formula: (DEBT_EX + LEASE) / A9
+  - id: D3
+    label: Market debt / equity, excl. leases
+    value: 0.6105
+    unit: x
+    tag: calc
+    source: 153,660 / A9
+    as_of: 2026-10-16 / 2026-06-30
+    formula: DEBT_EX / A9
+  - id: D4
+    label: Weight of equity E/V (incl. leases)
+    value: 0.5737
+    unit: share
+    tag: calc
+    source: A9 / (A9 + debt incl. leases)
+    as_of: '2026-10-16'
+    formula: E / (E + D)
+  - id: D5
+    label: Weight of debt D/V (incl. leases)
+    value: 0.4263
+    unit: share
+    tag: calc
+    source: 1 - E/V
+    as_of: '2026-10-16'
+    formula: 1 - E/V
+  - id: D6
+    label: 'Memo: CIQ total debt US$10,855m at 17.955 (basis check)'
+    value: 194918.0
+    unit: MXN m
+    tag: calc
+    source: US$10,855m (W-WACC, CIQ 3F pull, Jun-26) x 17.955
+    as_of: '2026-06-30'
+    note: About MXN 7.9 bn above the filings basis (187,021). Different debt definition or FX. Filings used for Bimbo.
+  - id: D7
+    label: Tax rate for Bimbo (statutory Mexico)
+    value: 0.3
+    unit: share
+    tag: sourced
+    source: Damodaran ctryprem 30.00% (Jan-2026); EEFF25 p.56 statutory table [WEB-DCTRY]
+    as_of: 2026-01
+    note: The 3F pull reports a 35.6% effective rate; not used for the WACC.
+e_bimbo_s_own_beta:
+  title: Bimbo's own beta
+  items:
+  - id: E1
+    label: Regression beta (5Y monthly vs IPC, or any window)
+    value: not computed
+    unit: text
+    tag: unverified
+    source: Monthly history for BIMBOA.MX returned only 13 closes (Nov-2025 to Oct-2026) [WEB-YHH]; IPC (^MXX) 13 monthly closes [WEB-YHX]; investing.com snapshot covered June-July only
+    as_of: '2026-10-16'
+    note: A 5-year monthly regression needs 60 returns. No return series in data/capitaliq. Not computed; one attempt only, per instruction.
+  - id: E2
+    label: Published Bimbo beta (investing.com overview)
+    value: 0.32
+    unit: x (levered, raw)
+    tag: unverified
+    source: investing.com BIMBOA overview, 'Beta' field 0.32 [WEB-INVB]; FAQ 'As of Oct 17, 2026'; price header 'Closed 16/10'
+    as_of: '2026-10-16'
+    note: Window and benchmark not printed; date of the beta not explicit. Yahoo shows '--' [WEB-YHK]. Used only as option C, which is not a verified regression.
+  - id: E3
+    label: Beta used for Bimbo in the WACC candidates
+    value: derived from peers and industry (section H, I, K)
+    unit: text
+    tag: assumption
+    source: Options A and B in section K
+    as_of: '2026-10-16'
+  - id: E4
+    label: Blume-adjusted Bimbo beta (0.67 x raw + 0.33)
+    value: 0.5444
+    unit: x
+    tag: calc
+    source: E2 (raw published beta)
+    as_of: '2026-10-16'
+    formula: 0.67 x E2 + 0.33
+    note: Used in the sensitivities of K2 (option C, Blume).
+f_rates_sovereign_risk_and_inflation:
+  title: Rates, sovereign risk and inflation
+  items:
+  - id: F1
+    label: M-Bono 10-year yield (local risk-free)
+    value: 9.26
+    unit: '%'
+    tag: sourced
+    source: CIQ rates (3F pull), via W-WACC section 2; verbatim file not yet in raw/
+    as_of: '2026-10-16'
+  - id: F2
+    label: M-Bono 20-year yield
+    value: 9.72
+    unit: '%'
+    tag: sourced
+    source: CIQ rates, via W-WACC section 2
+    as_of: '2026-10-16'
+    note: No M-Bono 2035 or 5/7-year yield in the sources; the 10-year is the matched proxy for the 2035 bond.
+  - id: F3
+    label: UST 10-year yield
+    value: 5.09
+    unit: '%'
+    tag: sourced
+    source: CIQ rates, via W-WACC section 2
+    as_of: '2026-10-16'
+  - id: F4
+    label: UST 20-year yield
+    value: 5.48
+    unit: '%'
+    tag: sourced
+    source: CIQ rates, via W-WACC section 2
+    as_of: '2026-10-15'
+  - id: F5
+    label: US 10-year TIPS real yield
+    value: 2.74
+    unit: '%'
+    tag: sourced
+    source: CIQ rates, via W-WACC section 2
+    as_of: '2026-10-16'
+  - id: F6
+    label: US 10-year breakeven inflation
+    value: 2.35
+    unit: '%'
+    tag: calc
+    source: F3 - F5
+    as_of: '2026-10-16'
+    formula: F3 - F5
+  - id: F7
+    label: Mexico 5-year CDS (sovereign, mid)
+    value: 0.953
+    unit: '%'
+    tag: sourced
+    source: 95.30 bp, CIQ, via W-WACC section 2
+    as_of: '2026-10-16'
+    note: 5-year tenor applied to a 10-year bond; a caveat only.
+  - id: F8
+    label: 'Memo: BIMBO senior unsecured 5-year CDS (not used)'
+    value: 0.549
+    unit: '%'
+    tag: sourced
+    source: data/capitaliq/corporate_issuance.csv cds_5y_history, method 'Evaluated' [S-CORP]
+    as_of: '2026-10-05'
+    note: Before 27-May-2026 the same series is 'Composite' (142-158 bp). Methodology break; not used.
+  - id: F9
+    label: Mexico CPI 2026 consensus (CIQ)
+    value: 3.76
+    unit: '%'
+    tag: sourced
+    source: CIQ standardized forecast, via W-WACC section 2
+    as_of: '2026-10-15'
+  - id: F10
+    label: Banxico inflation target
+    value: 3.0
+    unit: '%'
+    tag: unverified
+    source: 'Secondary only: Bloomberg Tax (Sep-2026) and Oxford Business Group via web search; banxico.org.mx pages returned 404 or a redirect'
+    as_of: '2026-10-17'
+    note: Confirm on banxico.org.mx before the report.
+  - id: F11
+    label: Banxico variability band
+    value: 1.0
+    unit: pp (+/-)
+    tag: unverified
+    source: As F10 (secondary sources)
+    as_of: '2026-10-17'
+  - id: F12
+    label: Mexico long-term real GDP growth
+    value: not retrieved
+    unit: text
+    tag: unverified
+    source: IMF DataMapper pages returned a template with no data [WEB-IMF]. The Banxico July-2026 survey long-term item was not found; a secondary figure of 1.83% (next decade) could not be confirmed and
+      is not used.
+    as_of: '2026-10-17'
+  - id: F13
+    label: Mexico long-term nominal MXN GDP growth
+    value: not computed
+    unit: text
+    tag: unverified
+    source: Formula (1 + g_real) x (1 + pi) - 1, with pi = F10 (3.0%); needs F12
+    as_of: '2026-10-17'
+  - id: F14
+    label: Mexico long-term CPI expectation (survey)
+    value: not retrieved
+    unit: text
+    tag: unverified
+    source: Banxico survey long-term item not retrieved
+    as_of: '2026-10-17'
+g_damodaran_inputs:
+  title: Damodaran inputs (data as of January 2026)
+  items:
+  - id: G1
+    label: Mature-market implied equity risk premium (monthly, trailing 12m with adjusted payout)
+    value: 4.2
+    unit: '%'
+    tag: sourced
+    source: 'Damodaran home page ''Implied ERP on October 1, 2026: 4.20%'' [WEB-DHOME]; previous month 4.14%'
+    as_of: '2026-10-01'
+    note: 'Both routes use this value. Memo: annual implied ERP (FCFE) for 2025 = 4.23% in histimpl.html (Jan-2026) [WEB-DERP]. Other Damodaran variants on the home page (3.30% to 5.67%) are not used.'
+  - id: G2
+    label: Country risk table, Damodaran (ctryprem, last updated 5-Jan-2026)
+    columns:
+    - Country
+    - Moody's
+    - Default spread (%)
+    - Country risk premium (%)
+    - Total ERP (%)
+    - Corporate tax (%)
+    - Source
+    rows:
+    - - United States
+      - Aa1
+      - 0.23
+      - 0.23
+      - 4.46
+      - 25.0
+      - WEB-DCTRY
+    - - Canada
+      - Aaa
+      - 0.0
+      - 0.0
+      - 4.23
+      - 26.14
+      - WEB-DCTRY
+    - - Mexico
+      - Baa2
+      - 1.62
+      - 2.46
+      - 6.69
+      - 30.0
+      - WEB-DCTRY
+    - - Spain
+      - A3
+      - 1.02
+      - 1.55
+      - 5.78
+      - 25.0
+      - WEB-DCTRY
+    - - United Kingdom
+      - Aa3
+      - 0.51
+      - 0.78
+      - 5.01
+      - 25.0
+      - WEB-DCTRY
+    - - China
+      - A1
+      - 0.6
+      - 0.91
+      - 5.14
+      - 25.0
+      - WEB-DCTRY
+    - - Brazil
+      - Ba1
+      - 2.13
+      - 3.24
+      - 7.47
+      - 34.0
+      - WEB-DCTRY
+    - - Japan
+      - n/a
+      - n/a
+      - n/a
+      - n/a
+      - 29.74
+      - WEB-DCTRY (tax only)
+    - - Switzerland
+      - n/a
+      - n/a
+      - n/a
+      - n/a
+      - 19.61
+      - WEB-DCTRY (tax only; national rate, canton not verified)
+  - id: G3
+    label: Mexico equity-to-bond volatility multiplier (CRP / default spread)
+    value: 1.519
+    unit: x
+    tag: calc
+    source: 2.46 / 1.62 (Mexico row)
+    as_of: 2026-01
+    formula: CRP / default spread
+  - id: G4
+    label: Damodaran synthetic default spreads (large firms, January 2026)
+    columns:
+    - Rating (Moody's / S&P)
+    - Interest coverage (lower to upper)
+    - Spread (%)
+    - Source
+    rows:
+    - - Aaa / AAA
+      - 8.50 and above
+      - 0.4
+      - WEB-DRAT
+    - - Aa2 / AA
+      - 6.50 to 8.50
+      - 0.55
+      - WEB-DRAT
+    - - A1 / A+
+      - 5.50 to 6.50
+      - 0.7
+      - WEB-DRAT
+    - - A2 / A
+      - 4.25 to 5.50
+      - 0.78
+      - WEB-DRAT
+    - - A3 / A-
+      - 3.00 to 4.25
+      - 0.89
+      - WEB-DRAT
+    - - Baa2 / BBB
+      - 2.50 to 3.00
+      - 1.11
+      - WEB-DRAT
+    - - Baa1 / BBB+ (interpolated)
+      - not in table
+      - 1.0
+      - 'calc: midpoint of A3/A- and Baa2/BBB'
+    - - Ba1 / BB+
+      - 2.25 to 2.50
+      - 1.38
+      - WEB-DRAT
+    note: Bimbo's EBIT-based coverage was not computed; the rating-based spread is used because Bimbo is BBB+/Baa1 (LSEG).
+  - id: G5
+    label: Damodaran Food Processing (US, January 2026)
+    columns:
+    - Metric
+    - Value
+    - Source
+    rows:
+    - - Number of firms
+      - 78
+      - WEB-DBETA
+    - - Levered beta
+      - 0.61
+      - WEB-DBETA
+    - - D/E
+      - 43.73%
+      - WEB-DBETA
+    - - Effective tax rate
+      - 10.37%
+      - WEB-DBETA (effective, not marginal)
+    - - Unlevered beta
+      - 0.46
+      - WEB-DBETA
+    - - Cash / firm value
+      - 2.56%
+      - WEB-DBETA
+    - - Unlevered beta corrected for cash
+      - 0.47
+      - WEB-DBETA
+  - id: G6
+    label: Damodaran Food Processing (Global, dataset January 2026; footer reads January 2025)
+    columns:
+    - Metric
+    - Value
+    - Source
+    rows:
+    - - Number of firms
+      - 1450
+      - WEB-DBETAG
+    - - Levered beta
+      - 0.67
+      - WEB-DBETAG
+    - - D/E
+      - 37.10%
+      - WEB-DBETAG
+    - - Effective tax rate
+      - 16.35%
+      - WEB-DBETAG (effective; marginal option exists)
+    - - Unlevered beta
+      - 0.53
+      - WEB-DBETAG
+    - - Cash / firm value
+      - 5.82%
+      - WEB-DBETAG
+    - - Unlevered beta corrected for cash
+      - 0.56
+      - WEB-DBETAG
+    note: Emerging-market and other regional Food Processing rows were not retrieved.
+h_peer_betas_market_caps_and_unlevering:
+  title: Peer betas, market caps and unlevering (valuation date 16-Oct-2026)
+  items:
+  - id: H1
+    label: Peer inputs (debt incl. leases in US$ m; market cap in US$ m; betas levered, 5Y monthly)
+    columns:
+    - Company (ticker)
+    - Total debt (US$ m)
+    - Market cap (US$ m)
+    - Market D/E (x)
+    - Statutory tax
+    - Levered beta
+    - Blume-adjusted levered beta
+    - Unlevered beta
+    - Beta source
+    - Market cap source
+    rows:
+    - - Flowers Foods (NYSE:FLO)
+      - 2007.8
+      - 1295.7
+      - 1.5496
+      - 0.25
+      - 0.43
+      - 0.6181
+      - 0.1989
+      - stockanalysis.com 5Y (16-Oct)
+      - CIQ 15/16-Oct
+    - - Gruma B (BMV:GRUMA B)
+      - 2112.0
+      - 4406.7
+      - 0.4793
+      - 0.3
+      - n/a
+      - n/a
+      - n/a
+      - n/a (Yahoo '--'; stockanalysis not found)
+      - Yahoo MXN 79.13bn (16-Oct) x CIQ FX
+    - - Yamazaki Baking (TSE:2212)
+      - 600.9
+      - 4654.8
+      - 0.1291
+      - 0.2974
+      - n/a
+      - n/a
+      - n/a
+      - n/a (Yahoo '--'; stockanalysis not found)
+      - Yahoo JPY 718.11bn (16-Oct) x CIQ FX 0.006482
+    - - Aryzta (SWX:ARYN)
+      - 986.9
+      - 1218.8
+      - 0.8097
+      - 0.1961
+      - 0.38
+      - 0.5846
+      - 0.2302
+      - stockanalysis.com 5Y (16-Oct)
+      - CIQ 15/16-Oct (stockanalysis CHF 1.00bn)
+    - - J.M. Smucker (NYSE:SJM)
+      - 6940.2
+      - 13612.5
+      - 0.5098
+      - 0.25
+      - 0.27
+      - 0.5109
+      - 0.1953
+      - stockanalysis.com 5Y (Yahoo 0.27)
+      - CIQ 15/16-Oct (stockanalysis 13.61bn)
+    - - Campbell's (NasdaqGS:CPB)
+      - 7450.0
+      - 5925.9
+      - 1.2572
+      - 0.25
+      - 0.04
+      - 0.3568
+      - 0.0206
+      - stockanalysis.com 5Y (Yahoo 0.04)
+      - CIQ 15/16-Oct (stockanalysis 5.93bn)
+    - - Mondelez (NasdaqGS:MDLZ)
+      - 22059.0
+      - 81568.8
+      - 0.2704
+      - 0.25
+      - 0.39
+      - 0.5913
+      - 0.3242
+      - stockanalysis.com 5Y (Yahoo 0.39)
+      - CIQ 15/16-Oct (stockanalysis 81.57bn)
+    - - Arca Continental (BMV:AC)
+      - 3644.0
+      - 18683.4
+      - 0.195
+      - 0.3
+      - 0.08
+      - 0.3836
+      - 0.0704
+      - Yahoo only (not on stockanalysis)
+      - Yahoo MXN 335.49bn (16-Oct) x CIQ FX; does not reconcile with shares shown
+    - - PepsiCo (NasdaqGS:PEP)
+      - 51881.0
+      - 179200.5
+      - 0.2895
+      - 0.25
+      - 0.36
+      - 0.5712
+      - 0.2958
+      - stockanalysis.com 5Y (Yahoo 0.36)
+      - CIQ 15/16-Oct (stockanalysis 179.19bn)
+    note: 'Unlevered beta = beta_l / (1 + (1 - t) x D/E), gross debt incl. leases, no cash correction (plain Hamada). Statutory tax from Damodaran ctryprem (US 25.00%, Mexico 30.00%, Japan 29.74%, Switzerland
+      19.61%). Gruma and Yamazaki betas not retrieved. Arca''s beta comes from Yahoo only. Debt: CIQ LTM totals (S-PR1); Gruma 2,112 from the 3F pull (W-WACC section 1; verbatim file not in raw/).'
+  - id: H2
+    label: Median unlevered beta, core peers with data (Flowers, Aryzta; Gruma and Yamazaki n/a)
+    value: 0.2145
+    unit: x
+    tag: calc
+    source: section H1 (n = 2 of 4)
+    as_of: '2026-10-16'
+    formula: median(bu_FLO, bu_ARYN)
+  - id: H3
+    label: Median unlevered beta, six peers with stockanalysis 5Y betas (used in option A)
+    value: 0.2145
+    unit: x
+    tag: calc
+    source: section H1 (FLO, ARYN, SJM, CPB, MDLZ, PEP)
+    as_of: '2026-10-16'
+    formula: median(bu of six peers)
+  - id: H4
+    label: Mean unlevered beta, six peers
+    value: 0.2108
+    unit: x
+    tag: calc
+    source: section H1
+    as_of: '2026-10-16'
+    formula: mean(bu of six peers)
+  - id: H5
+    label: Median unlevered beta, seven peers including Arca (Yahoo beta)
+    value: 0.1989
+    unit: x
+    tag: calc
+    source: section H1
+    as_of: '2026-10-16'
+    formula: median(bu of seven peers)
+  - id: H6
+    label: Mean unlevered beta, seven peers including Arca
+    value: 0.1908
+    unit: x
+    tag: calc
+    source: section H1
+    as_of: '2026-10-16'
+    formula: mean(bu of seven peers)
+  - id: H9
+    label: Median Blume-adjusted unlevered beta, six peers (Blume applied to levered betas before unlevering)
+    value: 0.3618
+    unit: x
+    tag: calc
+    source: section H1 (FLO, ARYN, SJM, CPB, MDLZ, PEP)
+    as_of: '2026-10-16'
+    formula: median of [(0.67 x beta + 0.33) / (1 + (1 - t) x D/E)]
+  - id: H7
+    label: Caveat on peer betas
+    value: very low (0.04 to 0.43 levered)
+    unit: text
+    tag: unverified
+    source: stockanalysis.com and Yahoo agree on SJM, CPB, MDLZ, PEP. Benchmark index not printed on either page.
+    as_of: '2026-10-16'
+    note: The unlevered median of about 0.21 implies a cost of equity close to the risk-free rate plus 0.9 pp. Not credible alone; treat option A as a low-end cross-check.
+  - id: H8
+    label: Peer market caps (CIQ) vs Yahoo/stockanalysis
+    value: agree within 1 to 5 percent for US names
+    unit: text
+    tag: sourced
+    source: section H1; data/capitaliq/capiq-ai-prompt1_2026-10-16.md [S-PR1]
+    as_of: '2026-10-16'
+    note: 'Cross-check with valuation/inputs/peers.yaml (other workstream; FLO price 6.108911, market cap 1,295.7): consistent.'
+i_operating_exposure:
+  title: Operating exposure (lambda) for the country risk premium
+  items:
+  - id: I1
+    label: Revenue and EBITDA weights by region and proxy CRP
+    columns:
+    - Region (Bimbo segment)
+    - Revenue weight FY25
+    - EBITDA weight FY25
+    - CRP proxy (%)
+    - Proxy basis
+    - Source
+    rows:
+    - - North America (US + Canada)
+      - 0.446
+      - 0.288
+      - 0.1792
+      - US 0.23% x 60/77 plants + Canada 0.00% x 17/77 plants (Damodaran ctryprem)
+      - W-SEG sections 2-4; RA25 p.82-83
+    - - Mexico
+      - 0.324
+      - 0.554
+      - 2.46
+      - Damodaran Mexico CRP 2.46% (Baa2)
+      - W-SEG; EBITDA weight includes eliminations
+    - - EAA (Europe, Asia, Africa)
+      - 0.127
+      - 0.098
+      - 1.55
+      - 'Proxy: Spain 1.55% (largest European plant base; 61 of 92 EAA plants in Europe). Assumption.'
+      - W-SEG; RA25 p.115-116
+    - - Latin America
+      - 0.103
+      - 0.06
+      - 3.24
+      - 'Proxy: Brazil 3.24% (14 of 42 LatAm plants). Argentina and Venezuela excluded (hyperinflation, not in table). Assumption.'
+      - W-SEG; RA25 p.85, p.115
+    note: 'Revenue shares: FY25, consolidated basis (W-SEG section 3). EBITDA shares: FY25 Adj. EBITDA (W-SEG section 3, Celebramos p.17).'
+  - id: I2
+    label: Operating-exposure CRP, revenue weights (lambda, used in route D)
+    value: 1.4075
+    unit: '%'
+    tag: calc
+    source: sum of revenue weight x CRP proxy (I1)
+    as_of: FY2025 weights
+    formula: sum(w_rev x CRP)
+  - id: I3
+    label: Operating-exposure CRP, EBITDA weights (sensitivity)
+    value: 1.7608
+    unit: '%'
+    tag: calc
+    source: sum of EBITDA weight x CRP proxy (I1)
+    as_of: FY2025 weights
+    formula: sum(w_ebitda x CRP)
+  - id: I4
+    label: Equity risk premium in route D = mature ERP + I2
+    value: 5.6075
+    unit: '%'
+    tag: calc
+    source: G1 + I2
+    as_of: 2026-01 / FY2025
+    formula: G1 + I2
+  - id: I5
+    label: Note on the CRP definition
+    value: CRP = default spread x (equity vol / bond vol)
+    unit: text
+    tag: sourced
+    source: 'Damodaran ctryprem: CRP for Mexico = 2.46 = 1.62 x 1.52 (G3)'
+    as_of: 2026-01
+    note: Route L (local rf, CRP = 0) and route D (rf net of default spread, plus lambda CRP) are shown side by side. Both are proposals for the team.
+j_pre_tax_cost_of_debt_in_mxn:
+  title: Pre-tax cost of debt in MXN (valuation date)
+  items:
+  - id: J1
+    label: Bimbo credit ratings (global)
+    value: BBB+ (S&P), BBB+ (Fitch), Baa1 (Moody's)
+    unit: text
+    tag: sourced
+    source: LSEG issuer ratings via wiki/Valuation/bimbo-credit-risk-lseg.md (S&P negative since 20-Mar-2025; Fitch stable 29-Jul-2026; Moody's stable 15-Nov-2024)
+    as_of: '2026-07-29'
+    note: National scale AAA(mex) on local bonds (W-BOND). Used only to justify the synthetic spread in candidate C.
+  - id: J2
+    label: Cost of debt candidates
+    columns:
+    - Candidate
+    - Pre-tax kd (%)
+    - Basis
+    - Tag
+    - Source / as of
+    rows:
+    - - A. BIMBO 23L market yield (primary)
+      - 9.26
+      - Yield on MXN 9.24% 2033 bond, price 99.87 (LSEG)
+      - sourced
+      - W-LSEG section 3a; export 2026-10-10, pricing date not stated
+    - - B. Matched-maturity spread
+      - 9.71
+      - M-Bono 10y 9.26% + 0.45 pp (BIMBO 26 spread at Feb-2026 issue)
+      - calc
+      - F1 + spread (W-BOND)
+    - - C. Synthetic rating spread
+      - 10.26
+      - M-Bono 10y 9.26% + 1.00 pp (Damodaran BBB+/Baa1, interpolated)
+      - calc
+      - F1 + G4 (Jan-2026)
+    - - 'Fallback: BIMBO 26 coupon (not a yield)'
+      - 9.22
+      - Issue coupon 9.22%, due 26-Jan-2035 (Feb-2026 issue)
+      - sourced
+      - W-BOND; W-CAP section 4
+    - - 'Memo: BIMBO 25 coupon 10.06% (due 6-Feb-2032); yield not in sources'
+      - 10.06
+      - Issue coupon 14-Feb-2025; fixed spread +30 bp over M-Bono at issue
+      - sourced
+      - W-BOND; W-CAP section 3b
+    - - 'Memo: BIMBO 23L coupon 9.24% (due 20-May-2033)'
+      - 9.24
+      - Issue coupon 2-Jun-2023 (the basis of candidate A's yield)
+      - sourced
+      - W-BOND; W-CAP section 3b
+    - - 'Memo: company average cost of debt (not MXN)'
+      - 6.5
+      - USD/MXN/EUR mix after swaps
+      - sourced
+      - 2Q26 p.6 (Jun-26)
+    - - 'Memo: USD notes YTM 2036 (not MXN)'
+      - 6.3
+      - LSEG; USD spread about 107 bp
+      - sourced
+      - W-LSEG section 3a (pricing date not stated)
+    note: 'Route L and route D use the same pre-tax MXN cost of debt. Candidate A is used in the WACC table; B and C are sensitivities. Candidate A equals the 10-year M-Bono (9.26%), so route L would show
+      no credit spread on a naive reading. It is not zero: the 23L matures in 2033, shorter than the 10-year benchmark, and the curve slopes upward (10y 9.26%, 20y 9.72%), so the 2033 government yield is
+      below 9.26% and the 23L carries a positive spread. Its pricing date (about 10-Oct) is about a week before the valuation date; the team can switch to B (9.71%), which follows the coordinator''s matched-maturity
+      fallback.'
+k_wacc_candidate_table:
+  title: WACC candidate table (proposals for the team, not decisions)
+  items:
+  - id: K1
+    label: 'WACC candidates: 3 beta options x 2 routes (MXN, valuation date 2026-10-16)'
+    columns:
+    - Case
+    - Route
+    - Beta option
+    - Unlevered beta
+    - Levered beta (D/E 0.743, tax 30%)
+    - rf (%)
+    - ERP + CRP (%)
+    - ke (%)
+    - kd pre-tax (%)
+    - kd after tax (%)
+    - E/V
+    - D/V
+    - WACC (%)
+    rows:
+    - - L-A
+      - Local (MXN)
+      - 'A. Bottom-up: median unlevered beta of six peers with 5Y betas'
+      - 0.2145
+      - 0.3261
+      - 9.26
+      - 4.2
+      - 10.63
+      - 9.26
+      - 6.48
+      - 0.5737
+      - 0.4263
+      - 8.86
+    - - L-B
+      - Local (MXN)
+      - B. Damodaran Food Processing, US (unlevered 0.46)
+      - 0.46
+      - 0.6993
+      - 9.26
+      - 4.2
+      - 12.2
+      - 9.26
+      - 6.48
+      - 0.5737
+      - 0.4263
+      - 9.76
+    - - L-B2
+      - Local (MXN)
+      - B2. Damodaran Food Processing, Global (unlevered 0.53)
+      - 0.53
+      - 0.8057
+      - 9.26
+      - 4.2
+      - 12.64
+      - 9.26
+      - 6.48
+      - 0.5737
+      - 0.4263
+      - 10.02
+    - - L-C
+      - Local (MXN)
+      - C. Published Bimbo beta 0.32 (investing.com; window and benchmark not printed)
+      - 0.2105
+      - 0.32
+      - 9.26
+      - 4.2
+      - 10.6
+      - 9.26
+      - 6.48
+      - 0.5737
+      - 0.4263
+      - 8.85
+    - - D-A
+      - Damodaran-consistent
+      - 'A. Bottom-up: median unlevered beta of six peers with 5Y betas'
+      - 0.2145
+      - 0.3261
+      - 7.64
+      - 5.61
+      - 9.47
+      - 9.26
+      - 6.48
+      - 0.5737
+      - 0.4263
+      - 8.2
+    - - D-B
+      - Damodaran-consistent
+      - B. Damodaran Food Processing, US (unlevered 0.46)
+      - 0.46
+      - 0.6993
+      - 7.64
+      - 5.61
+      - 11.56
+      - 9.26
+      - 6.48
+      - 0.5737
+      - 0.4263
+      - 9.4
+    - - D-B2
+      - Damodaran-consistent
+      - B2. Damodaran Food Processing, Global (unlevered 0.53)
+      - 0.53
+      - 0.8057
+      - 7.64
+      - 5.61
+      - 12.16
+      - 9.26
+      - 6.48
+      - 0.5737
+      - 0.4263
+      - 9.74
+    - - D-C
+      - Damodaran-consistent
+      - C. Published Bimbo beta 0.32 (investing.com; window and benchmark not printed)
+      - 0.2105
+      - 0.32
+      - 7.64
+      - 5.61
+      - 9.43
+      - 9.26
+      - 6.48
+      - 0.5737
+      - 0.4263
+      - 8.18
+    note: 'ke = rf + beta_l x (ERP + CRP). WACC = E/V x ke + D/V x kd x (1 - 0.30). Route L: rf = 9.26%, CRP 0. Route D: rf = 9.26% - 1.62% = 7.64%, ERP + lambda CRP (1.41%). Option B uses Damodaran''s
+      plain unlevered beta (effective-tax basis). Option C uses the published raw beta 0.32 at Bimbo''s own leverage (no relevering); its window and benchmark are not printed. The regression is not computed.'
+  - id: K2
+    label: Sensitivities (not proposals)
+    columns:
+    - Sensitivity
+    - WACC (%)
+    - kd (%)
+    rows:
+    - - L-C with Blume-adjusted published beta (0.5444)
+      - 9.39
+      - 9.26
+    - - D-C with Blume-adjusted published beta (0.5444)
+      - 8.9
+      - 9.26
+    - - L-A with Blume-adjusted median unlevered beta (option A, Blume)
+      - 9.4
+      - 9.26
+    - - D-A with Blume-adjusted median unlevered beta (option A, Blume)
+      - 8.92
+      - 9.26
+    - - L-B (US) with matched-maturity kd (M-Bono 10y + 45 bp)
+      - 9.89
+      - 9.71
+    - - D-B with Mexico spread = 5y CDS (0.953%)
+      - 9.78
+      - 9.26
+    - - D-B with EBITDA-weighted CRP
+      - 9.54
+      - 9.26
+    - - L-B with cash-corrected unlevered beta 0.47
+      - 9.8
+      - 9.26
+    - - D-B with cash-corrected unlevered beta 0.47
+      - 9.44
+      - 9.26
+l_open_issues:
+- 'Bimbo regression beta not computed: only 13 monthly closes and 13 IPC closes were retrievable; 60 are needed.'
+- Bimbo published beta 0.32 is from investing.com's overview (option C). Window and benchmark are not printed and the date is not explicit. Yahoo shows '--'; stockanalysis Bimbo pages not found. Treat C
+  as a single-source fallback.
+- 'Core peer betas: Gruma and Yamazaki not retrieved; Flowers and Aryzta come from stockanalysis.com only. Option A is therefore thin (two core peers).'
+- Peer 5Y betas are very low (0.04 to 0.43 levered). Benchmark index not printed on either source. The lower-bound result is not credible alone.
+- Damodaran's home page says the country-risk update is as of 1 July 2026, but the country table fetched here is the January 2026 version. Mexico CRP and default spread may have changed; re-check before
+  the report. ERP is the monthly 4.20% (1-Oct-2026) from the home page.
+- Damodaran Food Processing rows use effective tax rates (US 10.37%; Global 16.35%). The Global page footer reads January 2025 while its header reads January 2026.
+- 'Mexico default spread: Damodaran 1.62% (Baa2, used in route D to match the CRP table) vs CIQ 5y CDS 0.953% (sovereign, 5-year tenor). Sensitivity in K2.'
+- 'BBB+/Baa1 synthetic spread interpolated (1.00 pp): Damodaran''s table has no Baa1/BBB+ row.'
+- 'Banxico target (3%, +/-1 pp): primary page not reachable (404 and redirect). Secondary sources only; confirm on banxico.org.mx.'
+- Long-term real GDP growth and long-term nominal MXN growth not retrieved. The 1.83% figure seen in one summary was not confirmed and is not used.
+- Shares outstanding after 29-Jul-2026 not verified. CIQ's 06-Oct count (4,296,284,215) is one notice stale; the difference is 0.03 percent.
+- Weighted-average shares 1H26 is a time-weighted calc from BMV notices. CIQ quarterly counts do not reconcile (B13).
+- '2026 DPS: 1.075 used (ties to MXN 4,626.7 m). The 1.75 figure in two wiki articles is rejected (C6).'
+- '1H26 returns: 4,626.7 + 496 = 5,122.7 versus the release''s MXN 5.3 bn. Gap of about 177 m not explained (C10).'
+- 'Bimbo total debt: CIQ US$10,855m converts to MXN 194.9 bn vs filings 187.0 bn (incl. leases). Filings used (D6).'
+- BMV close 58.60 (16-Oct) from two delayed-quote pages, not the official BMV file. The 52-week range is CIQ at 6-Oct.
+- Gruma total debt (US$2,112 m) is from the 3F CIQ pull (wiki); the verbatim CIQ file is not in raw/. Its market cap (Yahoo, MXN 79.13 bn) has no displayed share count to check.
+- Arca Continental market cap from Yahoo (MXN 335.49 bn) does not reconcile with the 1.7 bn shares shown (about MXN 356 bn). Its beta (0.08) is from Yahoo only.
+- Aryzta tax rate is the Swiss national rate (19.61%); the canton is not verified.
+- LSEG bond yield pricing date not stated (export 2026-10-10). Treat the 9.26% 23L yield as about 9-10 October.
+- 'Pension and debt-like items: DB net deficit 1,524 and MEPP 985 (Dec-25); employee benefits non-current 6,507 (Dec-25) / 6,202 (Jun-26). Team decides which enter net debt.'
+- CIQ FX 0.055690 (17.955 MXN per US$) is the pricing-date rate in the CIQ header. Banxico FIX not retrieved.
+m_not_retrieved:
+- Bimbo regression beta (needs 60 monthly returns). The investing.com beta 0.32 has no stated window or benchmark.
+- Investing.com cross-check of the peer betas (for example SJM); the investing.com page URL was not found. Stockanalysis and Yahoo agree on SJM.
+- Damodaran country-risk table dated 1 July 2026 (the site says so; the fetched copy is January 2026).
+- Gruma B and Yamazaki Baking 5Y betas (Yahoo '--'; stockanalysis not found).
+- Damodaran regional CRP averages (Latin America, Europe, Asia, Africa); the CRP proxies in section I are country-level.
+- Damodaran Emerging-market and other regional Food Processing rows (only US and Global retrieved).
+- Banxico inflation target from banxico.org.mx (primary); Banxico survey long-term GDP and inflation items (July 2026).
+- Mexico long-term real GDP growth (IMF DataMapper returned an empty template).
+- Mexico M-Bono 2035 matched-maturity yield (only 10y and 20y in sources); BIMBO 26, 25 and 25-2 yields.
+- Bimbo USD notes and MXN bond yields dated 16-Oct-2026 (LSEG export pricing date unknown).
+- Aryzta canton (Swiss tax); US state tax (Damodaran combined rate used instead of 21% federal plus state).
+- Company 1H26 weighted-average diluted shares (2Q26 filing); reconciliation of 1H26 returns (MXN 5.3 bn).
+- Shares outstanding after 29-Jul-2026 (BMV notices beyond that date).
+- Gruma total debt in the verbatim CIQ file (3F); Gruma and Arca share counts on a verified basis.
+- Bimbo EBIT-based interest coverage (Damodaran synthetic rating by coverage).
+n_source_codes:
+- code: S-PR1
+  source: data/capitaliq/capiq-ai-prompt1_2026-10-16.md (CIQ AI paste; pricing 15/16-Oct-2026; FX header)
+- code: S-CORP
+  source: data/capitaliq/corporate_issuance.csv (equity listings, dividends, CDS history)
+- code: S-XH
+  source: data/capitaliq/cross_holdings.csv (price 55.41 and market cap 238,057 at 06-Oct-2026)
+- code: S-IS
+  source: data/capitaliq/income_statement.csv (weighted-average shares rows)
+- code: W-ACT
+  source: wiki/Valuation/bimbo-agm-dividends-and-buybacks.md (AGM, cancellations, 2026 share-count notices, section 4)
+- code: W-GOV
+  source: wiki/Company/bimbo-governance-and-ownership.md (register and shares in circulation)
+- code: W-CAP
+  source: wiki/Valuation/bimbo-capital-structure-and-debt.md (debt, cash, leases, ratings, dividends)
+- code: W-WACC
+  source: 'wiki/Valuation/bimbo-wacc-market-inputs-capiq-2026-10.md (CIQ rates, CDS, 3F pull: Gruma debt, tax)'
+- code: W-PEER
+  source: wiki/Valuation/peer-leverage-capiq-2026-10.md (peer debt and leverage)
+- code: W-BS
+  source: wiki/Financials/bimbo-balance-sheet-and-leverage.md (associates, employee benefits, NCI)
+- code: W-PEN
+  source: wiki/Financials/ciq-pension-obligations.md (DB deficit)
+- code: W-SEG
+  source: wiki/Company/bimbo-segments-and-regions.md (segment sales, EBITDA, plants)
+- code: W-IS
+  source: wiki/Financials/bimbo-income-statement-fy21-fy25.md (weighted-average shares FY21-FY25)
+- code: W-BOND
+  source: wiki/Valuation/bimbo-bond-prospectus-terms.md (issue coupons and spreads)
+- code: W-LSEG
+  source: wiki/Valuation/bimbo-credit-risk-lseg.md (bond yields, ratings, pricing-date caveat)
+- code: W-GUIDE
+  source: wiki/Financials/bimbo-guidance-2026.md (1H26 buybacks, treasury shares)
+- code: W-CIQDIV
+  source: wiki/Company/ciq-corporate-issuance-history.md (dividends and CDS)
+- code: WEB-INV
+  source: 'https://www.investing.com/equities/bimbo-a-historical-data (retrieved 2026-10-17): 16-Oct close 58.600; 15-Oct 57.970'
+- code: WEB-YHH
+  source: 'https://finance.yahoo.com/quote/BIMBOA.MX/history/?frequency=1mo (retrieved 2026-10-17): ''Oct 16, 2026: 58.60''; ''May 12, 2026: 1.075 Dividend'''
+- code: WEB-YHX
+  source: 'https://finance.yahoo.com/quote/%5EMXX/history/?frequency=1mo (retrieved 2026-10-17): IPC monthly closes (13 rows)'
+- code: WEB-YHK
+  source: 'https://finance.yahoo.com/quote/<TICKER>/key-statistics/ (retrieved 2026-10-17): betas and market caps for peers; Bimbo ''--'''
+- code: WEB-SA
+  source: 'https://stockanalysis.com/stocks/<ticker>/statistics/ (retrieved 2026-10-17): FLO 0.43, ARYN 0.38, SJM 0.27, CPB 0.04, MDLZ 0.39, PEP 0.36 (5Y beta; 16-Oct close)'
+- code: WEB-DCTRY
+  source: https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ctryprem.html (Last updated January 5, 2026)
+- code: WEB-DERP
+  source: https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/histimpl.html (Data used as of January 2026)
+- code: WEB-DBETA
+  source: https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/Betas.html (Data used as of January 2026)
+- code: WEB-DBETAG
+  source: https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/BetasGlobal.html (date of analysis January 2026; footer January 2025)
+- code: WEB-DRAT
+  source: https://pages.stern.nyu.edu/~adamodar/New_Home_Page/datafile/ratings.html (Data used as of January 2026)
+- code: WEB-DHOME
+  source: 'https://pages.stern.nyu.edu/~adamodar/New_Home_Page/home.htm (retrieved 2026-10-17): ''Implied ERP on October 1, 2026'': 4.20% trailing 12m with adjusted payout (previous month 4.14%); country-risk
+    update as of July 1, 2026'
+- code: WEB-INVB
+  source: 'https://www.investing.com/equities/bimbo-a (retrieved 2026-10-17): ''Beta'' 0.32, no window or benchmark printed; FAQ ''As of Oct 17, 2026'''
+- code: WEB-IMF
+  source: https://www.imf.org/external/datamapper/NGDP_RPCH@WEO/MEX (template only; no data retrieved)
+- code: WEB-BX
+  source: 'Secondary: Bloomberg Tax (Sep-2026) and Oxford Business Group (Banxico 3% +/-1 pp) via web search; banxico.org.mx returned 404'

@@ -1,0 +1,181 @@
+line_item,year,value,tag,source_doc,page,note
+revenue,2021,338792,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Net sales, continuing operations (Ricolino in discontinued operations from 2022)"
+revenue,2022,398706,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Net sales, continuing operations (Ricolino in discontinued operations from 2022)"
+revenue,2023,399879,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Net sales, continuing operations (Ricolino in discontinued operations from 2022)"
+revenue,2024,408335,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Net sales, continuing operations (Ricolino in discontinued operations from 2022)"
+revenue,2025,426952,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Net sales, continuing operations (Ricolino in discontinued operations from 2022)"
+cogs,2021,157703,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,Cost of sales as reported
+cogs,2022,193325,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,Cost of sales as reported
+cogs,2023,194369,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,Cost of sales as reported
+cogs,2024,193407,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,Cost of sales as reported
+cogs,2025,203465,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,Cost of sales as reported
+opex,2021,148509,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Distribution and selling + administration + integration + other (income) expenses, net"
+opex,2022,151685,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Distribution and selling + administration + integration + other (income) expenses, net"
+opex,2023,170055,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Distribution and selling + administration + integration + other (income) expenses, net"
+opex,2024,181779,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Distribution and selling + administration + integration + other (income) expenses, net"
+opex,2025,189341,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Distribution and selling + administration + integration + other (income) expenses, net"
+da,2021,16126,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,359,"Continuing D&A from the segment note, consistent with EBIT. Cash-flow D&A is 16,375; the 249 difference is discontinued Ricolino D&A (computed)"
+da,2022,18038,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,358,"Continuing D&A from the segment note. Cash-flow D&A is 18,282, including 244 of discontinued D&A (footnote, RA23 p.359)"
+da,2023,18929,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Segment-note D&A; equals cash-flow D&A
+da,2024,23051,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Segment-note D&A; equals cash-flow D&A
+da,2025,24838,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,85,Segment-note D&A; equals cash-flow D&A
+interest_expense,2021,7823,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Interest expense including lease interest (lease interest FY21 1,255; FY22 1,329; FY23 1,476; FY24 1,751; FY25 2,137)"
+interest_expense,2022,8049,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Interest expense including lease interest (lease interest FY21 1,255; FY22 1,329; FY23 1,476; FY24 1,751; FY25 2,137)"
+interest_expense,2023,10006,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Interest expense including lease interest (lease interest FY21 1,255; FY22 1,329; FY23 1,476; FY24 1,751; FY25 2,137)"
+interest_expense,2024,13100,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Interest expense including lease interest (lease interest FY21 1,255; FY22 1,329; FY23 1,476; FY24 1,751; FY25 2,137)"
+interest_expense,2025,14464,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Interest expense including lease interest (lease interest FY21 1,255; FY22 1,329; FY23 1,476; FY24 1,751; FY25 2,137)"
+interest_income,2021,363,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Interest income, positive"
+interest_income,2022,740,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Interest income, positive"
+interest_income,2023,809,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Interest income, positive"
+interest_income,2024,924,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Interest income, positive"
+interest_income,2025,897,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Interest income, positive"
+other_financial_net,2021,988,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Associates 247 less FX loss 538 plus monetary gain 25 plus discontinued after tax 1,254"
+other_financial_net,2022,16479,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Associates 452 less FX loss 995 plus monetary gain 34 plus discontinued after tax 16,988"
+other_financial_net,2023,-950,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Associates 316 less FX loss 1,323 plus monetary gain 73 less discontinued after tax 16"
+other_financial_net,2024,-133,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,Associates 464 less FX loss 506 plus monetary gain 103 less discontinued after tax 194
+other_financial_net,2025,-436,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,Associates (2) less FX loss 384 less monetary loss 50; no discontinued result
+income_tax,2021,8726,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Income tax expense, continuing operations (discontinued results are already after tax)"
+income_tax,2022,14381,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Income tax expense, continuing operations (discontinued results are already after tax)"
+income_tax,2023,8386,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Income tax expense, continuing operations (discontinued results are already after tax)"
+income_tax,2024,6797,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Income tax expense, continuing operations (discontinued results are already after tax)"
+income_tax,2025,7197,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Income tax expense, continuing operations (discontinued results are already after tax)"
+nci_income,2021,1466,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Consolidated NCI: continuing 1,436 plus discontinued 30"
+nci_income,2022,1575,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Consolidated NCI: continuing 1,173 plus discontinued 402"
+nci_income,2023,1445,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,Consolidated NCI
+nci_income,2024,1499,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,Consolidated NCI
+nci_income,2025,1813,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,Consolidated NCI
+shares_diluted,2021,4487.268,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Weighted-average shares in millions (filing shows thousands); one figure reported, no dilutive instruments, so basic equals diluted"
+shares_diluted,2022,4448.693,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Weighted-average shares in millions (filing shows thousands); one figure reported, no dilutive instruments, so basic equals diluted"
+shares_diluted,2023,4418.137,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Weighted-average shares in millions (filing shows thousands); one figure reported, no dilutive instruments, so basic equals diluted"
+shares_diluted,2024,4357.250,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Weighted-average shares in millions (filing shows thousands); one figure reported, no dilutive instruments, so basic equals diluted"
+shares_diluted,2025,4310.531,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Weighted-average shares in millions (filing shows thousands); one figure reported, no dilutive instruments, so basic equals diluted"
+cash,2021,8748,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Cash and cash equivalents
+cash,2022,12313,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Cash and cash equivalents
+cash,2023,6353,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Cash and cash equivalents
+cash,2024,8057,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Cash and cash equivalents
+cash,2025,8535,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Cash and cash equivalents
+receivables,2021,19184,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,292,"Trade receivables, net: customers less expected credit loss allowance (note 5)"
+receivables,2022,21600,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,292,"Trade receivables, net: customers less expected credit loss allowance (note 5)"
+receivables,2023,21268,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,36,"Trade receivables, net: customers less expected credit loss allowance (note 5)"
+receivables,2024,23555,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,36,"Trade receivables, net: customers less expected credit loss allowance (note 5)"
+receivables,2025,23784,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,36,"Trade receivables, net: customers less expected credit loss allowance (note 5)"
+inventory,2021,13710,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Inventories
+inventory,2022,16989,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Inventories
+inventory,2023,16120,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Inventories
+inventory,2024,18832,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Inventories
+inventory,2025,17151,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Inventories
+other_current_assets,2021,11769,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: other receivables + prepayments + current derivatives + derivative collateral deposits + held for sale
+other_current_assets,2022,12568,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: other receivables + prepayments + current derivatives + derivative collateral deposits + held for sale
+other_current_assets,2023,15173,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: other receivables + prepayments + current derivatives + derivative collateral deposits + held for sale
+other_current_assets,2024,16736,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: other receivables + prepayments + current derivatives + derivative collateral deposits + held for sale
+other_current_assets,2025,15201,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: other receivables + prepayments + current derivatives + derivative collateral deposits + held for sale
+ppe_net,2021,134645,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: PP&E net + right-of-use assets (IFRS 16)
+ppe_net,2022,141982,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: PP&E net + right-of-use assets (IFRS 16)
+ppe_net,2023,155004,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: PP&E net + right-of-use assets (IFRS 16)
+ppe_net,2024,189596,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: PP&E net + right-of-use assets (IFRS 16)
+ppe_net,2025,190180,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: PP&E net + right-of-use assets (IFRS 16)
+intangibles_goodwill,2021,131530,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: intangible assets net + goodwill
+intangibles_goodwill,2022,127147,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: intangible assets net + goodwill
+intangibles_goodwill,2023,117101,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: intangible assets net + goodwill
+intangibles_goodwill,2024,140908,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: intangible assets net + goodwill
+intangibles_goodwill,2025,135515,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: intangible assets net + goodwill
+other_noncurrent_assets,2021,18054,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: investments in associates + non-current derivatives + deferred tax assets + other assets
+other_noncurrent_assets,2022,15165,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: investments in associates + non-current derivatives + deferred tax assets + other assets
+other_noncurrent_assets,2023,17083,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: investments in associates + non-current derivatives + deferred tax assets + other assets
+other_noncurrent_assets,2024,19120,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: investments in associates + non-current derivatives + deferred tax assets + other assets
+other_noncurrent_assets,2025,19439,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: investments in associates + non-current derivatives + deferred tax assets + other assets
+payables,2021,35752,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Trade payables (accounts payable to suppliers)
+payables,2022,44058,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Trade payables (accounts payable to suppliers)
+payables,2023,40409,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Trade payables (accounts payable to suppliers)
+payables,2024,40815,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Trade payables (accounts payable to suppliers)
+payables,2025,39074,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Trade payables (accounts payable to suppliers)
+other_current_liabilities,2021,28590,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: other payables and accruals + related-party payables + income tax payable + employee profit sharing + current derivatives + other short-term
+other_current_liabilities,2022,33311,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: other payables and accruals + related-party payables + income tax payable + employee profit sharing + current derivatives + other short-term
+other_current_liabilities,2023,28100,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: other payables and accruals + related-party payables + income tax payable + employee profit sharing + current derivatives + other short-term
+other_current_liabilities,2024,32338,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: other payables and accruals + related-party payables + income tax payable + employee profit sharing + current derivatives + other short-term
+other_current_liabilities,2025,31788,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: other payables and accruals + related-party payables + income tax payable + employee profit sharing + current derivatives + other short-term
+debt_short,2021,10625,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Current portion of long-term debt
+debt_short,2022,6435,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Current portion of long-term debt
+debt_short,2023,12932,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Current portion of long-term debt
+debt_short,2024,4862,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Current portion of long-term debt
+debt_short,2025,12635,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Current portion of long-term debt
+debt_long,2021,82230,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Long-term debt
+debt_long,2022,77619,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Long-term debt
+debt_long,2023,97003,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Long-term debt
+debt_long,2024,146043,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Long-term debt
+debt_long,2025,141028,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Long-term debt
+lease_liabilities,2021,31149,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: current + non-current lease liabilities (IFRS 16)
+lease_liabilities,2022,29185,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: current + non-current lease liabilities (IFRS 16)
+lease_liabilities,2023,26815,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: current + non-current lease liabilities (IFRS 16)
+lease_liabilities,2024,35801,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: current + non-current lease liabilities (IFRS 16)
+lease_liabilities,2025,34790,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: current + non-current lease liabilities (IFRS 16)
+other_noncurrent_liabilities,2021,47688,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: non-current derivatives + employee benefits + deferred tax liabilities + other long-term liabilities
+other_noncurrent_liabilities,2022,29554,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Derived: non-current derivatives + employee benefits + deferred tax liabilities + other long-term liabilities
+other_noncurrent_liabilities,2023,31215,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: non-current derivatives + employee benefits + deferred tax liabilities + other long-term liabilities
+other_noncurrent_liabilities,2024,29247,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: non-current derivatives + employee benefits + deferred tax liabilities + other long-term liabilities
+other_noncurrent_liabilities,2025,30235,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Derived: non-current derivatives + employee benefits + deferred tax liabilities + other long-term liabilities
+equity_parent,2021,97100,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,"Owners' equity; includes perpetual notes classed as equity (8,867)"
+equity_parent,2022,124111,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,"Owners' equity; includes perpetual notes classed as equity (8,098)"
+equity_parent,2023,108322,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Owners' equity
+equity_parent,2024,125944,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Owners' equity
+equity_parent,2025,119512,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Owners' equity
+nci_equity,2021,4506,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Non-controlling interests in equity
+nci_equity,2022,3491,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Non-controlling interests in equity
+nci_equity,2023,3306,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Non-controlling interests in equity
+nci_equity,2024,1754,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Non-controlling interests in equity
+nci_equity,2025,743,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Non-controlling interests in equity
+cfo,2021,45776,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,260,Net cash from operating activities as reported (consolidated; includes Ricolino until its sale in 2022)
+cfo,2022,38851,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,260,Net cash from operating activities as reported (consolidated; includes Ricolino until its sale in 2022)
+cfo,2023,31411,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,16,Net cash from operating activities as reported (consolidated; includes Ricolino until its sale in 2022)
+cfo,2024,39907,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,16,Net cash from operating activities as reported (consolidated; includes Ricolino until its sale in 2022)
+cfo,2025,47753,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,16,Net cash from operating activities as reported (consolidated; includes Ricolino until its sale in 2022)
+capex,2021,21293,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,260,"Derived: purchases of PP&E + purchases of intangibles, cash basis (non-cash ROU additions are excluded)"
+capex,2022,29467,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,260,"Derived: purchases of PP&E + purchases of intangibles, cash basis (non-cash ROU additions are excluded)"
+capex,2023,35672,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,16,"Derived: purchases of PP&E + purchases of intangibles, cash basis (non-cash ROU additions are excluded)"
+capex,2024,30174,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,16,"Derived: purchases of PP&E + purchases of intangibles, cash basis (non-cash ROU additions are excluded)"
+capex,2025,22841,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,16,"Derived: purchases of PP&E + purchases of intangibles, cash basis (non-cash ROU additions are excluded)"
+lease_principal_paid,2021,4117,calc,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,260,"Derived: financing line 'Pagos de arrendamiento' (= note 9 roll-forward 'Pagos', interest included) less lease interest accrued (note 9 'Intereses devengados'; note 23). The interest part of the cash paid is not disclosed (searched notes 9, 13, 14, 23, the cash-flow statement and BMV XBRL [520000]); 'Intereses pagados' ties to debt interest only, so lease interest is paid inside the lease line. Residual = change in accrued unpaid lease interest (data/adjustments.md adjustment 6)"
+lease_principal_paid,2022,5056,calc,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,260,"Derived: financing line 'Pagos de arrendamiento' (= note 9 roll-forward 'Pagos', interest included) less lease interest accrued (note 9 'Intereses devengados'; note 23). The interest part of the cash paid is not disclosed (searched notes 9, 13, 14, 23, the cash-flow statement and BMV XBRL [520000]); 'Intereses pagados' ties to debt interest only, so lease interest is paid inside the lease line. Residual = change in accrued unpaid lease interest (data/adjustments.md adjustment 6)"
+lease_principal_paid,2023,4802,calc,filings/annual/IA25_GB_EEFF_V10.pdf,16,"Derived: financing line 'Pagos de arrendamiento' (= note 9 roll-forward 'Pagos', interest included) less lease interest accrued (note 9 'Intereses devengados'; note 23). The interest part of the cash paid is not disclosed (searched notes 9, 13, 14, 23, the cash-flow statement and BMV XBRL [520000]); 'Intereses pagados' ties to debt interest only, so lease interest is paid inside the lease line. Residual = change in accrued unpaid lease interest (data/adjustments.md adjustment 6)"
+lease_principal_paid,2024,5321,calc,filings/annual/IA25_GB_EEFF_V10.pdf,16,"Derived: financing line 'Pagos de arrendamiento' (= note 9 roll-forward 'Pagos', interest included) less lease interest accrued (note 9 'Intereses devengados'; note 23). The interest part of the cash paid is not disclosed (searched notes 9, 13, 14, 23, the cash-flow statement and BMV XBRL [520000]); 'Intereses pagados' ties to debt interest only, so lease interest is paid inside the lease line. Residual = change in accrued unpaid lease interest (data/adjustments.md adjustment 6)"
+lease_principal_paid,2025,5923,calc,filings/annual/IA25_GB_EEFF_V10.pdf,16,"Derived: financing line 'Pagos de arrendamiento' (= note 9 roll-forward 'Pagos', interest included) less lease interest accrued (note 9 'Intereses devengados'; note 23). The interest part of the cash paid is not disclosed (searched notes 9, 13, 14, 23, the cash-flow statement and BMV XBRL [520000]); 'Intereses pagados' ties to debt interest only, so lease interest is paid inside the lease line. Residual = change in accrued unpaid lease interest (data/adjustments.md adjustment 6)"
+dividends_paid,2021,4502,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,259,"Dividends decreed to the parent in the year (statement of changes in equity). Cash dividends including NCI equal this plus the NCI share in FY2022-FY2025; FY2021 cash total 4,636 differs by 29 (timing)"
+dividends_paid,2022,5791,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,259,"Dividends decreed to the parent in the year (statement of changes in equity). Cash dividends including NCI equal this plus the NCI share in FY2022-FY2025; FY2021 cash total 4,636 differs by 29 (timing)"
+dividends_paid,2023,3458,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,15,"Dividends decreed to the parent in the year (statement of changes in equity). Cash dividends including NCI equal this plus the NCI share in FY2022-FY2025; FY2021 cash total 4,636 differs by 29 (timing)"
+dividends_paid,2024,4125,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,15,"Dividends decreed to the parent in the year (statement of changes in equity). Cash dividends including NCI equal this plus the NCI share in FY2022-FY2025; FY2021 cash total 4,636 differs by 29 (timing)"
+dividends_paid,2025,4316,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,15,"Dividends decreed to the parent in the year (statement of changes in equity). Cash dividends including NCI equal this plus the NCI share in FY2022-FY2025; FY2021 cash total 4,636 differs by 29 (timing)"
+total_assets_reported,2021,337640,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Total assets as reported
+total_assets_reported,2022,347764,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,256,Total assets as reported
+total_assets_reported,2023,348102,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Total assets as reported
+total_assets_reported,2024,416804,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Total assets as reported
+total_assets_reported,2025,409805,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,12,Total assets as reported
+net_income_reported,2021,17382,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Consolidated net income as reported, before NCI split"
+net_income_reported,2022,48485,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,257,"Consolidated net income as reported, before NCI split"
+net_income_reported,2023,16922,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Consolidated net income as reported, before NCI split"
+net_income_reported,2024,14043,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Consolidated net income as reported, before NCI split"
+net_income_reported,2025,12946,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,13,"Consolidated net income as reported, before NCI split"
+seg_mexico,2021,109089,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,359,Net sales by region before eliminations
+seg_mexico,2022,130401,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,358,Net sales by region before eliminations
+seg_mexico,2023,145387,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Net sales by region before eliminations
+seg_mexico,2024,151164,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Net sales by region before eliminations
+seg_mexico,2025,154809,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,85,Net sales by region before eliminations
+seg_north_america,2021,175369,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,359,Net sales by region before eliminations
+seg_north_america,2022,205674,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,358,Net sales by region before eliminations
+seg_north_america,2023,192534,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Net sales by region before eliminations
+seg_north_america,2024,189330,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Net sales by region before eliminations
+seg_north_america,2025,190211,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,85,Net sales by region before eliminations
+seg_latin_america,2021,31109,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,359,Net sales by region before eliminations
+seg_latin_america,2022,38411,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,358,Net sales by region before eliminations
+seg_latin_america,2023,36647,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Net sales by region before eliminations
+seg_latin_america,2024,39879,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Net sales by region before eliminations
+seg_latin_america,2025,44120,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,85,Net sales by region before eliminations
+seg_europe_asia_africa,2021,34195,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,359,Net sales by region before eliminations (EAA)
+seg_europe_asia_africa,2022,37536,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,358,Net sales by region before eliminations (EAA)
+seg_europe_asia_africa,2023,40545,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Net sales by region before eliminations (EAA)
+seg_europe_asia_africa,2024,45044,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Net sales by region before eliminations (EAA)
+seg_europe_asia_africa,2025,54214,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,85,Net sales by region before eliminations (EAA)
+seg_eliminations,2021,-10970,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,359,Intersegment eliminations (negative); the four regions plus eliminations equal revenue in every year
+seg_eliminations,2022,-13316,sourced,filings/bmv/Reporte Anual 2023_XBRL_VF.PDF,358,Intersegment eliminations (negative); the four regions plus eliminations equal revenue in every year
+seg_eliminations,2023,-15234,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Intersegment eliminations (negative); the four regions plus eliminations equal revenue in every year
+seg_eliminations,2024,-17082,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,86,Intersegment eliminations (negative); the four regions plus eliminations equal revenue in every year
+seg_eliminations,2025,-16402,sourced,filings/annual/IA25_GB_EEFF_V10.pdf,85,Intersegment eliminations (negative); the four regions plus eliminations equal revenue in every year

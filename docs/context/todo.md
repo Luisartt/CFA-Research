@@ -6,31 +6,35 @@ Soft cap: see AGENTS.md > Context files.
 
 ## Milestones
 
-- [pending] thesis v1 — owner: all — due: 2026-09-23
-- [pending] industry analysis — owner: industry — due: 2026-09-30
-- [pending] model v1 — owner: model — due: 2026-10-07
-- [pending] valuation and target price — owner: valuation — due: 2026-10-14
-- [pending] report draft — owner: all — due: 2026-10-25
+- [in_progress] thesis v1 (draft research/thesis.md v1: the team's pillars with tagged evidence; claims, kill criteria and direction open) — owner: all — due: 2026-10-21
+- [in_progress] industry analysis (research/industry.md and BIMBOA/research/industry/industry-report_2026-10-17.md drafted; market definition, moat and peers open) — owner: industry — due: 2026-10-21
+- [in_progress] valuation and target price (mechanics v3 done: route B base proposal, Gordon 33.55 / exit 45.72; team decisions open, valuation/valuation.md §11 and output/dcf-v3-conclusiones.md) — owner: valuation — due: 2026-10-14
+- [pending] report draft — owner: writer — due: 2026-10-25
 - [pending] final report — owner: all — due: 2026-11-04
 - [pending] presentation — owner: all — due: 2026-12-08
 
 ## Tasks
 
-- [pending] Obtain the Buy/Hold/Sell count of the 12 analysts (CIQ Analyst Ratings view) and reconcile with Yahoo Finance 3-3-3 [unverified] — owner: Alexa Zaldivar — due: 2026-10-18
-
-- [ ] [unverified] Share de EE.UU. en puntos (Circana) y split volumen/precio de Bimbo (industry 2026-10-12)
-- [ ] [unverified] Share por país en Brasil, Colombia, Argentina, España, Reino Unido
-- [ ] [unverified] Repasar EV/EBITDA y márgenes de pares (heredados del 08-oct)
-- [ ] [unverified] Texto final de la Ley de Ingresos 2027 sobre IEPS (votación fines de oct)
-- [ ] [unverified] Accionistas de control de Gruma, Arca, Nutresa, Lala
-- [ ] [unverified] Conciliar botanas: RA25 US$106.9bn (top-10) vs Celebramos p.16 US$183bn (top-5, 1.4%) (industry 2026-10-12)
-- [ ] [unverified] Pedir a IR de Bimbo: share EE.UU. por categoría (Circana) y ranking de Barcel USA (#5 RA23 vs #6 RA24-25)
-- [ ] [unverified] Alcance del vínculo Flowers-Bimbo «licensee» (CIQ customers.csv, fuente 10-K de Flowers)
-- [ ] [unverified] Nutrella (Bimbo Brasil): confirmar venta a la que obliga Cade y su peso en ventas de Brasil (industry 2026-10-12)
-- [ ] [unverified] Precio de la compra del 40% de Bimbo Colombia (Nutresa, may-2025)
-- [ ] [unverified] Texto final de la Ley de Ingresos 2027 sobre IEPS y criterio de sodio (risks-esg 2026-10-14; sin aprobar al 14-oct)
-- [ ] [unverified] Emisiones absolutas alcance 1-3 de 2023-2025 desde el archivo de datos del informe integrado, y aclarar 99% vs 100% de electricidad renovable (esg)
-- [ ] [unverified] Sustainalytics SPO y términos finales de los bonos 23L y 23-2L (esg)
-- [ ] [unverified] Dueños de Frexport, Normaciel, Monser, Philae, Valacci y Marlupag; explicar el "grupo de control 81%" del deck 3T22 (governance)
-- [ ] Construir model/drivers.yaml y repetir el escenario bajista de risks.md con el motor, no con el puente estático (risks-esg)
-- [ ] Cuantificar: volumen de México bajo IEPS 20%; exposición a ventas en la UE; capex de sostenibilidad (IC25 p.168)
+- [pending] decide WACC variant: route B (base proposal) or A, beta source, target D/E; alternatives in DCF v3 'Scenarios' — owner: valuation — due: 2026-10-21
+- [pending] decide terminal assumptions: g, exit multiple, long-run return on new capital (capex path FY2031-35) — owner: valuation — due: 2026-10-21
+- [pending] confirm the 3-5 story drivers (segment growth, gross margin, opex, capex) and the number each must hit — owner: all — due: 2026-10-21
+- [pending] decide bridge judgements: NCI uplift (Ps 4.47/share at ke 12.94%), provisions incl. uncertain tax positions (Ps 2.66/share) — owner: valuation — due: 2026-10-21
+- [pending] decide use of excess cash in the forecast (buybacks, debt paydown, M&A) — owner: model — due: 2026-10-21
+- [pending] set target price, method weights and rating — owner: all — due: 2026-10-24
+- [pending] decide how to weight country risk and the discount rate by region: one MXN WACC with weighted country premium (v3 base: route B by FY2025 Adj. EBITDA 2.05%; by sales 1.70%, 3-year weights 1.99% / 1.65%, ex-Argentina 2.02%) or a regional DCF using the company's own impairment-test rates (Mexico 10.00%, US 7.27%, Canada 6.50%, Spain 7.00%, Brazil 10.25%; RA25 p.265) — owner: valuation — due: 2026-10-21
+- [pending] settle the terminal capex (peers' consensus 3.7-3.8% of sales, Bimbo consensus ~5.0%, model 6.0%; ±50 bp = ∓Ps 9.4): the company's impairment tests assume 3.3-4.3% of sales (maintenance-type, IAS 36), disclosed growth share of capex was 45% in 2021 and 36% in 2022; terminal capex below D&A excluding right-of-use (4.4%) is not sustainable with 4.25% growth — owner: model — due: 2026-10-24
+- [pending] compile remaining Capital IQ material (1,921 PDFs, 115 docx, 66 mp3: news, filings, broker research, transcripts) — owner: all — due: 2026-10-14
+- [pending] resolve the last flagged contradiction: FY22 buyback 2,556 vs 2,568 (resolved 2026-10-17: dividend 1.075 not 1.75, AGM notice; plants 249 = 248 + Venezuela; CIQ net debt 149,031 vs company 145,128 is a basis difference, wiki C4) — owner: model — due: 2026-10-21
+- [pending] add callout in bimbo-valuation-data-gaps: consensus now exists in ciq-consensus-estimates; confirm FY26 guidance vs transcript — owner: valuation — due: 2026-10-14
+- [pending] confirm macro/macro-view.yaml field by field (all status: propuesto; BIMBOA/journal/decisions.md 2026-10-17) and save a FRED key in macro/fred.key (keep it out of git) — owner: all — due: 2026-10-21
+- [pending] peer data still open: Gruma BMV official close; Aryzta and Arca book NCI; Yamazaki operating leases (J-GAAP); Gruma consensus in its native currency — owner: valuation — due: 2026-10-21
+- [pending] thesis: write the one-line thesis, the claim and "why the market is wrong" for each pillar, and one kill criterion per pillar (research/thesis.md v1 [team] slots) — owner: all — due: 2026-10-21
+- [pending] thesis evidence gaps: a third-party wheat price series (the +17% 2026 move is unverified), the water-stressed plant count (101 vs 89), and what the CEO has changed (program-level savings, dates) — owner: all — due: 2026-10-24
+- [pending] risks-esg: choose the 4-6 key risks, their scores and what is priced in; choose 3-5 material ESG issues; re-score the governance rubric (research/risks.md §5, research/esg.md) — owner: all — due: 2026-10-24
+- [pending] ESG data gaps: Sustainalytics second-party opinion, MSCI/DJSI ratings, assured Scope 1-3 series, water-stressed plant count (101 vs 89), renewable electricity 100% vs 99% — owner: all — due: 2026-10-24
+- [pending] report charts: football-field.png and sensitivity.png in report/charts come from the engine basis (superseded in valuation-outputs.yaml); redraw them from the published basis before the report — owner: valuation — due: 2026-10-25
+- [pending] forecast evidence: what supports an EBITDA margin above the clean historical best (14.4% FY21) from FY2028 (program-level savings), and the implied share path in North America (~0.8 pp a year) and Mexico (~0.3 pp a year) — owner: all — due: 2026-10-24
+- [pending] industry [unverified] figures: Mexico competitor shares (Sabritas, Gamesa, Bokados), numeric shares in Brazil, Colombia, Argentina, Spain and the UK, a US share series by category (Circana) and Bimbo's US volume/price split; save sources in research/sources/ — owner: industry — due: 2026-10-24
+- [pending] industry decisions: market definition, moat and peer set (research/industry.md coach moments) — owner: all — due: 2026-10-21
+- [pending] SECURITY: rotate the Obsidian Local REST API key and its TLS certificate (they are committed in .obsidian/plugins/obsidian-local-rest-api/data.json in the public repo), then stop tracking that file; purging it from git history needs a force push (your decision) — owner: Luis Arturo Romo Alba — due: 2026-10-18
+- [pending] optional: report the two unanchored DCF rows of the engine model (DCF!19-20, model-check S5) to the research-challenge plugin maintainer — owner: model — due: 2026-10-24
