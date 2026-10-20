@@ -1,0 +1,379 @@
+{
+ "price": 58.6,
+ "dps": 1.05,
+ "ke": 0.1303938899400653,
+ "wacc": 0.10378241694862467,
+ "base_exit": 46.417140641541984,
+ "base_gordon_ronic": 30.75677351500897,
+ "base_gordon_naive": 41.64567295640038,
+ "base_exp_return": -0.10461344420328077,
+ "bands": {
+  "sell_edge": {
+   "exp_return": -0.1,
+   "value": 46.65630314296579,
+   "multiple": 5.937559125643835
+  },
+  "clean_low": {
+   "exp_return": -0.05,
+   "value": 49.24831998424167,
+   "multiple": 6.157236727324834
+  },
+  "clean_high": {
+   "exp_return": 0.1,
+   "value": 57.02437050806931,
+   "multiple": 6.816269532367832
+  },
+  "buy_edge": {
+   "exp_return": 0.15,
+   "value": 59.61638734934518,
+   "multiple": 7.03594713404883
+  }
+ },
+ "slope_per_turn": 11.799185813398637,
+ "reverse_multiple": 6.9498066693236265,
+ "multiple_table": [
+  {
+   "multiple": 5.0,
+   "value": 35.593868808446615,
+   "exp_return": -0.31339433753589885
+  },
+  {
+   "multiple": 5.526,
+   "value": 41.800240546294305,
+   "exp_return": -0.19367343836935047
+  },
+  {
+   "multiple": 5.917289718482519,
+   "value": 46.417140641541984,
+   "exp_return": -0.10461344420328078
+  },
+  {
+   "multiple": 6.0,
+   "value": 47.39305462184526,
+   "exp_return": -0.08578806535614925
+  },
+  {
+   "multiple": 6.2,
+   "value": 49.75289178452498,
+   "exp_return": -0.04026681092019946
+  },
+  {
+   "multiple": 6.5,
+   "value": 53.292647528544556,
+   "exp_return": 0.028015070733725222
+  },
+  {
+   "multiple": 6.8,
+   "value": 56.832403272564164,
+   "exp_return": 0.09629695238765024
+  },
+  {
+   "multiple": 7.0,
+   "value": 59.19224043524388,
+   "exp_return": 0.14181820682360002
+  }
+ ],
+ "curve": [
+  {
+   "multiple": 4.8,
+   "value": 33.23403164576689,
+   "exp_return": -0.35891559197184864
+  },
+  {
+   "multiple": 5.0,
+   "value": 35.593868808446615,
+   "exp_return": -0.31339433753589885
+  },
+  {
+   "multiple": 5.2,
+   "value": 37.95370597112635,
+   "exp_return": -0.26787308309994884
+  },
+  {
+   "multiple": 5.4,
+   "value": 40.31354313380608,
+   "exp_return": -0.22235182866399883
+  },
+  {
+   "multiple": 5.6,
+   "value": 42.67338029648579,
+   "exp_return": -0.17683057422804938
+  },
+  {
+   "multiple": 5.8,
+   "value": 45.03321745916552,
+   "exp_return": -0.13130931979209937
+  },
+  {
+   "multiple": 6.0,
+   "value": 47.39305462184526,
+   "exp_return": -0.08578806535614925
+  },
+  {
+   "multiple": 6.2,
+   "value": 49.75289178452498,
+   "exp_return": -0.04026681092019946
+  },
+  {
+   "multiple": 6.4,
+   "value": 52.1127289472047,
+   "exp_return": 0.005254443515750218
+  },
+  {
+   "multiple": 6.6,
+   "value": 54.47256610988443,
+   "exp_return": 0.05077569795170023
+  },
+  {
+   "multiple": 6.8,
+   "value": 56.832403272564164,
+   "exp_return": 0.09629695238765024
+  },
+  {
+   "multiple": 7.0,
+   "value": 59.19224043524388,
+   "exp_return": 0.14181820682360002
+  },
+  {
+   "multiple": 7.2,
+   "value": 61.55207759792362,
+   "exp_return": 0.18733946125955026
+  },
+  {
+   "multiple": 7.4,
+   "value": 63.91191476060333,
+   "exp_return": 0.2328607156954996
+  }
+ ],
+ "share_na": [
+  0.4159211760033255,
+  0.4097898677921904,
+  0.40427088288744895,
+  0.3987679490864503,
+  0.3932824168823843
+ ],
+ "share_mx": [
+  0.38237747999910804,
+  0.3858848473784182,
+  0.38900380737699103,
+  0.3920906748765497,
+  0.3951442610899178
+ ],
+ "levers": {
+  "margin_m50_from27": {
+   "exit": -3.5460272647117606,
+   "gordon_ronic": -4.41458920102021
+  },
+  "margin_m100_from27": {
+   "exit": -7.092054529423535,
+   "gordon_ronic": -8.829178402040434
+  },
+  "margin_m100_2027_only": {
+   "exit": -0.6601248515071134,
+   "gordon_ronic": -0.6601248515071099
+  },
+  "margin_m50_all_years": {
+   "exit": -3.717522687512961,
+   "gordon_ronic": -4.58608462382141
+  },
+  "margin_p50_all_years": {
+   "exit": 3.717522687512947,
+   "gordon_ronic": 4.586084623821382
+  },
+  "na_margin_p100": {
+   "exit": 2.8102215869523803,
+   "gordon_ronic": 3.4934018619992493
+  },
+  "na_margin_gap_flowers_p150": {
+   "exit": 4.215332380428556,
+   "gordon_ronic": 5.240102792998844
+  },
+  "mx_margin_m100": {
+   "exit": -2.7906105658054585,
+   "gordon_ronic": -3.477025094872314
+  },
+  "mx_margin_m150": {
+   "exit": -4.185915848708184,
+   "gordon_ronic": -5.215537642308451
+  },
+  "na_growth_m1pp": {
+   "exit": -1.1217029970799857,
+   "gordon_ronic": -0.95188473696156
+  },
+  "mx_growth_m2pp": {
+   "exit": -2.1682546992575524,
+   "gordon_ronic": -1.8391286685127994
+  },
+  "growth_both": {
+   "exit": -3.289957696337524,
+   "gordon_ronic": -2.7910134054743594
+  }
+ },
+ "levers_consolidated": [
+  {
+   "lever": "EBITDA margin -50 bp every year",
+   "theme": "Wheat and climate input costs (gross margin)",
+   "d_exit": -3.717522687512961,
+   "d_gordon_ronic": -4.58608462382141
+  },
+  {
+   "lever": "EBITDA margin +50 bp every year",
+   "theme": "Productivity plan delivers more",
+   "d_exit": 3.717522687512947,
+   "d_gordon_ronic": 4.586084623821382
+  },
+  {
+   "lever": "Capex +50 bp of revenue every year",
+   "theme": "Water stress and decarbonisation capex",
+   "d_exit": -2.0478239940352267,
+   "d_gordon_ronic": -2.0478239940352267
+  },
+  {
+   "lever": "Revenue growth -50 bp every year",
+   "theme": "Front-of-pack labels, school-food rules, GLP-1 volumes",
+   "d_exit": -1.8433947630810508,
+   "d_gordon_ronic": -1.5735241750864404
+  },
+  {
+   "lever": "Exit multiple -0.5x",
+   "theme": "Controlled-company governance discount widens",
+   "d_exit": -5.899592906699326,
+   "d_gordon_ronic": 0.0
+  },
+  {
+   "lever": "WACC +50 bp",
+   "theme": "Country and currency risk (not ESG)",
+   "d_exit": -1.6168113889778155,
+   "d_gordon_ronic": -5.636136005628185
+  },
+  {
+   "lever": "One-off claim of MXN 1bn",
+   "theme": "Litigation (Canada Bread class actions) or tax disputes; per MXN 1bn",
+   "d_exit": -0.24143082087590947,
+   "d_gordon_ronic": -0.24143082087590947
+  },
+  {
+   "lever": "Recurring cost of MXN 1bn a year from FY2027 (pre-tax)",
+   "theme": "Carbon price (Mexican ETS) or packaging EPR fees; per MXN 1bn a year",
+   "d_exit": -1.431686297280315,
+   "d_gordon_ronic": -1.7737768508365157
+  },
+  {
+   "lever": "Bimbo 23L coupon step-up (Scope 3 target missed in 2030)",
+   "theme": "Scope 3 / SBTi",
+   "d_exit": -0.004304272804858082,
+   "d_gordon_ronic": -0.004304272804858082
+  }
+ ],
+ "scenario_bear_ops": {
+  "exit": -6.700068759387435,
+  "gordon_ronic": -7.031274484760075
+ },
+ "scenario_bull_ops": {
+  "exit": 4.215332380428556,
+  "gordon_ronic": 5.240102792998844
+ },
+ "scenario_all_three": {
+  "exit": -2.645676395232016,
+  "gordon_ronic": -1.9974319063241417
+ },
+ "case_bear_core": {
+  "value": 35.4467555569868,
+  "exp_return": -0.316232151880257,
+  "multiple": 5.525583336162253
+ },
+ "case_bear_base_multiple": {
+  "value": 39.71707188215455,
+  "exp_return": -0.23385775798809083,
+  "multiple": 5.917289718482519
+ },
+ "case_bull_hold_high": {
+  "value": 61.702199401582966,
+  "exp_return": 0.19023531057018694,
+  "multiple": 6.82
+ },
+ "case_all_three_base_multiple": {
+  "value": 43.77146424630997,
+  "exp_return": -0.1556485368983137,
+  "multiple": 5.917289718482519
+ },
+ "case_core_multiple_only": {
+  "value": 41.795324252251,
+  "exp_return": -0.19376827367221228,
+  "multiple": 5.525583336162253
+ },
+ "football": {
+  "dcf_exit_multiple": {
+   "low": 35.593868808446615,
+   "mid": 46.417140641541984,
+   "high": 59.19224043524388,
+   "note": "5.0x-7.0x on FY2030E EBITDA"
+  },
+  "dcf_exit_wacc": {
+   "low": 43.22167692449726,
+   "mid": 46.417140641541984,
+   "high": 49.76974353309538,
+   "note": "WACC 9.4%-11.4%"
+  },
+  "dcf_gordon_ronic": {
+   "low": 26.964800473908085,
+   "mid": 30.75677351500897,
+   "high": 35.86486984237603,
+   "note": "g 3.1%-5.1%, RONIC 14.6%"
+  }
+ },
+ "tornado": [
+  {
+   "label": "Exit multiple +/-0.5x",
+   "down": -5.899592906699326,
+   "up": 5.8995929066993185
+  },
+  {
+   "label": "EBITDA margin +/-50 bp",
+   "down": -3.717522687512961,
+   "up": 3.717522687512947
+  },
+  {
+   "label": "Capex +/-50 bp of sales",
+   "down": -2.0478239940352267,
+   "up": 2.0478239940352125
+  },
+  {
+   "label": "Revenue growth +/-50 bp",
+   "down": -1.8433947630810508,
+   "up": 1.8770536118121868
+  },
+  {
+   "label": "WACC +/-50 bp",
+   "down": -1.6168113889778155,
+   "up": 1.6560866494387483
+  }
+ ],
+ "mix": {
+  "w_mx": 0.554,
+  "rest_multiple": 5.525583336162253,
+  "gruma": 5.441722201960298,
+  "arca": 7.853799129766269,
+  "bimbo_today": 6.941367061179599,
+  "group_if_gruma": {
+   "multiple": 5.47912426781437,
+   "value": 41.24714507209695,
+   "exp_return": -0.20434264902781796
+  },
+  "group_if_arca": {
+   "multiple": 6.815414885818878,
+   "value": 57.01428637463343,
+   "exp_return": 0.09980547708496168
+  },
+  "group_if_mid": {
+   "multiple": 6.120810167928365,
+   "value": 48.81851624137992,
+   "exp_return": -0.05829091339256487
+  },
+  "mexico_for_today": 8.081149626807282,
+  "mexico_for_base": 6.232634567787282,
+  "mexico_for_clean_low": 6.665751912267996,
+  "mexico_for_clean_high": 7.855341813067629,
+  "mexico_for_buy": 8.25187178000084
+ }
+}

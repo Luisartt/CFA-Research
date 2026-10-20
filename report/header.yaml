@@ -1,0 +1,12 @@
+# report/header.yaml - header block of the report (read by the plugin builder). The team has not set rating or target yet.
+company: "Grupo Bimbo, S.A.B. de C.V."
+exchange: "BMV"
+ticker: "BIMBO A"
+sector: "Consumer Staples"
+industry: "Packaged Food & Bakery"
+recommendation: ""      # HOLD (provisional) in the PDF draft; BUY | HOLD | SELL is the team's decision
+price: 58.60
+price_date: "2026-10-16"
+currency: "MXN"
+target_price: 0.0       # TBD: the team's 12-month target (exit multiple not chosen yet)
+report_date: "2026-10-19"

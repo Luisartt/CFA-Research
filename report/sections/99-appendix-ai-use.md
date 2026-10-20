@@ -1,0 +1,11 @@
+# Use of AI Tools
+
+**Tools.** We used Claude (Anthropic) through Claude Code with a research-challenge plugin and a compiled knowledge wiki of the company filings. For independent review of the valuation documents we used Codex (OpenAI), and for translation of a few working notes smaller Claude models. NotebookLM (Google) produced an audio summary of our model notes for internal study.
+
+**What we used them for.** (1) Reading and extracting data: the assistant read 47 filings, presentations and Capital IQ exports into a wiki with source and page citations, and extracted and mapped the FY2021-FY2025 statements. (2) Building the financial model and the DCF, WACC and peer workbooks, with a Python replica to check every result. (3) Industry, risk and ESG research notes. (4) Charts and tables for this report, and drafting and editing the text from the team's analysis. (5) Coaching questions that tested the thesis.
+
+**How we verified the output.** The DCF workbook passes its integrity checks, and a Python replica reproduces every workbook value to half a centavo. Each wiki number carries a data tag and a page reference to a filing or public source, and every number in this report is read from the model or the wiki. A second model, Codex, reviewed the valuation and research documents, and we fixed what it flagged. [Team to confirm: which member checked the citations against the filings.]
+
+**What the team decided.** [Team to complete at submission: the decisions the team took on the thesis, the recommendation, the target price, the exit multiple, the key forecast assumptions, the cost-of-capital framework and the material risks and ESG issues.] The team validated the three theses on 19 October 2026 (the assistant proposed their wording and sizing); the target price and rating are not yet set.
+
+**Reflection.** [Team to complete at submission: one or two sentences on where AI helped most, where the team did not rely on it, and one limitation noticed. Draft observation from the assistant: it helped most with reading hundreds of pages of filings quickly and keeping every number tied to a source, and it writes fluent text around thin evidence, so every claim needed a source check.]
