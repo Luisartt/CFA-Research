@@ -6,10 +6,10 @@ Soft cap: see AGENTS.md > Context files.
 
 ## Milestones
 
-- [in_progress] thesis v1 (draft research/thesis.md v1: the team's pillars with tagged evidence; claims, kill criteria and direction open) — owner: all — due: 2026-10-21
+- [in_progress] thesis v2 (three theses validated 2026-10-19, research/thesis.md v2; open: what the market misses per thesis, and the rating, which follows the exit multiple) — owner: all — due: 2026-10-24
 - [in_progress] industry analysis (research/industry.md and BIMBOA/research/industry/industry-report_2026-10-17.md drafted; market definition, moat and peers open) — owner: industry — due: 2026-10-21
 - [in_progress] valuation and target price (mechanics v3 done: route B base proposal, Gordon 33.55 / exit 45.72; team decisions open, valuation/valuation.md §11 and output/dcf-v3-conclusiones.md) — owner: valuation — due: 2026-10-14
-- [pending] report draft — owner: writer — due: 2026-10-25
+- [in_progress] report draft (first draft PDF built 2026-10-19: report/BIMBOA_report_v1_draft.pdf, La Comer format, Bimbo palette, 9 body pages + 5 appendix; theses provisional, target TBD; on the consolidated cash flow only; copy in Drive Reporte Final) — owner: writer — due: 2026-10-25
 - [pending] final report — owner: all — due: 2026-11-04
 - [pending] presentation — owner: all — due: 2026-12-08
 
@@ -28,8 +28,8 @@ Soft cap: see AGENTS.md > Context files.
 - [pending] add callout in bimbo-valuation-data-gaps: consensus now exists in ciq-consensus-estimates; confirm FY26 guidance vs transcript — owner: valuation — due: 2026-10-14
 - [pending] confirm macro/macro-view.yaml field by field (all status: propuesto; BIMBOA/journal/decisions.md 2026-10-17) and save a FRED key in macro/fred.key (keep it out of git) — owner: all — due: 2026-10-21
 - [pending] peer data still open: Gruma BMV official close; Aryzta and Arca book NCI; Yamazaki operating leases (J-GAAP); Gruma consensus in its native currency — owner: valuation — due: 2026-10-21
-- [pending] thesis: write the one-line thesis, the claim and "why the market is wrong" for each pillar, and one kill criterion per pillar (research/thesis.md v1 [team] slots) — owner: all — due: 2026-10-21
-- [pending] thesis evidence gaps: a third-party wheat price series (the +17% 2026 move is unverified), the water-stressed plant count (101 vs 89), and what the CEO has changed (program-level savings, dates) — owner: all — due: 2026-10-24
+- [pending] thesis: for each of the three validated theses, state what the market misses (variant perception vs consensus; research/thesis.md v2 [team] slots) — owner: all — due: 2026-10-24
+- [pending] thesis evidence gaps: North America volume/price/mix and transformation programme size (capex, savings, end date), a Circana share series, the source of Mexico's share gain (about 0.3 points a year), Bimbo's 2027 wheat hedge coverage — owner: all — due: 2026-10-24
 - [pending] risks-esg: choose the 4-6 key risks, their scores and what is priced in; choose 3-5 material ESG issues; re-score the governance rubric (research/risks.md §5, research/esg.md) — owner: all — due: 2026-10-24
 - [pending] ESG data gaps: Sustainalytics second-party opinion, MSCI/DJSI ratings, assured Scope 1-3 series, water-stressed plant count (101 vs 89), renewable electricity 100% vs 99% — owner: all — due: 2026-10-24
 - [pending] report charts: football-field.png and sensitivity.png in report/charts come from the engine basis (superseded in valuation-outputs.yaml); redraw them from the published basis before the report — owner: valuation — due: 2026-10-25
@@ -38,3 +38,11 @@ Soft cap: see AGENTS.md > Context files.
 - [pending] industry decisions: market definition, moat and peer set (research/industry.md coach moments) — owner: all — due: 2026-10-21
 - [pending] SECURITY: rotate the Obsidian Local REST API key and its TLS certificate (they are committed in .obsidian/plugins/obsidian-local-rest-api/data.json in the public repo), then stop tracking that file; purging it from git history needs a force push (your decision) — owner: Luis Arturo Romo Alba — due: 2026-10-18
 - [pending] optional: report the two unanchored DCF rows of the engine model (DCF!19-20, model-check S5) to the research-challenge plugin maintainer — owner: model — due: 2026-10-24
+- [pending] decide the consolidation rules for the three DCFs: weights (50/50 input sets vs one third per model), Diego's exit-multiple basis (5.92x lease-consistent vs 6.2x raw), tax on EBIT (34% / 30% / 32%), horizon (5-year template vs v3 10 years); valuation/consolidated-valuation.md §11 — owner: all — due: 2026-10-21
+- [pending] Diego's workbooks: replace the Capital IQ debt reconverted at 17.96 MXN/US$ (194,918, incl. 2,658 derivatives) and cash (17,023) with the company figures (187,021 / 16,563); confirm Gruma LTM EBITDA (company 1,108.9 vs CIQ 995.0) — owner: Diego Benavides Pro — due: 2026-10-21
+- [pending] report: choose the exit multiple on evidence (base 5.92x; clean HOLD needs 6.16x-6.82x; price needs 6.95x), set target price and rating, then remove "provisional" and "TBD" from the header band, Executive Summary and Valuation — owner: all — due: 2026-10-24
+- [pending] report: insert the official CFA cover and fill its fields; team confirms the AI-use disclosure (who checked the citations); spot-check the citations and page numbers against the PDFs — owner: writer — due: 2026-10-30
+- [pending] report: refresh after the 3Q26 results (late October, date not announced): rerun valuation/build/consolidate_models.py, report/build/report_levers.py, report_charts.py, build_report_pdf.py, check_report.py — owner: model — due: 2026-10-30
+- [pending] report: decide the final format and length (the PDF template is 9 body pages in two columns at 8.7 pt; the plugin's Word estimate is 12 pages at 500 words per page; the rule is 10 A4 pages) — owner: all — due: 2026-10-25
+- [pending] report: keep the Spanish copy in sync after every English edit: update output/reporte-es/sections/*.md, then from report/build run `REPORT_LANG=es python report_charts.py` and `REPORT_LANG=es python build_report_pdf.py` (writes output/BIMBOA_reporte_v1_borrador_ES.pdf); the build lists any untranslated string — owner: writer — due: 2026-10-30
+
