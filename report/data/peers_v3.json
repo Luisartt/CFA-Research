@@ -1,0 +1,222 @@
+{
+ "pricing_date": "2026-10-16",
+ "peers": [
+  {
+   "name": "Flowers Foods, Inc.",
+   "group": "Core",
+   "ticker": "NYSE:FLO",
+   "ev_ebitda_ltm": 5.609444470364208,
+   "ev_ebitda_ntm": 6.147272023717357,
+   "ev_sales": 0.6214200118685274,
+   "pe_ltm": 23.45,
+   "pe_ntm": 8.93,
+   "nd_ebitda": 3.3704953612264545,
+   "ebitda_margin": 0.11078102567047608,
+   "in_median": "yes"
+  },
+  {
+   "name": "Gruma, S.A.B. de C.V.",
+   "group": "Core",
+   "ticker": "BMV:GRUMA B",
+   "ev_ebitda_ltm": 5.441722201960298,
+   "ev_ebitda_ntm": 5.638555825335442,
+   "ev_sales": 0.928343525446343,
+   "pe_ltm": 9.355020757152909,
+   "pe_ntm": 9.739254353567631,
+   "nd_ebitda": 1.4708269456217873,
+   "ebitda_margin": 0.17059737542499345,
+   "in_median": "yes"
+  },
+  {
+   "name": "Yamazaki Baking Co., Ltd.",
+   "group": "Core",
+   "ticker": "TSE:2212",
+   "ev_ebitda_ltm": 6.059714403567634,
+   "ev_ebitda_ntm": 5.844155443550768,
+   "ev_sales": 0.4939388192483474,
+   "pe_ltm": 17.74,
+   "pe_ntm": 16.84,
+   "nd_ebitda": -0.6700155653035234,
+   "ebitda_margin": 0.08151189748440006,
+   "in_median": "no"
+  },
+  {
+   "name": "ARYZTA AG",
+   "group": "Core",
+   "ticker": "SWX:ARYN",
+   "ev_ebitda_ltm": 8.333236584786054,
+   "ev_ebitda_ntm": 5.814703572859537,
+   "ev_sales": 0.8192369377580432,
+   "pe_ltm": 10.21,
+   "pe_ntm": 9.01,
+   "nd_ebitda": 3.5043934786053885,
+   "ebitda_margin": 0.09830957388798006,
+   "in_median": "no"
+  },
+  {
+   "name": "The J. M. Smucker Company",
+   "group": "Secondary",
+   "ticker": "NYSE:SJM",
+   "ev_ebitda_ltm": 8.87549766314696,
+   "ev_ebitda_ntm": 9.215746536570519,
+   "ev_sales": 2.239786390590702,
+   "pe_ltm": 58.63,
+   "pe_ntm": 12.6,
+   "nd_ebitda": 2.9846806300848194,
+   "ebitda_margin": 0.2523561467308806,
+   "in_median": "yes"
+  },
+  {
+   "name": "The Campbell's Company",
+   "group": "Secondary",
+   "ticker": "NasdaqGS:CPB",
+   "ev_ebitda_ltm": 7.6631487889273355,
+   "ev_ebitda_ntm": 8.357472226960914,
+   "ev_sales": 1.363700738916256,
+   "pe_ltm": 15.11,
+   "pe_ntm": 11.72,
+   "nd_ebitda": 4.2456747404844295,
+   "ebitda_margin": 0.17795566502463053,
+   "in_median": "yes"
+  },
+  {
+   "name": "Mondelez International, Inc.",
+   "group": "Secondary",
+   "ticker": "NasdaqGS:MDLZ",
+   "ev_ebitda_ltm": 16.144293392349038,
+   "ev_ebitda_ntm": 13.802617997775705,
+   "ev_sales": 2.574134845620668,
+   "pe_ltm": 23.1,
+   "pe_ntm": 19.83,
+   "nd_ebitda": 3.2500790388871326,
+   "ebitda_margin": 0.15944549464398236,
+   "in_median": "yes"
+  },
+  {
+   "name": "Arca Continental, S.A.B. de C.V.",
+   "group": "Secondary",
+   "ticker": "BMV:AC",
+   "ev_ebitda_ltm": 7.853799129766269,
+   "ev_ebitda_ntm": 7.109861211915867,
+   "ev_sales": 1.5245557069297886,
+   "pe_ltm": 18.71,
+   "pe_ntm": 16.5,
+   "nd_ebitda": 0.7445142223864056,
+   "ebitda_margin": 0.19411697214812265,
+   "in_median": "no"
+  },
+  {
+   "name": "PepsiCo, Inc.",
+   "group": "Secondary",
+   "ticker": "NasdaqGS:PEP",
+   "ev_ebitda_ltm": 11.193830731634332,
+   "ev_ebitda_ntm": 11.027248146169912,
+   "ev_sales": 2.2846622082429944,
+   "pe_ltm": 16.15,
+   "pe_ntm": 15.53,
+   "nd_ebitda": 2.256595681013416,
+   "ebitda_margin": 0.20410012113068882,
+   "in_median": "yes"
+  },
+  {
+   "name": "Grupo Bimbo, S.A.B. de C.V. (subject)",
+   "group": "Subject Company >>",
+   "ticker": "BMV:BIMBO A",
+   "ev_ebitda_ltm": 6.941367061179599,
+   "ev_ebitda_ntm": 6.575785387943234,
+   "ev_sales": 1.003412580708694,
+   "pe_ltm": 18.456692913385826,
+   "pe_ntm": 17.80650854569219,
+   "nd_ebitda": 2.809960767576618,
+   "ebitda_margin": 0.14455547039435435,
+   "in_median": "subject"
+  }
+ ],
+ "medians": {
+  "core_median": {
+   "ev_ebitda_ltm": 5.525583336162253,
+   "ev_ebitda_ntm": 5.8929139245263995,
+   "ev_sales": 0.7748817686574352,
+   "pe_ltm": 16.402510378576455,
+   "pe_ntm": 9.334627176783815,
+   "nd_ebitda": 2.420661153424121,
+   "ebitda_margin": 0.14068920054773476
+  },
+  "all_median": {
+   "ev_ebitda_ltm": 8.269323226037148,
+   "ev_ebitda_ntm": 8.786609381765716,
+   "ev_sales": 1.8017435647534792,
+   "pe_ltm": 16.15,
+   "pe_ntm": 11.72,
+   "nd_ebitda": 3.117379834485976,
+   "ebitda_margin": 0.174276520224812
+  },
+  "all_mean": {
+   "ev_ebitda_ltm": 9.154656208063697,
+   "ev_ebitda_ntm": 9.03148545942164,
+   "ev_sales": 1.6686746201142484,
+   "pe_ltm": 17.433004151430584,
+   "pe_ntm": 13.149850870713525,
+   "nd_ebitda": 2.9297253995530066,
+   "ebitda_margin": 0.17920597143760864
+  }
+ },
+ "capex_intensity_fy1_fy3": {
+  "Flowers Foods, Inc.": [
+   0.023604207423868994,
+   0.02451045321998715,
+   0.0246115328061042
+  ],
+  "Gruma, S.A.B. de C.V.": [
+   0.03305933051057781,
+   0.03665646147137916,
+   0.037547274194864914
+  ],
+  "Yamazaki Baking Co., Ltd.": [
+   0.04469299182782742,
+   0.04257552052539182,
+   0.04065803702657972
+  ],
+  "ARYZTA AG": [
+   0.04198124660369287,
+   0.0393628271617946,
+   0.038189267604662125
+  ],
+  "The J. M. Smucker Company": [
+   0.03656075804504644,
+   0.0381531236964082,
+   0.0378517764951011
+  ],
+  "The Campbell's Company": [
+   0.03419764630560961,
+   0.035820718991106074,
+   0.036676740701052334
+  ],
+  "Mondelez International, Inc.": [
+   0.03566777835465191,
+   0.03578017451602349,
+   0.03571234326985201
+  ],
+  "Arca Continental, S.A.B. de C.V.": [
+   0.06880326446572602,
+   0.06670704421957277,
+   0.06376556729708557
+  ],
+  "PepsiCo, Inc.": [
+   0.044320907016215626,
+   0.042846689630824816,
+   0.04324632605797966
+  ],
+  "Peer median (excluding Bimbo)": [
+   0.03656075804504644,
+   0.0381531236964082,
+   0.0378517764951011
+  ],
+  "Grupo Bimbo, S.A.B. de C.V. (subject)": [
+   0.05156009465782163,
+   0.050172716146154,
+   0.04895811989468278
+  ]
+ },
+ "source": "valuation/BIMBOA_PeerAnalysis_v3.xlsx, PeerAnalysis rows 64-91 (claim basis, S&P Capital IQ, 16-Oct-2026)"
+}
