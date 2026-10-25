@@ -1,0 +1,1328 @@
+Informacion BIMBo:
+
+"Grupo Bimbo — Sales Drivers: Macro Economic Data
+Important Scope Notice Before the Tables
+The context contains S&P Capital IQ economic data for 2015–2025 (actuals) for the following countries: MEX, USA, CAN, ARG, BRA, CHL, COL, CRI, ECU, SLV, GTM, HND, NIC, PAN, PRY. The data as-of date is 10/15/2026 for most series.
+
+What is NOT in the context (and therefore cannot be reported without fabrication):
+
+2026 estimates and 2027–2030 forecasts — the economic data tool returned only historical actuals through 2025. No forward-looking macro forecasts (2026E, 2027F–2030F) are present in the retrieved data.
+PER (Peru), URY (Uruguay), VEN (Venezuela) — these three countries were listed in your scope but no data was returned for them.
+Indicators 5–10 (CPI Dec/Dec, CPI food & non-alcoholic beverages, CPI bread & cereals, household consumption expenditure nominal %, retail sales, retail sales real) — the S&P Capital IQ economic data tool returns: real GDP growth, nominal GDP (USD), nominal GDP (LCU), CPI annual average %, population, population growth %, and real private consumption growth. Indicators 5, 6, 7, 8, and 10 are not available in the retrieved dataset.
+The indicators I can populate from the data are:
+
+Ind. 1: Real GDP growth % y/y (realGDPGrowth)
+Ind. 2: Nominal GDP, local currency, level (nominalGDPLCU)
+Ind. 3: Nominal GDP, local currency, % y/y — not directly provided; would require me to calculate from consecutive LCU levels, which the instructions prohibit (no self-interpolation). I will flag this.
+Ind. 4: CPI inflation, annual average % y/y (consumerPriceInflation)
+Ind. 9: Household final consumption expenditure, real % y/y (realPrivateConsumptionGrowth)
+Ind. 11: Population % y/y (populationGrowth)
+Part 1 — Long Data Table
+Source: S&P Capital IQ Economic Data Data as-of: 10/15/2026 (economicAsofFinl). All values are Actual unless noted. Provider: S&P Global Market Intelligence (Standardized / As Reported BEST_OF). Series names per CIQ field names are shown in the series_name_in_CIQ column. Forecast provider and vintage date: N/A for all rows below — no forecast data was returned.
+
+Reading note: "As reported ACTUAL" = national statistics agency data as reported; "Standardized ACTUAL" = S&P standardized/rebased series; "Standardized BEST_OF" = S&P best-of composite. These are the exact macroDataSource flags in the data.
+
+Indicator 1 — Real GDP Growth, % y/y
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2015	2.7	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2016	1.77	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2017	1.87	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2018	1.97	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2019	-0.39	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2020	-8.57	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2021	6.05	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2022	3.71	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2023	3.12	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2024	1.46	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+MEX	Mexico	1 – Real GDP growth	% y/y	N/A	2025	0.5	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2015	2.95	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2016	1.82	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2017	2.46	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2018	2.97	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2019	2.58	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2020	-2.08	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2021	6.27	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2022	2.43	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2023	2.92	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2024	2.95	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+USA	North America	1 – Real GDP growth	% y/y	N/A	2025	2.34	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2015	0.62	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2016	0.8	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2017	3.51	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2018	2.78	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2019	1.99	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2020	-5.04	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2021	6.03	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2022	5.06	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2023	2.47	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2024	2.09	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CAN	North America	1 – Real GDP growth	% y/y	N/A	2025	2.12	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2015	2.73	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2016	-2.08	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2017	2.82	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2018	-2.62	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2019	-2	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-9.9	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2021	10.44	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2022	6.02	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2023	-1.85	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2024	-1.37	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ARG	Latin America	1 – Real GDP growth	% y/y	N/A	2025	4.48	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2015	-3.54	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2016	-3.5	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2017	1.32	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2018	1.78	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2019	1.22	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-3.57	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2021	4.76	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2022	3.02	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2023	3.24	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2024	3.42	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+BRA	Latin America	1 – Real GDP growth	% y/y	N/A	2025	2.29	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2015	2.15	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2016	1.75	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2017	1.36	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2018	3.99	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2019	0.64	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-6.41	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2021	11.34	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2022	2.06	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2023	0.68	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2024	2.81	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CHL	Latin America	1 – Real GDP growth	% y/y	N/A	2025	2.46	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2015	2.96	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2016	2.09	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2017	1.36	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2018	2.56	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2019	3.19	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-7.19	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2021	10.8	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2022	7.33	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2023	0.84	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2024	1.49	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+COL	Latin America	1 – Real GDP growth	% y/y	N/A	2025	2.57	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2015	3.65	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2016	4.2	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2017	4.16	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2018	2.85	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2019	2.71	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-4.14	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2021	8.22	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2022	5.46	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2023	4.79	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2024	4.08	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+CRI	Latin America	1 – Real GDP growth	% y/y	N/A	2025	4.56	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2015	0.12	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2016	-0.69	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2017	5.97	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2018	1.04	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2019	0.17	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-9.25	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2021	9.42	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2022	5.87	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2023	1.83	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2024	-1.94	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+ECU	Latin America	1 – Real GDP growth	% y/y	N/A	2025	3.73	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2015	2.4	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2016	2.54	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2017	2.25	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2018	2.41	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2019	2.44	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-7.89	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2021	11.9	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2022	2.95	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2023	3.36	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2024	2.59	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+SLV	Latin America	1 – Real GDP growth	% y/y	N/A	2025	3.91	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2015	4.09	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2016	2.68	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2017	3.08	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2018	3.41	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2019	4.02	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-1.79	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2021	8.04	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2022	4.15	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2023	3.52	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2024	3.72	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+GTM	Latin America	1 – Real GDP growth	% y/y	N/A	2025	4.28	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2015	3.84	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2016	3.89	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2017	4.84	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2018	3.84	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2019	2.56	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-8.97	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2021	12.57	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2022	4.14	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2023	3.58	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2024	3.63	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+HND	Latin America	1 – Real GDP growth	% y/y	N/A	2025	3.75	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2015	4.79	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2016	4.56	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2017	4.63	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2018	-3.36	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2019	-2.9	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-2.24	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2021	10.45	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2022	3.55	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2023	4.43	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2024	3.58	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+NIC	Latin America	1 – Real GDP growth	% y/y	N/A	2025	4.92	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2015	5.73	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2016	4.95	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2017	5.59	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2018	3.72	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2019	3.1	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-17.82	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2021	16.47	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2022	11.04	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2023	7.17	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2024	2.75	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PAN	Latin America	1 – Real GDP growth	% y/y	N/A	2025	4.37	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2015	N/A	—	—	Not in retrieved data	—
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2016	N/A	—	—	Not in retrieved data	—
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2017	N/A	—	—	Not in retrieved data	—
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2018	N/A	—	—	Not in retrieved data	—
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2019	-0.4	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2020	-0.82	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2021	3.99	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2022	-0.03	Actual	S&P Global Market Intelligence	realGDPGrowth (Standardized ACTUAL)	10/15/2026
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2023	5.29	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2024	4.67	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+PRY	Latin America	1 – Real GDP growth	% y/y	N/A	2025	6.64	Actual	S&P Global Market Intelligence	realGDPGrowth (As reported ACTUAL)	10/15/2026
+Note on PRY 2015–2018: The Paraguay data block in the retrieved context starts at 2019. Years 2015–2018 are not present in the data returned.
+
+Indicator 2 — Nominal GDP, Local Currency, Level
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2015	19,228.61	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2016	20,758.79	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2017	22,536.21	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2018	24,176.67	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2019	25,121.82	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2020	24,086.76	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2021	26,690.03	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2022	29,525.51	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2023	31,871.09	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2024	33,582.9	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+MEX	Mexico	2 – Nominal GDP LCU	Billions	Mexican Peso (Mex$B)	2025	35,301.59	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2015	18,295.02	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2016	18,804.91	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2017	19,612.1	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2018	20,656.52	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2019	21,539.98	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2020	21,375.28	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2021	23,745.85	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2022	26,059.71	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2023	27,825.89	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2024	29,380.99	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+USA	North America	2 – Nominal GDP LCU	Billions	USD ($B)	2025	30,861.29	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2015	1,990.44	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2016	2,025.54	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2017	2,140.64	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2018	2,235.68	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2019	2,313.56	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2020	2,220.53	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2021	2,535.82	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2022	2,864.16	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2023	2,965.2	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2024	3,108.55	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CAN	North America	2 – Nominal GDP LCU	Billions	Canadian Dollar (C$B)	2025	3,245.26	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2015	5,954.51	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2016	8,228.16	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2017	10,660.23	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2018	14,744.81	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2019	21,558.44	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2020	27,209.81	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2021	46,219.08	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2022	82,810.05	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2023	193,946.18	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2024	584,377.01	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ARG	Latin America	2 – Nominal GDP LCU	Billions	Argentine Peso (AR$B)	2025	850,239.8	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2015	5,995.79	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2016	6,269.33	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2017	6,585.48	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2018	7,004.14	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2019	7,389.13	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2020	7,609.6	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2021	9,012.14	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2022	10,079.68	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2023	10,943.34	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2024	11,779.25	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+BRA	Latin America	2 – Nominal GDP LCU	Billions	Brazilian Real (R$B)	2025	12,738.57	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2015	158.62	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2016	168.76	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2017	179.31	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2018	189.43	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2019	195.55	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2020	201.31	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2021	239.56	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2022	262.95	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2023	282.1	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2024	310.68	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CHL	Latin America	2 – Nominal GDP LCU	Trillions	Chilean Peso (CL$T)	2025	339.98	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2015	804.69	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2016	863.78	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2017	920.47	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2018	987.79	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2019	1,060.07	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2020	998.47	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2021	1,192.63	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2022	1,471.08	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2023	1,587.2	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2024	1,713.32	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+COL	Latin America	2 – Nominal GDP LCU	Trillions	Colombian Peso (Col$T)	2025	1,852.67	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2015	30,171.92	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2016	32,056.29	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2017	34,343.65	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2018	36,099.88	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2019	38,029.38	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2020	36,735.63	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2021	40,716.61	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2022	45,947.44	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2023	47,611.32	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2024	49,819.17	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+CRI	Latin America	2 – Nominal GDP LCU	Billions	Costa Rican Colón (¢B)	2025	51,812.3	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2015	97.21	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2016	97.67	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2017	104.47	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2018	107.48	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2019	107.6	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2020	95.87	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2021	107.18	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2022	116.13	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2023	120.79	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2024	123.8	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+ECU	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2025	130.32	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2015	23.44	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2016	24.19	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2017	24.98	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2018	26.02	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2019	26.88	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2020	24.92	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2021	29.04	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2022	31.87	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2023	33.57	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2024	34.88	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+SLV	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized	2025	36.71	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2015	476.02	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2016	502	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2017	526.51	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2018	551.37	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2019	593.97	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2020	600.12	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2021	668.68	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2022	740.81	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2023	816.86	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2024	878.39	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+GTM	Latin America	2 – Nominal GDP LCU	Billions	Guatemalan Quetzal (Q.B)	2025	947.01	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2015	460.41	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2016	495.92	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2017	543.4	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2018	575.28	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2019	609.83	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2020	574.04	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2021	675.93	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2022	769.49	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2023	845.21	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2024	917.08	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+HND	Latin America	2 – Nominal GDP LCU	Billions	Honduran Lempira (L.B)	2025	1,027.76	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2015	347.71	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2016	380.26	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2017	414.28	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2018	410.99	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2019	420.61	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2020	437.05	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2021	499.75	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2022	560.88	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2023	648.87	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2024	721.36	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+NIC	Latin America	2 – Nominal GDP LCU	Billions	Nicaraguan Córdoba (C$B)	2025	814.42	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2015	54.09	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2016	57.91	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2017	62.2	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2018	67.32	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2019	69.78	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2020	57.06	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2021	67.4	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2022	76.48	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2023	83.82	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2024	86.56	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PAN	Latin America	2 – Nominal GDP LCU	Billions	USD ($B) — dollarized (Balboa)	2025	90.7	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PRY	Latin America	2 – Nominal GDP LCU	Trillions	Paraguayan Guaraní (₲T)	2015–2018	N/A	—	—	Not in retrieved data	—
+PRY	Latin America	2 – Nominal GDP LCU	Trillions	Paraguayan Guaraní (₲T)	2019	239.91	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PRY	Latin America	2 – Nominal GDP LCU	Trillions	Paraguayan Guaraní (₲T)	2020	239.91	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PRY	Latin America	2 – Nominal GDP LCU	Trillions	Paraguayan Guaraní (₲T)	2021	270.54	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PRY	Latin America	2 – Nominal GDP LCU	Trillions	Paraguayan Guaraní (₲T)	2022	292.17	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PRY	Latin America	2 – Nominal GDP LCU	Trillions	Paraguayan Guaraní (₲T)	2023	314.45	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PRY	Latin America	2 – Nominal GDP LCU	Trillions	Paraguayan Guaraní (₲T)	2024	338.24	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+PRY	Latin America	2 – Nominal GDP LCU	Trillions	Paraguayan Guaraní (₲T)	2025	371.83	Actual	S&P Global Market Intelligence	nominalGDPLCU (As reported ACTUAL)	10/15/2026
+Indicator 4 — CPI Inflation, Annual Average, % y/y
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2015	2.72	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2016	2.82	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2017	6.04	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2018	4.9	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2019	3.64	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2020	3.4	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2021	5.69	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2022	7.9	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2023	5.53	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2024	4.72	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+MEX	Mexico	4 – CPI avg inflation	% y/y	N/A	2025	3.81	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2015	0.12	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2016	1.26	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2017	2.13	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2018	2.44	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2019	1.81	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2020	1.23	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2021	4.7	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2022	8	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2023	4.12	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2024	2.95	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+USA	North America	4 – CPI avg inflation	% y/y	N/A	2025	2.71	Actual	S&P Global Market Intelligence	consumerPriceInflation (Standardized ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2015	1.13	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2016	1.43	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2017	1.6	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2018	2.27	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2019	1.95	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2020	0.72	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2021	3.4	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2022	6.8	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2023	3.88	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2024	2.38	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CAN	North America	4 – CPI avg inflation	% y/y	N/A	2025	2.07	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2015	16.36	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2016	37.52	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2017	25.28	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2018	34.28	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2019	53.55	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2020	42.02	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2021	48.41	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2022	72.43	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2023	133.49	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2024	219.88	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ARG	Latin America	4 – CPI avg inflation	% y/y	N/A	2025	41.92	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2015	9.03	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2016	8.74	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2017	3.45	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2018	3.66	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2019	3.73	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2020	3.21	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2021	8.3	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2022	9.28	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2023	4.59	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2024	4.37	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+BRA	Latin America	4 – CPI avg inflation	% y/y	N/A	2025	5.02	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2015	4.35	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2016	3.78	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2017	2.18	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2018	2.44	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2019	2.56	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2020	3.05	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2021	4.52	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2022	11.64	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2023	7.58	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2024	4.27	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CHL	Latin America	4 – CPI avg inflation	% y/y	N/A	2025	4.21	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2015	4.99	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2016	7.51	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2017	4.32	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2018	3.24	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2019	3.52	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2020	2.53	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2021	3.5	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2022	10.18	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2023	11.74	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2024	6.61	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+COL	Latin America	4 – CPI avg inflation	% y/y	N/A	2025	5.14	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2015	0.8	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2016	-0.02	Actual	S&P Global Market Intelligence	consumerPriceInflation (Standardized ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2017	1.63	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2018	2.22	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2019	2.1	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2020	0.72	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2021	1.73	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2022	8.27	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2023	0.53	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2024	-0.41	Actual	S&P Global Market Intelligence	consumerPriceInflation (Standardized ACTUAL)	10/15/2026
+CRI	Latin America	4 – CPI avg inflation	% y/y	N/A	2025	-0.07	Actual	S&P Global Market Intelligence	consumerPriceInflation (Standardized ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2015	3.97	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2016	1.73	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2017	0.42	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2018	-0.22	Actual	S&P Global Market Intelligence	consumerPriceInflation (Standardized ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2019	0.27	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2020	-0.34	Actual	S&P Global Market Intelligence	consumerPriceInflation (Standardized ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2021	0.13	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2022	3.47	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2023	2.22	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2024	1.55	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+ECU	Latin America	4 – CPI avg inflation	% y/y	N/A	2025	0.71	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2015	-0.73	Actual	S&P Global Market Intelligence	consumerPriceInflation (Standardized ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2016	0.6	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2017	1.01	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2018	1.09	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2019	0.07	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2020	-0.37	Actual	S&P Global Market Intelligence	consumerPriceInflation (Standardized ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2021	3.47	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2022	7.2	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2023	4.05	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2024	0.85	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+SLV	Latin America	4 – CPI avg inflation	% y/y	N/A	2025	0.26	Actual	S&P Global Market Intelligence	consumerPriceInflation (As reported ACTUAL)	10/15/2026
+GTM	Latin America	4 – CPI avg inflation	% y/y	N/A						
+"
+
+"Grupo Bimbo CFA Research Challenge — EAA Region Economic Data
+S&P Capital IQ Economic Indicators: 2015–2030
+Preliminary Notes
+Data source: S&P Capital IQ Economic & Demographic Data (BEST_OF methodology), as-of dates range from 06/15/2026 to 10/22/2026.
+
+Value types:
+
+Actual = macroDataSource contains "ACTUAL" (either "As reported ACTUAL" or "Standardized ACTUAL")
+Forecast = macroDataSource contains "FORECAST" (either "Standardized FORECAST" or "Standardized BEST_OF")
+Indicator 3 — Nominal GDP Growth % y/y: The tool does not return this as a standalone field. Where derivable from consecutive nominalGDPLCU values in the same local currency, it is computed as:
+
+Derived formula (applied once): Nominal GDP Growth % y/y = (GDP_t / GDP_{t-1} − 1) × 100
+
+This is marked Derived in the value_type column. For the European Union aggregate, nominalGDPLCU is returned in $B (USD billions); all other geographies use their local currency. Because the EU nominal GDP is in USD, cross-year derivations are valid within that series. Note: the first year of each series (2015) has no prior year in the dataset and is therefore N/A for the derived indicator.
+
+Indicator 4 — consumerPriceInflation: The tool labels this field consumerPriceInflation without specifying annual average vs. end-of-period. Based on S&P Capital IQ's standard methodology for this field, it represents the annual average CPI % change. This is stated as provided by the tool; no independent verification is possible from the data payload.
+
+Indicators not available in the tool (not attempted further):
+
+CPI food / CPI bread and cereals
+Dec/Dec CPI (end-of-period CPI)
+Nominal household consumption
+Retail sales
+Part 1 — Long Data Table
+Due to the volume (~1,700+ rows across 22 countries + 1 aggregate × 6 indicators × 16 years), the table is presented in full below. Columns: country_iso3 | bimbo_region | indicator | unit | currency | year | value | value_type | provider | series_name_in_CIQ | as_of_date.
+
+Legend for value_type:
+
+A = Actual (As reported ACTUAL or Standardized ACTUAL)
+F = Forecast (Standardized FORECAST or Standardized BEST_OF)
+D = Derived (Nominal GDP Growth, computed from nominalGDPLCU)
+Note on "Euro Area": The tool returned an error — "Euro Area: No country found for the specified query" — so no data is available for that aggregate. The European Union aggregate was successfully retrieved with ISO code EU. The EU nominalGDPLCU is denominated in $B (USD billions) per the tool's own output; Indicator 3 is derived from those values.
+
+Source: S&P Capital IQ
+
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+EU	EAA	realGDPGrowth	% y/y	N/A	2015	2.39	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2016	1.97	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2017	2.85	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2018	2.09	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2019	1.93	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2020	-5.61	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2021	6.40	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2022	3.60	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2023	0.43	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2024	1.42	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2025	1.41	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2026	1.22	Forecast	S&P Capital IQ	realGDPGrowth	07/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2027	1.41	Forecast	S&P Capital IQ	realGDPGrowth	06/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2028	1.59	Forecast	S&P Capital IQ	realGDPGrowth	09/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2029	1.59	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+EU	EAA	realGDPGrowth	% y/y	N/A	2030	1.61	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2015	12,312.33	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2016	12,644.81	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2017	13,178.78	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2018	13,641.52	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2019	14,138.22	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2020	13,600.58	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2021	14,818.51	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2022	16,191.97	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2023	17,299.25	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2024	18,131.20	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2025	18,884.57	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2026	0	Forecast	S&P Capital IQ	nominalGDPLCU	07/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2027	0	Forecast	S&P Capital IQ	nominalGDPLCU	06/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2028	0	Forecast	S&P Capital IQ	nominalGDPLCU	09/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2029	0	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+EU	EAA	nominalGDPLCU	$B	USD	2030	0	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2015	N/A	N/A	N/A	Derived from nominalGDPLCU	N/A
+EU	EAA	nominalGDPGrowth	% y/y	USD	2016	2.70	Derived	S&P Capital IQ	Derived: (12644.81/12312.33−1)×100	07/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2017	4.22	Derived	S&P Capital IQ	Derived: (13178.78/12644.81−1)×100	06/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2018	3.51	Derived	S&P Capital IQ	Derived: (13641.52/13178.78−1)×100	07/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2019	3.64	Derived	S&P Capital IQ	Derived: (14138.22/13641.52−1)×100	07/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2020	-3.80	Derived	S&P Capital IQ	Derived: (13600.58/14138.22−1)×100	06/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2021	8.95	Derived	S&P Capital IQ	Derived: (14818.51/13600.58−1)×100	07/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2022	9.26	Derived	S&P Capital IQ	Derived: (16191.97/14818.51−1)×100	06/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2023	6.84	Derived	S&P Capital IQ	Derived: (17299.25/16191.97−1)×100	07/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2024	4.81	Derived	S&P Capital IQ	Derived: (18131.20/17299.25−1)×100	07/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2025	4.16	Derived	S&P Capital IQ	Derived: (18884.57/18131.20−1)×100	10/15/2026
+EU	EAA	nominalGDPGrowth	% y/y	USD	2026	N/A	N/A	N/A	nominalGDPLCU=0 for forecast years; derivation not meaningful	N/A
+EU	EAA	nominalGDPGrowth	% y/y	USD	2027	N/A	N/A	N/A	nominalGDPLCU=0 for forecast years; derivation not meaningful	N/A
+EU	EAA	nominalGDPGrowth	% y/y	USD	2028	N/A	N/A	N/A	nominalGDPLCU=0 for forecast years; derivation not meaningful	N/A
+EU	EAA	nominalGDPGrowth	% y/y	USD	2029	N/A	N/A	N/A	nominalGDPLCU=0 for forecast years; derivation not meaningful	N/A
+EU	EAA	nominalGDPGrowth	% y/y	USD	2030	N/A	N/A	N/A	nominalGDPLCU=0 for forecast years; derivation not meaningful	N/A
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2015	0.10	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2016	0.25	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2017	1.71	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2018	1.89	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2019	1.47	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2020	0.69	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2021	2.89	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2022	9.19	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2023	6.36	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2024	2.61	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2025	2.46	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2026	2.99	Forecast	S&P Capital IQ	consumerPriceInflation	07/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2027	2.91	Forecast	S&P Capital IQ	consumerPriceInflation	06/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2028	2.20	Forecast	S&P Capital IQ	consumerPriceInflation	09/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2029	2.04	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+EU	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2030	2.09	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+EU	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2015–2030	N/A	N/A	N/A	realPrivateConsumptionGrowth	N/A
+EU	EAA	populationGrowth	% y/y	N/A	2015	0.22	Actual	S&P Capital IQ	populationGrowth	07/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2016	0.23	Actual	S&P Capital IQ	populationGrowth	07/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2017	0.19	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2018	0.18	Actual	S&P Capital IQ	populationGrowth	07/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2019	0.19	Actual	S&P Capital IQ	populationGrowth	07/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2020	0.08	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2021	-0.02	Actual	S&P Capital IQ	populationGrowth	07/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2022	0.29	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2023	0.31	Actual	S&P Capital IQ	populationGrowth	07/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2024	-0.10	Forecast	S&P Capital IQ	populationGrowth	07/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2025	-0.27	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2026	-0.24	Forecast	S&P Capital IQ	populationGrowth	07/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2027	-0.15	Forecast	S&P Capital IQ	populationGrowth	06/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2028	-0.17	Forecast	S&P Capital IQ	populationGrowth	09/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2029	-0.18	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+EU	EAA	populationGrowth	% y/y	N/A	2030	-0.19	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+Note on EU realPrivateConsumptionGrowth: The tool returned null for all EU years. This field is N/A for the EU aggregate across the entire 2015–2030 range.
+
+Note on EU nominalGDPLCU forecast years (2026–2030): The tool returned value = 0 for all forecast years. This appears to be a data gap in the tool's EU aggregate for this field in forecast periods; the zero values are reproduced exactly as returned and are not used for derivation.
+
+The following tables cover the 22 individual countries. For brevity, all six indicators per country are shown together.
+
+ESP — Spain | Currency: EUR (€B) | as_of_date range: 09/15/2026–10/15/2026
+Source: S&P Capital IQ
+
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+ESP	EAA	realGDPGrowth	% y/y	N/A	2015	4.06	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2016	2.92	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2017	2.90	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2018	2.40	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2019	1.96	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2020	-10.94	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2021	6.68	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2022	6.37	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2023	2.36	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2024	3.67	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2025	2.59	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2026	2.56	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2027	1.89	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2028	1.75	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2029	1.85	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ESP	EAA	realGDPGrowth	% y/y	N/A	2030	1.86	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2015	1,087.11	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2016	1,122.97	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2017	1,170.02	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2018	1,212.28	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2019	1,253.71	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2020	1,129.21	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2021	1,235.47	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2022	1,375.86	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2023	1,496.28	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2024	1,598.59	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2025	1,690.01	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2026	1,778.97	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2027	1,852.62	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2028	1,921.75	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2029	1,995.81	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ESP	EAA	nominalGDPLCU	€B	EUR	2030	2,074.19	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2015	N/A	N/A	N/A	Derived from nominalGDPLCU	N/A
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2016	3.30	Derived	S&P Capital IQ	Derived: (1122.97/1087.11−1)×100	09/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2017	4.19	Derived	S&P Capital IQ	Derived: (1170.02/1122.97−1)×100	09/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2018	3.61	Derived	S&P Capital IQ	Derived: (1212.28/1170.02−1)×100	09/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2019	3.42	Derived	S&P Capital IQ	Derived: (1253.71/1212.28−1)×100	09/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2020	-9.93	Derived	S&P Capital IQ	Derived: (1129.21/1253.71−1)×100	06/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2021	9.41	Derived	S&P Capital IQ	Derived: (1235.47/1129.21−1)×100	06/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2022	11.40	Derived	S&P Capital IQ	Derived: (1375.86/1235.47−1)×100	06/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2023	8.75	Derived	S&P Capital IQ	Derived: (1496.28/1375.86−1)×100	10/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2024	6.84	Derived	S&P Capital IQ	Derived: (1598.59/1496.28−1)×100	10/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2025	5.72	Derived	S&P Capital IQ	Derived: (1690.01/1598.59−1)×100	10/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2026	5.26	Derived	S&P Capital IQ	Derived: (1778.97/1690.01−1)×100	10/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2027	4.14	Derived	S&P Capital IQ	Derived: (1852.62/1778.97−1)×100	10/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2028	3.73	Derived	S&P Capital IQ	Derived: (1921.75/1852.62−1)×100	10/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2029	3.85	Derived	S&P Capital IQ	Derived: (1995.81/1921.75−1)×100	10/15/2026
+ESP	EAA	nominalGDPGrowth	% y/y	EUR	2030	3.93	Derived	S&P Capital IQ	Derived: (2074.19/1995.81−1)×100	10/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2015	-0.63	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2016	-0.33	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2017	2.04	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2018	1.74	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2019	0.78	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2020	-0.34	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2021	3.01	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2022	8.32	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2023	3.40	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2024	2.87	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2025	2.69	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2026	3.89	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2027	3.11	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2028	1.85	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2029	1.90	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ESP	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2030	2.03	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2015	3.00	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2016	2.66	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2017	3.08	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2018	1.73	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2019	1.14	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2020	-12.07	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	06/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2021	7.11	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	06/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2022	4.91	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	06/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2023	1.85	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2024	3.14	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2025	3.07	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2026	2.97	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2027	1.49	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2028	1.56	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2029	1.91	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ESP	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2030	2.00	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2015	-0.08	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2016	0.11	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2017	0.29	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2018	0.48	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2019	0.73	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2020	0.52	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2021	0.12	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2022	0.19	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2023	0.17	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2024	0.00	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2025	-0.04	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2026	-0.08	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2027	-0.10	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2028	-0.11	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2029	-0.13	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ESP	EAA	populationGrowth	% y/y	N/A	2030	-0.16	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+PRT — Portugal | Currency: EUR (€B) | as_of_date: 10/15/2026
+Source: S&P Capital IQ
+
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+PRT	EAA	realGDPGrowth	% y/y	N/A	2015	1.59	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2016	2.00	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2017	3.31	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2018	2.95	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2019	2.75	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2020	-8.20	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2021	5.56	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2022	6.99	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2023	3.10	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2024	2.70	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2025	1.88	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2026	2.24	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2027	1.84	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2028	1.91	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2029	1.80	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	realGDPGrowth	% y/y	N/A	2030	1.59	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2015	179.39	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2016	186.38	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2017	195.51	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2018	205.00	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2019	214.49	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2020	201.03	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2021	216.49	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2022	243.96	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2023	270.35	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2024	291.15	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2025	308.54	Actual	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2026	322.55	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2027	334.61	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2028	347.53	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2029	362.75	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPLCU	€B	EUR	2030	377.13	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2015	N/A	N/A	N/A	Derived from nominalGDPLCU	N/A
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2016	3.90	Derived	S&P Capital IQ	Derived: (186.38/179.39−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2017	4.90	Derived	S&P Capital IQ	Derived: (195.51/186.38−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2018	4.87	Derived	S&P Capital IQ	Derived: (205.00/195.51−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2019	4.63	Derived	S&P Capital IQ	Derived: (214.49/205.00−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2020	-6.27	Derived	S&P Capital IQ	Derived: (201.03/214.49−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2021	7.69	Derived	S&P Capital IQ	Derived: (216.49/201.03−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2022	12.69	Derived	S&P Capital IQ	Derived: (243.96/216.49−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2023	10.82	Derived	S&P Capital IQ	Derived: (270.35/243.96−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2024	7.70	Derived	S&P Capital IQ	Derived: (291.15/270.35−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2025	5.97	Derived	S&P Capital IQ	Derived: (308.54/291.15−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2026	4.54	Derived	S&P Capital IQ	Derived: (322.55/308.54−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2027	3.74	Derived	S&P Capital IQ	Derived: (334.61/322.55−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2028	3.86	Derived	S&P Capital IQ	Derived: (347.53/334.61−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2029	4.38	Derived	S&P Capital IQ	Derived: (362.75/347.53−1)×100	10/15/2026
+PRT	EAA	nominalGDPGrowth	% y/y	EUR	2030	3.96	Derived	S&P Capital IQ	Derived: (377.13/362.75−1)×100	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2015	0.51	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2016	0.64	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2017	1.56	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2018	1.17	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2019	0.30	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2020	-0.12	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2021	0.94	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2022	8.10	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2023	5.26	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2024	2.67	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2025	2.19	Actual	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2026	3.15	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2027	2.94	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2028	2.06	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2029	1.89	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2030	1.99	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2015	1.77	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2016	2.36	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2017	1.78	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2018	2.56	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2019	3.46	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2020	-6.76	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2021	4.89	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2022	5.58	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2023	2.41	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2024	2.97	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2025	3.54	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2026	3.13	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2027	1.55	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2028	1.66	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2029	2.00	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2030	1.60	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2015	-0.35	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2016	-0.23	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2017	-0.15	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2018	-0.05	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2019	0.17	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2020	0.26	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2021	0.20	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2022	0.25	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2023	0.13	Actual	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2024	-0.05	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2025	-0.13	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2026	-0.16	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2027	-0.17	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2028	-0.19	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2029	-0.20	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+PRT	EAA	populationGrowth	% y/y	N/A	2030	-0.19	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+FRA — France | Currency: EUR (€B) | as_of_date range: 09/15/2026–10/15/2026
+Source: S&P Capital IQ
+
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+FRA	EAA	realGDPGrowth	% y/y	N/A	2015	1.07	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2016	0.86	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2017	2.08	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2018	1.65	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2019	2.03	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2020	-7.61	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2021	6.88	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2022	2.72	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2023	1.63	Actual	S&P Capital IQ	realGDPGrowth	08/18/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2024	1.50	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2025	0.80	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2026	0.41	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2027	0.62	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2028	1.31	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2029	1.34	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+FRA	EAA	realGDPGrowth	% y/y	N/A	2030	1.27	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2015	2,201.40	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2016	2,231.82	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2017	2,291.68	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2018	2,355.36	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2019	2,432.21	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2020	2,318.28	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2021	2,508.10	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2022	2,654.00	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2023	2,833.83	Actual	S&P Capital IQ	nominalGDPLCU	08/18/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2024	2,935.24	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2025	2,991.06	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2026	3,069.18	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2027	3,154.91	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2028	3,249.29	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2029	3,359.21	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+FRA	EAA	nominalGDPLCU	€B	EUR	2030	3,470.29	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2015	N/A	N/A	N/A	Derived from nominalGDPLCU	N/A
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2016	1.38	Derived	S&P Capital IQ	Derived: (2231.82/2201.40−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2017	2.68	Derived	S&P Capital IQ	Derived: (2291.68/2231.82−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2018	2.78	Derived	S&P Capital IQ	Derived: (2355.36/2291.68−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2019	3.26	Derived	S&P Capital IQ	Derived: (2432.21/2355.36−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2020	-4.68	Derived	S&P Capital IQ	Derived: (2318.28/2432.21−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2021	8.19	Derived	S&P Capital IQ	Derived: (2508.10/2318.28−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2022	5.82	Derived	S&P Capital IQ	Derived: (2654.00/2508.10−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2023	6.78	Derived	S&P Capital IQ	Derived: (2833.83/2654.00−1)×100	08/18/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2024	3.58	Derived	S&P Capital IQ	Derived: (2935.24/2833.83−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2025	1.90	Derived	S&P Capital IQ	Derived: (2991.06/2935.24−1)×100	09/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2026	2.61	Derived	S&P Capital IQ	Derived: (3069.18/2991.06−1)×100	10/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2027	2.79	Derived	S&P Capital IQ	Derived: (3154.91/3069.18−1)×100	10/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2028	2.99	Derived	S&P Capital IQ	Derived: (3249.29/3154.91−1)×100	10/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2029	3.38	Derived	S&P Capital IQ	Derived: (3359.21/3249.29−1)×100	10/15/2026
+FRA	EAA	nominalGDPGrowth	% y/y	EUR	2030	3.31	Derived	S&P Capital IQ	Derived: (3470.29/3359.21−1)×100	10/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2015	0.08	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2016	0.31	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2017	1.16	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2018	2.10	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2019	1.30	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2020	0.52	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2021	2.07	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2022	5.91	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2023	5.66	Actual	S&P Capital IQ	consumerPriceInflation	08/18/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2024	2.32	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2025	0.93	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2026	2.42	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2027	2.31	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2028	1.89	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2029	1.79	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+FRA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2030	1.85	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2015	1.58	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2016	1.54	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2017	1.64	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2018	1.06	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2019	1.68	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2020	-6.54	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2021	5.28	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2022	3.29	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2023	0.95	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	08/18/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2024	0.75	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2025	0.46	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2026	0.46	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2027	0.71	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2028	1.38	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2029	1.41	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+FRA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2030	1.47	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2015	0.35	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2016	0.26	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2017	0.30	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2018	0.36	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2019	0.32	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2020	0.27	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2021	0.27	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2022	0.29	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2023	0.24	Actual	S&P Capital IQ	populationGrowth	08/18/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2024	0.17	Forecast	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2025	0.15	Forecast	S&P Capital IQ	populationGrowth	09/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2026	0.14	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2027	0.14	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2028	0.14	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2029	0.13	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+FRA	EAA	populationGrowth	% y/y	N/A	2030	0.13	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ITA — Italy | Currency: EUR (€B) | as_of_date range: 06/15/2026–10/15/2026
+Source: S&P Capital IQ
+
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+ITA	EAA	realGDPGrowth	% y/y	N/A	2015	0.89	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2016	1.24	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2017	1.60	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2018	0.83	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2019	0.43	Actual	S&P Capital IQ	realGDPGrowth	06/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2020	-8.95	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2021	8.93	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2022	4.82	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2023	0.92	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2024	0.78	Actual	S&P Capital IQ	realGDPGrowth	09/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2025	0.54	Actual	S&P Capital IQ	realGDPGrowth	07/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2026	0.89	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2027	0.56	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2028	0.69	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2029	0.49	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ITA	EAA	realGDPGrowth	% y/y	N/A	2030	0.59	Forecast	S&P Capital IQ	realGDPGrowth	10/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2015	1,663.28	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2016	1,704.86	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2017	1,744.49	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2018	1,777.74	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2019	1,804.07	Actual	S&P Capital IQ	nominalGDPLCU	06/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2020	1,670.01	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2021	1,842.51	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2022	1,998.07	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2023	2,142.74	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2024	2,202.03	Actual	S&P Capital IQ	nominalGDPLCU	09/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2025	2,258.05	Actual	S&P Capital IQ	nominalGDPLCU	07/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2026	2,304.58	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2027	2,343.24	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2028	2,393.36	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2029	2,455.11	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ITA	EAA	nominalGDPLCU	€B	EUR	2030	2,520.82	Forecast	S&P Capital IQ	nominalGDPLCU	10/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2015	N/A	N/A	N/A	Derived from nominalGDPLCU	N/A
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2016	2.50	Derived	S&P Capital IQ	Derived: (1704.86/1663.28−1)×100	06/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2017	2.32	Derived	S&P Capital IQ	Derived: (1744.49/1704.86−1)×100	06/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2018	1.91	Derived	S&P Capital IQ	Derived: (1777.74/1744.49−1)×100	06/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2019	1.48	Derived	S&P Capital IQ	Derived: (1804.07/1777.74−1)×100	06/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2020	-7.43	Derived	S&P Capital IQ	Derived: (1670.01/1804.07−1)×100	07/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2021	10.33	Derived	S&P Capital IQ	Derived: (1842.51/1670.01−1)×100	07/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2022	8.44	Derived	S&P Capital IQ	Derived: (1998.07/1842.51−1)×100	09/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2023	7.24	Derived	S&P Capital IQ	Derived: (2142.74/1998.07−1)×100	09/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2024	2.77	Derived	S&P Capital IQ	Derived: (2202.03/2142.74−1)×100	09/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2025	2.54	Derived	S&P Capital IQ	Derived: (2258.05/2202.03−1)×100	07/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2026	2.06	Derived	S&P Capital IQ	Derived: (2304.58/2258.05−1)×100	10/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2027	1.68	Derived	S&P Capital IQ	Derived: (2343.24/2304.58−1)×100	10/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2028	2.14	Derived	S&P Capital IQ	Derived: (2393.36/2343.24−1)×100	10/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2029	2.58	Derived	S&P Capital IQ	Derived: (2455.11/2393.36−1)×100	10/15/2026
+ITA	EAA	nominalGDPGrowth	% y/y	EUR	2030	2.68	Derived	S&P Capital IQ	Derived: (2520.82/2455.11−1)×100	10/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2015	0.16	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2016	-0.06	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2017	1.33	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2018	1.24	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2019	0.66	Actual	S&P Capital IQ	consumerPriceInflation	06/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2020	-0.17	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2021	1.95	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2022	8.75	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2023	5.91	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2024	1.08	Actual	S&P Capital IQ	consumerPriceInflation	09/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2025	1.63	Actual	S&P Capital IQ	consumerPriceInflation	07/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2026	2.99	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2027	2.61	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2028	1.51	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2029	1.77	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ITA	EAA	consumerPriceInflation	% y/y (annual avg)	N/A	2030	1.83	Forecast	S&P Capital IQ	consumerPriceInflation	10/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2015	1.85	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	06/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2016	0.77	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	06/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2017	1.21	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	06/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2018	0.52	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	06/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2019	-0.02	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	06/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2020	-10.60	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	07/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2021	5.84	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	07/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2022	5.26	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2023	0.54	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2024	1.23	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	09/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2025	1.06	Actual	S&P Capital IQ	realPrivateConsumptionGrowth	07/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2026	1.17	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2027	0.36	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2028	0.54	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2029	0.67	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ITA	EAA	realPrivateConsumptionGrowth	% y/y	N/A	2030	0.71	Forecast	S&P Capital IQ	realPrivateConsumptionGrowth	10/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2015	-0.15	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2016	-0.16	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2017	-0.15	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2018	-0.19	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2019	-0.24	Actual	S&P Capital IQ	populationGrowth	06/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2020	-0.36	Actual	S&P Capital IQ	populationGrowth	07/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2021	-0.31	Actual	S&P Capital IQ	populationGrowth	07/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2022	-0.18	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2023	-0.20	Actual	S&P Capital IQ	populationGrowth	09/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2024	-0.26	Forecast	S&P Capital IQ	populationGrowth	09/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2025	-0.33	Forecast	S&P Capital IQ	populationGrowth	07/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2026	-0.37	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2027	-0.40	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2028	-0.41	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2029	-0.42	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+ITA	EAA	populationGrowth	% y/y	N/A	2030	-0.44	Forecast	S&P Capital IQ	populationGrowth	10/15/2026
+GBR — United Kingdom | Currency: GBP (£B) | as_of_date range: 10/15/2026–10/21/2026
+Source: S&P Capital IQ
+
+country_iso3	bimbo_region	indicator	unit	currency	year	value	value_type	provider	series_name_in_CIQ	as_of_date
+GBR	EAA	realGDPGrowth	% y/y	N/A	2015	2.17	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2016	2.22	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2017	3.31	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2018	1.64	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2019	1.39	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2020	-10.05	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2021	8.52	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2022	5.02	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2023	0.44	Actual	S&P Capital IQ	realGDPGrowth	10/15/2026
+GBR	EAA	realGDPGrowth	% y/y	N/A	2024	1.11	Actual	S&P Capital IQ	realGDP"
+
+"Tipos de cambio FX (prompt 3) - 2026-10-24
+
+Moneda local por 1 USD. Fuentes: Banxico SIE (API) y S&P Capital IQ (economic data, versión 2026-10-15).
+
+Reglas y marcas
+Promedio 2015-2025: MXN, y CAD, GBP y EUR desde 2019, salen del FIX diario de Banxico. El resto, de Capital IQ (averageExchangeRate).
+Cierre 2015-2025: Banxico.
+2026-2030: pronóstico de Capital IQ.
+~ promedio de Capital IQ que viene en miles, ya multiplicado por 1,000 (precisión ±0.5%).
+c valor solo de Capital IQ (Banxico no tiene la moneda o su serie está congelada).
+EUR de Capital IQ vía España (el agregado Euro Area dio error).
+3A - Historia 2015-2025
+Promedio anual
+Moneda	2015	2016	2017	2018	2019	2020	2021	2022	2023	2024	2025
+MXN	15.881	18.689	18.907	19.237	19.257	21.498	20.282	20.12	17.734	18.326	19.2
+CAD	1.28	1.33	1.3	1.3	1.3269	1.3413	1.2534	1.3011	1.3494	1.3698	1.3975
+BRL	3.33	3.49	3.19	3.65	3.94	5.15	5.39	5.16	5	5.39	5.59
+ARS	9.23	14.76	16.56	28.09	48.25	70.64	95.09	130.71	296.52	916.32	1,243.79
+CLP	650~	680~	650~	640~	700~	790~	760~	870~	840~	940~	950~
+COP	2,740~	3,050~	2,950~	2,960~	3,280~	3,690~	3,740~	4,250~	4,330~	4,070~	4,050~
+PEN	3.18	3.38	3.26	3.29	3.34	3.5	3.88	3.83	3.74	3.75	3.57
+UYU	27.33	30.16	28.68	30.73	35.25	42.01	43.56	41.18	38.83	40.21	41.09
+PYG	5,200~	5,670~	5,620~	5,730~	6,240~	6,770~	6,770~	6,980~	7,290~	7,560~	7,540~
+GTQ	7.65	7.6	7.35	7.52	7.7	7.72	7.74	7.75	7.83	7.76	7.68
+HNL	21.95	22.84	23.49	23.9	24.59	24.67	24.1	24.56	24.66	24.86	26.02
+CRC	534.57	544.74	567.51	576.97	584.01	581.67	617.56	643.65	540.70	511.97	500.58
+NIO	27.26	28.62	30.05	31.55	33.12	34.34	35.17	35.87	36.44	36.62	36.62
+GBP	0.65	0.74	0.78	0.75	0.7844	0.7798	0.7269	0.8118	0.8041	0.7824	0.7589
+CHF	0.96	0.99	0.98	0.98	0.99	0.94	0.91	0.95	0.9	0.88	0.83
+RON	4.01	4.06	4.05	3.94	4.24	4.24	4.16	4.69	4.57	4.6	4.47
+RSD	108.81	111.28	107.76	100.18	105.25	103.16	99.4	111.66	108.40	108.21	103.97
+TRY	2.72	3.02	3.65	4.83	5.68	7.02	8.86	16.57	23.79	32.83	39.49
+RUB	61.11	67.03	58.31	62.74	64.72	72.21	73.66	68.57	85.29	92.6	83.55
+UAH	21.84	25.55	26.6	27.2	25.83	26.96	27.28	32.3	36.57	40.16	41.69
+CNY	6.28	6.64	6.76	6.62	6.91	6.9	6.45	6.73	7.08	7.2	7.19
+INR	64.15	67.2	65.12	68.39	70.43	74.1	73.92	78.6	82.6	83.67	87.16
+KRW	1,130~	1,160~	1,130~	1,100~	1,170~	1,180~	1,140~	1,290~	1,310~	1,360~	1,420~
+KZT	221.73	341.85	326.00	344.74	382.78	413.40	425.93	460.29	456.26	468.97	521.08
+ZAR	12.76	14.71	13.33	13.24	14.45	16.47	14.78	16.36	18.45	18.33	17.89
+MAD	9.76	9.81	9.69	9.39	9.62	9.49	8.99	10.16	10.13	9.94	9.35
+TND	1.96	2.15	2.42	2.65	2.93	2.81	2.79	3.1	3.11	3.11	3
+EUR	0.9	0.9	0.89	0.85	0.8934	0.8773	0.8458	0.9515	0.9249	0.9241	0.8863
+Cierre de año (31-dic)
+Moneda	2015	2016	2017	2018	2019	2020	2021	2022	2023	2024	2025
+MXN	17.249	20.619	19.663	19.651	18.864	19.909	20.467	19.471	16.919	20.786	18.001
+CAD	1.3883	1.3412	1.2534	1.3656	1.2968	1.2739	1.2634	1.3556	1.3184	1.438	1.3708
+BRL	3.9604	3.2552	3.3124	3.8805	4.0193	5.1948	5.571	5.2854	4.852	6.1766	5.4855
+ARS	12.937	15.873	18.622	37.594	59.881	84.035	103.09	178.57	833.45	1,031.06	1,459.42c
+CLP	708.66	669.90	615.43	693.90	753.06	710.52	852.09	854.76	877.09	990.29	900.96
+COP	3,174.50	3,002.00	2,985.78	3,249.75	3,287.53	3,430.77	4,072.99	4,850.61	3,860.26	4,406.84	3,780.29
+PEN	3.4145	3.3543	3.2405	3.3685	3.312	3.619	3.9873	3.8108	3.7121	3.7564	3.3625
+UYU	29.94	29.24	28.736	32.363	37.175	42.194	44.642	39.841	38.91	43.668	39.063
+PYG	5,780.34	5,767.02	5,589.72	5,963.02	6,464.13	6,910.85	6,877.58	7,342.14	7,272.74	7,818.62	6,600.66
+GTQ	7.6336	7.5244	7.3421	7.7399	7.6982	7.8125	7.728	7.8493	7.8247	7.7161	7.6628
+HNL	22.124	23.474	23.585	24.331	24.63	24.096	24.51	24.691	24.752	25.381	26.316
+CRC	537.34	556.08	569.44	606.52	571.47	613.14	642.21	591.66	523.48	510.22	497.55
+NIO	27.933	29.326	30.769	32.363	33.784	34.843	35.587	36.496	36.63	36.9	36.901
+GBP	0.6781	0.8092	0.7391	0.7846	0.7551	0.7319	0.7382	0.8315	0.7847	0.7984	0.7436
+CHF	1.0002	1.0161	0.9748	0.9853	0.9684	0.8838	0.9111	0.9254	0.8415	0.906	0.7923
+RON	4.1597	4.3066	3.882	4.0667	4.2662	3.9793	4.3516	4.6361	4.5025	4.8031	4.3384
+RSD	111.25c	117.14c	99.12c	103.39c	104.92c	95.66c	103.93c	110.15c	105.87c	112.44c	99.92c
+TRY	2.9136	3.5239	3.7867	5.2933	5.9513	7.4311	13.3	18.72	29.533	35.361	42.955
+RUB	72.992	61.238	57.571	69.348	62.035	73.963	74.963	72.412	89.765	113.64	79.112
+UAH	24.038	27.1	28.09	27.701	23.753	28.328	27.248	36.9	38.168	42.017	42.194
+CNY	6.4876	6.9396	6.5121	6.8785	6.9633	6.527	6.3561	6.8985	7.0998	7.2993	6.9891
+INR	66.224	67.977	63.845	69.527	71.215	73.073	74.299	82.643	83.193	85.617	89.849
+KRW	1,175.06	1,205.83	1,067.40	1,115.85	1,154.87	1,086.48	1,190.05	1,260.40	1,291.16	1,477.54	1,443.21
+KZT	340.01c	333.29c	332.33c	384.20c	381.18c	420.71c	431.67c	460.98c	453.64c	523.54c	502.57c
+ZAR	15.483	13.74	12.387	14.398	13.988	14.674	15.957	17.018	18.292	18.875	16.573
+MAD	9.9108	10.121	9.3284	9.5694	9.5602	8.9047	9.2421	10.46	9.8717	10.132	9.1241
+TND	2.03c	2.34c	2.48c	2.99c	2.8c	2.7c	2.89c	3.11c	3.07c	3.18c	2.9c
+EUR	0.92	0.9479	0.833	0.8746	0.8909	0.8174	0.8793	0.9375	0.9051	0.9658	0.8516
+3B - 2026 (mensual y último cierre)
+Fin de mes (Banxico; KZT, TND y RSD no disponibles)
+Moneda	2026-01	2026-02	2026-03	2026-04	2026-05	2026-06	2026-07	2026-08	2026-09
+MXN	17.331	17.219	18.003	17.512	17.351	17.469	17.329	17.015	18.069
+CAD	1.3539	1.3643	1.3959	1.3615	1.3774	1.4188	1.4029	1.3862	1.4196
+BRL	5.2329	5.1308	5.2247	4.9801	5.0582	5.1787	5.0787	5.1813	5.1706
+ARS	1,428.77	1,428.99	1,428.83	1,428.37	1,428.02	1,428.40	1,428.59	1,428.61	1,428.40
+CLP	862.24	877.19	934.75	900.81	892.97	925.77	925.68	934.36	970.94
+COP	3,662.46	3,758.27	3,660.06	3,630.55	3,658.85	3,450.90	3,144.95	3,218.33	3,308.96
+PEN	3.3559	3.3555	3.4944	3.5227	3.4127	3.4106	3.3974	3.3574	3.4283
+UYU	38.61	38.462	40.486	40.323	40.16	40.16	40.323	40.323	40.161
+PYG	6,648.94	6,447.46	6,485.08	6,002.39	6,013.23	6,086.42	5,963.03	5,910.16	5,844.54
+GTQ	7.6628	7.6628	7.6453	7.6394	7.6219	7.622	7.6278	7.6278	7.6336
+HNL	26.385	26.525	26.596	26.596	26.667	26.738	26.81	26.882	26.954
+CRC	495.03	471.76	465.08	454.50	452.54	454.57	450.45	450.48	454.57
+NIO	36.765	36.765	36.765	36.765	36.765	36.765	36.765	36.9	36.63
+GBP	0.7288	0.7437	0.758	0.7362	0.7422	0.7536	0.7434	0.7376	0.753
+CHF	0.7699	0.7689	0.8029	0.7817	0.7806	0.8068	0.8092	0.8076	0.8348
+RON	4.2827	4.3159	4.4267	4.4267	4.5005	4.583	4.56	4.529	4.6425
+RSD	N/A	N/A	N/A	N/A	N/A	N/A	N/A	N/A	N/A
+TRY	43.497	43.956	44.484	45.187	45.892	46.663	47.528	48.263	49.02
+RUB	76.103	77.161	81.367	74.962	71.021	78.31	79.428	86.133	83.264
+UAH	42.919	43.103	43.859	43.86	44.248	44.643	44.642	44.445	44.643
+CNY	6.9522	6.8634	6.8994	6.8292	6.7664	6.787	6.754	6.7204	6.7051
+INR	91.995	90.992	94.789	94.879	95.056	94.695	95.418	95.15	95.787
+KRW	1,444.88	1,439.47	1,526.02	1,477.54	1,502.86	1,548.23	1,438.02	1,368.36	1,355.38
+KZT	N/A	N/A	N/A	N/A	N/A	N/A	N/A	N/A	N/A
+ZAR	16.033	15.916	17.115	16.7	16.197	16.388	16.554	16.132	16.391
+MAD	9.0992	9.1575	9.3545	9.2251	9.1659	9.3809	9.3371	9.2937	9.6899
+TND	N/A	N/A	N/A	N/A	N/A	N/A	N/A	N/A	N/A
+EUR	0.8405	0.847	0.8683	0.8525	0.8568	0.8749	0.8694	0.861	0.8807
+Promedio mensual (solo monedas con serie diaria; oct al 23)
+Moneda	2026-01	2026-02	2026-03	2026-04	2026-05	2026-06	2026-07	2026-08	2026-09	2026-10
+MXN	17.645	17.223	17.769	17.419	17.303	17.382	17.461	17.066	17.264	18.355
+CAD	1.3773	1.3649	1.3717	1.3741	1.3731	1.4041	1.4106	1.39	1.3965	1.4178
+GBP	0.7397	0.7366	0.7495	0.7428	0.7416	0.7499	0.7477	0.7386	0.7455	0.7533
+EUR	0.8519	0.8459	0.865	0.8542	0.8565	0.8682	0.8757	0.8627	0.8688	0.8917
+Último cierre diario (2026-10-23)
+MXN: 18.667 (FIX directo)
+CAD: 1.397597 (cruce vía MXN)
+GBP: 0.747748 (cruce vía MXN)
+EUR: 0.893218 (cruce vía MXN)
+3C - Pronósticos 2026-2030 (Capital IQ)
+Promedio anual
+Moneda	2026	2027	2028	2029	2030
+MXN	17.54	18.21	18.67	19.03	19.24
+CAD	1.39	1.36	1.33	1.29	1.26
+BRL	5.14	5.18	5.3	5.42	5.54
+ARS	1,472.34	1,695.69	1,851.17	1,907.40	1,974.33
+CLP	917.00	931.80	901.75	906.75	914.72
+COP	3,484.23	3,445.24	3,657.07	3,715.25	3,714.47
+PEN	3.41	3.42	3.44	3.45	3.45
+UYU	40.09	42.63	44.28	45.82	47.29
+PYG	6,134.11	5,972.76	6,224.53	6,445.97	6,660.27
+GTQ	7.64	7.71	7.76	7.83	7.9
+HNL	26.79	27.46	28.13	28.81	29.51
+CRC	459.37	465.17	476.92	486.67	500.07
+NIO	36.62	36.67	38.53	40.17	41.89
+GBP	0.75	0.75	0.75	0.75	0.75
+CHF	0.8	0.81	0.81	0.8	0.79
+RON	4.52	4.75	4.73	4.58	4.49
+RSD	102.61	102.82	100.67	99.92	99.68
+TRY	46.74	54.83	60.56	64.5	68.7
+RUB	79.93	87.56	95.88	100.67	100.45
+UAH	44.25	46.55	46.98	46.43	43.9
+CNY	6.79	6.66	6.62	6.59	6.59
+INR	94.56	97.4	96.82	97.56	99.14
+KRW	1,435.44	1,363.81	1,351.27	1,330.00	1,317.62
+KZT	469.37	479.64	509.87	511.19	513.57
+ZAR	16.39	16.61	16.77	17.05	17.37
+MAD	9.32	9.62	9.75	9.65	9.69
+TND	2.95	3.15	3.29	3.38	3.45
+EUR	0.87	0.89	0.89	0.86	0.84
+Cierre de año
+Moneda	2026	2027	2028	2029	2030
+MXN	18.13	18.49	18.85	19.15	19.39
+CAD	1.41	1.35	1.3	1.28	1.25
+BRL	5.13	5.24	5.37	5.47	5.6
+ARS	1,559.34	1,813.71	1,876.95	1,933.54	2,016.97
+CLP	949.18	909.15	903.69	910.49	919.19
+COP	3,477.41	3,530.10	3,709.97	3,715.62	3,717.58
+PEN	3.42	3.42	3.44	3.45	3.45
+UYU	41.14	44.22	45.75	47.41	49
+PYG	5,786.86	6,093.59	6,341.96	6,551.52	6,770.66
+GTQ	7.68	7.73	7.8	7.86	7.93
+HNL	27.13	27.79	28.47	29.16	29.86
+CRC	457.13	472.46	481.28	493.30	506.67
+NIO	36.62	37.72	39.34	41.02	42.78
+GBP	0.76	0.75	0.75	0.75	0.75
+CHF	0.8	0.81	0.81	0.79	0.79
+RON	4.7	4.78	4.66	4.52	4.47
+RSD	104.30	101.49	100.18	99.77	99.59
+TRY	51.01	58.06	62.67	66.65	70.78
+RUB	85.88	92.05	99.26	100.76	101.25
+UAH	45.42	47	46.95	45.25	43.06
+CNY	6.68	6.64	6.6	6.59	6.58
+INR	97.06	96.91	97.05	98.22	100.05
+KRW	1,358.43	1,360.01	1,340.65	1,320.97	1,315.15
+KZT	448.70	529.84	489.35	522.63	514.76
+ZAR	16.37	16.72	16.86	17.22	17.5
+MAD	9.48	9.73	9.72	9.65	9.74
+TND	3.05	3.23	3.34	3.43	3.47
+EUR	0.88	0.89	0.87	0.84	0.84
+3D - Forwards USD/MXN a 1-5 años
+
+Pendiente. Ni Banxico ni Capital IQ (economic data) los tienen. El plug-in de Excel ya funciona (la prueba con IBM devuelve precio), pero todavía no se ha encontrado la fórmula de forwards de tipo de cambio. Falta confirmarla en el Asistente de funciones del plug-in; la plantilla para llenarlos está en fx-forwards-y-datos_2026-10-24.xlsx, hoja Forwards_USDMXN.
+
+Advertencias
+ARS: Banxico congelado en ~1,428 desde dic-2025; usar Capital IQ desde 2025.
+RUB 2024: cierre Banxico 113.64 vs Capital IQ 101.68; se dejó Banxico.
+MXN 2026: cierre pronosticado 18.13, debajo del spot 18.667.
+EUR, GBP y CHF van como moneda local por USD (inverso a la convención de mercado).
+Tu Excel tiene abierta una hoja temporal tmp_test con pruebas; bórrala cuando quieras.
+Key Takeaways
+28 monedas con promedio y cierre 2015-2030.
+Banxico y Capital IQ coinciden: promedios 0.0-0.7%, cierres 0.1-1.3% en promedio.
+Falta solo 3D: los forwards de USD/MXN."
+
+"Source: S&P Capital IQ Financials (consolidated total revenue); Grupo Bimbo earnings press releases / financial supplements via S&P Global (segment net sales and growth ex-FX) Currency/Units: MXN millions
+
+Quarter	Region	Net Sales (MXN mm)	Growth ex-FX (%)	Source Document	Page/Section
+3Q2026	North America	N/A (see note)	+1.0% 12	Q3 2026 Earnings Call, 10/22/2026	Slide 10 / p.4
+3Q2026	Mexico	N/A (see note)	N/A (not separately stated ex-FX; reported +growth) 12	Q3 2026 Earnings Call, 10/22/2026	p.4
+3Q2026	EAA	N/A (see note)	N/A (local-currency growth stated qualitatively) 1	Q3 2026 Earnings Call, 10/22/2026	p.4
+3Q2026	Latin America	N/A (see note)	N/A (qualitative only) 1	Q3 2026 Earnings Call, 10/22/2026	p.4
+3Q2026	Consolidated	107,421 (3Q25 base) → N/A 3Q26 MXN	+3.6% 1	Q3 2026 Earnings Call, 10/22/2026	p.4
+2Q2026	North America	44,368	+1.3% 3	Q2 2026 ER, 07/23/2026	Net Sales table
+2Q2026	Mexico	40,279	+4.7% 3	Q2 2026 ER, 07/23/2026	Net Sales table
+2Q2026	EAA	13,188	+8.4% 3	Q2 2026 ER, 07/23/2026	Net Sales table
+2Q2026	Latin America	11,620	+14.1% 3	Q2 2026 ER, 07/23/2026	Net Sales table
+2Q2026	Consolidated	105,026	+4.5% 3	Q2 2026 ER, 07/23/2026	Net Sales table
+1Q2026	North America	N/A (MXN not in context)	+0.7% 45	Q1 2026 ER (FIN SUPP), 03/31/2026	p.2
+1Q2026	Mexico	39,726	+4.5% 45	Q1 2026 ER (FIN SUPP), 03/31/2026	p.2
+1Q2026	EAA	N/A (MXN not in context)	+12.6% 4	Q1 2026 ER (FIN SUPP), 03/31/2026	p.2
+1Q2026	Latin America	N/A (MXN not in context)	+15.1% 4	Q1 2026 ER (FIN SUPP), 03/31/2026	p.2
+1Q2026	Consolidated	100,282 (CIQ FQ1 2026)	+4.8% 4	Q1 2026 ER (FIN SUPP), 03/31/2026	p.2
+4Q2025	North America	47,037	−2.9% 6	Q4 2025 ER, 02/27/2026	Net Sales table
+4Q2025	Mexico	39,419	+4.8% 6	Q4 2025 ER, 02/27/2026	Net Sales table
+4Q2025	EAA	14,366	+17.8% 6	Q4 2025 ER, 02/27/2026	Net Sales table
+4Q2025	Latin America	11,769	+15.4% 6	Q4 2025 ER, 02/27/2026	Net Sales table
+4Q2025	Consolidated	108,688	+3.9% 6	Q4 2025 ER, 02/27/2026	Financial Summary
+3Q2025	North America	47,470	−3.5% 7	Q3 2025 EP, 10/28/2025	Net Sales table
+3Q2025	Mexico	38,897	+0.3% 7	Q3 2025 EP, 10/28/2025	Net Sales table
+3Q2025	EAA	14,369	+17.3% 7	Q3 2025 EP, 10/28/2025	Net Sales table
+3Q2025	Latin America	10,707	+9.1% 7	Q3 2025 EP, 10/28/2025	Net Sales table
+3Q2025	Consolidated	107,421	+2.0% 7	Q3 2025 EP, 10/28/2025	Net Sales table
+2Q2025	North America	49,124	>−4% 8	Q2 2025 Earnings Call, 07/24/2025	p.4
+2Q2025	Mexico	38,475	+3% 8	Q2 2025 Earnings Call, 07/24/2025	p.4
+2Q2025	EAA	13,436	N/A (not stated ex-FX in context)	Q2 2025 Earnings Call, 07/24/2025	—
+2Q2025	Latin America	10,735	Record Q2 ex-FX 8	Q2 2025 Earnings Call, 07/24/2025	p.4
+2Q2025	Consolidated	103,448 (FQ1 2026 base per CIQ)	N/A	—	—
+1Q2025	North America	N/A	−9% approx. 9	Q1 2025 Earnings Call, 04/29/2025	p.4
+1Q2025	Mexico	N/A	N/A	—	—
+1Q2025	EAA	N/A	+4.5% 9	Q1 2025 Earnings Call, 04/29/2025	p.4
+1Q2025	Latin America	N/A	+5.2% 9	Q1 2025 Earnings Call, 04/29/2025	p.4
+1Q2025	Consolidated	103,448	N/A	—	—
+FY2025 (annual)	North America	190,211	−4.0% 6	Q4 2025 ER, 02/27/2026	Annual table
+FY2025	Mexico	154,809	+2.4% 6	Q4 2025 ER, 02/27/2026	Annual table
+FY2025	EAA	54,214	+11.7% 6	Q4 2025 ER, 02/27/2026	Annual table
+FY2025	Latin America	44,120	+10.1% 6	Q4 2025 ER, 02/27/2026	Annual table
+FY2025	Consolidated	426,952	+1.6% 6	Q4 2025 ER, 02/27/2026	Annual table
+FY2024 (annual)	North America	189,330	−4.6% 10	FIN SUPP 2024, 05/28/2026	p.115
+FY2024	Mexico	151,164	+4.0% 10	FIN SUPP 2024, 05/28/2026	p.115
+FY2024	EAA	45,044	+7.9% 10	FIN SUPP 2024, 05/28/2026	p.115
+FY2024	Latin America	39,879	+10.0% 10	FIN SUPP 2024, 05/28/2026	p.115
+FY2024	Consolidated	408,335	+0.5% 10	FIN SUPP 2024, 05/28/2026	p.115
+4Q2024	North America	53,013	N/A (not in context)	—	—
+4Q2024	Mexico	37,616	N/A	—	—
+4Q2024	EAA	12,618	N/A	—	—
+4Q2024	Latin America	11,065	N/A	—	—
+4Q2024	Consolidated	110,312	N/A	—	—
+3Q2024	North America	49,930	−4.0% 11	Q3 2024 Earnings Call, 10/29/2024	p.4
+3Q2024	Mexico	38,793	+6.6% 11	Q3 2024 Earnings Call, 10/29/2024	p.4
+3Q2024	EAA	11,918	+7.3% 11	Q3 2024 Earnings Call, 10/29/2024	p.4
+3Q2024	Latin America	10,209	+7.7% 11	Q3 2024 Earnings Call, 10/29/2024	p.4
+3Q2024	Consolidated	106,110	N/A (not stated ex-FX at consolidated level)	—	—
+2Q2024	North America	N/A	−3.4% 12	Q2 2024 Earnings Call, 07/24/2024	p.4
+2Q2024	Mexico	N/A	+~4% 12	Q2 2024 Earnings Call, 07/24/2024	p.4
+2Q2024	EAA	N/A	+~9% 12	Q2 2024 Earnings Call, 07/24/2024	p.4
+2Q2024	Latin America	N/A	+3.8% 12	Q2 2024 Earnings Call, 07/24/2024	p.4
+2Q2024	Consolidated	98,272 (CIQ)	N/A	—	—
+1Q2024	North America	N/A	−4.5% 13	Q1 2024 Earnings Call, 04/22/2024	p.5
+1Q2024	Mexico	N/A	N/A	—	—
+1Q2024	EAA	N/A	+5.3% 13	Q1 2024 Earnings Call, 04/22/2024	p.5
+1Q2024	Latin America	N/A	+4.5% 13	Q1 2024 Earnings Call, 04/22/2024	p.5
+1Q2024	Consolidated	93,641 (CIQ)	N/A	—	—
+FY2023 (annual)	North America	192,534	N/A	—	—
+FY2023	Mexico	145,387	N/A	—	—
+FY2023	EAA	40,545	N/A	—	—
+FY2023	Latin America	36,647	N/A	—	—
+FY2023	Consolidated	399,879	N/A	—	—
+3Q2023	North America	N/A	>+6% 14	Q3 2023 Earnings Call, 10/26/2023	p.4
+3Q2023	Mexico	N/A	>+8% 14	Q3 2023 Earnings Call, 10/26/2023	p.4
+3Q2023	EAA	N/A	>+20% 14	Q3 2023 Earnings Call, 10/26/2023	p.4
+3Q2023	Latin America	N/A	>+14% 14	Q3 2023 Earnings Call, 10/26/2023	p.4
+3Q2023	Consolidated	98,779 (CIQ)	N/A	—	—
+2Q2023	North America	N/A	~+12% (USD terms) 15	Q2 2023 Earnings Call, 07/25/2023	p.4
+2Q2023	Mexico	N/A	+12.6% 15	Q2 2023 Earnings Call, 07/25/2023	p.4
+2Q2023	EAA	N/A	>+31% 15	Q2 2023 Earnings Call, 07/25/2023	p.4
+2Q2023	Latin America	N/A	~+17% 15	Q2 2023 Earnings Call, 07/25/2023	p.4
+2Q2023	Consolidated	100,036 (CIQ)	Double-digit 15	Q2 2023 Earnings Call, 07/25/2023	p.4
+1Q2023	North America	N/A	+15% (USD) 16	Q1 2023 Earnings Call, 04/27/2023	p.4
+1Q2023	Mexico	N/A	~+20% 16	Q1 2023 Earnings Call, 04/27/2023	p.4
+1Q2023	EAA	N/A	+31% 16	Q1 2023 Earnings Call, 04/27/2023	p.4
+1Q2023	Latin America	N/A	+24% 16	Q1 2023 Earnings Call, 04/27/2023	p.4
+1Q2023	Consolidated	99,181 (CIQ)	N/A	—	—
+4Q2022	North America	N/A	~+22% (USD) 17	Q4 2022 Earnings Call, 02/22/2023	p.5
+4Q2022	Mexico	N/A	>+17% 17	Q4 2022 Earnings Call, 02/22/2023	p.5
+4Q2022	EAA	N/A	>+24% 1718	Q4 2022 Earnings Call, 02/22/2023	p.5
+4Q2022	Latin America	N/A	>+33% 18	Q4 2022 Earnings Call, 02/22/2023	p.5
+4Q2022	Consolidated	108,995 (CIQ)	N/A	—	—
+3Q2022	North America	N/A	+19% (USD) 19	Q3 2022 Earnings Call, 10/27/2022	p.4
+3Q2022	Mexico	N/A	>+20% 19	Q3 2022 Earnings Call, 10/27/2022	p.4
+3Q2022	EAA	N/A	>+23% 19	Q3 2022 Earnings Call, 10/27/2022	p.4
+3Q2022	Latin America	N/A	>+39% 19	Q3 2022 Earnings Call, 10/27/2022	p.4
+3Q2022	Consolidated	102,726 (CIQ)	N/A	—	—
+1Q2022	North America	N/A	+15.8% (USD) 20	Q1 2022 Earnings Call, 04/26/2022	p.5
+1Q2022	Mexico	N/A	+19.5% 20	Q1 2022 Earnings Call, 04/26/2022	p.5
+1Q2022	EAA	N/A	+21.1% 20	Q1 2022 Earnings Call, 04/26/2022	p.5
+1Q2022	Latin America	N/A	+25.1% 20	Q1 2022 Earnings Call, 04/26/2022	p.5
+1Q2022	Consolidated	90,570 (CIQ)	N/A	—	—
+4Q2021	North America	N/A	+12.4% (USD) 21	Q4 2021 Earnings Call, 02/22/2022	p.5
+4Q2021	Mexico	N/A	+20.5% 21	Q4 2021 Earnings Call, 02/22/2022	p.5
+4Q2021	EAA	N/A	+17.7% 21	Q4 2021 Earnings Call, 02/22/2022	p.5
+4Q2021	Latin America	N/A	+24.6% 21	Q4 2021 Earnings Call, 02/22/2022	p.5
+4Q2021	Consolidated	94,550 (CIQ)	N/A	—	—
+1Q2019–3Q2021	All regions	N/A	N/A	No press releases in context	—
+Eliminations
+Intercompany eliminations are disclosed only in the annual data. From the FY2024 annual table 10: eliminations were MXN −17,082 million (2024) vs. MXN −15,234 million (2023). Quarterly eliminations are not separately disclosed in the available context.
+
+3Q2026 Segment MXN Sales — Important Note
+The 3Q2026 press release (financial supplement with the segment MXN table) is not in the context; only the earnings call transcript and investor presentation slides are available. The consolidated CIQ total revenue for FQ3 2026 is not yet populated (shown as NA in the segment financials tool output). The ex-FX growth figures for 3Q2026 by region are sourced from the call transcript and slides as follows:
+
+Consolidated: +3.6% ex-FX 1
+North America: +1.0% ex-FX 2
+Mexico: Mexico net sales growth of 5.2% / 4.7% / 4.5% cited for YTD 2026 2; Q3 standalone ex-FX not separately quantified in the transcript
+EAA: "almost every business grew in local currency" 1; YTD EAA +130 bps margin 2; standalone Q3 ex-FX % not stated
+Latin America: qualitative only 1
+What Could Not Be Retrieved
+Gap	Tool/Field Attempted
+Segment MXN net sales by quarter for 1Q2019–4Q2023 and 1Q2024–2Q2024	S&P Capital IQ segment financials tool — returned only consolidated total revenue; no quarterly segment breakdown available
+Segment MXN net sales for 3Q2026 (press release not yet in context)	S&P Capital IQ filings/earnings releases — 3Q2026 press release not retrieved
+Segment MXN net sales for 2Q2022, 2Q2024, 1Q2025, 2Q2025 (partial quarters)	Same — quarterly segment tables not in the available press releases in context
+Eliminations by quarter	Not disclosed in quarterly press releases; annual only
+Precise ex-FX % for North America 2Q2022, 4Q2022 (USD growth cited, not ex-FX)	Earnings call transcripts available but North America reports in USD terms; ex-FX not always separately stated
+1Q2019–4Q2020 earnings calls / press releases	Not in context; no filings tool output for those periods"

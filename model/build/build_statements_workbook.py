@@ -14,14 +14,35 @@ Sources (PDF page numbers):
 Rule (data/adjustments.md): the latest report that presents a year wins, so
 FY2023 comes from IA25 and FY2021-FY2022 from RA23 (restated for Ricolino).
 """
+import sys
 from pathlib import Path
 
 from openpyxl import Workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
 
+import statements_es
+
 ROOT = Path(__file__).resolve().parents[2]
-OUT = ROOT / "model" / "BIMBOA_statements_2021-2030_v1.xlsx"
+# Usage: python build_statements_workbook.py [--lang es]
+LANG = "es" if "--lang" in sys.argv and sys.argv[sys.argv.index("--lang") + 1] == "es" else "en"
+OUT = ROOT / "model" / ("BIMBOA_estados_2021-2030_v1_ES.xlsx" if LANG == "es"
+                        else "BIMBOA_statements_2021-2030_v1.xlsx")
+
+
+def t(s):
+    """Label in the build language; a missing Spanish label stops the build."""
+    return s if LANG == "en" else statements_es.ES[s]
+
+
+def sn(name):
+    """Sheet name in the build language."""
+    return name if LANG == "en" else statements_es.SHEETS[name]
+
+
+def yl(y):
+    """Year column label in the build language."""
+    return y if LANG == "en" else statements_es.YEARS[y]
 
 HIST = ["FY2021A", "FY2022A", "FY2023A", "FY2024A", "FY2025A"]
 FCST = ["FY2026E", "FY2027E", "FY2028E", "FY2029E", "FY2030E"]
@@ -36,6 +57,7 @@ SRC = {
     "BS": "RA23 p.256 (FY21-22); IA25 p.12 (FY23-25)",
     "CF": "RA23 p.260 (FY21-22); IA25 p.16 (FY23-25)",
     "EQ": "RA23 p.259 (FY21-22); IA25 p.15 (FY23-25)",
+    "SEG": "Segment note: RA23 p.359 (FY21), p.358 (FY22); IA25 p.86 (FY23-24), p.85 (FY25)",
 }
 
 # Row spec: (key, label, kind, payload, note)
@@ -83,6 +105,11 @@ IS_ROWS = [
     ("da", "D&A, continuing (segment note)", "i", [16126, 18038, 18929, 23051, 24838],
      "RA23 p.358-359; IA25 p.85-86 (data/financials.csv)"),
     ("ebitda", "EBITDA (EBIT + D&A)", "f", "={c}{ebit}+{c}{da}", ""),
+    ("othnc", "Impairment and other non-cash items (segment note)", "hf",
+     ("={SEG}!{c}{seg_i_tot}+{SEG}!{c}{seg_n_tot}", "INPUT"),
+     "Mainly multi-employer pension plan (MEPP) adjustments"),
+    ("adjebitda", "Adjusted EBITDA (company definition)", "f", "={c}{ebit}+{c}{da}+{c}{othnc}",
+     "Company definition; in history it ties to the segment note"),
 ]
 
 OCI_ROWS = [
@@ -216,6 +243,8 @@ CF_ROWS = [
     ("perpy", "Yield on perpetual notes (equity instrument)", "i", [-621, -649, -395, 0, 0], ""),
     ("perpr", "Repurchase of perpetual notes", "i", [0, -344, -78, 0, 0], ""),
     ("divp", "Dividends paid", "i", [-4636, -5885, -3549, -4234, -4451], "Parent + NCI"),
+    ("sedist", "Distributions to US structured entities (NCI)", "i", [0, 0, 0, 0, 0],
+     "Not reported separately in history; forecast = equity 'consolidation of structured entities'"),
     ("leasep", "Lease payments", "i", [-5372, -6385, -6278, -7072, -8060], "Principal + interest"),
     ("derp", "Payments on derivative financial instruments", "i", [-1690, 0, -1655, -1889, -1034], ""),
     ("derc", "Collections on derivative financial instruments", "i", [1496, 418, 2090, 692, 633], ""),
@@ -258,6 +287,80 @@ EQ_ROWS = [
     ("tot", "Total equity, closing", "f", "={c}{c1}+{c}{c2}", "Must equal BS total equity"),
 ]
 
+# Segment note (audited). Regional net sales are before intersegment eliminations;
+# regional operating income excludes intercompany royalties, which sit in the
+# eliminations column (segment note footnote 1).
+REGIONS = [("mx", "Mexico"), ("na", "North America"), ("la", "Latin America"), ("eaa", "Europe, Asia and Africa (EAA)")]
+SEG_DATA = {
+    "s": {"mx": [109089, 130401, 145387, 151164, 154809], "na": [175369, 205674, 192534, 189330, 190211],
+          "la": [31109, 38411, 36647, 39879, 44120], "eaa": [34195, 37536, 40545, 45044, 54214],
+          "el": [-10970, -13316, -15234, -17082, -16402]},
+    "o": {"mx": [16731, 18824, 21882, 23726, 23442], "na": [15171, 33263, 11175, 5920, 6272],
+          "la": [78, 1087, 1294, 1191, 607], "eaa": [292, -486, 326, 1227, 2498],
+          "el": [308, 1008, 778, 1085, 1327]},
+    "d": {"mx": [3907, 4424, 5524, 6895, 7859], "na": [8470, 9248, 8946, 10878, 10793],
+          "la": [1687, 2278, 2215, 2507, 2945], "eaa": [2062, 2088, 2244, 2772, 3241],
+          "el": [0, 0, 0, -1, 0]},
+    "i": {"mx": [133, 72, 78, 141, 329], "na": [57, -890, -79, -4, 25],
+          "la": [142, 46, 22, -101, 0], "eaa": [350, 1024, 362, 213, 91], "el": [0, 0, 0, 0, 0]},
+    "n": {"mx": [0, 0, 0, 0, 0], "na": [-2246, -19010, 175, -982, 27],
+          "la": [19, 22, 0, 6, 0], "eaa": [0, 0, 0, 0, 0], "el": [211, 448, 0, 0, 0]},
+}
+# Reported Adjusted EBITDA by region (tie-out only).
+SEG_EBITDA_REPORTED = {"mx": [20771, 23320, 27484, 30762, 31630], "na": [21452, 22611, 20217, 15812, 17117],
+                       "la": [1926, 3433, 3531, 3603, 3552], "eaa": [2704, 2626, 2932, 4212, 5830],
+                       "el": [519, 1456, 778, 1084, 1327], "tot": [47372, 53446, 54942, 55473, 59456]}
+
+
+def _seg_rows():
+    keys = [k for k, _ in REGIONS] + ["el"]
+    first, last = keys[0], keys[-1]
+    rows = [("h1", "Net sales by region (before intersegment eliminations)", "h", None, "")]
+    for k, lab in REGIONS:
+        rows.append((f"s_{k}", lab, "tf", (SEG_DATA["s"][k], None), ""))
+    rows.append(("s_el", "Intersegment eliminations", "tf", (SEG_DATA["s"]["el"], None), ""))
+    rows.append(("s_tot", "Consolidated net sales", "hf", ("=SUM({c}{s_%s}:{c}{s_%s})" % (first, last), None),
+                 "Equals IS net sales"))
+    rows.append(("b1", "", "b", None, ""))
+    rows.append(("h2", "Net sales growth (in MXN, includes FX translation)", "h", None, ""))
+    for k, lab in REGIONS:
+        rows.append((f"g_{k}", lab, "hf", ("=IFERROR({c}{s_%s}/{p}{s_%s}-1,0)" % (k, k), None), ""))
+    rows.append(("g_tot", "Consolidated net sales", "hf", ("=IFERROR({c}{s_tot}/{p}{s_tot}-1,0)", None), ""))
+    rows.append(("b2", "", "b", None, ""))
+    blocks = [("o", "Operating income by region", "Eliminations (intercompany royalties)",
+               "Equals IS operating income"),
+              ("d", "Depreciation and amortization by region", "Eliminations", "Equals IS memo D&A"),
+              ("i", "Impairment (reversal) of long-lived assets by region", "Eliminations", ""),
+              ("n", "Other non-cash items by region (mainly MEPP)", "Eliminations", "")]
+    for b, head, ellab, totnote in blocks:
+        rows.append((f"h_{b}", head, "h", None, ""))
+        for k, lab in REGIONS + [("el", ellab)]:
+            rows.append((f"{b}_{k}", lab, "tf", (SEG_DATA[b][k], None), ""))
+        rows.append((f"{b}_tot", "Total", "hf",
+                     ("=SUM({c}{%s_%s}:{c}{%s_%s})" % (b, first, b, last), None), totnote))
+        rows.append((f"b_{b}", "", "b", None, ""))
+    rows.append(("h_e", "Adjusted EBITDA by region (operating income + D&A + impairment + non-cash)", "h", None, ""))
+    for k, lab in REGIONS:
+        rows.append((f"e_{k}", lab, "hf",
+                     ("={c}{o_%s}+{c}{d_%s}+{c}{i_%s}+{c}{n_%s}" % (k, k, k, k), None), ""))
+    rows.append(("e_el", "Eliminations (intercompany royalties)", "hf",
+                 ("={c}{o_el}+{c}{d_el}+{c}{i_el}+{c}{n_el}", None), ""))
+    rows.append(("e_tot", "Total Adjusted EBITDA", "hf", ("=SUM({c}{e_%s}:{c}{e_el})" % first, None),
+                 "Equals IS Adjusted EBITDA (EBIT + D&A + non-cash)"))
+    rows.append(("b3", "", "b", None, ""))
+    rows.append(("h_m", "Adjusted EBITDA margin on regional net sales", "h", None, ""))
+    for k, lab in REGIONS:
+        rows.append((f"m_{k}", lab, "hf", ("=IFERROR({c}{e_%s}/{c}{s_%s},0)" % (k, k), None),
+                     "Same basis as the quarterly releases"))
+    rows.append(("m_tot", "Consolidated", "hf", ("=IFERROR({c}{e_tot}/{c}{s_tot},0)", None), ""))
+    return rows
+
+
+BS_ROWNUM = {key: 5 + i for i, (key, *_) in enumerate(BS_ROWS)}
+SEG_ROWS = _seg_rows()
+SEG_ROWNUM = {key: 5 + i for i, (key, *_) in enumerate(SEG_ROWS)}
+CF_ROWNUM = {key: 5 + i for i, (key, *_) in enumerate(CF_ROWS)}
+
 BLUE = Font(name="Arial", size=9, color="0000FF")
 BLACK = Font(name="Arial", size=9, color="000000")
 BOLD = Font(name="Arial", size=9, bold=True)
@@ -273,29 +376,32 @@ TOP = Border(top=Side(style="thin"))
 NUM = '#,##0;(#,##0);"-"'
 NUM2 = '#,##0.00;(#,##0.00);"-"'
 TOTAL_KEYS = {"gp", "ebit", "pbt", "ni", "nicont", "ta", "tl", "te", "tle", "tca", "tcl", "ctrl",
-              "cfo", "cfi", "cff", "end", "oci", "ci", "c1", "c2", "tot", "opex", "cif", "sub1", "sub2", "net"}
+              "cfo", "cfi", "cff", "end", "oci", "ci", "c1", "c2", "tot", "opex", "cif", "sub1", "sub2", "net",
+              "adjebitda", "s_tot", "o_tot", "d_tot", "i_tot", "n_tot", "e_tot", "m_tot", "g_tot"}
+PCT_PREFIX = ("g_", "m_")
 
 
-def build_sheet(wb, name, title, subtitle, rows, src):
-    ws = wb.create_sheet(name)
-    ws["A1"] = title
+def build_sheet(wb, name, title, subtitle, rows, src, ext=None):
+    ext = ext or {}
+    ws = wb.create_sheet(sn(name))
+    ws["A1"] = t(title)
     ws["A1"].font = TITLE
-    ws["A2"] = subtitle
+    ws["A2"] = t(subtitle)
     ws["A2"].font = NOTE
     hdr = 4
-    ws.cell(hdr, 1, "MXN millions").font = HDR
+    ws.cell(hdr, 1, t("MXN millions")).font = HDR
     for j, y in enumerate(YEARS):
-        c = ws.cell(hdr, 2 + j, y)
+        c = ws.cell(hdr, 2 + j, yl(y))
         c.font = HDR
         c.alignment = Alignment(horizontal="center")
-    ws[f"{TAG_COL}{hdr}"] = "Tag"
-    ws[f"{SRC_COL}{hdr}"] = "Source / note"
+    ws[f"{TAG_COL}{hdr}"] = t("Tag")
+    ws[f"{SRC_COL}{hdr}"] = t("Source / note")
     for col in ["A"] + COLS + [TAG_COL, SRC_COL]:
         ws[f"{col}{hdr}"].fill = FILL_HDR
         ws[f"{col}{hdr}"].font = HDR
-    ws.cell(hdr - 1, 2, "Actual (audited)").fill = FILL_HIST
+    ws.cell(hdr - 1, 2, t("Actual (audited)")).fill = FILL_HIST
     ws.merge_cells(start_row=hdr - 1, start_column=2, end_row=hdr - 1, end_column=6)
-    ws.cell(hdr - 1, 7, "Forecast - team projects and balances").fill = FILL_FCST
+    ws.cell(hdr - 1, 7, t("Forecast - team projects and balances")).fill = FILL_FCST
     ws.merge_cells(start_row=hdr - 1, start_column=7, end_row=hdr - 1, end_column=11)
     for c in (ws.cell(hdr - 1, 2), ws.cell(hdr - 1, 7)):
         c.font = BOLD
@@ -309,7 +415,7 @@ def build_sheet(wb, name, title, subtitle, rows, src):
 
     for key, label, kind, payload, note in rows:
         r = rownum[key]
-        a = ws.cell(r, 1, label)
+        a = ws.cell(r, 1, t(label))
         if kind == "h":
             a.font = BOLD
             for col in ["A"] + COLS:
@@ -319,6 +425,8 @@ def build_sheet(wb, name, title, subtitle, rows, src):
             continue
         a.font = BOLD if key in TOTAL_KEYS else BLACK
         fmt = NUM2 if key == "eps" else ('#,##0.000' if key == "shares" else NUM)
+        if name == "Segments" and key.startswith(PCT_PREFIX):
+            fmt = '0.0%;(0.0%);"-"'
         for j, col in enumerate(COLS):
             cell = ws[f"{col}{r}"]
             prev = COLS[j - 1] if j else None
@@ -337,22 +445,37 @@ def build_sheet(wb, name, title, subtitle, rows, src):
                     cell.value = f"={prev}{rownum[close_key]}"
                     cell.font = BLACK
             elif kind == "f":
-                cell.value = payload.format(c=col, p=prev, **rownum)
+                if prev is None and "{p}" in payload:
+                    continue
+                cell.value = payload.format(c=col, p=prev, **rownum, **ext)
                 cell.font = BOLD if key in TOTAL_KEYS else BLACK
+            elif kind in ("tf", "hf"):
+                hist, fcst = payload
+                tpl = fcst if j >= 5 else hist
+                if j < 5 and kind == "tf":
+                    cell.value = hist[j]
+                    cell.font = BLUE
+                elif tpl == "INPUT":
+                    cell.fill = FILL_IN
+                elif tpl is None or (prev is None and "{p}" in tpl):
+                    pass
+                else:
+                    cell.value = tpl.format(c=col, p=prev, **rownum, **ext)
+                    cell.font = BOLD if key in TOTAL_KEYS else BLACK
             cell.number_format = fmt
             if key in TOTAL_KEYS:
                 cell.border = TOP
-        if kind == "i":
+        if kind in ("i", "tf"):
             tag = "[sourced]"
         elif kind in ("beg", "open"):
             tag = "[sourced] FY21; [calc] after"
         else:
             tag = "[calc]"
         if key in ("da",) and name == "IS":
-            srcnote = note
+            srcnote = t(note)
         else:
-            srcnote = (src + ("; " + note if note else "")) if kind != "f" else note
-        ws[f"{TAG_COL}{r}"] = tag
+            srcnote = (t(src) + ("; " + t(note) if note else "")) if kind in ("i", "tf", "beg", "open") else t(note)
+        ws[f"{TAG_COL}{r}"] = t(tag)
         ws[f"{SRC_COL}{r}"] = srcnote
         ws[f"{TAG_COL}{r}"].font = NOTE
         ws[f"{SRC_COL}{r}"].font = NOTE
@@ -366,14 +489,715 @@ def build_sheet(wb, name, title, subtitle, rows, src):
     return ws, rownum
 
 
+def validate_segments():
+    """Segment note ties to the income statement in every historical year (build-time check)."""
+    is_vals = {key: payload for key, _, kind, payload, _ in IS_ROWS if kind == "i"}
+    keys = [k for k, _ in REGIONS] + ["el"]
+    for j in range(5):
+        sales = sum(SEG_DATA["s"][k][j] for k in keys)
+        assert sales == is_vals["sales"][j], ("sales", j)
+        ebit = (is_vals["sales"][j] - is_vals["cogs"][j]
+                - sum(is_vals[x][j] for x in ("dist", "admin", "integ", "oth")))
+        assert sum(SEG_DATA["o"][k][j] for k in keys) == ebit, ("ebit", j)
+        assert sum(SEG_DATA["d"][k][j] for k in keys) == is_vals["da"][j], ("da", j)
+        nc = sum(SEG_DATA[b][k][j] for b in ("i", "n") for k in keys)
+        for k in keys:
+            e = sum(SEG_DATA[b][k][j] for b in ("o", "d", "i", "n"))
+            assert e == SEG_EBITDA_REPORTED[k][j], ("ebitda", k, j)
+        assert ebit + is_vals["da"][j] + nc == SEG_EBITDA_REPORTED["tot"][j], ("total ebitda", j)
+
+
+# FY2026E drivers (team decisions 2026-10-22/23, docs/context/memory.md).
+FX_CSV = ROOT / "data" / "market" / "usdmxn_daily_2025-01_2026-10.csv"
+REL = {"q1": "1T26 rel. p.9", "q2": "2T26 rel. p.8", "q3": "3T26 rel. p.8"}
+Q_SRC = "Earnings releases, filings/quarterly: 1T26 p.9, 2T26 p.8, 3T26 p.8 (income statement)"
+
+# FY2027E net sales by region (team decisions 2026-10-25, docs/context/memory.md). Ratios and GDP growth come
+# from data/macro/nominal_gdp_growth_2016-2030.xlsx (built by model/build/build_macro_gdp.py), 4 decimals.
+MACRO = "data/macro/nominal_gdp_growth_2016-2030.xlsx"
+REG27 = [("na", "North America"), ("mx", "Mexico"), ("la", "Latin America"), ("eaa", "EAA")]
+R9 = {"na": [40533, 44368, 44241], "mx": [39726, 40279, 40905],
+      "la": [11545, 11620, 12047], "eaa": [12631, 13188, 13371]}
+RATIO27 = {"na": 0.1678, "mx": 0.7747, "la": 0.6688, "eaa": 0.5611}
+GDP27 = {"na": 0.0544, "mx": 0.0669, "la": 0.0795, "eaa": 0.0622}
+GDPSRC = {"na": "sheet Data (USA, team choice: US only)", "mx": "sheet Data (MEX)",
+          "la": "sheet Regional_agg (prior-year FX weights)", "eaa": "sheet Regional_agg (prior-year FX weights)"}
+# Local currency -> USD factor FY2027E per region, sheet Regional_FX of MACRO (4 decimals) [calc]
+FXL27 = {"na": 1.0, "mx": 1.0, "la": 0.9749, "eaa": 0.9917}
+FXLSRC = {"na": "USA only (team choice for GDP): earned in USD", "mx": "Peso business: no translation",
+          "la": MACRO + ", sheet Regional_FX", "eaa": MACRO + ", sheet Regional_FX"}
+
+
+def fx_quarter_averages():
+    """4Q25 average, 4Q26 average (October closes plus the last quote held to year-end) and 9M26 average."""
+    import csv
+    import datetime
+    rows = [(datetime.date.fromisoformat(r["date"]), float(r["usdmxn_close"]))
+            for r in csv.DictReader(open(FX_CSV, encoding="utf-8"))]
+    q4_25 = [v for d, v in rows if d.year == 2025 and d.month >= 10]
+    q4_26 = [v for d, v in rows if d.year == 2026 and d.month >= 10]
+    m9_26 = [v for d, v in rows if d.year == 2026 and d.month <= 9]
+    last_d, spot = rows[-1]
+    rem = sum(1 for i in range(1, 80)
+              if (last_d + datetime.timedelta(i)).year == 2026 and (last_d + datetime.timedelta(i)).weekday() < 5)
+    return (round(sum(q4_25) / len(q4_25), 4), round((sum(q4_26) + rem * spot) / (len(q4_26) + rem), 4),
+            round(sum(m9_26) / len(m9_26), 4))
+
+
+def build_assumptions(wb, is_r):
+    """Assumptions sheet: 2026 actual by quarter, FY2026E drivers, option A (feeds the IS) and option B check."""
+    fx25, fx26, fx9m = fx_quarter_averages()
+    ws = wb.create_sheet(sn("Assumptions"))
+    bsn = sn("BS")
+    ws["A1"] = t("Grupo Bimbo - FY2026E assumptions")
+    ws["A1"].font = TITLE
+    ws["A2"] = t("2026 = 9M26 actual + 4Q26 estimate, anchored on Bimbo's 2026 guidance. Option A feeds the income statement; option B is the check.")
+    ws["A2"].font = NOTE
+    hdr = 4
+    for j, txt in enumerate(["MXN millions", "1Q26", "2Q26", "3Q26", "9M26", "Tag", "Source / note"]):
+        c = ws.cell(hdr, 1 + j, t(txt))
+        c.font = HDR
+        c.fill = FILL_HDR
+    isn = sn("IS")
+    rows = [
+        ("h_q", "2026 actual by quarter (earnings releases)", "h", None, "", ""),
+        ("q_s", "Net sales", "q", [100319, 105026, 106061], "[sourced]", Q_SRC),
+        ("q_c", "Cost of sales", "q", [47662, 49771, 49762], "[sourced]", Q_SRC),
+        ("q_gp", "Gross profit", "qf", "={c}{q_s}-{c}{q_c}", "[calc]", ""),
+        ("q_g", "General expenses", "q", [44282, 45378, 45052], "[sourced]",
+         Q_SRC + "; distribution and selling + administration + integration"),
+        ("q_o", "Other (income) expenses, net", "q", [463, 1049, 857], "[sourced]", Q_SRC),
+        ("q_ebit", "Operating income", "qf", "={c}{q_gp}-{c}{q_g}-{c}{q_o}", "[calc]",
+         "Sum of lines; the releases print 7,911 / 8,827 / 10,390 (rounding)"),
+        ("q_e", "Adjusted EBITDA", "q", [14036, 15113, 16644], "[sourced]", Q_SRC),
+        ("q_dn", "D&A, impairment and non-cash items (EBITDA - EBIT)", "qf", "={c}{q_e}-{c}{q_ebit}", "[calc]", ""),
+        ("q_s25", "Net sales, same quarter 2025", "q", [103448, 107389, 107427], "[sourced]",
+         "Comparatives: 1T26 p.3, 2T26 p.3, 3T26 p.3 (3Q25 restated from 107,421)"),
+        ("q_e25", "Adjusted EBITDA, same quarter 2025", "q", [12797, 14890, 15776], "[sourced]",
+         "Comparatives in the 2026 releases (income statement page)"),
+        ("q_gm", "Gross margin", "qf", "={c}{q_gp}/{c}{q_s}", "[calc]", ""),
+        ("q_gr", "General expenses / net sales", "qf", "={c}{q_g}/{c}{q_s}", "[calc]", ""),
+        ("q_or", "Other expenses / net sales", "qf", "={c}{q_o}/{c}{q_s}", "[calc]", ""),
+        ("q_dr", "D&A and non-cash / net sales", "qf", "={c}{q_dn}/{c}{q_s}", "[calc]", ""),
+        ("q_em", "Adjusted EBITDA margin", "qf", "={c}{q_e}/{c}{q_s}", "[calc]", ""),
+        ("q_gx", "Net sales growth in MXN", "qf", "={c}{q_s}/{c}{q_s25}-1", "[calc]", ""),
+        ("q_int", "Net interest expense", "q", [3273, 3292, 2829], "[sourced]", Q_SRC),
+        ("q_fx", "Foreign exchange loss (gain), net", "q", [189, 227, 194], "[sourced]", Q_SRC),
+        ("q_mon", "Monetary position loss (gain)", "q", [0, -56, 119], "[sourced]", Q_SRC),
+        ("q_as", "Share of results of associates", "q", [-7, 42, 1], "[sourced]", Q_SRC),
+        ("q_pbt", "Income before taxes (as reported)", "q", [4443, 5406, 7249], "[sourced]", Q_SRC),
+        ("q_pbtc", "Income before taxes, sum of lines", "qf",
+         "={c}{q_ebit}-{c}{q_int}-{c}{q_fx}-{c}{q_mon}+{c}{q_as}", "[calc]", "Differs from the release by rounding"),
+        ("q_tax", "Income taxes", "q", [1644, 2000, 2682], "[sourced]", Q_SRC),
+        ("q_etr", "Effective tax rate", "qf", "={c}{q_tax}/{c}{q_pbt}", "[calc]", ""),
+        ("q_nci", "Non-controlling interest", "q", [437, 471, 458], "[sourced]", Q_SRC),
+        ("bl1", "", "b", None, "", ""),
+        ("h_d", "FY2026E drivers (value in column B)", "h", None, "", ""),
+        ("s25", "Net sales FY2025", "vf", "=%s!F%d" % (isn, is_r["sales"]), "[sourced]", "Income statement"),
+        ("s4q25", "Net sales 4Q25", "v", 108688, "[sourced]", "4T25 rel. p.4"),
+        ("e4q25", "Adjusted EBITDA 4Q25", "vf", "=%s!F%d-E{q_e25}" % (isn, is_r["adjebitda"]), "[calc]",
+         "FY2025 less 9M25"),
+        ("g4q", "4Q26 net sales growth excluding FX", "v", 0.05, "[assumption]",
+         "Team: guide 'mid-single digit' taken literally for the last quarter (3Q26 deck p.26)"),
+        ("mx25", "Mexico net sales FY2025 (after intersegment eliminations)", "v", 140360, "[sourced]",
+         "Segment note, IA25 p.85"),
+        ("mxsh", "Mexico share of net sales", "vf", "=B{mx25}/B{s25}", "[calc]",
+         "Earned in MXN; the rest is translated (about 2/3 abroad, call 2026-02-25 p.7)"),
+        ("fx25", "USD/MXN average 4Q25", "v", fx25, "[calc]",
+         "Average of daily closes Oct-Dec 2025, data/market/usdmxn_daily_2025-01_2026-10.csv"),
+        ("fx26", "USD/MXN average 4Q26", "v", fx26, "[assumption]",
+         "October 2026 closes to 23-Oct plus the 23-Oct quote held for the remaining business days (market FX, team decision)"),
+        ("fac", "FX translation factor 4Q26 vs 4Q25", "vf", "=B{mxsh}+(1-B{mxsh})*B{fx26}/B{fx25}", "[calc]",
+         "USD/MXN as proxy for every foreign currency, as in Bimbo's own guidance"),
+        ("s4q26", "Net sales 4Q26", "vf", "=B{s4q25}*(1+B{g4q})*B{fac}", "[calc]", ""),
+        ("s26", "Net sales FY2026E", "vf", "=E{q_s}+B{s4q26}", "[calc]", "9M26 actual + 4Q26"),
+        ("gs26", "Net sales growth FY2026E in MXN", "vf", "=B{s26}/B{s25}-1", "[calc]",
+         "Guide: flat to low-single-digit decline in MXN"),
+        ("m25", "Adjusted EBITDA margin FY2025", "vf", "=%s!F%d/%s!F%d" % (isn, is_r["adjebitda"], isn, is_r["sales"]),
+         "[calc]", ""),
+        ("bp", "Margin expansion, midpoint of the guide", "v", 0.01025, "[guidance]",
+         "+85 to +120 bp; filings/quarterly/GB_Investor_PPT_3Q26.pdf p.26"),
+        ("one", "Less one-off gain on the La Moderna stake", "v", -0.00115, "[guidance]",
+         "10-13 bp of FY2026 margin, midpoint; call 2026-04-29 p.7 (excluded by team decision)"),
+        ("m26", "Adjusted EBITDA margin FY2026E", "vf", "=B{m25}+B{bp}+B{one}", "[calc]", ""),
+        ("e26", "Adjusted EBITDA FY2026E", "vf", "=B{s26}*B{m26}", "[calc]", ""),
+        ("e4q26m", "Implied 4Q26 Adjusted EBITDA margin", "vf", "=(B{e26}-E{q_e})/B{s4q26}", "[calc]",
+         "Compare with 4Q25"),
+        ("e4q25m", "4Q25 Adjusted EBITDA margin", "vf", "=B{e4q25}/B{s4q25}", "[calc]", ""),
+        ("bl2", "", "b", None, "", ""),
+        ("h_a", "Option A: FY2026E income statement (9M26 gross margin; general expenses close to the guide)", "h",
+         None, "", ""),
+        ("a_c", "Cost of sales", "vf", "=B{s26}*(1-E{q_gm})", "[calc]", "9M26 gross margin"),
+        ("a_da", "D&A and non-cash items", "vf", "=B{s26}*E{q_dr}", "[calc]",
+         "9M26 ratio of (EBITDA - EBIT); goes to the IS D&A memo line"),
+        ("a_o", "Other (income) expenses, net", "vf", "=B{s26}*E{q_or}", "[calc]", "9M26 ratio"),
+        ("a_ebit", "Operating income", "vf", "=B{e26}-B{a_da}", "[calc]", ""),
+        ("a_g", "General expenses (closing line)", "vf", "=B{s26}-B{a_c}-B{a_o}-B{a_ebit}", "[calc]", ""),
+        ("a_gr", "General expenses / net sales", "vf", "=B{a_g}/B{s26}", "[calc]", "Compare with 9M26"),
+        ("a_dist", "  Distribution and selling", "vf",
+         "=B{a_g}*%s!F%d/(%s!F%d+%s!F%d+%s!F%d)" % (isn, is_r["dist"], isn, is_r["dist"], isn, is_r["admin"], isn, is_r["integ"]),
+         "[calc]", "FY2025 split of general expenses"),
+        ("a_adm", "  Administrative", "vf",
+         "=B{a_g}*%s!F%d/(%s!F%d+%s!F%d+%s!F%d)" % (isn, is_r["admin"], isn, is_r["dist"], isn, is_r["admin"], isn, is_r["integ"]),
+         "[calc]", "FY2025 split of general expenses"),
+        ("a_int", "  Integration", "vf",
+         "=B{a_g}*%s!F%d/(%s!F%d+%s!F%d+%s!F%d)" % (isn, is_r["integ"], isn, is_r["dist"], isn, is_r["admin"], isn, is_r["integ"]),
+         "[calc]", "FY2025 split of general expenses"),
+        ("bl4", "", "b", None, "", ""),
+        ("h_c", "FY2026E below operating income (team decisions 2026-10-23)", "h", None, "", ""),
+        ("c_int", "Net interest expense", "vf", "=E{q_int}+D{q_int}", "[assumption]",
+         "9M26 actual + 4Q26 = 3Q26; the CFO said the 3Q26 level may not hold (3Q26 call). "
+         "Releases give net interest only: IS interest income FY2026E = 0"),
+        ("c_fx", "Foreign exchange loss (gain), net", "vf", "=E{q_fx}*4/3", "[assumption]",
+         "9M26 actual + 4Q26 at the 9M26 quarterly average"),
+        ("c_mon", "Monetary position loss (gain)", "vf", "=E{q_mon}*4/3", "[assumption]",
+         "9M26 actual + 4Q26 at the 9M26 quarterly average"),
+        ("c_as", "Share of results of associates", "vf", "=E{q_as}*4/3", "[assumption]",
+         "9M26 actual + 4Q26 at the 9M26 quarterly average"),
+        ("c_etr", "Effective tax rate", "v", 0.37, "[assumption]",
+         "9M26 = 37.0%, Bimbo's estimate of its annual rate (IAS 34); the lower 4Q rate of 2024-25 is not projected"),
+        ("c_nci", "Non-controlling interest", "vf", "=E{q_nci}*4/3", "[assumption]",
+         "9M26 actual + 4Q26 at the 9M26 quarterly average"),
+        ("c_sh", "Weighted-average shares (millions)", "v", 4304.744119, "[assumption]",
+         "Shares outstanding at 31-Dec-2025, 4,304,744,119 (EEFF25 p.80): the 2026 starting count; "
+         "2026 buybacks (20m shares in 3Q26, 3Q26 call) not deducted"),
+        ("bl5", "", "b", None, "", ""),
+        ("h_e", "FY2026E balance sheet and cash flow (team decisions 2026-10-23)", "h", None, "", ""),
+        ("fx9m", "USD/MXN average 9M26", "v", fx9m, "[calc]",
+         "Average of daily closes Jan-Sep 2026, data/market/usdmxn_daily_2025-01_2026-10.csv"),
+        ("fxy", "USD/MXN average FY2026E", "vf", "=(3*B{fx9m}+B{fx26})/4", "[calc]", "Three quarters at 9M26, one at 4Q26"),
+        ("cx_usd", "Capex FY2026E (US$ millions)", "v", 1050, "[guidance]",
+         "Midpoint of the CFO's US$1.0-1.1bn (3Q26 call); deck US$1.0-1.2bn (GB_Investor_PPT_3Q26 p.26)"),
+        ("cx", "Capex FY2026E", "vf", "=B{cx_usd}*B{fxy}", "[calc]", "Purchases of PP&E in the cash flow"),
+        ("rou_d", "Right-of-use depreciation", "v", 6142, "[assumption]",
+         "FY2025 (EEFF25 p.41); right-of-use assets and lease liabilities held at FY2025: new leases replace expiring ones"),
+        ("l_int", "Lease interest", "v", 2137, "[assumption]", "FY2025 (EEFF25 p.43); paid inside lease payments"),
+        ("amort", "Intangible amortization", "v", 2175, "[assumption]", "FY2025 (EEFF25 p.45); no intangible purchases"),
+        ("ppe_d", "PP&E depreciation and other non-cash items", "vf", "=B{a_da}-B{rou_d}-B{amort}", "[calc]",
+         "IS D&A less right-of-use depreciation and amortization"),
+        ("d_ar", "Receivable days (average FY2021-FY2025, on net sales)", "vf",
+         "=AVERAGE(" + ",".join("%s!%s%d/%s!%s%d*365" % (bsn, c, BS_ROWNUM["ar"], isn, c, is_r["sales"]) for c in "BCDEF") + ")",
+         "[calc]", "Team 2026-10-25: stable 29-33 days in FY2021-FY2025, average used"),
+        ("d_inv", "Inventory days (FY2025, on cost of sales)", "vf",
+         "=%s!F%d/%s!F%d*365" % (bsn, BS_ROWNUM["inv"], isn, is_r["cogs"]), "[calc]", "Held at FY2025"),
+        ("d_ap", "Payable days (FY2025, on cost of sales)", "vf",
+         "=%s!F%d/%s!F%d*365" % (bsn, BS_ROWNUM["ap"], isn, is_r["cogs"]), "[calc]", "Held at FY2025"),
+        ("std_sep", "Current portion of debt at 30-Sep-2026", "v", 13636, "[sourced]", "3T26 rel. p.8"),
+        ("ltd_sep", "Long-term debt at 30-Sep-2026", "v", 139166, "[sourced]", "3T26 rel. p.8"),
+        ("mat_usd", "Bank loans maturing in the rest of 2026 (US$ millions)", "v", 87, "[sourced]",
+         "Amortization profile, 3T26 rel. p.6"),
+        ("mat_fx", "USD/MXN of the amortization profile", "v", 17.84, "[sourced]", "3T26 rel. p.6, note 11"),
+        ("mat", "2026 maturity repaid in 4Q26", "vf", "=B{mat_usd}*B{mat_fx}", "[assumption]",
+         "Only the contractual maturity; no prepayment, no new borrowing; cash is the result"),
+        ("dps", "Dividend per share 2026 (MXN)", "v", 1.075, "[sourced]",
+         "BMV notice 30-Apr-2026 (bmv.com.mx/docs-pub/derechos/derechos_1554405_1.pdf), paid 13-May-2026"),
+        ("div", "Dividends declared, controlling", "vf", "=B{dps}*B{c_sh}", "[calc]", "On shares outstanding at 31-Dec-2025"),
+        ("divn", "Dividends to non-controlling interest", "v", 135, "[assumption]", "FY2025 (equity statement)"),
+        ("ret9", "Returned to shareholders 9M26 (dividends + buybacks)", "v", 6000, "[guidance]",
+         "CFO: 'returning 6 billion pesos' (3Q26 call, approximate)"),
+        ("bb3q", "Share repurchases 3Q26", "v", 1200, "[guidance]",
+         "CFO: 20 million shares, about 1.2 billion pesos in the quarter (3Q26 call)"),
+        ("bb", "Share repurchases FY2026E", "vf", "=B{ret9}-B{div}+B{bb3q}", "[assumption]",
+         "Team 2026-10-25: 9M26 implied + 4Q26 at the 3Q26 pace (CFO: the program continues, 3Q26 call)"),
+        ("bl3", "", "b", None, "", ""),
+        ("h_b", "Option B check: every ratio from 9M26", "h", None, "", ""),
+        ("b_ebit", "Operating income", "vf", "=B{s26}*(E{q_gm}-E{q_gr}-E{q_or})", "[calc]", ""),
+        ("b_e", "Adjusted EBITDA", "vf", "=B{b_ebit}+B{a_da}", "[calc]", ""),
+        ("b_m", "Adjusted EBITDA margin", "vf", "=B{b_e}/B{s26}", "[calc]", ""),
+        ("b_d", "Difference B - A", "vf", "=B{b_e}-B{e26}", "[calc]", ""),
+        ("b_dbp", "Difference B - A (bp of net sales)", "vf", "=B{b_d}/B{s26}*10000", "[calc]",
+         "A small difference means the guide is consistent with 9M26"),
+        ("bl6", "", "b", None, "", ""),
+        ("h_f", "FY2027E net sales by region: organic growth = ratio x nominal GDP growth (team decisions 2026-10-25)",
+         "h", None, "", ""),
+    ] + [("r9_" + k, "Net sales by quarter, %s" % lab, "q", R9[k], "[sourced]",
+          "1T26 p.3, 2T26 p.3, 3T26 p.3 (before intersegment eliminations)") for k, lab in REG27] + [
+        x for k, lab in REG27 for x in (
+            ("rt_" + k, "Organic ratio, %s" % lab, "v", RATIO27[k], "[assumption]",
+             "Team: organic 9M26 ex-FX growth / nominal GDP growth 2026; " + MACRO + ", sheet Organic_pass"),
+            ("gd_" + k, "Nominal GDP growth 2027 in local currency, %s" % lab, "v", GDP27[k], "[calc]",
+             "Capital IQ levels; %s, %s" % (MACRO, GDPSRC[k])),
+            ("go_" + k, "Organic net sales growth FY2027E excluding FX, %s" % lab, "vf", "=B{rt_%s}*B{gd_%s}" % (k, k),
+             "[calc]", "Ratio x GDP growth"),
+            ("wt_" + k, "Weight in 9M26 regional sales, %s" % lab, "vf",
+             "=E{r9_%s}/(E{r9_na}+E{r9_mx}+E{r9_la}+E{r9_eaa})" % k, "[calc]", ""))] + [
+        ("g27x", "Net sales growth FY2027E excluding FX", "vf",
+         "=B{go_na}*B{wt_na}+B{go_mx}*B{wt_mx}+B{go_la}*B{wt_la}+B{go_eaa}*B{wt_eaa}", "[calc]",
+         "Regions weighted by 9M26 sales; intersegment eliminations move with the total"),
+    ] + [
+        x for k, lab in REG27 for x in (
+            ("fxl_" + k, "FX factor local currency to USD FY2027E, %s" % lab, "v", FXL27[k], "[calc]", FXLSRC[k]),
+            ("fxm_" + k, "FX factor to MXN FY2027E, %s" % lab, "vf",
+             "=1" if k == "mx" else "=B{fxl_%s}*B{fx27}/B{fxy}" % k, "[calc]",
+             "Peso business" if k == "mx" else "Local currency to USD x USD/MXN average FY2027E / FY2026E"),
+            ("s26_" + k, "Net sales FY2026E, %s" % lab, "vf", "=B{s26}*B{wt_%s}" % k, "[calc]",
+             "FY2026E split with the 9M26 regional mix (team 2026-10-25: no 4Q seasonality); eliminations pro rata"),
+            ("s27_" + k, "Net sales FY2027E, %s" % lab, "vf", "=B{s26_%s}*(1+B{go_%s})*B{fxm_%s}" % (k, k, k), "[calc]",
+             "FY2026E x (1 + organic growth in local currency) x FX factor to MXN"))] + [
+        ("s27", "Net sales FY2027E", "vf", "=B{s27_na}+B{s27_mx}+B{s27_la}+B{s27_eaa}", "[calc]",
+         "Sum of regions; replaces the FY2022-FY2026E CAGR (advisor's feedback, memory.md 2026-10-24)"),
+        ("g27m", "Net sales growth FY2027E in MXN", "vf", "=B{s27}/B{s26}-1", "[calc]", "Reported-currency growth"),
+        ("g27b", "  of which business growth (organic, excluding FX)", "vf", "=B{g27x}", "[calc]", "Advisor: split business vs FX"),
+        ("g27f", "  of which FX effect", "vf", "=B{g27m}-B{g27b}", "[calc]",
+         "Growth in MXN less growth excluding FX, the way Bimbo reports it"),
+        ("bl7", "", "b", None, "", ""),
+        ("h_g", "FY2027E cost of sales by nature (team decisions 2026-10-23)", "h", None, "", ""),
+        ("n_rm", "Raw materials FY2025", "v", 129712, "[sourced]", "Costs by nature, EEFF25 p.82"),
+        ("n_wg", "Wages and benefits FY2025", "v", 40113, "[sourced]", "Costs by nature, EEFF25 p.82"),
+        ("n_fr", "Freight, fuel and maintenance FY2025", "v", 18374, "[sourced]", "Costs by nature, EEFF25 p.82"),
+        ("n_dp", "Depreciation FY2025", "v", 10070, "[sourced]", "Costs by nature, EEFF25 p.82"),
+        ("n_ot", "Other cost of sales FY2025", "v", 5196, "[sourced]",
+         "EEFF25 p.82: professional services 1,607 + low-value leases 1,634 + indirect taxes 1,391 + travel 230 + other 334"),
+        ("n_chk", "Check: lines less IS cost of sales FY2025 (must be 0)", "vf",
+         "=B{n_rm}+B{n_wg}+B{n_fr}+B{n_dp}+B{n_ot}-%s!F%d" % (isn, is_r["cogs"]), "[calc]", ""),
+        ("el", "Elasticity of raw materials / net sales to prior-year wheat", "v", 0.109, "[assumption]",
+         "Team-approved log-log fit FY2018-FY2025, one-year lag, R2 0.70 (same-year 0.099, R2 0.48); "
+         "costs-by-nature notes RA BMV 2020 p.283, RA 2022 p.308, RA 2024 p.317, EEFF25 p.82"),
+        ("w24", "Wheat price 2024 (US$/t, annual average)", "v", 201.1949, "[sourced]",
+         "IMF global price of wheat, FRED PWHEAMTUSDM"),
+        ("w25", "Wheat price 2025 (US$/t, annual average)", "v", 173.0919, "[sourced]",
+         "IMF global price of wheat, FRED PWHEAMTUSDM"),
+        ("w9m", "Wheat price Jan-Sep 2026 (US$/t, average)", "v", 208.2778, "[sourced]",
+         "Average of the nine monthly values, FRED PWHEAMTUSDM"),
+        ("wsep", "Wheat price Sep-2026 (US$/t)", "v", 246.8518, "[sourced]", "FRED PWHEAMTUSDM"),
+        ("w26", "Wheat price 2026E (US$/t, annual average)", "vf", "=(9*B{w9m}+3*B{wsep})/12", "[assumption]",
+         "Team: nine actual months + Oct-Dec held at the Sep-2026 level; replace with actuals as FRED publishes them"),
+        ("rr25", "Raw materials / net sales FY2025", "vf", "=B{n_rm}/B{s25}", "[calc]", ""),
+        ("rr26", "Raw materials / net sales FY2026E", "vf", "=B{rr25}*(B{w25}/B{w24})^B{el}", "[calc]",
+         "FY2025 ratio moved by the 2025 wheat change (one-year lag)"),
+        ("rm26", "Raw materials FY2026E", "vf", "=B{s26}*B{rr26}", "[calc]", ""),
+        ("nr26", "Other cost of sales lines FY2026E (total less raw materials)", "vf", "=B{a_c}-B{rm26}", "[calc]",
+         "FY2026E cost of sales (option A) less raw materials"),
+        ("wg26", "  Wages and benefits FY2026E", "vf", "=B{nr26}*B{n_wg}/(B{n_wg}+B{n_fr}+B{n_dp}+B{n_ot})", "[calc]",
+         "FY2025 mix of the non-raw-material lines"),
+        ("fr26", "  Freight, fuel and maintenance FY2026E", "vf", "=B{nr26}*B{n_fr}/(B{n_wg}+B{n_fr}+B{n_dp}+B{n_ot})",
+         "[calc]", "FY2025 mix of the non-raw-material lines"),
+        ("dp26", "  Depreciation FY2026E", "vf", "=B{nr26}*B{n_dp}/(B{n_wg}+B{n_fr}+B{n_dp}+B{n_ot})", "[calc]",
+         "FY2025 mix of the non-raw-material lines"),
+        ("ot26", "  Other FY2026E", "vf", "=B{nr26}*B{n_ot}/(B{n_wg}+B{n_fr}+B{n_dp}+B{n_ot})", "[calc]",
+         "FY2025 mix of the non-raw-material lines"),
+        ("rr27", "Raw materials / net sales FY2027E", "vf", "=B{rr26}*(B{w26}/B{w25})^B{el}", "[calc]",
+         "FY2026E ratio moved by the 2026E wheat change (one-year lag)"),
+        ("rm27", "Raw materials FY2027E", "vf", "=B{s27}*B{rr27}", "[calc]", ""),
+        ("wg27", "Wages and benefits FY2027E", "vf", "=B{wg26}/B{s26}*B{s27}", "[assumption]",
+         "Team: no specific adjustment (minimum wage, 46-hour week are risks only); FY2026E ratio to net sales"),
+        ("fr27", "Freight, fuel and maintenance FY2027E", "vf", "=B{fr26}/B{s26}*B{s27}", "[assumption]",
+         "Team: FY2026E ratio to net sales; the fuel share of this line is not disclosed (GRI 302-1 gives group fuel only, "
+         "two-thirds of diesel burnt by third-party carriers), so diesel stays a risk and sensitivity"),
+        ("dp27", "Depreciation FY2027E", "vf", "=B{dp26}*B{ppd27}/B{ppd26}", "[calc]",
+         "FY2026E line moved with PP&E depreciation (capex-driven, below)"),
+        ("ot27", "Other cost of sales FY2027E", "vf", "=B{ot26}/B{s26}*B{s27}", "[assumption]", "FY2026E ratio to net sales"),
+        ("c27", "Cost of sales FY2027E", "vf", "=B{rm27}+B{wg27}+B{fr27}+B{dp27}+B{ot27}", "[calc]", "Feeds the IS"),
+        ("gm27", "Gross margin FY2027E", "vf", "=1-B{c27}/B{s27}", "[calc]",
+         "Result, not a target; consensus 52.0% (CIQ, 20-Sep-2026) for reference only"),
+        ("bl8", "", "b", None, "", ""),
+        ("h_h", "FY2027E capex and PP&E depreciation (team decisions 2026-10-23)", "h", None, "", ""),
+        ("cx26g", "Capex FY2026 original guide, midpoint (US$ millions)", "v", 1300, "[guidance]",
+         "US$1.2-1.4bn, 4Q25 deck p.17 (26-Feb-2026); cut to US$1.0-1.2bn in July (2Q26 deck) after deferring projects"),
+        ("dfr", "Projects deferred from 2026 to 2027 (US$ millions)", "vf", "=B{cx26g}-B{cx_usd}", "[calc]",
+         "Original guide midpoint less FY2026E capex"),
+        ("cx27_usd", "Capex FY2027E (US$ millions)", "vf", "=B{cx_usd}+B{dfr}", "[assumption]",
+         "Team: FY2026E level + every deferred project lands in 2027 (prudent: more cash out); "
+         "CFO said 'a little bit higher' than 2026 (3Q26 call)"),
+        ("fx27", "USD/MXN average FY2027E", "vf", "=(17.50+18.04)/2", "[calc]",
+         "Average of the Banxico survey year-end medians 2026 (17.50) and 2027 (18.04), Sep-2026 survey"),
+        ("cx27", "Capex FY2027E", "vf", "=B{cx27_usd}*B{fx27}", "[calc]", "Purchases of PP&E in the cash flow"),
+        ("ppd25", "PP&E depreciation FY2025", "v", 16375, "[sourced]", "PP&E roll-forward, EEFF25 p.38"),
+        ("ppe24", "Net PP&E at 31-Dec-2024", "v", 155376, "[sourced]", "PP&E roll-forward, EEFF25 p.38"),
+        ("dr", "PP&E depreciation rate (on opening net PP&E)", "vf", "=B{ppd25}/B{ppe24}", "[calc]",
+         "FY2025; straight-line, useful lives EEFF25 p.28"),
+        ("ppd26", "PP&E depreciation FY2026E at that rate", "vf", "=B{dr}*%s!F%d" % (bsn, BS_ROWNUM["ppe"]), "[calc]",
+         "Rate x net PP&E Dec-25"),
+        ("ppd27", "PP&E depreciation FY2027E", "vf", "=B{dr}*%s!G%d" % (bsn, BS_ROWNUM["ppe"]), "[calc]",
+         "Rate x net PP&E Dec-26: 2026 capex depreciates in 2027; 2027 capex mostly from 2028"),
+        ("bl9", "", "b", None, "", ""),
+        ("h_i", "FY2027E general and other expenses by nature (team decisions 2026-10-23)", "h", None, "", ""),
+    ]
+    # FY2025 expenses by nature (EEFF25 p.82): key, label, FY2025, FY2027E method
+    opex = [
+        ("wg", "Wages and benefits", 84493, "r"),
+        ("fr", "Freight, fuel and maintenance", 42263, "r"),
+        ("ad", "Advertising and promotion", 15637, "r"),
+        ("ps", "Professional services and consulting", 12180, "r"),
+        ("lg", "Logistics costs", 6109, "r"),
+        ("mp", "Multi-employer pension plan cancellation and revaluation", 27, "n"),
+        ("ig", "Integration expenses", 541, "n"),
+        ("tx", "Indirect taxes", 1759, "r"),
+        ("rs", "Restructuring expenses", 3908, "n"),
+        ("ls", "Low-value and short-term leases", 3330, "r"),
+        ("tv", "Travel expenses", 1842, "r"),
+        ("ot", "Other", 2484, "o"),
+    ]
+    nda = "+".join("B{o_%s}" % k for k, *_ in opex)
+    for k, label, v25, _ in opex:
+        rows.append(("o_" + k, label + " FY2025", "v", v25, "[sourced]", "Expenses by nature, EEFF25 p.82"))
+    rows += [
+        ("o_da", "Depreciation and amortization FY2025", "v", 14768, "[sourced]", "Expenses by nature, EEFF25 p.82"),
+        ("o_chk", "Check: lines less IS general and other expenses FY2025 (must be 0)", "vf",
+         "=B{o_da}+" + nda + "-SUM(%s!F%d:F%d)" % (isn, is_r["dist"], is_r["oth"]), "[calc]", ""),
+        ("n22_nr", "Non-recurring items inside Other FY2025 (brand impairment 67, gain on PP&E sale -6)", "v", 61,
+         "[sourced]", "Other expenses, net, EEFF25 p.83 (note 22)"),
+        ("n22_tot", "Other (income) expenses, net FY2025", "v", 4911, "[sourced]", "EEFF25 p.83 (note 22)"),
+        ("n22_rec", "Recurring part of other expenses, net FY2025 (amortization 146 + labor provision 1 + other 768)",
+         "v", 915, "[sourced]", "EEFF25 p.83 (note 22); restructuring, MEPP, impairments and gains excluded"),
+        ("oda26", "Depreciation and amortization in expenses FY2026E", "vf", "=B{a_da}-B{dp26}", "[calc]",
+         "IS D&A FY2026E less cost-of-sales depreciation"),
+        ("ond26", "Other expense lines FY2026E (total less D&A)", "vf", "=B{a_g}+B{a_o}-B{oda26}", "[calc]",
+         "FY2026E general + other expenses (option A) less D&A; split below by the FY2025 mix"),
+    ]
+    for k, label, _, _ in opex:
+        rows.append(("p_" + k, "  %s FY2026E" % label, "vf", "=B{ond26}*B{o_%s}/(%s)" % (k, nda), "[calc]",
+                     "FY2025 mix of the non-D&A lines"))
+    method = {
+        "r": ("vf", "=B{p_%s}/B{s26}*B{s27}", "[assumption]", "FY2026E ratio to net sales"),
+        "z": ("v", 0, "[assumption]", "Revaluation with no pattern (175 / -982 / 27 in 2023-2025, EEFF25 p.82); not projected"),
+        "n": ("v", 0, "[assumption]", "Non-recurring: not projected (team 2026-10-25, advisor feedback: organic, no non-recurring items)"),
+        "o": ("vf", "=B{p_%s}/B{s26}*B{s27}*(1-B{n22_nr}/B{o_%s})", "[assumption]",
+              "FY2026E ratio to net sales, less the FY2025 non-recurring share (impairment, PP&E gain)"),
+    }
+    notes = {
+        "wg": "Team: no specific adjustment (minimum wage, 46-hour week are risks only); FY2026E ratio to net sales",
+        "fr": "Team: FY2026E ratio to net sales; diesel stays a risk (fuel share not disclosed)",
+    }
+    for k, label, _, m in opex:
+        kind, formula, tag, note = method[m]
+        payload = formula.replace("%s", k) if isinstance(formula, str) else formula
+        rows.append(("q27_" + k, "%s FY2027E" % label, kind, payload, tag, notes.get(k, note)))
+    rows += [
+        ("q27_da", "Depreciation and amortization in expenses FY2027E", "vf",
+         "=B{rou_d}+B{amort}+(B{oda26}-B{rou_d}-B{amort})*B{ppd27}/B{ppd26}", "[calc]",
+         "Right-of-use depreciation and intangible amortization held at FY2025; the PP&E part moves with PP&E depreciation"),
+        ("x27", "General and other expenses FY2027E", "vf", "=B{q27_da}+" + "+".join("B{q27_%s}" % k for k, *_ in opex),
+         "[calc]", "Feeds the IS"),
+        ("x27_o", "  Other (income) expenses, net", "vf", "=B{a_o}*B{n22_rec}/B{n22_tot}/B{s26}*B{s27}", "[calc]",
+         "FY2026E ratio to net sales, recurring part only (FY2025 mix, EEFF25 p.83): restructuring, MEPP, impairments, gains out"),
+        ("x27_i", "  Integration", "vf", "=B{q27_ig}", "[calc]", ""),
+        ("x27_d", "  Distribution and selling", "vf",
+         "=(B{x27}-B{x27_o}-B{x27_i})*%s!F%d/(%s!F%d+%s!F%d)" % (isn, is_r["dist"], isn, is_r["dist"], isn, is_r["admin"]),
+         "[calc]", "FY2025 split of distribution and administration"),
+        ("x27_a", "  Administrative", "vf", "=B{x27}-B{x27_o}-B{x27_i}-B{x27_d}", "[calc]", ""),
+        ("da27", "D&A FY2027E (IS memo)", "vf", "=B{dp27}+B{q27_da}", "[calc]", "Cost-of-sales depreciation + expenses D&A"),
+        ("x27_r", "General and other expenses / net sales FY2027E", "vf", "=B{x27}/B{s27}", "[calc]", "Compare with FY2026E"),
+        ("x26_r", "General and other expenses / net sales FY2026E", "vf", "=(B{a_g}+B{a_o})/B{s26}", "[calc]", ""),
+        ("ebit27", "Operating income FY2027E", "vf", "=B{s27}-B{c27}-B{x27}", "[calc]", ""),
+        ("em27", "Adjusted EBITDA margin FY2027E", "vf", "=(B{ebit27}+B{da27})/B{s27}", "[calc]",
+         "Result, not a target; compare with FY2026E excluding restructuring"),
+        ("em26x", "Adjusted EBITDA margin FY2026E excluding restructuring (comparison only)", "vf",
+         "=(B{e26}+B{p_rs})/B{s26}", "[calc]",
+         "FY2026E keeps the 9M26 restructuring actually booked; FY2027E has none, so compare FY2027E with this line"),
+        ("bl10", "", "b", None, "", ""),
+        ("h_j", "FY2027E below operating income (team decisions 2026-10-23)", "h", None, "", ""),
+        ("debt26", "Gross debt at 31-Dec-2026E", "vf", "=%s!G%d+%s!G%d" % (bsn, BS_ROWNUM["std"], bsn, BS_ROWNUM["ltd"]),
+         "[calc]", "Balance sheet FY2026E"),
+        ("mat27_usd", "Debt maturing in 2027 (US$ millions)", "v", 677, "[sourced]", "Amortization profile, 3T26 rel. p.6"),
+        ("mat27", "2027 maturity repaid", "vf", "=B{mat27_usd}*B{mat_fx}", "[sourced]",
+         "Contractual maturity at the profile's USD/MXN 17.84 (mostly Bimbo 17, MXN 9,633, due 24-Sep-2027)"),
+        ("refi27", "New borrowing FY2027E (refinancing of the 2027 maturity)", "vf", "=B{mat27}", "[assumption]",
+         "Team 2026-10-25: refinanced in full, as Bimbo did in 2025 (MXN 15bn) and 2026 (MXN 12bn, Bimbo 16 prepaid 10-Feb-2026); "
+         "net debt is the same either way"),
+        ("mat28_usd", "Debt maturing in 2028 (US$ millions)", "v", 833, "[sourced]",
+         "Maturity ladder, 2Q26 investor presentation p.17 (latest ladder with 2028; the 3T26 profile shows 2027 only in the files)"),
+        ("mat28", "2028 maturity, current portion at 31-Dec-2027E", "vf", "=B{mat28_usd}*B{mat_fx}", "[calc]",
+         "Reclassified from long-term to current debt: due within 12 months of the balance date"),
+        ("debt27", "Gross debt at 31-Dec-2027E", "vf", "=B{debt26}-B{mat27}+B{refi27}", "[calc]",
+         "Carried in MXN at 17.84 (team): translation of the hedged balance goes to OCI"),
+        ("kd", "Average cost of debt (incl. derivatives)", "v", 0.065, "[sourced]", "3T26 rel. p.6"),
+        ("fxsh", "Share of debt outside MXN", "v", 0.60, "[sourced]", "43% USD, 12% EUR, 3% CAD, 2% GBP; 3T26 rel. p.6"),
+        ("fxf", "FX factor on interest", "vf", "=(1-B{fxsh})+B{fxsh}*B{fx27}/B{mat_fx}", "[calc]",
+         "Team: FX enters through interest; USD/MXN average FY2027E vs the 17.84 balance rate"),
+        ("int27", "Interest expense FY2027E", "vf", "=(B{debt26}+B{debt27})/2*B{kd}*B{fxf}+B{l_int}", "[calc]",
+         "Average gross debt x 6.5% x FX factor + lease interest (FY2025, EEFF25 p.83)"),
+        ("mon27", "Monetary position loss (gain) FY2027E", "vf", "=B{c_mon}", "[assumption]", "Held at FY2026E"),
+        ("as27", "Share of results of associates FY2027E", "vf", "=B{c_as}", "[assumption]", "Held at FY2026E"),
+        ("etr27", "Effective tax rate FY2027E", "v", 0.37, "[assumption]",
+         "PROPOSED, pending team: FY2026E 9M rate held; Brazil matures only in 3Q27, so the unrecognized tax-loss effect "
+         "(+4.18 pp in FY2025, EEFF25 p.57) stays all year"),
+        ("nci27", "Non-controlling interest FY2027E", "vf", "=B{c_nci}/B{s26}*B{s27}", "[calc]",
+         "FY2026E ratio to net sales: the US distributors earn on sales, not on Bimbo's interest or taxes"),
+        ("bl11", "", "b", None, "", ""),
+        ("h_k", "FY2027E balance sheet and cash flow (same methods as FY2026E)", "h", None, "", ""),
+        ("infl27", "Mexico consumer inflation 2027 (annual average)", "v", 0.039, "[sourced]",
+         "Capital IQ consumerPriceInflation, data/capitaliq/capiq-sales-drivers-M1_2026-10-24.md; " + MACRO + ", sheet IAS29_test"),
+        ("dps27", "Dividend per share 2027 (MXN)", "vf", "=B{dps}*(1+B{infl27})", "[assumption]",
+         "CFO: grow the dividend 'slightly above inflation' (3Q26 call); 'slightly' is not quantified, so at inflation"),
+        ("div27", "Dividends declared FY2027E, controlling", "vf", "=B{dps27}*B{c_sh}", "[calc]",
+         "Same share count as FY2026E"),
+        ("divn27", "Dividends to non-controlling interest FY2027E", "vf", "=B{divn}", "[assumption]", "Held at FY2026E (FY2025)"),
+        ("bb27", "Share repurchases FY2027E", "vf",
+         "=-AVERAGE(%s!B%d:F%d)" % (sn("CF"), CF_ROWNUM["buyb"], CF_ROWNUM["buyb"]), "[assumption]",
+         "Team 2026-10-25: average FY2021-FY2025 (cash flow statement); CFO: the program continues, no amount given (3Q26 call)"),
+    ]
+    pct = {"q_gm", "q_gr", "q_or", "q_dr", "q_em", "q_gx", "g4q", "mxsh", "gs26", "m25", "bp", "one", "m26",
+           "e4q26m", "e4q25m", "a_gr", "b_m", "q_etr", "c_etr", "rr25", "rr26", "rr27", "gm27", "dr", "x27_r", "x26_r", "em27", "kd", "fxsh", "etr27",
+           "g27x", "g27m", "g27b", "g27f", "infl27", "em26x"} | {p + k for p in ("gd_", "go_", "wt_") for k, _ in REG27}
+    ratio_keys = {p + k for p in ("rt_", "fxl_", "fxm_") for k, _ in REG27}
+    rn = {key: hdr + 1 + i for i, (key, *_) in enumerate(rows)}
+    for key, label, kind, payload, tag, note in rows:
+        r = rn[key]
+        a = ws.cell(r, 1, t(label))
+        if kind == "h":
+            a.font = BOLD
+            for col in "ABCDE":
+                ws[f"{col}{r}"].fill = FILL_SEC
+            continue
+        if kind == "b":
+            continue
+        a.font = BLACK
+        fmt = '0.00%;(0.00%);"-"' if key in ("rr25", "rr26", "rr27") else ('0.0%;(0.0%);"-"' if key in pct else ('0.0000' if key in ("fx25", "fx26", "fac", "fx9m", "fxy", "mat_fx", "el", "fx27", "fxf", "fac27") or key in ratio_keys else
+                                                 ('0.00' if key in ("w24", "w25", "w9m", "wsep", "w26") else
+                                                 ('0.0;(0.0)' if key in ("b_dbp", "d_ar", "d_inv", "d_ap") else
+                                                  ('#,##0.000' if key in ("c_sh", "dps") else NUM)))))
+        cells = []
+        if kind == "q":
+            for j, col in enumerate("BCD"):
+                ws[f"{col}{r}"] = payload[j]
+                ws[f"{col}{r}"].font = BLUE
+                cells.append(ws[f"{col}{r}"])
+            ws[f"E{r}"] = f"=SUM(B{r}:D{r})"
+            cells.append(ws[f"E{r}"])
+        elif kind == "qf":
+            for col in "BCDE":
+                ws[f"{col}{r}"] = payload.format(c=col, **rn)
+                cells.append(ws[f"{col}{r}"])
+        elif kind == "v":
+            ws[f"B{r}"] = payload
+            ws[f"B{r}"].font = BLUE
+            if tag == "[assumption]":
+                ws[f"B{r}"].fill = FILL_IN
+            cells.append(ws[f"B{r}"])
+        elif kind == "vf":
+            ws[f"B{r}"] = payload.format(**rn)
+            cells.append(ws[f"B{r}"])
+        for c in cells:
+            c.number_format = fmt
+        ws[f"F{r}"] = t(tag)
+        ws[f"G{r}"] = t(note)
+        ws[f"F{r}"].font = NOTE
+        ws[f"G{r}"].font = NOTE
+    ws.column_dimensions["A"].width = 60
+    for col in "BCDE":
+        ws.column_dimensions[col].width = 12
+    ws.column_dimensions["F"].width = 13
+    ws.column_dimensions["G"].width = 90
+    ws.freeze_panes = "B5"
+    return rn
+
+
+def link_is_2026(wb, is_r, rn):
+    """FY2026E income statement from the Assumptions sheet: option A down to EBIT, then the lines below it."""
+    ws = wb[sn("IS")]
+    an = sn("Assumptions")
+    links = {"sales": "s26", "cogs": "a_c", "dist": "a_dist", "admin": "a_adm", "integ": "a_int",
+             "oth": "a_o", "da": "a_da", "intexp": "c_int", "fx": "c_fx", "mon": "c_mon", "assoc": "c_as",
+             "nci": "c_nci", "shares": "c_sh"}
+    col = FC[0]
+    for is_key, a_key in links.items():
+        c = ws[f"{col}{is_r[is_key]}"]
+        c.value = f"={an}!B{rn[a_key]}"
+        c.font = BLACK
+        c.fill = PatternFill(fill_type=None)
+    c = ws[f"{col}{is_r['tax']}"]
+    c.value = f"={col}{is_r['pbt']}*{an}!B{rn['c_etr']}"
+    c.font = BLACK
+    c.fill = PatternFill(fill_type=None)
+    for key in ("othnc", "intinc", "disc"):
+        c = ws[f"{col}{is_r[key]}"]
+        c.value = 0
+        c.font = BLUE
+        c.fill = PatternFill(fill_type=None)
+    for is_key, a_key in {"sales": "s27", "cogs": "c27", "dist": "x27_d", "admin": "x27_a", "integ": "x27_i",
+                          "oth": "x27_o", "da": "da27", "intexp": "int27", "mon": "mon27", "assoc": "as27",
+                          "nci": "nci27", "shares": "c_sh"}.items():
+        c = ws[f"{FC[1]}{is_r[is_key]}"]
+        c.value = f"={an}!B{rn[a_key]}"
+        c.font = BLACK
+        c.fill = PatternFill(fill_type=None)
+    c = ws[f"{FC[1]}{is_r['tax']}"]
+    c.value = f"={FC[1]}{is_r['pbt']}*{an}!B{rn['etr27']}"
+    c.font = BLACK
+    c.fill = PatternFill(fill_type=None)
+    # Interest income not projected (2025: 897, cash is a result); FX result 0 (sign not forecastable, as the VPPA)
+    for key in ("othnc", "intinc", "fx", "disc"):
+        c = ws[f"{FC[1]}{is_r[key]}"]
+        c.value = 0
+        c.font = BLUE
+        c.fill = PatternFill(fill_type=None)
+
+
+def link_bs_cf_2026(wb, is_r, bs_r, cf_r, eq_r, oci_r, rn):
+    """FY2026E balance sheet, cash flow, equity and OCI from the Assumptions sheet.
+
+    Lines without a driver are held at FY2025 (BS) or set to 0 (flows), so every
+    balance-sheet change has its cash-flow or equity counterpart and Checks closes.
+    """
+    col, prev = FC[0], COLS[4]
+    an, isn, bsn, cfn, eqn = sn("Assumptions"), sn("IS"), sn("BS"), sn("CF"), sn("Equity")
+    a = {k: f"{an}!B{v}" for k, v in rn.items()}
+
+    def put(sheet, rows, values):
+        ws = wb[sn(sheet)]
+        for key, r in rows.items():
+            if key not in values:
+                continue
+            c = ws[f"{col}{r}"]
+            c.value = values[key]
+            c.font = BLUE if values[key] == 0 else BLACK
+            c.fill = PatternFill(fill_type=None)
+
+    bs = {k: f"={prev}{r}" for k, (r, kind) in
+          {k: (bs_r[k], kind) for k, _, kind, *_ in BS_ROWS}.items() if kind == "i"}
+    bs.update({
+        "cash": f"={cfn}!{col}{cf_r['end']}",
+        "ar": f"={isn}!{col}{is_r['sales']}*{a['d_ar']}/365",
+        "inv": f"={isn}!{col}{is_r['cogs']}*{a['d_inv']}/365",
+        "ap": f"={isn}!{col}{is_r['cogs']}*{a['d_ap']}/365",
+        "ppe": f"={prev}{bs_r['ppe']}+{a['cx']}-{a['ppe_d']}",
+        "intang": f"={prev}{bs_r['intang']}-{a['amort']}",
+        "assoc": f"={prev}{bs_r['assoc']}+{isn}!{col}{is_r['assoc']}",
+        "std": f"={a['std_sep']}-{a['mat']}",
+        "ltd": f"={a['ltd_sep']}",
+        "re": f"={prev}{bs_r['re']}+SUM({eqn}!{col}{eq_r['py']}:{eqn}!{col}{eq_r['ni1']})",
+        "ncib": f"={eqn}!{col}{eq_r['c2']}",
+    })
+    put("BS", bs_r, bs)
+
+    cf = {k: 0 for k, _, kind, *_ in CF_ROWS if kind == "i"}
+    cf.update({
+        "pbtc": f"={isn}!{col}{is_r['pbt']}",
+        "da": f"={isn}!{col}{is_r['da']}",
+        "assoc": f"=-{isn}!{col}{is_r['assoc']}",
+        "intexp": f"={isn}!{col}{is_r['intexp']}",
+        "intinc": f"={isn}!{col}{is_r['intinc']}",
+        "dar": f"={bsn}!{prev}{bs_r['ar']}-{bsn}!{col}{bs_r['ar']}",
+        "dinv": f"={bsn}!{prev}{bs_r['inv']}-{bsn}!{col}{bs_r['inv']}",
+        "dap": f"={bsn}!{col}{bs_r['ap']}-{bsn}!{prev}{bs_r['ap']}",
+        "taxpd": f"=-{isn}!{col}{is_r['tax']}",
+        "capex": f"=-{a['cx']}",
+        "intr": f"=-{isn}!{col}{is_r['intinc']}",
+        "repay": f"={bsn}!{col}{bs_r['std']}+{bsn}!{col}{bs_r['ltd']}-{bsn}!{prev}{bs_r['std']}-{bsn}!{prev}{bs_r['ltd']}",
+        "intp": f"=-({isn}!{col}{is_r['intexp']}-{a['l_int']})",
+        "divp": f"=-({a['div']}+{a['divn']})",
+        "leasep": f"=-({a['rou_d']}+{a['l_int']})",
+        "buyb": f"=-{a['bb']}",
+        "sedist": f"={eqn}!{col}{eq_r['se']}",
+    })
+    put("CF", cf_r, cf)
+
+    eq = {k: 0 for k, _, kind, *_ in EQ_ROWS if kind == "i"}
+    eq.update({
+        "div1": f"=-{a['div']}",
+        "bb": f"=-{a['bb']}",
+        "ni1": f"={isn}!{col}{is_r['nictrl']}",
+        "div2": f"=-{a['divn']}",
+        "ni2": f"={isn}!{col}{is_r['nci']}",
+        # NCI owners take out what they earn: NCI equity stays at its FY2025 level (team, 2026-10-23)
+        "se": f"=-({col}{eq_r['ni2']}+{col}{eq_r['div2']})",
+    })
+    put("Equity", eq_r, eq)
+
+    oci = {k: 0 for k, _, kind, *_ in OCI_ROWS if kind == "i"}
+    oci.update({"ni": f"={isn}!{col}{is_r['ni']}", "cinci": f"={isn}!{col}{is_r['nci']}"})
+    put("OCI", oci_r, oci)
+
+
+def link_bs_cf_2027(wb, is_r, bs_r, cf_r, eq_r, oci_r, rn):
+    """FY2027E balance sheet, cash flow, equity and OCI: the FY2026E methods with the FY2027E drivers."""
+    col, prev = FC[1], FC[0]
+    an, isn, bsn, cfn, eqn = sn("Assumptions"), sn("IS"), sn("BS"), sn("CF"), sn("Equity")
+    a = {k: f"{an}!B{v}" for k, v in rn.items()}
+
+    def put(sheet, rows, values):
+        ws = wb[sn(sheet)]
+        for key, r in rows.items():
+            if key not in values:
+                continue
+            c = ws[f"{col}{r}"]
+            c.value = values[key]
+            c.font = BLUE if values[key] == 0 else BLACK
+            c.fill = PatternFill(fill_type=None)
+
+    bs = {k: f"={prev}{r}" for k, (r, kind) in
+          {k: (bs_r[k], kind) for k, _, kind, *_ in BS_ROWS}.items() if kind == "i"}
+    bs.update({
+        "cash": f"={cfn}!{col}{cf_r['end']}",
+        "ar": f"={isn}!{col}{is_r['sales']}*{a['d_ar']}/365",
+        "inv": f"={isn}!{col}{is_r['cogs']}*{a['d_inv']}/365",
+        "ap": f"={isn}!{col}{is_r['cogs']}*{a['d_ap']}/365",
+        # PP&E depreciation = IS D&A less right-of-use depreciation and amortization, as in FY2026E
+        "ppe": f"={prev}{bs_r['ppe']}+{a['cx27']}-({isn}!{col}{is_r['da']}-{a['rou_d']}-{a['amort']})",
+        "intang": f"={prev}{bs_r['intang']}-{a['amort']}",
+        "assoc": f"={prev}{bs_r['assoc']}+{isn}!{col}{is_r['assoc']}",
+        # 2027 maturity repaid from the current portion; the 2028 maturity moves from long-term to current
+        "std": f"={a['mat28']}",
+        "ltd": f"={prev}{bs_r['std']}+{prev}{bs_r['ltd']}-{a['mat27']}+{a['refi27']}-{a['mat28']}",
+        "re": f"={prev}{bs_r['re']}+SUM({eqn}!{col}{eq_r['py']}:{eqn}!{col}{eq_r['ni1']})",
+        "ncib": f"={eqn}!{col}{eq_r['c2']}",
+    })
+    put("BS", bs_r, bs)
+
+    cf = {k: 0 for k, _, kind, *_ in CF_ROWS if kind == "i"}
+    cf.update({
+        "pbtc": f"={isn}!{col}{is_r['pbt']}",
+        "da": f"={isn}!{col}{is_r['da']}",
+        "assoc": f"=-{isn}!{col}{is_r['assoc']}",
+        "intexp": f"={isn}!{col}{is_r['intexp']}",
+        "intinc": f"={isn}!{col}{is_r['intinc']}",
+        "dar": f"={bsn}!{prev}{bs_r['ar']}-{bsn}!{col}{bs_r['ar']}",
+        "dinv": f"={bsn}!{prev}{bs_r['inv']}-{bsn}!{col}{bs_r['inv']}",
+        "dap": f"={bsn}!{col}{bs_r['ap']}-{bsn}!{prev}{bs_r['ap']}",
+        "taxpd": f"=-{isn}!{col}{is_r['tax']}",
+        "capex": f"=-{a['cx27']}",
+        "intr": f"=-{isn}!{col}{is_r['intinc']}",
+        "borr": f"={a['refi27']}",
+        "repay": f"={bsn}!{col}{bs_r['std']}+{bsn}!{col}{bs_r['ltd']}-{bsn}!{prev}{bs_r['std']}-{bsn}!{prev}{bs_r['ltd']}-{a['refi27']}",
+        "intp": f"=-({isn}!{col}{is_r['intexp']}-{a['l_int']})",
+        "divp": f"=-({a['div27']}+{a['divn27']})",
+        "leasep": f"=-({a['rou_d']}+{a['l_int']})",
+        "buyb": f"=-{a['bb27']}",
+        "sedist": f"={eqn}!{col}{eq_r['se']}",
+    })
+    put("CF", cf_r, cf)
+
+    eq = {k: 0 for k, _, kind, *_ in EQ_ROWS if kind == "i"}
+    eq.update({
+        "div1": f"=-{a['div27']}",
+        "bb": f"=-{a['bb27']}",
+        "ni1": f"={isn}!{col}{is_r['nictrl']}",
+        "div2": f"=-{a['divn27']}",
+        "ni2": f"={isn}!{col}{is_r['nci']}",
+        "se": f"=-({col}{eq_r['ni2']}+{col}{eq_r['div2']})",
+    })
+    put("Equity", eq_r, eq)
+
+    oci = {k: 0 for k, _, kind, *_ in OCI_ROWS if kind == "i"}
+    oci.update({"ni": f"={isn}!{col}{is_r['ni']}", "cinci": f"={isn}!{col}{is_r['nci']}"})
+    put("OCI", oci_r, oci)
+
+
+def sheet_refs(formula):
+    """Rename sheet references in a check formula to the build language."""
+    for name in ("Segments", "Equity", "OCI", "IS", "BS", "CF"):
+        formula = formula.replace(f"{name}!", f"{sn(name)}!")
+    return formula
+
+
 def main():
     wb = Workbook()
     readme = wb.active
-    readme.title = "README"
+    readme.title = sn("README")
 
+    seg_ext = {"SEG": sn("Segments"), "seg_s_tot": SEG_ROWNUM["s_tot"],
+               "seg_i_tot": SEG_ROWNUM["i_tot"], "seg_n_tot": SEG_ROWNUM["n_tot"]}
     _, is_r = build_sheet(wb, "IS", "Grupo Bimbo - Consolidated income statement",
                           "Continuing operations; FY2021 restated for Ricolino (discontinued from 2022). Costs by function, as reported.",
-                          IS_ROWS, SRC["IS"])
+                          IS_ROWS, SRC["IS"], seg_ext)
+    a_rn = build_assumptions(wb, is_r)
+    link_is_2026(wb, is_r, a_rn)
+    _, seg_r = build_sheet(wb, "Segments", "Grupo Bimbo - Net sales and Adjusted EBITDA by region (history)",
+                           "Audited segment note, reference only to calibrate the theses. Not forecast and not balanced by region.",
+                           SEG_ROWS, SRC["SEG"])
+    assert seg_r == SEG_ROWNUM
+    validate_segments()
     _, oci_r = build_sheet(wb, "OCI", "Grupo Bimbo - Consolidated statement of other comprehensive income",
                            "As reported. Positive = gain.", OCI_ROWS, SRC["OCI"])
     _, bs_r = build_sheet(wb, "BS", "Grupo Bimbo - Consolidated balance sheet (31 December)",
@@ -384,17 +1208,21 @@ def main():
     _, eq_r = build_sheet(wb, "Equity", "Grupo Bimbo - Equity roll-forward (statement of changes in equity)",
                           "Columns of the statement of changes in equity condensed to controlling and non-controlling totals.",
                           EQ_ROWS, SRC["EQ"])
+    assert bs_r == BS_ROWNUM
+    assert cf_r == CF_ROWNUM
+    link_bs_cf_2026(wb, is_r, bs_r, cf_r, eq_r, oci_r, a_rn)
+    link_bs_cf_2027(wb, is_r, bs_r, cf_r, eq_r, oci_r, a_rn)
 
     # Checks sheet
-    ck = wb.create_sheet("Checks")
-    ck["A1"] = "Integrity checks - every line must be 0 in every year"
+    ck = wb.create_sheet(sn("Checks"))
+    ck["A1"] = t("Integrity checks - every line must be 0 in every year")
     ck["A1"].font = TITLE
-    ck["A2"] = "Historical columns are 0 by construction. In the forecast, a non-zero value tells you which link is still missing."
+    ck["A2"] = t("Historical columns are 0 by construction. In the forecast, a non-zero value tells you which link is still missing.")
     ck["A2"].font = NOTE
-    ck.cell(4, 1, "Check (difference, MXN m)").font = HDR
+    ck.cell(4, 1, t("Check (difference, MXN m)")).font = HDR
     ck.cell(4, 1).fill = FILL_HDR
     for j, y in enumerate(YEARS):
-        c = ck.cell(4, 2 + j, y)
+        c = ck.cell(4, 2 + j, yl(y))
         c.font = HDR
         c.fill = FILL_HDR
         c.alignment = Alignment(horizontal="center")
@@ -433,43 +1261,45 @@ def main():
         ("OCI total vs filing", "oci", [4441, -10705, -14790, 13814, -11045]),
     ]
     r = 5
-    ck.cell(r, 1, "Links between statements (all years)").font = BOLD
+    ck.cell(r, 1, t("Links between statements (all years)")).font = BOLD
     r += 1
     first_check = r
     for label, f in checks:
-        ck.cell(r, 1, label).font = BLACK
+        ck.cell(r, 1, t(label)).font = BLACK
         for j, col in enumerate(COLS):
             c = ck[f"{col}{r}"]
-            c.value = f.format(c=col)
+            c.value = sheet_refs(f.format(c=col))
             c.number_format = NUM
         r += 1
     r += 1
-    ck.cell(r, 1, "Subtotals vs the audited filing (history only)").font = BOLD
+    ck.cell(r, 1, t("Subtotals vs the audited filing (history only)")).font = BOLD
     r += 1
     rows_hist = [(l, "IS", row, v) for l, row, v in tie_outs]
     rows_hist += [(l, "BS", bs_r[k], v) for l, k, v in tie_bs]
     rows_hist += [(l, "CF", cf_r[k], v) for l, k, v in tie_cf[:3]]
     rows_hist += [(tie_cf[3][0], "OCI", oci_r["oci"], tie_cf[3][2])]
+
     for label, sh, row, vals in rows_hist:
-        ck.cell(r, 1, label).font = BLACK
+        ck.cell(r, 1, t(label)).font = BLACK
         for j, col in enumerate(HC):
             c = ck[f"{col}{r}"]
-            c.value = f"={sh}!{col}{row}-{vals[j]}"
+            ref = vals[j] if isinstance(vals, list) else sheet_refs(vals.format(col=col))
+            c.value = f"={sn(sh)}!{col}{row}-{ref}"
             c.number_format = NUM
         r += 1
     last_check = r - 1
     r += 1
-    ck.cell(r, 1, "Sum of absolute differences").font = BOLD
+    ck.cell(r, 1, t("Sum of absolute differences")).font = BOLD
     for col in COLS:
         c = ck[f"{col}{r}"]
         c.value = f"=SUMPRODUCT(ABS({col}{first_check}:{col}{last_check}))"
         c.number_format = NUM
         c.font = BOLD
     r += 1
-    ck.cell(r, 1, "Status").font = BOLD
+    ck.cell(r, 1, t("Status")).font = BOLD
     for col in COLS:
         c = ck[f"{col}{r}"]
-        c.value = f'=IF(ROUND({col}{r-1},0)=0,"OK","CHECK")'
+        c.value = f'=IF(ROUND({col}{r-1},0)=0,"OK","{t('CHECK')}")'
         c.font = BOLD
         c.alignment = Alignment(horizontal="center")
     ck.column_dimensions["A"].width = 52
@@ -485,6 +1315,10 @@ def main():
         ("What is here", BOLD),
         ("IS, OCI, BS, CF and Equity: every line of the face of the audited statements, FY2021A-FY2025A.", None),
         ("Checks: links between the statements and tie-outs of every subtotal to the filing. History: all 0.", None),
+        ("Segments: history by region (audited segment note), reference to calibrate the theses.", None),
+        ("The forecast is consolidated: nothing is projected or balanced by region.", None),
+        ("Assumptions: FY2026E = 9M26 actual + 4Q26, on Bimbo's guidance. IS FY2026E down to net income and EPS links here.", None),
+        ("FY2026E and FY2027E: IS, BS, CF, equity and OCI link to Assumptions; Checks should show OK for both. FY2028E-FY2030E are still empty.", None),
         ("", None),
         ("Sources (PDF page numbers)", BOLD),
         ("FY2023-FY2025: filings/annual/IA25_GB_EEFF_V10.pdf - BS p.12, IS p.13, OCI p.14, equity p.15, CF p.16.", None),
@@ -510,8 +1344,8 @@ def main():
         ("Lease interest is paid inside the CF line 'Lease payments' (data/adjustments.md, adjustment 6).", None),
         ("The condensed model inputs (data/financials.csv) group these lines; totals agree with this workbook.", None),
     ]
-    for i, (t, f) in enumerate(lines, start=1):
-        c = readme.cell(i, 1, t)
+    for i, (txt, f) in enumerate(lines, start=1):
+        c = readme.cell(i, 1, t(txt))
         if f:
             c.font = f
     readme.column_dimensions["A"].width = 130

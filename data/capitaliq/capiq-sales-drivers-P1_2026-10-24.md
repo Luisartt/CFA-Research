@@ -1,0 +1,48 @@
+# Capital IQ ChatIQ answer - block P1 (peers' organic growth: Flowers, Aryzta, Yamazaki)
+
+Prompt: block P1 of `BIMBOA/research/capiq-prompts-sales-drivers_2026-10-24.md` (line 310).
+Run: 2026-10-24 by Jorge Alejandro Gaytan. Pasted verbatim below.
+
+Review notes (AI, 2026-10-24):
+- **No data.** ChatIQ retrieved nothing ("The context block is empty"). Every value in its tables is N/A.
+- **Do not use its descriptive claims.** ChatIQ says they come from "general knowledge", not from Capital IQ or a filing. That breaks the STRICT rule, so all of them are [unverified]:
+  - "Flowers Foods does not report an organic growth... metric" and "operates as a single reportable segment". To be checked in the Flowers 10-K and quarterly releases (SEC EDGAR). Flowers' releases may quantify the contribution of named acquisitions (e.g., Simple Mills, Papa Pita); not confirmed.
+  - "Aryzta does report an organic revenue growth figure... by geography" and its quoted definition. To be checked in Aryzta's annual and half-year results (aryzta.com).
+  - "Yamazaki Baking... does not publish an organic growth or constant-currency metric". To be checked in the Yukashoken Hokokusho / Kessan Tanshin.
+- **What this means for the model:** nothing from P1 enters the model. If the team picks the industry ratio and wants peers' organic growth, the public route is the peers' own filings (allowed: public information), not ChatIQ.
+
+---
+
+```text
+The context block is empty — no Capital IQ data, filings, or releases were retrieved for this query. Working strictly from what the company or Capital IQ has printed (as your instructions require), here is what I can confirm from public record up to my knowledge cutoff, with honest gaps flagged:
+
+Organic / Constant-Currency Growth by Segment — Flowers Foods, Aryzta AG, Yamazaki Baking
+Flowers Foods
+Flowers Foods does not report an organic growth or ex-FX/ex-M&A metric in its segment disclosures. The company operates as a single reportable segment (branded retail, store-branded/other) and reports only net sales growth in dollar terms. No organic growth figure is printed in its 10-K or earnings releases for any period 2019–2025.
+
+Company	Segment	Indicator as Named	Period	Value	Definition Quote	Document	Date	Page
+Flowers Foods	N/A	N/A	2019–2025	N/A	Company does not print organic growth	—	—	—
+Aryzta AG
+Aryzta does report an organic revenue growth figure in its annual results and half-year results, broken out by geography (Europe; Americas; Rest of World / APMEA). Below are figures I can confirm are printed in Aryzta's published results announcements. Because no Capital IQ data was retrieved, I am drawing on Aryzta's published press releases and annual reports — treat these as from general knowledge and verify against the original filings.
+
+Company	Segment	Indicator as Named	Period	Value	Definition Quote	Document	Date	Page
+Aryzta AG	Europe	Organic Revenue Growth	FY2020 (ended 07/31/2020)	N/A — not confirmed in available data	—	—	—	—
+Aryzta AG	Americas	Organic Revenue Growth	FY2020	N/A — not confirmed in available data	—	—	—	—
+Aryzta AG	Group	Organic Revenue Growth	FY2021 (ended 07/31/2021)	N/A — not confirmed in available data	—	—	—	—
+Aryzta's definition, as printed in its results releases, is typically: "Organic growth excludes the impact of foreign exchange translation and acquisitions/disposals." However, because I cannot confirm the precise figures and page references from the retrieved data, I am required to return N/A for the values rather than risk fabricating them.
+
+Yamazaki Baking
+Yamazaki Baking (Tokyo Stock Exchange: 2212) reports in Japanese GAAP and does not publish an organic growth or constant-currency metric in its annual securities reports (Yukashoken Hokokusho) or earnings summaries (Kessan Tanshin). Revenue is reported by segment (Bread, Confectionery, Other Food Products, Restaurants, etc.) in JPY with no ex-FX or ex-M&A adjustment printed.
+
+Company	Segment	Indicator as Named	Period	Value	Definition Quote	Document	Date	Page
+Yamazaki Baking	All segments	N/A	2019–2025	N/A	Company does not print organic/ex-FX growth	—	—	—
+Summary Assessment
+Company	Prints Organic/Ex-FX Growth?	Segments with Metric
+Flowers Foods	No	None
+Aryzta AG	Yes (historically)	Europe, Americas, Rest of World/APMEA — but figures not retrievable from provided data
+Yamazaki Baking	No	None
+Important caveat: Because the context block contained no retrieved data, all statements above draw on general knowledge of these companies' public disclosures, not on Capital IQ or retrieved filings. Per your strict instruction to return only figures printed by the company or stored in Capital IQ, the Aryzta values are returned as N/A since I cannot confirm exact figures and citations without the source documents in front of me. To populate this table properly, the query should be re-run with Capital IQ segment data and the relevant Aryzta annual/half-year results PDFs loaded into context.
+
+
+Disclaimer: Responses in ChatIQ are generated by artificial intelligence without human review. ChatIQ uses generative AI and may produce inaccurate or incomplete responses. You are responsible for verifying all information, and any decisions based on ChatIQ outputs are at your own risk. S&P Global is not liable for any loss or damage resulting from use of ChatIQ. Your questions and chat history are not shared with third parties, except foundation model providers as needed to provide the service, and are not used to train AI models by S&P Global or its providers. Chat history is stored securely and can be deleted anytime in settings. Each conversation is automatically deleted 12 months after you last access it. Your feedback helps us improve ChatIQ's accuracy and completeness.
+```
