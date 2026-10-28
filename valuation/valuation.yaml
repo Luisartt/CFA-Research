@@ -25,7 +25,11 @@ wacc:
   pre_tax_cost_of_debt: 0.0971    # M-Bono 10y + 0.45pp BIMBO 26 issue spread (matched maturity)
   tax_rate: 0.30                  # Mexico statutory
 terminal:
-  growth: 0.0425                  # proposal: long-run MXN growth of the regional mix (team decision)
+  growth: 0.0271                  # [calc] team decision 2026-10-25: FY2030E organic ratio per region held in perpetuity x nominal GDP growth 2030
+                                  # in local currency, every currency translated to MXN by purchasing power parity (Capital IQ CPI 2030), weighted by
+                                  # FY2030E sales; model/BIMBOA_statements_2021-2030_v1.xlsx, Assumptions 'Terminal growth g in MXN' (unrounded 2.7056%, live links to the Capital IQ macro sheets).
+                                  # Replaces the v3 proposal 4.25%. valuation-outputs.yaml and valuation.md NOT rerun yet: the DCF still carries the
+                                  # v3 forecast; rerun once the FY2028E-FY2030E statements feed it
   exit_ev_ebitda: 6.0             # [assumption] judgment above the core bakery LTM median 5.53x (Flowers 5.61x, Gruma 5.44x;
                                   # IFRS 16 basis; BIMBOA_PeerAnalysis_v3) for the Mexico mix; all eligible peers 8.27x; Bimbo today 6.94x (team decision)
   lt_nominal_gdp_growth: 0.05     # [assumption] ~2% real + 3% Banxico target. Real [sourced]: IMF WEO Oct-2026 2.1% a year for 2029-31;

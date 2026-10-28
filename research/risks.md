@@ -51,6 +51,7 @@ R1, R2 and R4 hit together and the multiple de-rates to the core (R5). The scena
 | R12 | Water stress, water and circular-economy laws, Scope 3 target missed | ESG | 4 | 1 | Not quantifiable: no climate capex or EPR cost disclosed (`research/esg.md`) |
 | R13 | Cyber attack | operational | 2 | 2 | RA25 pp.36-37 |
 | R14 | Argentina, Venezuela, Russia | operational | 2 | 1 | Latin America ~6% of segment EBITDA `[calc]` |
+| R15 | Diesel and freight: US retail diesel $5.19/gal 2026 → $4.49 2027 per EIA STEO Oct-2026 `[sourced]`, with upside risk from Hormuz; Mexico held near MXN 27/l by a voluntary agreement that could lapse; IEPS on fuels in the 2027 package. The model holds freight at the FY2026E ratio to sales because the fuel share of the freight lines is not disclosed (GRI 302-1 gives group fuel only; 2025 diesel 2,859m kWh in vehicles, two-thirds in third-party carriers `[calc]` anexos datos desempeño 2025 p.17) | operational | parked | parked | PARKED until the team's risk-scoring session (team, 2026-10-23). Sensitivity, not base case: freight lines FY2025 = 18,374 cost of sales + 42,263 expenses `[sourced]` EEFF25 p.82 |
 
 ## 5. Coach moments (team decides; logged in `docs/context/thesis-journal.md`)
 
