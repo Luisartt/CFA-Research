@@ -20,9 +20,9 @@ Soft cap: see AGENTS.md > Context files.
 - [pending] text files still quote superseded figures (valuation/valuation.yaml g 0.0271, valuation/valuation.md, research/thesis.md, output/dcf-v3-conclusiones.md): left untouched in PR 4 by decision; update to the TP12m workbook or mark them superseded — owner: Jorge Alejandro Gaytan — due: 2026-11-01
 - [in_progress] BIMBOA_WACC_v3.xlsx restored in valuation/ on 2026-10-28 (identical to the archived copy; the 11 cells cited by WACC_V2 and Assumptions match); commit it and open a pull request together with the context files — owner: Jorge Alejandro Gaytan — due: 2026-10-30
 - [pending] the TP12m workbook has no build script in the repo (analisis-dcf-2026-10-26/build/ only rebuilds the auditfix and V1V3 copies): keep a backup and change it only in copies — owner: Jorge Alejandro Gaytan — due: 2026-10-30
-- [pending] main checkout CFA-Research has 9 uncommitted changes (3 old Excel modified, 5 untracked files in raw/ including Alejandro's models): sort them out before git pull — owner: Jorge Alejandro Gaytan — due: 2026-10-30
+- [pending] main checkout CFA-Research has 9 uncommitted changes (3 old Excel modified, 5 untracked files in raw/, mostly copies of files already on GitHub): sort them out before git pull — owner: Jorge Alejandro Gaytan — due: 2026-10-30
 - [pending] optional: delete the merged remote branch tp12m-final-2026-10-28 — owner: Jorge Alejandro Gaytan — due: 2026-11-01
-- [pending] valuation/SPG_* and valuation/team-models/ (Alejandro's and Diego's) were left in the repo for now (Jorge, 2026-10-28); revisit only if the team wants them out; Diego's Capital IQ debt/cash fix only matters if they stay — owner: all — due: 2026-11-01
+- [pending] valuation/SPG_* and valuation/team-models/ (the Bimbo_*_Alejandro models are Jorge's own; the SPG_* models are Diego's) were left in the repo for now (Jorge, 2026-10-28); revisit only if the team wants them out; Diego's Capital IQ debt/cash fix only matters if they stay — owner: all — due: 2026-11-01
 - [pending] learn the business-vs-FX split of consolidated sales (regional FX factor and FX effect line) before Q&A prep — owner: Jorge Alejandro Gaytan — due: 2026-11-01
 
 ## Thesis, risks, industry
