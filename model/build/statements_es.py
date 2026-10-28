@@ -716,6 +716,33 @@ ES = {
     "Non-controlling interest FY2027E": "Participación no controladora FY2027E",
     "FY2026E ratio to net sales: the US distributors earn on sales, not on Bimbo's interest or taxes":
         "Razón FY2026E sobre ventas: los distribuidores de EUA ganan sobre ventas, no sobre los intereses ni impuestos de Bimbo",
+    # Lines held at 0 in the forecast (team decisions 2026-10-25)
+    'Forecast = 0 (team 2026-10-25): the DCF bridge already deducts pensions, provisions and derivatives as debt-like; projecting these payments in FCFF would count them twice; the liability is held at Dec-25':
+        'Proyección = 0 (equipo 2026-10-25): el puente del DCF ya resta pensiones, provisiones y derivados como deuda; proyectar estos pagos en el FCFF los contaría dos veces; el pasivo se mantiene al nivel de dic-25',
+    'FY2026E = 0 because releases give net interest only (inside interest expense); FY2027E onward = 0 (team 2026-10-25): not operating; FCFF excludes it and cash enters at its balance in the DCF bridge; affects net income and EPS only':
+        '2026E = 0 porque los reportes solo dan intereses netos (dentro del gasto por intereses); de 2027E en adelante = 0 (equipo 2026-10-25): no es operativo; el FCFF no lo incluye y el efectivo entra a su saldo en el puente del DCF; solo afecta la utilidad neta y la UPA',
+    "Forecast = 0 (team 2026-10-25): immaterial (Assumptions: share of PP&E purchases FY2025 and 1H26); Bimbo's fixed-asset investment is PP&E only (RA25 BMV p.143), so the capex does not include them":
+        'Proyección = 0 (equipo 2026-10-25): inmaterial (Supuestos: proporción de las compras de propiedades, planta y equipo 2025 y 1S26); la inversión en activos fijos de Bimbo es solo propiedades, planta y equipo (RA25 BMV p.143), así que el capex no las incluye',
+    'Negative = income (as in the filing); FY2026E = 0 because releases give net interest only (inside interest expense); FY2027E onward = 0 (team 2026-10-25): not operating; FCFF excludes it and cash enters at its balance in the DCF bridge; affects net income and EPS only':
+        'Negativo = ingreso (como en el reporte); 2026E = 0 porque los reportes solo dan intereses netos (dentro del gasto por intereses); de 2027E en adelante = 0 (equipo 2026-10-25): no es operativo; el FCFF no lo incluye y el efectivo entra a su saldo en el puente del DCF; solo afecta la utilidad neta y la UPA',
+    'FY2022 drop = MEPP settlement; forecast held at Dec-25 (team 2026-10-25): deducted as debt-like in the DCF bridge':
+        'La caída de 2022 = liquidación de MEPP; proyección al nivel de dic-25 (equipo 2026-10-25): se resta como deuda en el puente del DCF',
+    'FY2025 (EEFF25 p.45); intangible purchases = 0 (immaterial, see below)':
+        '2025 (EEFF25 p.45); compras de intangibles = 0 (inmaterial, ver abajo)',
+    'Intangible purchases / PP&E purchases FY2025':
+        'Compras de intangibles / compras de propiedades, planta y equipo 2025',
+    'Cash flow FY2025 (EEFF25)':
+        'Flujo de efectivo 2025 (EEFF25)',
+    'Purchases of intangible assets 1H26':
+        'Compras de activos intangibles 1S26',
+    'BMV Jun-26 p.17':
+        'BMV jun-26 p.17',
+    'Purchases of PP&E 1H26':
+        'Compras de propiedades, planta y equipo 1S26',
+    'Intangible purchases / PP&E purchases 1H26':
+        'Compras de intangibles / compras de propiedades, planta y equipo 1S26',
+    'Team 2026-10-25: intangible purchases = 0 in FY2026E-FY2030E because they are immaterial (this row and FY2025)':
+        'Equipo 2026-10-25: compras de intangibles = 0 en 2026E-2030E por inmateriales (este renglón y 2025)',
 }
 
 # Expense-by-nature labels are generated in the build (FY2025 / FY2026E / FY2027E)
@@ -861,4 +888,296 @@ ES.update({
     "New borrowing FY2027E (refinancing of the 2027 maturity)": "Deuda nueva FY2027E (refinanciamiento del vencimiento 2027)",
     "Team 2026-10-25: refinanced in full, as Bimbo did in 2025 (MXN 15bn) and 2026 (MXN 12bn, Bimbo 16 prepaid 10-Feb-2026); net debt is the same either way":
         "Equipo 2026-10-25: se refinancia completo, como Bimbo hizo en 2025 (MXN 15 mil millones) y 2026 (MXN 12 mil millones, Bimbo 16 prepagado el 10-feb-2026); la deuda neta es la misma en ambos casos",
+})
+
+# FY2028E-FY2030E net sales by region and terminal growth g (team decisions 2026-10-25)
+for _y in (2027, 2028, 2029, 2030):
+    ES[f"USD/MXN average {_y}, Capital IQ forecast"] = f"USD/MXN promedio {_y}, pronóstico de Capital IQ"
+for _y in (2028, 2029, 2030):
+    ES[f"USD/MXN average FY{_y}E"] = f"USD/MXN promedio FY{_y}E"
+    ES[f"Net sales FY{_y}E (sum of regions)"] = f"Ventas netas FY{_y}E (suma de regiones)"
+    ES[f"Net sales growth FY{_y}E in MXN"] = f"Crecimiento de ventas netas FY{_y}E en MXN"
+    for _en, _es in {"North America": "Norteamérica", "Mexico": "México", "Latin America": "Latinoamérica", "EAA": "EAA"}.items():
+        ES[f"Nominal GDP growth {_y} in local currency, {_en}"] = f"Crecimiento del PIB nominal {_y} en moneda local, {_es}"
+        ES[f"FX factor local currency to USD FY{_y}E, {_en}"] = f"Factor cambiario moneda local a USD FY{_y}E, {_es}"
+        ES[f"FX factor to MXN FY{_y}E, {_en}"] = f"Factor cambiario a MXN FY{_y}E, {_es}"
+        ES[f"Net sales FY{_y}E, {_en}"] = f"Ventas netas FY{_y}E, {_es}"
+for _en, _es in {"North America": "Norteamérica", "Mexico": "México", "Latin America": "Latinoamérica", "EAA": "EAA"}.items():
+    ES[f"Weight in FY2030E net sales, {_en}"] = f"Peso en ventas netas FY2030E, {_es}"
+    ES[f"Long-run growth in MXN, {_en}"] = f"Crecimiento de largo plazo en MXN, {_es}"
+ES.update({
+    _MACRO + ", sheet FX (Capital IQ forecast)": _MACRO + ", hoja FX (pronóstico de Capital IQ)",
+    "PROPOSED, pending team: FY2027E level (Banxico survey) moved with the Capital IQ year-on-year change":
+        "PROPUESTA, pendiente del equipo: nivel FY2027E (encuesta Banxico) movido con el cambio anual de Capital IQ",
+    "Local currency to USD x USD/MXN average, year on year": "Moneda local a USD x USD/MXN promedio, año contra año",
+    "Prior year x (1 + organic ratio x GDP growth in local currency) x FX factor to MXN":
+        "Año anterior x (1 + ratio orgánico x crecimiento del PIB en moneda local) x factor cambiario a MXN",
+    "FY2028E-FY2030E net sales by region: organic ratios held, same method as FY2027E (team decisions 2026-10-25)":
+        "Ventas netas por región FY2028E-FY2030E: ratios orgánicos constantes, mismo método que FY2027E (decisiones del equipo 2026-10-25)",
+    "Not yet linked to the income statement (FY2028E-FY2030E statements pending)":
+        "Todavía no ligado al ER (estados FY2028E-FY2030E pendientes)",
+    "Terminal growth g (Gordon) in MXN: FY2030E ratios x long-run nominal GDP, PPP for USD/MXN (team decisions 2026-10-25)":
+        "Crecimiento a perpetuidad g (Gordon) en MXN: ratios FY2030E x PIB nominal de largo plazo, paridad de poder de compra para el USD/MXN (decisiones del equipo 2026-10-25)",
+    "Terminal ratio, all regions": "Ratio a perpetuidad, todas las regiones",
+    "Team 2026-10-25: in perpetuity Bimbo keeps its share of each economy (no acquisitions, share or mix projected); "
+    "the 9M26 ratios hold only FY2027E-FY2030E":
+        "Equipo 2026-10-25: a perpetuidad Bimbo conserva su peso en cada economía (no se proyectan adquisiciones, participación ni mezcla); "
+        "los ratios 9M26 aplican solo FY2027E-FY2030E",
+    "USD/MXN long-run change (2030 / 2029, Capital IQ)": "Cambio de largo plazo del USD/MXN (2030 / 2029, Capital IQ)",
+    "Long-run proxy = last forecast year; above 1 = the peso loses vs the USD":
+        "Aproximación de largo plazo = último año pronosticado; mayor a 1 = el peso pierde frente al USD",
+    "Team 2026-10-25: FY2030E regional mix": "Equipo 2026-10-25: mezcla regional FY2030E",
+    "Ratio x Mexico GDP growth 2030; peso business": "Ratio x crecimiento del PIB de México 2030; negocio en pesos",
+    "(1 + ratio x GDP growth 2030 in local currency) x FX factor 2030 to USD x USD/MXN change - 1":
+        "(1 + ratio x crecimiento del PIB 2030 en moneda local) x factor cambiario 2030 a USD x cambio del USD/MXN - 1",
+    "Terminal growth g in MXN": "Crecimiento a perpetuidad g en MXN",
+    "Regions weighted by FY2030E sales; replaces the v3 proposal 4.25% (0.36 x 3% + 0.64 x 5%, valuation.md)":
+        "Regiones ponderadas por ventas FY2030E; reemplaza la propuesta v3 de 4.25% (0.36 x 3% + 0.64 x 5%, valuation.md)",
+    "  of which business growth (local currency, ratio 1.0x)": "  del cual crecimiento del negocio (moneda local, ratio 1.0x)",
+    "Translation of USD, EUR and other sales into MXN": "Conversión a MXN de las ventas en USD, EUR y otras monedas",
+    "Check: Mexico long-run nominal GDP growth (2030)": "Comprobación: crecimiento del PIB nominal de largo plazo de México (2030)",
+    "Capital IQ levels": "Niveles de Capital IQ",
+    "Check: g less Mexico GDP growth": "Comprobación: g menos crecimiento del PIB de México",
+    "Equals the two rows below": "Igual a la suma de los dos renglones de abajo",
+    "  from regions whose economies grow faster or slower than Mexico":
+        "  por regiones cuyas economías crecen más o menos que México",
+    "Business growth less Mexico GDP growth": "Crecimiento del negocio menos crecimiento del PIB de México",
+    "  from FX translation into MXN": "  por la conversión cambiaria a MXN",
+    "Check: implied ratio g / Mexico GDP growth": "Comprobación: ratio implícito g / crecimiento del PIB de México",
+    "Above 1 only because of the two rows above, not because Bimbo gains share":
+        "Mayor a 1 solo por los dos renglones de arriba, no porque Bimbo gane participación",
+})
+
+# Team decisions 2026-10-25 (later): Capital IQ USD/MXN FY2027E-FY2030E; terminal g option A with PPP drift
+for _en, _es in {"North America": "Norteamérica", "Mexico": "México", "Latin America": "Latinoamérica", "EAA": "EAA"}.items():
+    ES[f"Terminal ratio, {_en}"] = f"Ratio a perpetuidad, {_es}"
+ES.update({
+    "Team 2026-10-25: Capital IQ forecast for every year FY2027E-FY2030E (same source as GDP and regional FX); replaces the Banxico survey average (17.50 + 18.04) / 2 = 17.77":
+        "Equipo 2026-10-25: pronóstico de Capital IQ para cada año FY2027E-FY2030E (misma fuente que el PIB y los tipos de cambio regionales); "
+        "reemplaza el promedio de la encuesta Banxico (17.50 + 18.04) / 2 = 17.77",
+    "Team 2026-10-25: Capital IQ forecast for every year FY2027E-FY2030E (same source as GDP and regional FX)": "Equipo 2026-10-25: pronóstico de Capital IQ para cada año FY2027E-FY2030E (misma fuente que el PIB y los tipos de cambio regionales)",
+    "CPI inflation 2030, Mexico": "Inflación 2030, México",
+    "CPI inflation 2030, United States": "Inflación 2030, Estados Unidos",
+    "Capital IQ consumerPriceInflation; " + _MACRO + ", sheet IAS29_test": "Capital IQ consumerPriceInflation; " + _MACRO + ", hoja IAS29_test",
+    "USD/MXN long-run change (purchasing power parity)": "Cambio de largo plazo del USD/MXN (paridad de poder de compra)",
+    "Team 2026-10-25: (1 + Mexico CPI) / (1 + US CPI), 2030; above 1 = the peso loses vs the USD":
+        "Equipo 2026-10-25: (1 + inflación de México) / (1 + inflación de EUA), 2030; mayor a 1 = el peso pierde frente al USD",
+    "Team 2026-10-25 (option A): the FY2030E organic ratio held in perpetuity, so g continues FY2030E with no jump":
+        "Equipo 2026-10-25 (opción A): el ratio orgánico de FY2030E se mantiene a perpetuidad, así que g continúa FY2030E sin salto",
+    "(1 + ratio x GDP growth 2030 in local currency) x FX factor 2030 to USD x USD/MXN change - 1; local currency to USD = Capital IQ 2030 change (not PPP)":
+        "(1 + ratio x crecimiento del PIB 2030 en moneda local) x factor cambiario 2030 a USD x cambio del USD/MXN - 1; moneda local a USD = cambio 2030 de Capital IQ (no paridad)",
+    "  of which business growth (local currency, FY2030E ratios)": "  del cual crecimiento del negocio (moneda local, ratios FY2030E)",
+    "Check: g less FY2030E net sales growth in MXN": "Comprobación: g menos crecimiento de ventas netas FY2030E en MXN",
+    "Near 0 = no jump between the last forecast year and the perpetuity":
+        "Cerca de 0 = sin salto entre el último año proyectado y la perpetuidad",
+    "  from the regional ratios and economies vs Mexico": "  por los ratios regionales y las economías frente a México",
+    "Explained by the two rows above": "Se explica por los dos renglones de arriba",
+})
+
+# Team decision 2026-10-25 (later): purchasing power parity for the Latin America and EAA perpetuity FX
+ES.update({
+    "Terminal growth g (Gordon) in MXN: FY2030E ratios x long-run nominal GDP, purchasing power parity for every currency (team decisions 2026-10-25)":
+        "Crecimiento a perpetuidad g (Gordon) en MXN: ratios FY2030E x PIB nominal de largo plazo, paridad de poder de compra para todas las monedas "
+        "(decisiones del equipo 2026-10-25)",
+    "Long-run FX factor local currency to USD (purchasing power parity), Latin America":
+        "Factor cambiario de largo plazo moneda local a USD (paridad de poder de compra), Latinoamérica",
+    "Long-run FX factor local currency to USD (purchasing power parity), EAA":
+        "Factor cambiario de largo plazo moneda local a USD (paridad de poder de compra), EAA",
+    "Team 2026-10-25: (1 + US CPI) / (1 + currency CPI) 2030 by country, aggregated as Regional_FX; " + _MACRO + ", sheet PPP_terminal":
+        "Equipo 2026-10-25: (1 + inflación de EUA) / (1 + inflación de la moneda) 2030 por país, agregado como en Regional_FX; "
+        + _MACRO + ", hoja PPP_terminal",
+    "Team 2026-10-25: (1 + US CPI) / (1 + currency CPI) 2030 by country, euro = GDP-weighted euro CPI, aggregated as Regional_FX; "
+    + _MACRO + ", sheet PPP_terminal":
+        "Equipo 2026-10-25: (1 + inflación de EUA) / (1 + inflación de la moneda) 2030 por país, euro = inflación de la zona euro ponderada por PIB, "
+        "agregado como en Regional_FX; " + _MACRO + ", hoja PPP_terminal",
+    "(1 + ratio x GDP growth 2030 in local currency) x FX factor 2030 to USD x USD/MXN change - 1; local currency to USD by purchasing power parity":
+        "(1 + ratio x crecimiento del PIB 2030 en moneda local) x factor cambiario 2030 a USD x cambio del USD/MXN - 1; "
+        "moneda local a USD por paridad de poder de compra",
+})
+
+# FY2028E-FY2030E statements: FY2027E methods extended (team decisions 2026-10-25)
+_EXT = "Equipo 2026-10-25: regla FY2027E extendida a FY2028E-FY2030E"
+_EXT_EN = "Team 2026-10-25: FY2027E rule extended to FY2028E-FY2030E"
+_OPEX = ("Wages and benefits", "Freight, fuel and maintenance", "Advertising and promotion", "Professional services and consulting",
+         "Logistics costs", "Multi-employer pension plan cancellation and revaluation", "Integration expenses", "Indirect taxes",
+         "Restructuring expenses", "Low-value and short-term leases", "Travel expenses", "Other")
+_FROM27 = ["Raw materials / net sales FY2027E", "Raw materials FY2027E", "Other cost of sales FY2027E", "Depreciation FY2027E",
+           "Cost of sales FY2027E", "Gross margin FY2027E", "Capex FY2027E", "PP&E depreciation FY2027E",
+           "Depreciation and amortization in expenses FY2027E", "General and other expenses FY2027E", "D&A FY2027E (IS memo)",
+           "General and other expenses / net sales FY2027E", "Operating income FY2027E", "Adjusted EBITDA margin FY2027E",
+           "Interest expense FY2027E", "Monetary position loss (gain) FY2027E", "Share of results of associates FY2027E",
+           "Non-controlling interest FY2027E", "Mexico consumer inflation 2027 (annual average)", "Dividend per share 2027 (MXN)",
+           "Dividends declared FY2027E, controlling", "Dividends to non-controlling interest FY2027E", "Share repurchases FY2027E",
+           "Gross debt at 31-Dec-2027E", "New borrowing FY2027E (refinancing of the 2027 maturity)"] + [
+           "%s FY2027E" % _l for _l in _OPEX]
+for _y in (2028, 2029, 2030):
+    for _k in _FROM27:
+        ES[_k.replace("2027", str(_y))] = ES[_k].replace("2027", str(_y))
+    ES["Debt maturing in %d (US$ millions)" % (_y + 1)] = ES["Debt maturing in 2027 (US$ millions)"].replace("2027", str(_y + 1))
+    _k = "2028 maturity, current portion at 31-Dec-2027E"
+    ES[_k.replace("2028", str(_y + 1)).replace("2027", str(_y))] = ES[_k].replace("2028", str(_y + 1)).replace("2027", str(_y))
+    ES["Wheat price %d (US$/t, annual average)" % (_y - 1)] = ES["Wheat price 2025 (US$/t, annual average)"].replace("2025", str(_y - 1))
+    ES["FY%dE drivers: FY2027E methods (team decisions 2026-10-25)" % _y] = \
+        "Supuestos FY%dE: métodos de FY2027E (decisiones del equipo 2026-10-25)" % _y
+    ES["FX factor on interest FY%dE" % _y] = "Factor cambiario sobre intereses FY%dE" % _y
+ES.update({
+    "Capex / net sales FY2027E": "Capex / ventas netas FY2027E",
+    "US$1.3bn = FY2026E + deferred projects = Bimbo's original 2026 plan (4Q25 deck p.17)":
+        "US$1.3 mil millones = FY2026E + proyectos diferidos = plan original de Bimbo para 2026 (presentación 4T25 p.17)",
+    "Effective tax rate FY2028E-FY2030E": "Tasa efectiva de impuestos FY2028E-FY2030E",
+    "Team 2026-10-23: average of FY2023 and FY2024, the years without the unrecognized tax-loss effect (EEFF25 p.57)":
+        "Equipo 2026-10-23: promedio de FY2023 y FY2024, los años sin el efecto de pérdidas fiscales no reconocidas (EEFF25 p.57)",
+    "Team 2026-10-25: held at the 2026E level (no forecast of our own); CBOT futures as a sensitivity only":
+        "Equipo 2026-10-25: en su nivel 2026E (sin pronóstico propio); los futuros de CBOT solo como sensibilidad",
+    "Prior-year ratio moved by the prior-year wheat change (one-year lag), as FY2027E":
+        "Ratio del año anterior movido por el cambio del trigo del año anterior (rezago de un año), como FY2027E",
+    _EXT_EN + "; prior-year ratio to net sales": _EXT + "; ratio a ventas netas del año anterior",
+    "Prior-year line moved with PP&E depreciation": "Renglón del año anterior movido con la depreciación de PP&E",
+    "Result, not a target": "Resultado, no meta",
+    "Team 2026-10-25: capex / net sales held at FY2027E; purchases of PP&E in the cash flow":
+        "Equipo 2026-10-25: capex / ventas netas en su nivel FY2027E; compras de PP&E en el flujo de efectivo",
+    "Rate x net PP&E at the prior year-end": "Tasa x PP&E neto al cierre del año anterior",
+    "Prior-year ratio to net sales, recurring part only": "Ratio a ventas netas del año anterior, solo la parte recurrente",
+    _EXT_EN + ": refinanced in full; net debt is the same either way":
+        _EXT + ": se refinancia completo; la deuda neta es la misma en cualquier caso",
+    "Maturity ladder, 2Q26 investor presentation p.17 (USD bonds 900 + bank loans 181)":
+        "Perfil de vencimientos, presentación a inversionistas 2T26 p.17 (bonos USD 900 + créditos bancarios 181)",
+    "Maturity ladder, 2Q26 investor presentation p.17 (MXN bonds 237 + bank loans 159)":
+        "Perfil de vencimientos, presentación a inversionistas 2T26 p.17 (bonos MXN 237 + créditos bancarios 159)",
+    "Maturity ladder, 2Q26 investor presentation p.17 (no maturity shown for 2031)":
+        "Perfil de vencimientos, presentación a inversionistas 2T26 p.17 (sin vencimientos en 2031)",
+    "USD/MXN average of the year vs the 17.84 balance rate": "USD/MXN promedio del año frente al tipo de 17.84 del saldo",
+    "Average gross debt x 6.5% x FX factor + lease interest (team 2026-10-23: debt x rate)":
+        "Deuda bruta promedio x 6.5% x factor cambiario + intereses de arrendamiento (equipo 2026-10-23: deuda x tasa)",
+    _EXT_EN + ": dividend grows at inflation": _EXT + ": el dividendo crece con la inflación",
+    _EXT_EN + ": average FY2021-FY2025 (cash flow statement)": _EXT + ": promedio FY2021-FY2025 (estado de flujos de efectivo)",
+    "FY2026E-FY2030E: IS, BS, CF, equity and OCI link to Assumptions; Checks should show OK in every year.":
+        "FY2026E-FY2030E: ER, BG, FE, capital y ORI ligados a Supuestos; Cuadres debe mostrar OK en todos los años.",
+})
+
+# Reinvestment test of g (RONIC)
+for _y in (2027, 2028, 2029, 2030):
+    ES["NOPAT FY%dE = EBIT x (1 - tax)" % _y] = "NOPAT FY%dE = EBIT x (1 - impuestos)" % _y
+    ES["Operating invested capital at 31-Dec-%dE" % _y] = "Capital invertido operativo al 31-dic-%dE" % _y
+    ES["ROIC FY%dE (NOPAT / opening invested capital)" % _y] = "ROIC FY%dE (NOPAT / capital invertido inicial)" % _y
+ES.update({
+    "Reinvestment test of g: return on new invested capital (RONIC), FY2028E-FY2030E":
+        "Prueba de reinversión de g: rendimiento sobre el nuevo capital invertido (RONIC), FY2028E-FY2030E",
+    "Operating tax rate on EBIT": "Tasa de impuestos operativa sobre el EBIT",
+    "FY2028E-FY2030E rate in every year, so the 2028 tax step-down does not enter the return":
+        "Tasa FY2028E-FY2030E en todos los años, para que la baja de impuestos de 2028 no entre al rendimiento",
+    "WACC (v3 route B proposal, reference)": "WACC (propuesta v3 ruta B, referencia)",
+    "valuation/valuation-outputs.yaml (BIMBOA_WACC_v3.xlsx); team confirms":
+        "valuation/valuation-outputs.yaml (BIMBOA_WACC_v3.xlsx); el equipo confirma",
+    "Net PP&E + right-of-use + intangibles + goodwill + receivables + inventories - trade payables":
+        "PP&E neto + derechos de uso + intangibles + crédito mercantil + clientes + inventarios - proveedores",
+    "Compare with the WACC": "Comparar con el WACC",
+    "RONIC FY2028E-FY2030E": "RONIC FY2028E-FY2030E",
+    "(NOPAT FY2030E - FY2027E) / (invested capital Dec-30 - Dec-27). Overstated: NOPAT is translated at a weaker peso "
+    "while the invested capital is carried at historical pesos":
+        "(NOPAT FY2030E - FY2027E) / (capital invertido dic-30 - dic-27). Sobrestimado: el NOPAT se convierte a un peso más débil "
+        "y el capital invertido se queda en pesos históricos",
+    "Net reinvestment rate FY2030E": "Tasa de reinversión neta FY2030E",
+    "(Invested capital Dec-30 - Dec-29) / NOPAT FY2030E": "(Capital invertido dic-30 - dic-29) / NOPAT FY2030E",
+    "RONIC implied by a Gordon value that keeps the FY2030E reinvestment rate":
+        "RONIC implícito en un valor de Gordon que mantiene la tasa de reinversión FY2030E",
+    "g / reinvestment rate": "g / tasa de reinversión",
+    "Reinvestment rate that g needs at the forecast RONIC": "Tasa de reinversión que g necesita con el RONIC proyectado",
+    "g / RONIC": "g / RONIC",
+    "Check: ROIC FY2030E less WACC": "Comprobación: ROIC FY2030E menos WACC",
+    "Below 0 = the average return on Bimbo's capital is below its cost":
+        "Menor a 0 = el rendimiento promedio del capital de Bimbo está por debajo de su costo",
+    "Check: RONIC less WACC": "Comprobación: RONIC menos WACC",
+    "Above 0 = growth adds value; at 0 the Gordon value equals NOPAT / WACC":
+        "Mayor a 0 = el crecimiento agrega valor; en 0 el valor de Gordon es igual a NOPAT / WACC",
+})
+
+# Headers before the external audit (2026-10-25)
+ES.update({
+    "Forecast (team assumptions, sheet Assumptions)": "Proyección (supuestos del equipo, hoja Supuestos)",
+    "Forecast: net sales only (sheet Assumptions)": "Proyección: solo ventas netas (hoja Supuestos)",
+    "Grupo Bimbo - Net sales by region (history and forecast) and Adjusted EBITDA by region (history)":
+        "Grupo Bimbo - Ventas netas por región (historia y proyección) y UAFIDA Ajustada por región (historia)",
+    "History: audited segment note. Forecast: net sales by region from Assumptions; Adjusted EBITDA by region "
+    "is not forecast (the forecast is consolidated below net sales).":
+        "Historia: nota de segmentos auditada. Proyección: ventas netas por región desde Supuestos; la UAFIDA Ajustada por región "
+        "no se proyecta (debajo de ventas la proyección es consolidada).",
+    "Grupo Bimbo - Assumptions FY2026E-FY2030E and terminal growth": "Grupo Bimbo - Supuestos 2026E-2030E y crecimiento a perpetuidad",
+    "First block: 2026 actual by quarter (columns B-E). Every section below it: one value per row in column B, with its tag and source.":
+        "Primer bloque: 2026 real por trimestre (columnas B-E). Cada sección debajo: un valor por renglón en la columna B, con su etiqueta y fuente.",
+    "Value": "Valor",
+    "Regional sales before intersegment eliminations / consolidated net sales, 9M26":
+        "Ventas regionales antes de eliminaciones entre segmentos / ventas netas consolidadas, 9M26",
+    "Shows the forecast regions in sheet Segments on the same basis as the history (before eliminations)":
+        "Muestra las regiones proyectadas en la hoja Regiones en la misma base que la historia (antes de eliminaciones)",
+})
+
+# Methodology sheet, live macro links, README rewrite (2026-10-25)
+SHEETS["Methodology"] = "Metodología"
+ES.update({
+    "Applies the advisor's feedback (Alan): see sheet Methodology": "Aplica la retro del asesor (Alan): ver hoja Metodología",
+    "Grupo Bimbo - Forecast methodology: formula, driver and reason for every projected line":
+        "Grupo Bimbo - Metodología de la proyección: fórmula, variable y razón de cada renglón proyectado",
+    "Driver and value link live to sheet Assumptions. Green rows apply the advisor's feedback (Alan).":
+        "La variable y su valor se ligan en vivo a la hoja Supuestos. Los renglones verdes aplican la retro del asesor (Alan).",
+    "Historical columns tie to the filing. In any year, a non-zero value points to a broken link.":
+        "Las columnas históricas cuadran con el reporte. En cualquier año, un valor distinto de 0 señala una liga rota.",
+    "Team 2026-10-23: FY2026E 9M rate held; Brazil matures only in 3Q27, so the unrecognized tax-loss effect "
+    "(+4.18 pp in FY2025, EEFF25 p.57) stays all year":
+        "Equipo 2026-10-23: se mantiene la tasa 9M de FY2026E; Brasil madura hasta el 3T27, así que el efecto de pérdidas fiscales "
+        "no reconocidas (+4.18 pp en FY2025, EEFF25 p.57) se queda todo el año",
+    "MXN millions. Built by model/build/build_statements_workbook.py; the macro sheets are copied from "
+    "data/macro/nominal_gdp_growth_2016-2030.xlsx (built by model/build/build_macro_gdp.py).":
+        "Millones de MXN. Generado con model/build/build_statements_workbook.py; las hojas macro se copian de "
+        "data/macro/nominal_gdp_growth_2016-2030.xlsx (generado con model/build/build_macro_gdp.py).",
+    "Sheets": "Hojas",
+    "Methodology: one row per forecast line - formula, driver (live link), why, source and whether it applies the advisor's feedback.":
+        "Metodología: un renglón por línea proyectada - fórmula, variable (liga en vivo), por qué, fuente y si aplica la retro del asesor.",
+    "IS, OCI, BS, CF and Equity: every line of the face of the audited statements. FY2021A-FY2025A as reported; "
+    "FY2026E-FY2030E linked to Assumptions.":
+        "ER, ORI, BG, FE y Capital: cada renglón de la cara de los estados auditados. 2021R-2025R como se reportaron; "
+        "2026E-2030E ligados a Supuestos.",
+    "Assumptions: every forecast driver, one value per row with its tag and source. First block: 2026 actual by quarter.":
+        "Supuestos: cada variable de la proyección, un valor por renglón con su etiqueta y fuente. Primer bloque: 2026 real por trimestre.",
+    "Segments: net sales by region (history and forecast); Adjusted EBITDA by region (history only).":
+        "Regiones: ventas netas por región (historia y proyección); UAFIDA Ajustada por región (solo historia).",
+    "Checks: links between the statements in every year and tie-outs to the filing in history. Every line must be 0.":
+        "Cuadres: ligas entre los estados en todos los años y cuadre contra el reporte en la historia. Cada renglón debe ser 0.",
+    "Macro sheets (gold tabs, in English): Capital IQ GDP, CPI and FX with live formulas - Macro_Notes, Data, Growth_view, "
+    "IAS29_test, FX, Regional_agg, Ratio_history, Ratio_NA, Evidence_MEX, Ratios_9M26, Organic_pass, Cross_check_history, "
+    "Regional_FX, PPP_terminal. Assumptions links to them directly.":
+        "Hojas macro (pestañas doradas, en inglés): PIB, inflación y tipo de cambio de Capital IQ con fórmulas vivas - Macro_Notes, Data, "
+        "Growth_view, IAS29_test, FX, Regional_agg, Ratio_history, Ratio_NA, Evidence_MEX, Ratios_9M26, Organic_pass, Cross_check_history, "
+        "Regional_FX, PPP_terminal. Supuestos se liga a ellas directamente.",
+    "Advisor feedback (Alan)": "Retro del asesor (Alan)",
+    "No historical CAGR; growth = team ratio x economy (nominal GDP); organic only; no non-recurring items; growth in local "
+    "currency, consolidated in pesos, with business growth and FX effect shown separately.":
+        "Sin CAGR histórico; crecimiento = ratio del equipo x economía (PIB nominal); solo orgánico; sin partidas no recurrentes; "
+        "crecimiento en moneda local, consolidado en pesos, con el crecimiento del negocio y el efecto cambiario por separado.",
+    "Where it applies: green sections in Assumptions and green rows in Methodology.":
+        "Dónde se aplica: secciones verdes en Supuestos y renglones verdes en Metodología.",
+    "Blue number = typed from a filing or source [sourced]. Black = formula [calc]. Yellow = team assumption typed as a value. "
+    "Green = applies the advisor's feedback.":
+        "Número azul = capturado de un reporte o fuente [sourced]. Negro = fórmula [calc]. Amarillo = supuesto del equipo capturado como valor. "
+        "Verde = aplica la retro del asesor.",
+})
+
+# Glossary sheet and Spanish macro sheets (2026-10-25)
+SHEETS["Glossary"] = "Terminología"
+ES.update({
+    "Grupo Bimbo - Glossary: abbreviations and terms used in this workbook":
+        "Grupo Bimbo - Terminología: abreviaciones y términos usados en este libro",
+    "Plain-words meaning of every abbreviation, and the sheets where it appears.":
+        "Significado en palabras simples de cada abreviación y las hojas donde aparece.",
+    "Glossary: every abbreviation and term (PPP, g, perpetuity, ex-FX, RONIC...) in plain words, with the sheets where it appears.":
+        "Terminología: cada abreviación y término (PPA/PPP, g, perpetuidad, sin efecto cambiario, RONIC...) en palabras simples, con las "
+        "hojas donde aparece.",
+    "Macro sheets (gold tabs): Capital IQ GDP, CPI and FX with live formulas - Macro_Notes, Data, Growth_view, "
+    "IAS29_test, FX, Regional_agg, Ratio_history, Ratio_NA, Evidence_MEX, Ratios_9M26, Organic_pass, Cross_check_history, "
+    "Regional_FX, PPP_terminal. Assumptions links to them directly.":
+        "Hojas macro (pestañas doradas, en español): PIB, inflación y tipo de cambio de Capital IQ con fórmulas vivas - Macro_Notas, Datos, "
+        "Crecimiento_PIB, Prueba_NIC29, TC, PIB_regional, Ratio_historia, Ratio_NA, Evidencia_MEX, Ratios_9M26, Filtro_orgánico, "
+        "Contraste_histórico, TC_regional, Paridad_terminal. Supuestos se liga a ellas directamente.",
+    "Where it applies: green sections in Assumptions (dark green header, light green rows) and green rows in Methodology.":
+        "Dónde se aplica: secciones verdes en Supuestos (encabezado verde oscuro, renglones verde claro) y renglones verdes en Metodología.",
 })

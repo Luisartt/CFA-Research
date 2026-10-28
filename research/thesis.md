@@ -63,6 +63,20 @@ Where the numbers stand:
 
 All three at once: -2.65, from 46.42 to 43.77 at the base multiple (thesis 1 offsets about 60% of the two downside theses) `[calc]`. None of the three argues for a premium multiple by itself: thesis 1 moves North America toward a baker that trades at 5.6x (Flowers); a premium would have to come from Mexico (about 55% of EBITDA) `[assumption]`.
 
+## Team decision 2026-10-27: North America share gain (V-2)
+
+- **Team statement:** "Mantenemos el ratio de Norteamérica en 0.17 para 2027-2030 y el terminal: es nuestra tesis de ganancia de participación." (Jorge Alejandro Gaytan, 2026-10-27).
+- **What it means in the model:** North America grows 0.168 x US nominal GDP: +0.9% (2027) to +0.7% (2030) a year in USD, and the same ratio in the terminal `[calc]`.
+  - The ratio is 9M26 ex-FX growth of 1.01% over US nominal GDP 2026 of 5.99%.
+  - Source: `analisis-dcf-2026-10-26/proyecciones/BIMBOA_statements_2021-2030_v1_V1V3.xlsx`, sheets Ratio_NA and Organic_pass.
+- **What must be true:** Bimbo outgrows a US bread category that runs at -3% to 0% nominal (units -2% to -4%, price/mix +1-2% `[assumption]`, `research/industry.md`), by about 0.7-3.9 pp a year through 2030 `[calc]`.
+- **Value at stake:** a ratio of 0 instead of 0.17 lowers NOPAT FY2031E (and the terminal value) by 2.0%; the 2023-25 history (-0.13) lowers it by 3.6% `[calc]`.
+- **Against (coach, on record):**
+  - Three positive quarters against nine of decline.
+  - 2Q26 was helped by the World Cup (2T26 p.5), and 2026 laps a weak 2025.
+  - Stone House (2-Jun-2025, size not disclosed) is not deducted from 9M26, so the base may not be fully organic.
+- **Tension with Thesis 3:** Thesis 3 argues organic growth falls short, partly in North America. The team now forecasts share gains there. Thesis 3's "North America +1.5% a year in USD" line refers to the older regional build; the current model has +0.7-0.9%. **[team]** to reconcile the two in the report.
+
 ## Context kept from v1 (debt management, retired as a pillar)
 
 - Net debt / EBITDA 2.5x at 2Q26 on the company's definition `[sourced]` call 2026-07-23 p.10; 2.81x with leases against a 2.98x peer median (5th least leveraged of 10) `[calc]` peer workbook v3.
@@ -102,5 +116,6 @@ All three at once: -2.65, from 46.42 to 43.77 at the base multiple (thesis 1 off
 
 ## History
 
+- 2026-10-27: the team set the North America share-gain view (ratio 0.17 for 2027-2030 and terminal) as part of the story; see the section above. The DCF in `analisis-dcf-2026-10-26/` uses it.
 - v2 2026-10-19: the team validated the three theses as drafted in the first report (one buy, two sell, format "Problem — due to"). They replace the pillars of 2026-10-16. Evidence, sizing (consolidated DCF) and the drafted kill criteria carried over; claims "why the market is wrong" and direction left for the team. The debt-management pillar became context and a risk.
 - v1 2026-10-17: first synthesis. Pillars as decided by the team on 2026-10-16: (1) climate change and input costs, (2) the new CEO's execution, (3) debt management, a hold. Superseded draft: `output/bimbo-tesis-3-pilares.md` (2026-10-08: BUY; pillars NA margin recovery, capex moderation and FCF, valuation discount).

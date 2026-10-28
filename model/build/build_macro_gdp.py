@@ -631,6 +631,59 @@ for n_, reg in enumerate(('Mexico', 'North America', 'Latin America', 'EAA'), 1)
 rx.cell(ftop + 6, 1, 'Limits: weights are GDP, not Bimbo sales by country (not disclosed): China is the largest EAA weight and Brazil the largest Latin America weight. '
         'Annual-average FX; Bimbo translates hyperinflationary Argentina at the closing rate (IAS 29, EEFF25 p.23, p.26). Capital IQ FX forecasts [sourced] via sheet FX.')
 rx.column_dimensions['A'].width = 16
+
+# Terminal FX by purchasing power parity (team decision 2026-10-25): in perpetuity each currency moves against the USD
+# by its inflation gap, PPP ratio = (1 + US CPI 2030) / (1 + currency CPI 2030). Dollarized countries = 1; the euro uses
+# the GDP-weighted CPI of the euro countries in Bimbo's list (proxy for euro-area inflation). Region factor aggregated
+# exactly as in Regional_FX for 2030 (same weights and GDP growth) [calc].
+pp = wb.create_sheet('PPP_terminal')
+pp.append(['Terminal FX, local currency to USD, by purchasing power parity 2030 [calc]: PPP ratio = (1 + US CPI) / (1 + currency CPI); '
+           'below 1 = the currency loses vs USD. CPI from IAS29_test (Capital IQ) [sourced]. USD countries = 1; EUR = GDP-weighted CPI of the euro countries'])
+pp.append(['iso3', 'region', 'currency', 'CPI 2030', 'currency CPI 2030', 'PPP ratio 2030'])
+for c in pp[2]:
+    c.font, c.fill = B, H
+cpirow = {iso: k for k, iso in enumerate(REG, 3)}
+cpic = L(3 + 2030 - 2015)            # IAS29_test column of 2030
+gcol = L(5 + 2029 - 2015)            # Regional_agg GDP USD column of 2029 (weights for 2030)
+prow = {}
+for k, iso in enumerate(order, 3):
+    prow[iso] = k
+eur = [i for i in order if CUR[i] == 'EUR']
+eur_cpi = '(' + '+'.join(f'Regional_agg!{gcol}{grow[i]}*IAS29_test!{cpic}{cpirow[i]}' for i in eur) + ')/(' + \
+          '+'.join(f'Regional_agg!{gcol}{grow[i]}' for i in eur) + ')'
+us = f'IAS29_test!{cpic}{cpirow["USA"]}'
+for iso in order:
+    k = prow[iso]
+    pp.cell(k, 1, iso)
+    pp.cell(k, 2, REG[iso])
+    pp.cell(k, 3, CUR[iso])
+    pp.cell(k, 4, f'=IAS29_test!{cpic}{cpirow[iso]}').number_format = '0.00%'
+    if CUR[iso] == 'USD':
+        pp.cell(k, 5, f'={us}')
+    elif CUR[iso] == 'EUR':
+        pp.cell(k, 5, '=' + eur_cpi)
+    else:
+        pp.cell(k, 5, f'=D{k}')
+    pp.cell(k, 5).number_format = '0.00%'
+    pp.cell(k, 6, f'=IFERROR((1+{us})/(1+E{k}),0)').number_format = '0.0000'
+ptop = 3 + len(order) + 2
+pp.cell(ptop - 1, 1, 'Region factor 2030, local currency to USD, PPP [calc] = sum(weight x (1 + GDP growth) x PPP ratio) / sum(weight x (1 + GDP growth)), as Regional_FX').font = B
+pp.cell(ptop, 1, 'region').font = B
+pp.cell(ptop, 4, 2030).font = B
+for n_, reg in enumerate(('Mexico', 'North America', 'Latin America', 'EAA'), 1):
+    rr = ptop + n_
+    pp.cell(rr, 1, reg).font = B
+    if reg in ('Mexico', 'North America'):
+        pp.cell(rr, 4, 1).number_format = '0.0000'
+        continue
+    wc = L(5 + 2030 - 2016)
+    isos = [i for i in order if REG[i] == reg]
+    num_ = '+'.join(f'Regional_agg!{wc}{wtop + grow[i] - 2}*(1+N(Data!J{pos[(i, 2030)]}))*F{prow[i]}' for i in isos)
+    den_ = '+'.join(f'Regional_agg!{wc}{wtop + grow[i] - 2}*(1+N(Data!J{pos[(i, 2030)]}))' for i in isos)
+    pp.cell(rr, 4, f'=({num_})/({den_})').number_format = '0.0000'
+pp.cell(ptop + 6, 1, 'Mexico and North America = 1 here: the USD/MXN PPP step is applied in the statements workbook '
+        '((1 + Mexico CPI) / (1 + US CPI)). Limits: GDP weights, not Bimbo sales by country; annual-average CPI; one year (2030) as the long-run proxy.')
+pp.column_dimensions['A'].width = 16
 wb.save(sys.argv[1])
 
 # Python-side replica for checking the formulas
@@ -673,3 +726,18 @@ for reg in ('Latin America', 'EAA'):
         r_ = {i: 1 if CUR[i] == 'USD' else fx[(CUR[i], y - 1)] / fx[(CUR[i], y)] for i in inc}
         out.append(sum(w[i] * (1 + g_[i]) * r_[i] for i in inc) / sum(w[i] * (1 + g_[i]) for i in inc))
     print(reg, ' '.join(f'{x:.4f}' for x in out))
+
+
+
+print('PPP region factor 2030, local currency to USD [calc]:')
+_c = {(i, 2030): cpi[(i, 2030)]['v'] / 100 for i in REG if (i, 2030) in cpi}
+_eur = [i for i in order if CUR[i] == 'EUR' and i not in EXCL]
+_eurc = sum(usd[(i, 2029)] * _c[(i, 2030)] for i in _eur) / sum(usd[(i, 2029)] for i in _eur)
+for reg in ('Latin America', 'EAA'):
+    inc = [i for i in order if REG[i] == reg and i not in EXCL]
+    tot = sum(usd[(i, 2029)] for i in inc)
+    w = {i: usd[(i, 2029)] / tot for i in inc}
+    g_ = {i: float(gdp[(i, 2030)]['v']) / float(gdp[(i, 2029)]['v']) - 1 for i in inc}
+    cc = {i: _c[('USA', 2030)] if CUR[i] == 'USD' else (_eurc if CUR[i] == 'EUR' else _c[(i, 2030)]) for i in inc}
+    r_ = {i: (1 + _c[('USA', 2030)]) / (1 + cc[i]) for i in inc}
+    print(reg, f"{sum(w[i] * (1 + g_[i]) * r_[i] for i in inc) / sum(w[i] * (1 + g_[i]) for i in inc):.4f}")
