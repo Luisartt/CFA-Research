@@ -180,3 +180,42 @@ why: stop old figures being mixed with the final valuation; updates the "model o
 why: Jorge asked to replace the repo content with his local folder and keep Alan's skills; the folder is a full copy of the repo, so the replacement equals committing the differences; older versions stay in git history and in the Desktop archive
 # decision: the text files that still quote DCF v3 figures (valuation/valuation.yaml g 0.0271, valuation.md, valuation-outputs.yaml, consolidated-valuation*, output/dcf-v3-conclusiones.md, report v1) are not touched in the upload; valuation/SPG_* and valuation/team-models/ stay in the repo for now (team, Jorge Alejandro Gaytan, 2026-10-28)
 why: Jorge said not to touch them; the TP12m workbook is the only source of final figures until they are updated
+
+# decision: thesis rework from the closed TP12m workbook: variables kept = V1 North America returns to growth (Ratio_NA), V4 bought growth (Organic_pass vs Ratios_9M26), V13 FX-borrowed growth (Assumptions!B148-B149: FY2027E MXN growth 4.75% = business 3.29% + FX 1.46%); V10 capex (4.48% of sales vs consensus maintenance capex above model total capex) moves to risks, not thesis; CEO dropped as a pillar; any variable that needs a model change is discarded (team, Jorge Alejandro Gaytan, 2026-10-28)
+
+# decision: in thesis A, FX is supporting evidence inside the "quality of growth" pillar, not a pillar of its own (2026-10-28)
+why: Jorge: we do not know how the market treats FX; the model also treats expected depreciation as roughly value-neutral (FX effect in growth, Assumptions!B149, and 1.70% expected depreciation in the WACC, WACC_V2!B9)
+
+# decision: thesis A keeps HOLD as the base rating; SELL is only a trigger: a debt-funded acquisition that takes net debt/EBITDA to 3.0x or more while past integrations (Wickbold) still lag (2026-10-28)
+why: Jorge: no basis to change the rating abruptly; 3.0x is the level the CFO used on the 3Q26 call (current 2.4x, comfort range 2.0-2.5x, lines 248, 308, 311); Wickbold integration slower than planned (line 413)
+
+# decision: thesis A catalyst = Latin America 4Q26 ex-FX net sales growth once Wickbold laps: at or below 9.1% confirms, at or above 14.1% refutes for Latin America, in between inconclusive; if refuted, adjust (Latin America is 11.06% of FY2030E sales) rather than abandon the HOLD (2026-10-28)
+why: thresholds from our own data: best 2026 organic quarter 9.1% (3Q26, Organic_pass) and lowest 2026 reported quarter with Wickbold 14.1% (2Q26 release p.3); Jorge chose them
+# decision: apply items 4, 5 and the buyback share count in a new version, analisis-dcf-2026-10-26/precio-objetivo/BIMBOA_statements_2021-2030_v2_pivot_waccV2_TP12m_v2.xlsx: 12-month target method B Ps 66.13 (was 64.18), DCF value 16-Oct-2026 Ps 60.18 (was 59.21), rating HOLD unchanged; TP12m_v2 replaces TP12m as the single source for valuation figures (team, Jorge Alejandro Gaytan, 2026-10-29)
+why: team rule 2026-10-29, reopen only if the rating changes or the target moves more than $1; together +1.96 (item 5 debt repayment cash vs non-cash +0.19, BMV 3T26 p.55; item 4 PP&E depreciation at the rate basis so FY2026E impairment and MEPP items are not projected, +0.84; buybacks at fair value +0.92); text items 1-3 left as is; Valuacion sheet does not deduct 4Q26 buybacks; changes listed in sheet TP12m_v2_cambios
+# decision: WACC D/E with leases at market = 0.7431 (WACC_V2!B31, valuation/BIMBOA_WACC_v3.xlsx WACC!C141) is final, no longer provisional (team, Jorge Alejandro Gaytan, 2026-11-02)
+why: Jorge confirmed it on 2026-11-02; closes the todo item "WACC D/E is provisional (2026-10-27): confirm or replace"
+# decision: the professor review copy BIMBOA_modelo_revision_profesor_v1.xlsx is rebuilt from TP12m_v2 (target 66.13) and sent as is; in that copy only, the v1 text notes of guion section 7 items 1-3 (Methodology rows 13, 15, 22; Assumptions G298) describe V2, and the Valuacion_12m labels say the base case already deducts buybacks; TP12m_v2 itself unchanged (team, Jorge Alejandro Gaytan, 2026-11-02)
+why: Jorge asked to correct the inconsistencies from the context of the work and to send the file as is; the team rule of 2026-10-29 keeps the model of record closed for changes under $1
+
+# decision: central thesis (Alan's one-thesis feedback) = "Bimbo is worth what it costs today — due to growth of about 3% once acquisitions and currency are stripped out and a new management that must still prove the margin it inherited, offset by costs that are covered into 2027 and absorbable after it"; the three v10 theses become its pillars; the team's three-paragraph text of 2026-11-02 is final for the story (team, Jorge Alejandro Gaytan, 2026-11-02)
+why: one HOLD story that the three pillars support (two against buying, one against selling, all tested in 2027); figures in the text still to be refreshed from TP12m_v2
+
+# decision: central thesis text = report/sections/01b-central-thesis_v12.md (figures from TP12m_v2 only, management statements from the 3Q26 call with line numbers); supersedes the 2026-11-02 team draft wording (team approved, Jorge Alejandro Gaytan, 2026-11-02)
+
+# decision: the report's central thesis = Luisart's text with TP12m_v2 figures (report/sections/01d-central-thesis-final.md); Luisart confirmed it is the same thesis and he forgot to update the figures; supersedes the v12 decision above as the base text, v12 items are complements for the meeting (team, Jorge Alejandro Gaytan, 2026-11-02)
+
+# decision: rating pivots by pillar (research/thesis-pivots.md): P1 BUY = ex-FX growth net of reported inorganic > 4% in 4Q26 and 1Q27 (model 3.29%, B148), P1 catalyst LatAm 4Q26 9.1%/14.1%, P1 SELL = debt-funded deal to >= 3.0x net debt/EBITDA while Wickbold lags; P2 SELL only = wheat Jan-Jun 2027 average above US$294 (B277 x 1.35; confirmation 3Q27 gross margin < 51.4%), no P2 BUY pivot; P3 BUY = 2027 margin guidance low end above +28 bp (B361 vs B52), P3 SELL = 1Q27 other expenses, net >= 0.76% of sales (E18) or integration expenses still reported (team, Jorge Alejandro Gaytan, 2026-11-03)
+why: Alan asked for observable facts, not model moves; Jorge could not justify a BUY pivot for the cost pillar, which is the floor of the HOLD
+
+# decision: pillar 2 (costs) reframed: rests on the FY2021-FY2023 shock Bimbo already absorbed (raw materials +279 bp of sales, adjusted EBITDA margin within 13.4%-14.0%) vs +76 bp in the model's FY2027E, consensus gross margin 52.0% vs 52.1%, hedges as timing only; "absorbable until 2030" dropped; report text in report/sections/pillar2-and-pivots-final.md (advisor Alan approved; team, Jorge Alejandro Gaytan, 2026-11-03)
+why: Alan criticised the hedge-based pillar as weak; the new version rests on audited history, not on the flat-wheat method
+
+# decision: rating stays HOLD (final) at MXN 64.85 with the v32 figures (target 58.54, verified in Excel on the verificacion-v32 copy); the band rule gives SELL at that price, so HOLD is a stated judgment (team, Jorge Alejandro Gaytan, 2026-11-04)
+why: team decision after Alan's feedback; open item: whether to keep the ke-based rule and how to argue the override
+
+# decision: HOLD override text = report/sections/hold-rating-override_v1.md (one argument: the rule flips to HOLD at 15.3% FY2027E margin, 18 bp above our 15.12%, half the 35 bp width of the 2026 guide; plus the dated Feb-2027 test); drops the re-rating and guidance/leverage reasons; Table 4 last row 15.30% -> 61.16, band 47.64-64.96 (team, Jorge Alejandro Gaytan, 2026-11-04)
+why: the v32 reasons did not survive Q&A (one argued for SELL, one was already in the model)
+
+# decision: R3 (terminal return on capital below base) stays at probability 2, impact 4; Figure 31 unchanged (team, Jorge Alejandro Gaytan, 2026-11-04)
+why: terminal RONIC is the FY2030E ROIC and recovers with the pillar 3 margin; raising P would mean doubting our own margin. Alan called P2 generous (ROIC 17.0 -> 11.4 over four years); be ready to defend it in Q&A

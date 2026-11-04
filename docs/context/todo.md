@@ -13,9 +13,7 @@ Soft cap: see AGENTS.md > Context files.
 
 ## Model and valuation (source: analisis-dcf-2026-10-26/precio-objetivo/..._TP12m.xlsx)
 
-- [pending] fix the five workbook inconsistencies flagged in analisis-dcf-2026-10-26/notas/guion_proyecciones_V2_4T26_ES.md §7, in a copy: stale notes (Methodology C22/F22, row 13, row 15; Assumptions G298), FY2026E PP&E depreciation base (17,254 vs 16,591), FY2026E debt repayment 2,413 vs contractual 1,552 (possible FX translation counted as cash) — owner: Jorge Alejandro Gaytan — due: 2026-10-30
-- [pending] decide whether to deduct 4Q26 and FY2027E buybacks from the share count (up to +Ps 0.92 on the target) — owner: valuation — due: 2026-10-30
-- [pending] WACC D/E is provisional (current market 0.743, 2026-10-27): confirm or replace — owner: valuation — due: 2026-10-30
+- [pending] move the report, thesis v4 and deck to the TP12m_v2 figures (target 66.13, upside +12.9%, total return +14.8%, DCF 60.18, BUY below 51.84 / SELL above 69.68, EPS and EBIT FY2027E-FY2030E); decide whether to archive the old TP12m file — owner: Jorge Alejandro Gaytan — due: 2026-11-01
 - [pending] statements opens: cost of debt 6.5% vs implied 7.47%, VPPA = 0, payable days trend, FY2027E margin vs FY2026E (wheat) — owner: Jorge Alejandro Gaytan — due: 2026-10-30
 - [pending] text files still quote superseded figures (valuation/valuation.yaml g 0.0271, valuation/valuation.md, research/thesis.md, output/dcf-v3-conclusiones.md): left untouched in PR 4 by decision; update to the TP12m workbook or mark them superseded — owner: Jorge Alejandro Gaytan — due: 2026-11-01
 - [in_progress] BIMBOA_WACC_v3.xlsx restored in valuation/ on 2026-10-28 (identical to the archived copy; the 11 cells cited by WACC_V2 and Assumptions match); commit it and open a pull request together with the context files — owner: Jorge Alejandro Gaytan — due: 2026-10-30
@@ -26,10 +24,11 @@ Soft cap: see AGENTS.md > Context files.
 - [pending] learn the business-vs-FX split of consolidated sales (regional FX factor and FX effect line) before Q&A prep — owner: Jorge Alejandro Gaytan — due: 2026-11-01
 
 ## Thesis, risks, industry
+- [pending] thesis A evidence gaps (research/thesis-a-working-draft.md s.10): Jorge's 20-second 'why not BUY'; evidence that FY2022-FY2024 capex pays off; catalyst Stress; place V1 or drop it; FX share inside consensus growth [unverified]; CIQ GAAP net income = controlling interest? [unverified] — owner: Jorge Alejandro Gaytan — due: 2026-11-01
 
 - [pending] single HOLD thesis v4 (BIMBOA_Entrega_CFA/02_Tesis/BIMBOA_Tesis_HOLD_unica_v4_EN.docx): resolve the [unverified] numbers; reconcile the North America share-gain ratio 0.17 with pillar 1 and the old Thesis 3 line; state what the market misses per pillar — owner: all — due: 2026-10-30
 - [pending] thesis evidence gaps: North America volume/price/mix and transformation programme size, a Circana share series, the source of Mexico's share gain, Bimbo's 2027 wheat hedge coverage; Stone House inside 9M26 growth — owner: all — due: 2026-10-30
-- [pending] risks-esg: choose the 4-6 key risks (draft v3 pillars 1 and 3 move here), their scores and what is priced in; choose 3-5 material ESG issues; re-score the governance rubric — owner: all — due: 2026-10-30
+- [pending] risks-esg: choose the 4-6 key risks (draft v3 pillars 1 and 3 move here; add V10: model capex 20,031 FY2027E below CIQ consensus maintenance capex 23,477), their scores and what is priced in; choose 3-5 material ESG issues; re-score the governance rubric — owner: all — due: 2026-10-30
 - [pending] ESG data gaps: Sustainalytics second-party opinion, MSCI/DJSI ratings, assured Scope 1-3 series, water-stressed plant count (101 vs 89), renewable electricity 100% vs 99% — owner: all — due: 2026-10-30
 - [pending] industry [unverified] figures: Mexico competitor shares, numeric shares in Brazil, Colombia, Argentina, Spain and the UK, a US share series by category (Circana), Bimbo's US volume/price split; save sources in research/sources/ — owner: industry — due: 2026-10-30
 - [pending] industry decisions: market definition, moat and peer set — owner: all — due: 2026-10-30
