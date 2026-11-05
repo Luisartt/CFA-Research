@@ -1,12 +1,14 @@
-# report/header.yaml - header block of the report (read by the plugin builder). The team has not set rating or target yet.
+# report/header.yaml - header block of the report (read by report/build/build_report_docx.py).
+# Rating, target and reference price: team decisions of 2026-10-28 (docs/context/memory.md).
 company: "Grupo Bimbo, S.A.B. de C.V."
 exchange: "BMV"
 ticker: "BIMBO A"
 sector: "Consumer Staples"
 industry: "Packaged Food & Bakery"
-recommendation: ""      # HOLD (provisional) in the PDF draft; BUY | HOLD | SELL is the team's decision
-price: 58.60
-price_date: "2026-10-16"
+recommendation: "SELL"
+bias: "neutral"
+price: 67.27
+price_date: "2026-11-04"
 currency: "MXN"
-target_price: 0.0       # TBD: the team's 12-month target (exit multiple not chosen yet)
-report_date: "2026-10-19"
+target_price: 58.5422    # 12-month target (Valuacion_12m!B49 of the final model workbook)
+report_date: "2026-11-04"
