@@ -1,0 +1,201 @@
+<title>BIMBOA V2: seis cambios</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: one landscape sheet; value strip on top, then one table in two groups (projection/terminal, WACC) */
+:root {
+  --bg: #fbfbfd; --paper: #ffffff; --fg: #1b1f2a; --muted: #5a6172; --rule: #dfe2ea;
+  --accent: #1d3f8f; --accent-soft: #e8edf8; --up: #1f7a4d; --warn: #9a5b00;
+  --f-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --f-cond: "IBM Plex Sans Condensed", "Arial Narrow", "IBM Plex Sans", sans-serif;
+  --f-mono: "IBM Plex Mono", ui-monospace, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #11141b; --paper: #171b24; --fg: #e6e8ee; --muted: #9aa1b2; --rule: #2a303d;
+  --accent: #8fb0f2; --accent-soft: #1d2740; --up: #6cc79a; --warn: #e2a64f; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #11141b; --paper: #171b24; --fg: #e6e8ee; --muted: #9aa1b2; --rule: #2a303d;
+  --accent: #8fb0f2; --accent-soft: #1d2740; --up: #6cc79a; --warn: #e2a64f; color-scheme: dark }
+body { background: var(--bg); color: var(--fg); font-family: var(--f-body); font-size: 13px; line-height: 1.45;
+  padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 24px 32px; }
+.wrap { max-width: 1280px; margin: 0 auto; display: grid; gap: 18px; }
+header { display: grid; gap: 4px; }
+.eyebrow { font-family: var(--f-cond); font-size: 11.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+h1 { font-family: var(--f-cond); font-weight: 600; font-size: 26px; margin: 0; text-wrap: balance; }
+.lede { color: var(--muted); max-width: 95ch; margin: 0; }
+.strip { display: flex; flex-wrap: wrap; gap: 0; border: 1px solid var(--rule); background: var(--paper); border-radius: 6px; }
+.cell { flex: 1 1 160px; padding: 10px 14px; border-right: 1px solid var(--rule); min-width: 0; }
+.cell:last-child { border-right: 0; }
+.cell .k { font-size: 11.5px; color: var(--muted); }
+.cell .v { font-family: var(--f-mono); font-size: 20px; font-weight: 500; font-variant-numeric: tabular-nums; }
+.cell.key .v { color: var(--accent); }
+.tbl { overflow-x: auto; border: 1px solid var(--rule); border-radius: 6px; background: var(--paper); }
+table { border-collapse: collapse; width: 100%; min-width: 1100px; }
+th, td { text-align: left; vertical-align: top; padding: 9px 11px; border-bottom: 1px solid var(--rule); }
+thead th { font-family: var(--f-cond); font-weight: 600; font-size: 12px; letter-spacing: .04em; text-transform: uppercase; color: var(--muted); background: var(--bg); }
+tr.group th { background: var(--accent-soft); color: var(--accent); font-family: var(--f-cond); font-size: 12.5px; letter-spacing: .05em; text-transform: uppercase; }
+td.n { font-family: var(--f-mono); font-size: 12px; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.chg b { display: block; font-weight: 600; margin-bottom: 2px; }
+.eff { font-family: var(--f-mono); font-variant-numeric: tabular-nums; color: var(--up); font-weight: 500; white-space: nowrap; }
+td.against { color: var(--fg); }
+td.q { color: var(--accent); font-weight: 500; }
+.tag { font-family: var(--f-mono); font-size: 10.5px; color: var(--muted); }
+ul { margin: 0; padding-left: 16px; display: grid; gap: 3px; }
+.foot { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 18px; }
+.foot section { min-width: 0; }
+.foot h2 { font-family: var(--f-cond); font-size: 13px; letter-spacing: .06em; text-transform: uppercase; margin: 0 0 6px; color: var(--warn); }
+.foot h2.neutral { color: var(--muted); }
+.small { font-size: 11.5px; color: var(--muted); }
+</style>
+
+<div class="wrap">
+  <header>
+    <div class="eyebrow">Grupo Bimbo (BIMBOA) · CFA Research Challenge · para discusión del equipo · 27-oct-2026</div>
+    <h1>Seis cambios de la V2: evidencia y argumento en contra</h1>
+    <p class="lede">Se mantienen las reglas de Alan (solo orgánico, sin CAGR, solo partidas recurrentes), los ratios de ventas, los márgenes, la tasa fiscal de 30%, el puente, el stub y la convención de mitad de año. Todas las cifras son [calc] del modelo, salvo que se indique otra etiqueta. El precio objetivo y la recomendación los decide el equipo.</p>
+  </header>
+
+  <div class="strip" aria-label="Valor por acción">
+    <div class="cell"><div class="k">v1 (WACC 10.32%, RONIC = WACC)</div><div class="v">Ps 29.01</div></div>
+    <div class="cell"><div class="k">V2, cambios 1-3 (WACC 10.32%)</div><div class="v">Ps 47.79</div></div>
+    <div class="cell key"><div class="k">V2, cambios 1-6 (WACC 9.62%)</div><div class="v">Ps 59.21</div></div>
+    <div class="cell"><div class="k">Precio BMV, 16-oct-2026 [sourced]</div><div class="v">Ps 58.60</div></div>
+    <div class="cell"><div class="k">VT / EBITDA aj. 2030E (V2 final)</div><div class="v">6.5x</div></div>
+  </div>
+
+  <div class="tbl">
+    <table>
+      <thead>
+        <tr><th style="width:15%">Cambio</th><th style="width:11%">v1 → V2</th><th style="width:7%">Efecto</th><th style="width:24%">Evidencia</th><th style="width:26%">Argumento en contra</th><th style="width:17%">Pregunta para el equipo</th></tr>
+      </thead>
+      <tbody>
+        <tr class="group"><th colspan="6">Proyección y valor terminal (efecto medido con el WACC v1)</th></tr>
+        <tr>
+          <td class="chg"><b>1. Capex 2027E-2030E normalizado</b>Ancla 2027E = punto medio de la guía vigente; 2028E-30E al mismo % de ventas</td>
+          <td class="n">US$1.3 → 1.1 mm<br>5.30% → 4.48% de ventas</td>
+          <td><span class="eff">+Ps 4.03</span></td>
+          <td><ul>
+            <li>La guía 2026 se recortó de US$1.2-1.4 mm a US$1.0-1.2 mm; la presentación la llama "capex normalizado tras un ciclo de inversión elevado" <span class="tag">[guidance] deck 2T26 p.21, p.23</span></li>
+            <li>Capex de PP&amp;E / ventas antes del ciclo, FY2014-20: 4.60% <span class="tag">[calc] RA15-RA20</span></li>
+            <li>Consenso de capex 2029-30E: 19.3-19.7 mil millones de pesos <span class="tag">[sourced] CIQ 20-sep-2026</span></li>
+          </ul></td>
+          <td class="against"><ul>
+            <li>Con este capex, el PP&amp;E casi no crece mientras las ventas suben ~4% al año</li>
+            <li>Plan de más de US$2 mm en México para 2025-2028 <span class="tag">[guidance] 2T25 p.1</span></li>
+            <li>Bimbo recorta capex difiriendo proyectos, no eliminándolos</li>
+            <li>Menos capital también sube el ROIC terminal: el cambio 1 refuerza al 3</li>
+          </ul></td>
+          <td class="q">¿El ciclo 2022-25 dejó capacidad suficiente para crecer hasta 2030 sin volver a más de 5% de las ventas?</td>
+        </tr>
+        <tr>
+          <td class="chg"><b>2. g terminal con inflación consistente</b>Ratio del equipo × PIB real + inflación de largo plazo (México, LatAm, EAA). Norteamérica sin cambio</td>
+          <td class="n">3.47% → 4.40%<br>real −0.2% → +0.7%</td>
+          <td><span class="eff">+Ps 0.50</span></td>
+          <td><ul>
+            <li>El M-Bono del WACC trae ~3.7-4.1% de inflación (breakeven 4.06%) <span class="tag">[calc]</span>; la g v1 crecía por debajo</li>
+            <li>Inflación esperada 2031-34: 3.70% <span class="tag">[sourced] Banxico, Encuesta sep-2026, Cuadro 5 p.6</span></li>
+            <li>Precios en México "en línea con la inflación" <span class="tag">[sourced] calls 28-oct-2025 p.4; 23-jul-2026 p.4</span></li>
+          </ul></td>
+          <td class="against"><ul>
+            <li>El ratio se midió sobre crecimiento nominal; aplicarlo al real es una reinterpretación</li>
+            <li>El PIB real se aproxima con el IPC como deflactor</li>
+            <li>LatAm y EAA salen con +3.3% real, un dato alto</li>
+            <li>Efecto chico con RONIC = WACC; mucho mayor con el RONIC del cambio 3</li>
+          </ul></td>
+          <td class="q">¿Bimbo puede trasladar la inflación en perpetuidad fuera de Norteamérica?</td>
+        </tr>
+        <tr>
+          <td class="chg"><b>3. RONIC terminal sobre capital tangible</b>Reinversión = g / ROIC tangible 2030E (PP&amp;E + derecho de uso + capital de trabajo)</td>
+          <td class="n">= WACC 10.32% → 15.7%</td>
+          <td><span class="eff">+Ps 14.25</span></td>
+          <td><ul>
+            <li>Regla de Alan: solo orgánico. El crecimiento orgánico no compra crédito mercantil ni marcas</li>
+            <li>ROIC tangible FY2022-25: 17.7% / 17.1% / 13.8% / 11.9% <span class="tag">[calc] EBITDA aj. − D&amp;A</span>; 2030E queda dentro del rango</li>
+            <li>VT / EBITDA pasa de 4.4x a 5.7x, contra 6.3-9.5x en la historia <span class="tag">[sourced] Ve por Más 3T26 p.1</span></li>
+          </ul></td>
+          <td class="against"><ul>
+            <li>El ROIC tangible cae cuatro años seguidos; 15.7% supone que se recupera</li>
+            <li>Sobre el capital total (con crédito mercantil) Bimbo gana 9.9%, por debajo del WACC</li>
+            <li>Mínimo histórico: Ps 48.88; RONIC = WACC: Ps 39.12 (ambos con WACC V2)</li>
+            <li>Es el cambio que más mueve el valor</li>
+          </ul></td>
+          <td class="q">¿Qué evidencia tenemos de que el ROIC tangible regresa a ~16% para 2030?</td>
+        </tr>
+        <tr class="group"><th colspan="6">WACC: misma ruta B de Damodaran, beta 0.53, ERP 4.20%, D/E 0.743. En conjunto +Ps 11.42 (10.32% → 9.62%)</th></tr>
+        <tr>
+          <td class="chg"><b>4. Tasa libre de riesgo por moneda de los flujos</b>Pesos para el EBITDA de México; Treasury + 1.7% de depreciación para el resto</td>
+          <td class="n">rf 7.51% → 7.23%<br>WACC → 10.16%</td>
+          <td class="n">−0.16 pp</td>
+          <td><ul>
+            <li>45% del EBITDA FY2025 está fuera de México <span class="tag">[calc] EEFF25 segmentos</span></li>
+            <li>El equipo (V-1) separó la brecha de 2.30%: 1.7% de depreciación y 0.63 pp de prima del peso, que dejó "solo en el WACC"</li>
+            <li>Los flujos en dólares ya se convierten al 1.7%</li>
+          </ul></td>
+          <td class="against"><ul>
+            <li>Bimbo cotiza en pesos y sus inversionistas exigen la prima del peso sobre toda la empresa</li>
+            <li>Los pesos de 2025 son fijos; si México crece más, la tasa sube</li>
+            <li>Mezcla una tasa de mercado (M-Bono) con una conversión supuesta (1.7%)</li>
+          </ul></td>
+          <td class="q">¿La prima del peso es riesgo del inversionista o riesgo de los flujos?</td>
+        </tr>
+        <tr>
+          <td class="chg"><b>5. Prima país multiplicada por la beta</b>ke = rf + β × (ERP + prima país)</td>
+          <td class="n">ke 12.94% → 12.26%<br>WACC → 9.93%</td>
+          <td class="n">−0.23 pp</td>
+          <td><ul>
+            <li>Es el método de beta de Damodaran para la prima ponderada por operaciones</li>
+            <li>Una empresa de consumo básico con β 0.81 está menos expuesta que la empresa promedio</li>
+            <li>La prima país ya está ponderada por plantas y EBITDA (2.05%)</li>
+          </ul></td>
+          <td class="against"><ul>
+            <li>Damodaran también propone sumarla completa o con lambda; ninguno de los métodos es "el correcto"</li>
+            <li>Escoger el método después de ver el resultado es sesgo de confirmación</li>
+            <li>Sumada completa (solo cambios 4 y 6): Ps 55.14</li>
+          </ul></td>
+          <td class="q">¿Qué método defendemos ante los jueces y por qué, sin mencionar el precio?</td>
+        </tr>
+        <tr>
+          <td class="chg"><b>6. Costo de deuda por moneda</b>42% en pesos (M-Bono + 45 pb); 58% en otras monedas a Treasury + 1.00 pp, convertido al 1.7%</td>
+          <td class="n">Kd 9.71% → 8.66%<br>WACC → 9.62%</td>
+          <td class="n">−0.31 pp</td>
+          <td><ul>
+            <li>Mezcla de la deuda después de derivados: USD 42% / MXN 42% / EUR 12% / CAD 3% / GBP 1% <span class="tag">[sourced] comunicado 2T26 p.6</span></li>
+            <li>Diferencial del BIMBO 26: +45 pb <span class="tag">[sourced] prospecto</span>; S&amp;P BBB+</li>
+            <li>Costo promedio reportado: 6.5% <span class="tag">[sourced] 3T26 p.6</span></li>
+          </ul></td>
+          <td class="against"><ul>
+            <li>No tenemos el rendimiento de mercado de los bonos en dólares de Bimbo; el diferencial es sintético</li>
+            <li>El escudo fiscal de la deuda de EE.UU. va a la tasa de allá, no al 30%: sube el WACC (no aplicado)</li>
+            <li>Los swaps cambian el riesgo cambiario, no la tasa base</li>
+          </ul></td>
+          <td class="q">¿Conseguimos el rendimiento de los bonos 2034-2051 en Capital IQ para reemplazar el diferencial sintético?</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="foot">
+    <section>
+      <h2>Lo que no aplicamos y bajaría el valor</h2>
+      <ul>
+        <li>D/E objetivo: con la guía de 2.0-2.5x de deuda neta / EBITDA da 0.689 en vez de 0.743 (actual), y eso sube el WACC</li>
+        <li>Escudo fiscal de la deuda en dólares a la tasa de EE.UU.</li>
+        <li>Norteamérica sigue con 0.17 × PIB nominal. Si traslada la inflación completa, el valor <em>sube</em> a Ps 65.91</li>
+      </ul>
+    </section>
+    <section>
+      <h2 class="neutral">Sensibilidad de la V2 final (Ps 59.21)</h2>
+      <ul>
+        <li>WACC −0.5 pp / +0.5 pp: Ps 69.47 / Ps 50.73</li>
+        <li>RONIC: mínimo 11.9%, Ps 48.88; promedio 15.1%, Ps 57.95</li>
+        <li>g v1 (3.47%) con el RONIC V2: Ps 51.90</li>
+        <li>Contraste: tasas de las pruebas de deterioro de Bimbo, 8.89% <span class="tag">[sourced] RA25 p.265</span>. Las estima la administración: solo sirven como referencia</li>
+      </ul>
+    </section>
+    <section>
+      <h2 class="neutral">Lectura</h2>
+      <p style="margin:0">Con supuestos que se pueden defender uno por uno, el valor intrínseco queda casi igual al precio. Eso apunta a mantener más que a comprar. El valor depende sobre todo del RONIC terminal (3) y del WACC (4-6).</p>
+      <p class="small" style="margin:6px 0 0">Modelo: analisis-dcf-2026-10-26/proyecciones/BIMBOA_statements_2021-2030_v2_pivot_waccV2.xlsx (hojas V2_changes y WACC_V2; Assumptions, filas 648-722).</p>
+    </section>
+  </div>
+</div>
